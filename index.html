@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NOOON — Maquininha e Conta Digital</title>
+  <meta name="description" content="Venda no cartão e no Pix, receba com rapidez e controle tudo em um único app." />
+  <meta name="theme-color" content="#2e6417" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://nooon.com.br/" />
+
+  <!-- Open Graph / WhatsApp / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="NOOON" />
+  <meta property="og:title" content="NOOON — Maquininha e Conta Digital" />
+  <meta property="og:description" content="Venda no cartão e no Pix, receba com rapidez e controle tudo em um único app." />
+  <meta property="og:url" content="https://nooon.com.br/" />
+  <meta property="og:image" content="https://nooon.com.br/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NOOON — Maquininha e Conta Digital" />
+  <meta name="twitter:description" content="Venda no cartão e no Pix, receba com rapidez e controle tudo em um único app." />
+  <meta name="twitter:image" content="https://nooon.com.br/og.png" />
+
+  <!-- Ícones -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180.png" />
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="https://nooon.com.br" aria-label="NOOON Home">
+        <span class="brand__mark" aria-hidden="true">N</span>
+        <span class="brand__name">NOOON</span>
+      </a>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+          <span class="sr-only">Abrir menu</span>
+          <span class="nav__hamburger" aria-hidden="true"></span>
+        </button>
+
+        <div class="nav__menu" id="navMenu">
+          <a class="nav__link" href="#maquininha">Maquininha</a>
+          <a class="nav__link" href="https://portal.nooon.com.br">Conta Digital</a>
+          <a class="nav__link" href="#beneficios">Benefícios</a>
+          <a class="nav__link" href="#como-funciona">Como funciona</a>
+          <a class="nav__link" href="#ajuda">Ajuda</a>
+
+          <div class="nav__actions">
+            <a class="btn btn--ghost" href="https://portal.nooon.com.br">Entrar</a>
+            <a class="btn btn--primary" href="#contato">Pedir maquininha</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <p class="pill">Pagamentos + Banco Digital</p>
+          <h1>NOOON — no ritmo do seu negócio</h1>
+          <p class="hero__subtitle">
+            Venda no cartão e no Pix, receba com rapidez e controle tudo em um único app.
+            Simples, transparente e sem complicação.
+          </p>
+
+          <div class="hero__ctas">
+            <a class="btn btn--primary btn--lg" href="#contato">Quero minha maquininha</a>
+            <a class="btn btn--ghost btn--lg" href="https://portal.nooon.com.br">Conhecer a conta digital</a>
+          </div>
+
+          <ul class="hero__bullets">
+            <li>Pix e cartões</li>
+            <li>Aproximação (NFC)</li>
+            <li>App completo</li>
+            <li>Suporte humano</li>
+          </ul>
+        </div>
+
+        <div class="hero__side">
+          <div class="card card--glass">
+            <h3>Comece hoje</h3>
+            <p class="muted">Preencha e a NOOON te chama no WhatsApp.</p>
+
+            <form class="form" id="leadForm">
+              <label class="field">
+                <span>Nome</span>
+                <input name="nome" type="text" placeholder="Seu nome" required />
+              </label>
+
+              <label class="field">
+                <span>WhatsApp</span>
+                <input name="whatsapp" type="tel" placeholder="(84) 98788-5959" required />
+              </label>
+
+              <label class="field">
+                <span>Tipo de negócio</span>
+                <select name="negocio" required>
+                  <option value="" selected disabled>Selecione</option>
+                  <option>Loja física</option>
+                  <option>Delivery</option>
+                  <option>Prestador de serviço</option>
+                  <option>Autônomo</option>
+                  <option>Outro</option>
+                </select>
+              </label>
+
+              <button class="btn btn--primary btn--full" type="submit">Falar com a NOOON</button>
+              <p class="tiny muted">Ao enviar, você concorda em ser contatado pela NOOON.</p>
+
+              <div class="toast" id="toast" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+
+          <div class="hero__mini">
+            <div class="mini">
+              <span class="mini__label">Transparência</span>
+              <span class="mini__value">Taxas claras</span>
+            </div>
+            <div class="mini">
+              <span class="mini__label">Controle</span>
+              <span class="mini__value">Tudo no app</span>
+            </div>
+            <div class="mini">
+              <span class="mini__label">Fluxo</span>
+              <span class="mini__value">Recebimento ágil</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section class="section section--alt" id="beneficios">
+      <div class="container">
+        <div class="section__head">
+          <h2>Por que escolher a NOOON?</h2>
+          <p class="muted">Menos complicação, mais vendas e mais controle.</p>
+        </div>
+
+        <div class="grid grid--3">
+          <div class="card">
+            <h3>Sem burocracia</h3>
+            <p class="muted">Peça, ative no app e comece a vender.</p>
+          </div>
+          <div class="card">
+            <h3>Conta integrada</h3>
+            <p class="muted">Receba e gerencie suas vendas em um só lugar.</p>
+          </div>
+          <div class="card">
+            <h3>Suporte humano</h3>
+            <p class="muted">Atendimento de verdade quando você precisar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Maquininha -->
+    <section class="section" id="maquininha">
+      <div class="container split">
+        <div class="split__content">
+          <h2>Maquininha NOOON</h2>
+          <p class="muted">Venda do seu jeito: balcão, delivery e atendimento rápido.</p>
+
+          <ul class="checklist">
+            <li>Cartão de débito e crédito</li>
+            <li>Pix QR Code</li>
+            <li>Aproximação (NFC)</li>
+            <li>Relatórios em tempo real</li>
+            <li>Gestão simples pelo app</li>
+          </ul>
+
+          <div class="ctaRow">
+            <a class="btn btn--primary" href="#contato">Pedir maquininha</a>
+            <a class="btn btn--ghost" href="https://portal.nooon.com.br">Acessar conta</a>
+          </div>
+        </div>
+
+        <div class="split__visual">
+          <div class="device">
+            <div class="device__screen">
+              <p class="device__title">NOOON App</p>
+              <p class="device__subtitle">Vendas • Recebimentos • Caixa</p>
+
+              <div class="device__bars" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </div>
+
+              <p class="tiny muted">Depois você troca por print real do app/maquininha.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Como funciona -->
+    <section class="section section--alt" id="como-funciona">
+      <div class="container">
+        <div class="section__head">
+          <h2>Como funciona</h2>
+          <p class="muted">Em poucos passos você já está vendendo.</p>
+        </div>
+
+        <div class="grid grid--3">
+          <div class="card">
+            <p class="step">1</p>
+            <h3>Peça</h3>
+            <p class="muted">Solicite pelo site e fale com a equipe.</p>
+          </div>
+          <div class="card">
+            <p class="step">2</p>
+            <h3>Ative</h3>
+            <p class="muted">Ativação rápida no app NOOON.</p>
+          </div>
+          <div class="card">
+            <p class="step">3</p>
+            <h3>Venda</h3>
+            <p class="muted">Acompanhe tudo em tempo real.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="ajuda">
+      <div class="container">
+        <div class="section__head">
+          <h2>Perguntas frequentes</h2>
+          <p class="muted">Respostas curtas para remover objeções.</p>
+        </div>
+
+        <div class="faq" id="faq">
+          <details class="faq__item">
+            <summary>A NOOON cobra aluguel ou mensalidade?</summary>
+            <div class="faq__content">
+              <p>Defina sua política aqui (ex.: sem aluguel/mensalidade).</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary>Como recebo minhas vendas?</summary>
+            <div class="faq__content">
+              <p>Direto na sua conta NOOON, com acompanhamento pelo app.</p>
+            </div>
+          </details>
+
+          <details class="faq__item">
+            <summary>Como falar com o suporte?</summary>
+            <div class="faq__content">
+              <p>WhatsApp: <strong>+55 84 98788-5959</strong></p>
+              <p>Portal: <a class="link" href="https://portal.nooon.com.br">portal.nooon.com.br</a></p>
+            </div>
+          </details>
+        </div>
+
+        <div class="legalRow">
+          <a class="legalLink" href="privacidade.html">Política de Privacidade</a>
+          <span class="dot">•</span>
+          <a class="legalLink" href="termos.html">Termos de Uso</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section section--cta" id="contato">
+      <div class="container ctaBox">
+        <div>
+          <h2>Pronto pra vender mais?</h2>
+          <p class="muted">Chama no WhatsApp e a NOOON te orienta.</p>
+        </div>
+
+        <div class="ctaBox__actions">
+          <a class="btn btn--primary btn--lg" id="ctaWhats" href="#">Chamar no WhatsApp</a>
+          <a class="btn btn--ghost btn--lg" href="https://portal.nooon.com.br">Acessar Conta Digital</a>
+        </div>
+
+        <p class="tiny muted mt">WhatsApp oficial: +55 84 98788-5959</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <a class="brand brand--footer" href="https://nooon.com.br" aria-label="NOOON Home">
+          <span class="brand__mark" aria-hidden="true">N</span>
+          <span class="brand__name">NOOON</span>
+        </a>
+
+        <p class="muted">Pagamentos e banco digital no ritmo do seu negócio.</p>
+        <p class="tiny muted">© <span id="year"></span> NOOON. Todos os direitos reservados.</p>
+      </div>
+
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h4>Soluções</h4>
+          <a href="#maquininha">Maquininha</a>
+          <a href="https://portal.nooon.com.br">Conta Digital</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Legal</h4>
+          <a href="termos.html">Termos</a>
+          <a href="privacidade.html">Privacidade</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Contato</h4>
+          <a href="#contato">WhatsApp</a>
+          <a href="https://portal.nooon.com.br">Portal</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
