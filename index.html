@@ -3,1024 +3,824 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NOOON • Banco digital e pagamentos para negócios</title>
-  <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <meta name="description" content="NOOON: banco digital + máquinas de pagamento. Receba no cartão e no PIX, controle pelo app e suporte que resolve." />
-  <meta name="theme-color" content="#06130b" />
+  <title>NOOON — Máquinas de Pagamento</title>
+  <meta name="description" content="NOOON: máquinas de pagamento para quem quer vender sem travar. Taxas ajustáveis, crédito especial e controle de caixa por aplicativo." />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/nooon-icon.png" />
-  <link rel="apple-touch-icon" href="assets/nooon-icon.png" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="NOOON — Máquinas de pagamento" />
+  <meta property="og:description" content="Taxas ajustáveis, crédito especial e controle simples para o seu negócio." />
+  <meta property="og:image" content="assets/og.png" />
+  <meta property="og:type" content="website" />
+
+  <!-- Icons -->
+  <link rel="icon" href="assets/favicon-nooon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png" />
 
   <style>
     :root{
-      --bg: #06130b;           /* verde bem escuro */
-      --bg2:#071a0f;
-      --card:#0a2516;
-      --stroke:#123a22;
-      --text:#ffffff;
-      --muted:#cfe7d6;
-      --muted2:#9bc8ab;
-      --brand:#74cc00;         /* verde vivo NOOON */
-      --brand2:#2e6417;        /* verde escuro NOOON */
-
+      --bg:#050b07;
+      --panel:#0a140e;
+      --panel2:#0b1a10;
+      --text:#eaf5ea;
+      --muted:#b6c8b7;
+      --line:rgba(116,204,0,.18);
+      --neon:#74cc00;
+      --neon2:#2e6417;
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
       --radius: 18px;
-      --shadow: 0 18px 55px rgba(0,0,0,.45);
-      --shadow2: 0 12px 32px rgba(0,0,0,.35);
-      --max: 1120px;
-
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --radius2: 22px;
+      --max: 1160px;
     }
 
     *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family: var(--font);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
       background:
-        radial-gradient(1200px 900px at 18% -12%, rgba(116,204,0,.16), transparent 55%),
-        radial-gradient(1000px 800px at 92% 8%, rgba(46,100,23,.22), transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      color: var(--text);
+        radial-gradient(900px 520px at 15% 10%, rgba(116,204,0,.12), transparent 55%),
+        radial-gradient(800px 520px at 85% 0%, rgba(46,100,23,.22), transparent 55%),
+        radial-gradient(1100px 760px at 50% 90%, rgba(116,204,0,.08), transparent 60%),
+        linear-gradient(180deg, #020503 0%, #050b07 55%, #030705 100%);
       overflow-x:hidden;
     }
 
     a{ color:inherit; text-decoration:none; }
-    .container{ width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .container{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
 
-    /* Header */
-    .header{
-      position: sticky;
-      top:0;
-      z-index: 50;
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      background: rgba(5,11,7,.70);
       backdrop-filter: blur(10px);
-      background: rgba(6,19,11,.65);
-      border-bottom: 1px solid rgba(18,58,34,.55);
+      border-bottom: 1px solid rgba(116,204,0,.10);
     }
-    .header-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
       padding: 14px 0;
       gap: 14px;
     }
     .brand{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-      min-width: 220px;
+      display:flex; align-items:center; gap:10px;
+      min-width: 170px;
     }
-    .brand img{
-      height: 28px;
-      width: auto;
-      display:block;
-      filter: drop-shadow(0 10px 22px rgba(116,204,0,.15));
+    .brand-mark{
+      width:34px; height:34px; border-radius:10px;
+      display:grid; place-items:center;
+      background: rgba(116,204,0,.10);
+      border: 1px solid rgba(116,204,0,.22);
+      box-shadow: 0 10px 30px rgba(116,204,0,.10);
     }
-    .brand small{
-      color: var(--muted2);
-      font-size: 12px;
-      letter-spacing:.2px;
+    .brand-mark svg{ width:20px; height:20px; }
+    .brand-name{
+      font-weight:800; letter-spacing:.12em;
+      font-size: 14px;
     }
-
-    nav{
-      display:flex;
-      align-items:center;
-      gap: 16px;
-      flex-wrap:wrap;
-      justify-content:center;
-    }
-    nav a{
+    .nav{
+      display:flex; align-items:center; gap: 18px;
+      color: var(--muted);
       font-size: 13px;
-      color: rgba(255,255,255,.88);
-      padding: 8px 10px;
+    }
+    .nav a{
+      opacity:.9;
+      padding:8px 10px;
       border-radius: 10px;
       border: 1px solid transparent;
-      transition: .2s ease;
     }
-    nav a:hover{
-      border-color: rgba(116,204,0,.25);
+    .nav a:hover{
+      color: var(--text);
+      border-color: rgba(116,204,0,.16);
       background: rgba(116,204,0,.06);
     }
 
-    .header-cta{
-      display:flex; gap:10px; align-items:center;
-      min-width: 250px;
-      justify-content:flex-end;
-    }
-
-    /* Buttons */
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding: 11px 14px;
-      border-radius: 12px;
+    /* CTA */
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(116,204,0,.26);
+      background: linear-gradient(180deg, rgba(116,204,0,.95), rgba(116,204,0,.80));
+      color: #071106;
       font-weight: 800;
-      letter-spacing: .2px;
-      font-size: 13px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      box-shadow: var(--shadow2);
-      transition: transform .15s ease, background .2s ease, border-color .2s ease;
-      cursor:pointer;
-      user-select:none;
+      box-shadow: 0 16px 45px rgba(116,204,0,.20);
+      transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
       white-space:nowrap;
     }
-    .btn:hover{ transform: translateY(-1px); border-color: rgba(116,204,0,.28); }
-    .btn-primary{
-      background: linear-gradient(135deg, rgba(116,204,0,.95), rgba(46,100,23,.95));
-      border-color: rgba(255,255,255,.12);
-      color: #06130b;
-      box-shadow: 0 16px 45px rgba(116,204,0,.22);
-    }
-    .btn-outline{
-      background: rgba(6,19,11,.15);
+    .cta:hover{ transform: translateY(-1px); filter: brightness(1.02); box-shadow: 0 18px 55px rgba(116,204,0,.24); }
+    .cta:active{ transform: translateY(0px); }
+    .cta.secondary{
+      background: rgba(116,204,0,.08);
+      color: var(--text);
       border-color: rgba(116,204,0,.22);
-      color: rgba(255,255,255,.95);
-    }
-    .btn-ghost{ background: transparent; border-color: rgba(255,255,255,.10); box-shadow:none; }
-    .btn-small{ padding: 9px 12px; font-weight: 800; font-size: 12.5px; box-shadow:none; }
-
-    /* Hero */
-    .hero{ padding: 62px 0 18px; position: relative; }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap: 28px;
-      align-items:stretch;
-    }
-    .kicker{
-      color: rgba(116,204,0,.92);
-      font-weight: 900;
-      font-size: 12px;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-    }
-    .hero h1{
-      margin: 8px 0 0;
-      font-size: clamp(28px, 3.2vw, 44px);
-      line-height: 1.06;
-      letter-spacing: -0.6px;
-    }
-    .hero p{
-      margin: 14px 0 0;
-      color: rgba(255,255,255,.85);
-      font-size: 16px;
-      line-height: 1.55;
-      max-width: 52ch;
-    }
-    .hero-actions{
-      margin-top: 18px;
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .pill-row{
-      margin-top: 18px;
-      display:flex; flex-wrap:wrap; gap:10px;
-    }
-    .pill{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      color: rgba(255,255,255,.86);
-      font-size: 12.5px;
-    }
-    .pill .dot{
-      width:8px; height:8px; border-radius:999px;
-      background: rgba(116,204,0,.95);
-      box-shadow: 0 0 14px rgba(116,204,0,.35);
-    }
-
-    .hero-card{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow: var(--shadow);
-      padding: 18px;
-      position: relative;
-      overflow:hidden;
-    }
-    .hero-card:before{
-      content:"";
-      position:absolute;
-      right:-40px; top:-30px;
-      width: 220px; height: 220px;
-      background: url("assets/nooon-icon.png") no-repeat center / contain;
-      opacity: .12;
-      transform: rotate(8deg);
-      pointer-events:none;
-    }
-    .hero-card h3{
-      margin:0;
-      font-size: 14px;
-      color: rgba(255,255,255,.90);
-      letter-spacing: .3px;
-    }
-    .hero-card .big{
-      margin-top: 10px;
-      font-size: 34px;
-      font-weight: 950;
-      letter-spacing: -0.8px;
-    }
-    .hero-card .sub{
-      margin-top: 4px;
-      color: rgba(255,255,255,.72);
-      font-size: 13px;
-      line-height: 1.4;
-    }
-    .hero-card ul{
-      margin: 14px 0 0;
-      padding-left: 18px;
-      color: rgba(255,255,255,.82);
-      font-size: 13px;
-      line-height: 1.55;
-      position: relative;
-      z-index: 1;
-    }
-    .hero-card .mini-cta{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top: 14px;
-      position: relative;
-      z-index: 1;
+      box-shadow:none;
+      font-weight:700;
     }
 
     /* Sections */
-    section{ padding: 34px 0; }
-    .section-title{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
+    section{ padding: 46px 0; }
+    .hero{ padding: 54px 0 28px; }
+    .kicker{
+      display:inline-block;
+      font-weight:800;
+      letter-spacing:.12em;
+      font-size: 12px;
+      color: rgba(116,204,0,.95);
+      margin-bottom: 12px;
+    }
+    h1{
+      margin:0 0 12px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing:-.02em;
+    }
+    .lead{
+      margin:0;
+      color: var(--muted);
+      font-size: clamp(14px, 1.6vw, 18px);
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+    .hero-actions{ margin-top: 18px; display:flex; gap: 12px; flex-wrap:wrap; }
+    .hero-grid{
+      margin-top: 26px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
       gap: 16px;
-      margin-bottom: 14px;
+      align-items: stretch;
     }
-    h2{
-      margin: 6px 0 0;
-      font-size: 22px;
-      letter-spacing: -0.3px;
-    }
-    .section-desc{
-      margin: 10px 0 0;
-      color: rgba(255,255,255,.80);
-      max-width: 70ch;
-      line-height: 1.6;
-    }
-
-    .grid-3{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 14px; }
-    .grid-2{ display:grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 14px; }
-
     .card{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(10,37,22,.55);
-      box-shadow: var(--shadow2);
-      padding: 16px;
-      position: relative;
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(10,20,14,.82), rgba(10,20,14,.62));
+      border: 1px solid rgba(116,204,0,.16);
+      box-shadow: var(--shadow);
       overflow:hidden;
+      position:relative;
     }
-    .card:before{
+    .card::before{
       content:"";
-      position:absolute; inset:auto -120px -120px auto;
-      width: 220px; height: 220px;
-      background: radial-gradient(circle at 30% 30%, rgba(46,100,23,.30), transparent 60%);
-      filter: blur(1px);
+      position:absolute; inset:-2px;
+      background: radial-gradient(500px 220px at 25% 0%, rgba(116,204,0,.13), transparent 55%),
+                  radial-gradient(420px 260px at 85% 30%, rgba(46,100,23,.20), transparent 60%);
       pointer-events:none;
     }
-    .card h3{ margin:0; font-size: 15px; letter-spacing: -0.2px; position:relative; z-index:1; }
-    .card p{
-      margin: 8px 0 0;
-      color: rgba(255,255,255,.78);
+    .card-inner{ position:relative; padding: 18px; }
+    .mini{
+      color: var(--muted);
       font-size: 13px;
       line-height: 1.55;
-      position: relative;
-      z-index: 1;
     }
-    .bullets{
-      margin: 12px 0 0;
-      padding-left: 18px;
-      color: rgba(255,255,255,.82);
-      font-size: 13px;
-      line-height: 1.65;
-      position: relative;
-      z-index: 1;
+    .bullet{
+      margin: 10px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap: 8px;
+    }
+    .bullet li{
+      display:flex; gap:10px; align-items:flex-start;
+      color: var(--text);
+      opacity: .92;
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+    .dot{
+      width:9px; height:9px;
+      border-radius: 99px;
+      margin-top: 5px;
+      background: rgba(116,204,0,.95);
+      box-shadow: 0 0 0 6px rgba(116,204,0,.10);
+      flex: 0 0 auto;
     }
 
-    /* Machines grid */
-    .machine-grid{
+    /* Machines block */
+    .machines{
+      padding: 24px 0 52px;
+    }
+    .machines-head{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap: 16px; flex-wrap:wrap;
+      margin-bottom: 16px;
+    }
+    .machines-title{
+      margin:0;
+      font-size: clamp(22px, 2.6vw, 30px);
+      letter-spacing:-.01em;
+    }
+    .machines-sub{
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 70ch;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .grid-3{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 16px;
       margin-top: 14px;
     }
-    .machine-item{
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(10,37,22,.55);
-      box-shadow: var(--shadow2);
-      padding: 14px;
+    .machine{
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(8,16,11,.88), rgba(8,16,11,.62));
+      border: 1px solid rgba(116,204,0,.16);
+      box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
     }
-    .machine-item:before{
+    .machine::before{
       content:"";
-      position:absolute;
-      right:-90px; top:-110px;
-      width: 240px; height: 240px;
-      background: url("assets/nooon-icon.png") no-repeat center / contain;
-      opacity: .06;
-      transform: rotate(10deg);
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(520px 260px at 20% 0%, rgba(116,204,0,.12), transparent 55%),
+        radial-gradient(420px 240px at 80% 30%, rgba(46,100,23,.18), transparent 60%);
       pointer-events:none;
     }
-    .machine-item img{
-      width: 100%;
-      height: 300px;
+    .machine-inner{ position:relative; padding: 16px; display:flex; flex-direction:column; height:100%; }
+    .machine-img{
+      border-radius: 16px;
+      height: 240px;
+      display:grid; place-items:center;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.06);
+      overflow:hidden;
+    }
+    .machine-img img{
+      max-width: 92%;
+      max-height: 92%;
       object-fit: contain;
-      display:block;
-      filter:
-        drop-shadow(0 18px 45px rgba(0,0,0,.55))
-        drop-shadow(0 0 28px rgba(116,204,0,.14));
-      position:relative;
-      z-index:1;
+      filter: drop-shadow(0 18px 30px rgba(0,0,0,.55));
     }
-    .machine-item h4{
-      margin: 10px 0 0;
-      font-size: 14px;
-      letter-spacing: -0.2px;
-      position:relative;
-      z-index:1;
+    .machine-name{
+      margin: 14px 0 8px;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing:.02em;
     }
-    .machine-item p{
-      margin: 6px 0 0;
-      color: rgba(255,255,255,.78);
+    .machine-desc{
+      margin:0 0 12px;
+      color: var(--muted);
       font-size: 13px;
-      line-height: 1.5;
-      position:relative;
-      z-index:1;
+      line-height:1.5;
     }
-    .machine-item .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top: 12px;
-      position:relative;
-      z-index:1;
+    .pricing{
+      margin-top:auto;
+      padding-top: 8px;
+      border-top: 1px solid rgba(116,204,0,.12);
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.6;
     }
-    .machine-pricing {
-      margin: 12px 0;
-      font-size: 0.9rem;
-      color: #e6f4e8;
-    }
-    
-    .machine-pricing ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .machine-pricing li {
-      margin-bottom: 6px;
-    }
-    
-    .machine-pricing span {
-      color: #74cc00;
-      font-size: 0.8rem;
-    }
-    
-    /* Forms */
-    .form{ display:grid; gap: 10px; position: relative; z-index: 1; }
-    .row{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    label{
+    .pricing b{ color: var(--text); }
+    .hint{
+      color: rgba(116,204,0,.92);
       font-size: 12px;
-      color: rgba(255,255,255,.78);
-      display:block;
-      margin-bottom: 6px;
       font-weight: 800;
-      letter-spacing: .2px;
     }
-    input, select, textarea{
-      width:100%;
-      padding: 12px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(6,19,11,.45);
-      color: rgba(255,255,255,.92);
-      outline: none;
-      transition: border-color .2s ease, background .2s ease;
-      font-family: var(--font);
+    .machine-actions{
+      display:flex; gap: 10px;
+      margin-top: 12px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(116,204,0,.22);
+      background: rgba(116,204,0,.10);
+      color: var(--text);
+      font-weight: 800;
+      font-size: 13px;
+      transition: transform .12s ease, filter .12s ease, background .12s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.03); background: rgba(116,204,0,.14); }
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(116,204,0,.95), rgba(116,204,0,.80));
+      color:#061005;
+      border-color: rgba(116,204,0,.26);
+      box-shadow: 0 14px 40px rgba(116,204,0,.18);
+    }
+
+    /* Benefits */
+    .section-title{
+      margin:0 0 10px;
+      font-size: clamp(20px, 2.3vw, 28px);
+      letter-spacing:-.01em;
+    }
+    .section-lead{
+      margin:0;
+      color: var(--muted);
+      max-width: 75ch;
+      line-height:1.55;
+      font-size: 14px;
+    }
+    .benefits{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 14px;
+    }
+    .benefit{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(116,204,0,.16);
+      background: linear-gradient(180deg, rgba(10,20,14,.78), rgba(10,20,14,.54));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+      min-height: 190px;
+    }
+    .benefit::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(520px 260px at 25% 0%, rgba(116,204,0,.12), transparent 58%);
+      pointer-events:none;
+    }
+    .benefit-inner{ position:relative; padding: 16px; }
+    .benefit h3{
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing:-.01em;
+    }
+    .benefit p{
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height:1.55;
+    }
+    .mini-list{
+      margin:0; padding-left: 18px;
+      color: rgba(234,245,234,.92);
+      font-size: 13px;
+      line-height:1.6;
+    }
+
+    /* Audience */
+    .pills{
+      margin-top: 14px;
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(116,204,0,.16);
+      background: rgba(116,204,0,.06);
+      color: rgba(234,245,234,.92);
+      font-weight: 800;
       font-size: 13px;
     }
-    input:focus, select:focus, textarea:focus{
-      border-color: rgba(116,204,0,.35);
-      background: rgba(6,19,11,.55);
-    }
-    textarea{ min-height: 92px; resize: vertical; }
-    .form-actions{ display:flex; gap: 10px; flex-wrap:wrap; margin-top: 2px; }
-    .fine{
-      margin-top: 10px;
-      color: rgba(255,255,255,.68);
-      font-size: 12px;
-      line-height: 1.45;
-    }
-    .status{
-      margin-top: 10px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      color: rgba(255,255,255,.82);
-      display:none;
-    }
-    .status.ok{ border-color: rgba(116,204,0,.30); background: rgba(116,204,0,.06); display:block; }
-    .status.err{ border-color: rgba(255,77,77,.35); background: rgba(255,77,77,.07); display:block; }
 
-    /* Segments */
-    .segments{ display:grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 14px; }
-    .segment{
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      padding: 12px;
-      font-size: 12.5px;
-      color: rgba(255,255,255,.84);
-      text-align:center;
-      box-shadow: var(--shadow2);
+    /* Partners / network */
+    .two{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
     }
 
-    /* CTA band */
-    .cta-band{
-      border-radius: calc(var(--radius) + 4px);
-      border: 1px solid rgba(255,255,255,.12);
-      background:
-        radial-gradient(900px 500px at 15% 50%, rgba(116,204,0,.16), transparent 55%),
-        radial-gradient(700px 420px at 85% 40%, rgba(46,100,23,.28), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow: var(--shadow);
-      padding: 18px;
+    /* Contact */
+    .contact-grid{
+      margin-top: 16px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+    }
+    .contact-item{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(116,204,0,.16);
+      background: rgba(116,204,0,.06);
+      padding: 14px;
+      color: rgba(234,245,234,.92);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+    .contact-item b{ color: var(--text); }
+    .contact-item a{
+      color: rgba(116,204,0,.95);
+      font-weight: 900;
+    }
+    .contact-item a:hover{ text-decoration: underline; }
+
+    /* Final CTA */
+    .final{
+      padding: 54px 0 64px;
+    }
+    .final .card-inner{
+      padding: 22px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap: 12px;
+      gap: 18px;
       flex-wrap:wrap;
-      position:relative;
-      overflow:hidden;
     }
-    .cta-band:after{
-      content:"";
-      position:absolute;
-      right:-60px; bottom:-80px;
-      width: 320px; height: 320px;
-      background: url("assets/nooon-icon.png") no-repeat center / contain;
-      opacity:.08;
-      transform: rotate(10deg);
-      pointer-events:none;
-    }
-    .cta-band h3{ margin:0; font-size: 16px; letter-spacing:-0.2px; position:relative; z-index:1; }
-    .cta-band p{ margin: 6px 0 0; color: rgba(255,255,255,.78); font-size: 13px; line-height:1.5; max-width: 64ch; position:relative; z-index:1; }
+    .final h2{ margin:0; font-size: clamp(20px, 2.6vw, 30px); }
+    .final p{ margin: 6px 0 0; color: var(--muted); max-width: 70ch; line-height:1.55; font-size: 14px; }
 
     /* Footer */
     footer{
-      padding: 30px 0 46px;
-      border-top: 1px solid rgba(255,255,255,.10);
-      margin-top: 20px;
-      background: rgba(6,19,11,.35);
+      padding: 26px 0 38px;
+      color: rgba(182,200,183,.85);
+      border-top: 1px solid rgba(116,204,0,.10);
+      background: rgba(0,0,0,.10);
     }
-    .footer-grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr 1fr;
-      gap: 18px;
-      align-items:start;
-    }
-    .footer-links a{
-      display:block;
-      padding: 6px 0;
-      color: rgba(255,255,255,.80);
+    .footer-inner{
+      display:flex; align-items:flex-start; justify-content:space-between; gap: 18px; flex-wrap:wrap;
       font-size: 13px;
     }
-    .footer-links a:hover{ color: rgba(116,204,0,.95); }
-    .small{
-      color: rgba(255,255,255,.65);
-      font-size: 12px;
-      line-height: 1.55;
-      margin-top: 8px;
+    .small{ opacity:.85; }
+    .foot-links{ display:flex; gap: 10px; flex-wrap:wrap; }
+    .foot-links a{
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(116,204,0,.12);
+      background: rgba(116,204,0,.06);
     }
-    .footer-icon{ height: 30px; width:auto; display:block; margin-bottom:6px; opacity:.95; }
-
-    /* Floating WhatsApp */
-    .float-wa{
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      z-index: 60;
-    }
-    .float-wa a{
-      display:flex; align-items:center; justify-content:center;
-      width: 54px; height: 54px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: linear-gradient(135deg, rgba(116,204,0,.95), rgba(46,100,23,.95));
-      box-shadow: 0 18px 50px rgba(116,204,0,.22);
-      color: #06130b;
-      font-weight: 950;
-      letter-spacing: .2px;
-      transition: transform .15s ease;
-    }
-    .float-wa a:hover{ transform: translateY(-2px); }
 
     /* Responsive */
     @media (max-width: 980px){
       .hero-grid{ grid-template-columns: 1fr; }
-      .header-inner{ flex-wrap:wrap; }
-      .header-cta{ min-width: unset; width:100%; justify-content:flex-start; }
-      nav{ width:100%; justify-content:flex-start; }
       .grid-3{ grid-template-columns: 1fr; }
-      .grid-2{ grid-template-columns: 1fr; }
-      .machine-grid{ grid-template-columns: 1fr; }
-      .segments{ grid-template-columns: repeat(2, 1fr); }
-      .footer-grid{ grid-template-columns: 1fr; }
-      .row{ grid-template-columns: 1fr; }
-      .machine-item img{ height: 320px; }
+      .benefits{ grid-template-columns: 1fr; }
+      .two{ grid-template-columns: 1fr; }
+      .contact-grid{ grid-template-columns: 1fr; }
+      .nav{ display:none; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Floating WhatsApp -->
-  <div class="float-wa" aria-label="WhatsApp">
-    <a href="https://wa.me/5584987885959?text=Ol%C3%A1%2C%20quero%20conhecer%20o%20NOOON%20(banco%20digital%20%2B%20m%C3%A1quinas%20de%20pagamento).%20Pode%20me%20ajudar%3F"
-       target="_blank" rel="noopener noreferrer" title="Falar no WhatsApp">
-      WA
-    </a>
-  </div>
+  <!-- WhatsApp NOOON (único canal de conversão) -->
+  <script>
+    // Formato: DDI + DDD + número (sem +, sem espaços, sem traços)
+    // WhatsApp informado: (84) 98788-5959 -> 55 84 98788 5959
+    const WA_NUMBER = "5584987885959";
 
-  <header class="header">
+    const WA_TEXT_DEFAULT = encodeURIComponent("Quero falar sobre as máquinas de pagamento NOOON.");
+    const WA_LINK_DEFAULT = `https://wa.me/${WA_NUMBER}?text=${WA_TEXT_DEFAULT}`;
+
+    window.__NOOON_WA__ = WA_LINK_DEFAULT;
+  </script>
+
+  <!-- Topbar -->
+  <div class="topbar">
     <div class="container">
-      <div class="header-inner">
-        <a class="brand" href="#topo" aria-label="NOOON Home">
-          <img src="assets/nooon-logo-horizontal.png" alt="NOOON" />
-          <small>banco digital + pagamentos</small>
+      <div class="topbar-inner">
+        <a class="brand" href="#top" aria-label="NOOON">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 3l8 4.6v8.8L12 21l-8-4.6V7.6L12 3z" stroke="rgba(116,204,0,.9)" stroke-width="1.8"/>
+              <path d="M8.5 12c0-1.9 1.6-3.5 3.5-3.5s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5S8.5 13.9 8.5 12z" stroke="rgba(116,204,0,.9)" stroke-width="1.8"/>
+            </svg>
+          </span>
+          <span class="brand-name">NOOON</span>
         </a>
 
-        <nav aria-label="Navegação principal">
-          <a href="#solucoes">Soluções</a>
+        <nav class="nav" aria-label="Navegação">
           <a href="#maquinas">Máquinas</a>
-          <a href="#conta">Conta</a>
-          <a href="#empresas">Empresas & Parceiros</a>
-          <a href="#afiliados">Afiliados</a>
-          <a href="#suporte">Suporte</a>
+          <a href="#diferenciais">Diferenciais</a>
+          <a href="#publico">Para quem é</a>
+          <a href="#rede">Representantes & Afiliados</a>
+          <a href="#contato">Contato</a>
         </nav>
 
-        <div class="header-cta">
-          <a
-            class="btn btn-ghost btn-small"
-            href="https://portal.nooon.com.br/login"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Entrar
-          </a>
-          <a class="btn btn-primary btn-small" href="#quero-comecar">Quero começar</a>
-        </div>
+        <a class="cta" href="#" id="ctaTop">Falar no WhatsApp</a>
       </div>
     </div>
-  </header>
+  </div>
 
-  <main id="topo">
-    <!-- HERO -->
+  <!-- Hero -->
+  <main id="top">
     <section class="hero">
       <div class="container">
+        <span class="kicker">FERRAMENTA DE NEGÓCIOS</span>
+        <h1>NOOON — máquinas de pagamento para quem quer vender sem travar</h1>
+        <p class="lead">
+          Taxas ajustáveis, crédito especial prático e rápido (quando fizer sentido) e controle simples do caixa pelo aplicativo.
+          Tudo com rota direta no WhatsApp.
+        </p>
+
+        <div class="hero-actions">
+          <a class="cta" href="#" id="ctaHero">Falar no WhatsApp</a>
+          <a class="cta secondary" href="#maquinas">Ver máquinas</a>
+        </div>
+
         <div class="hero-grid">
-          <div>
-            <div class="kicker">Vendedor direto. Sem enrolação.</div>
-            <h1>NOOON: banco digital + pagamentos pro seu negócio.</h1>
-            <p>Receba no cartão e no PIX. Controle pelo app. Suporte que resolve.
-              Comece como cliente ou ganhe comissões como afiliado.</p>
-
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#quero-comecar">Quero ser cliente</a>
-              <a class="btn btn-outline" href="#afiliados">Quero ser afiliado</a>
-              <a class="btn btn-outline" href="https://wa.me/5584987885959?text=Ol%C3%A1%2C%20quero%20virar%20cliente%20do%20NOOON.%20Pode%20me%20orientar%3F"
-                 target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a>
-            </div>
-
-            <div class="pill-row" aria-label="Destaques">
-              <span class="pill"><span class="dot"></span> Segurança e conformidade</span>
-              <span class="pill"><span class="dot"></span> Onboarding simples</span>
-              <span class="pill"><span class="dot"></span> Gestão pelo app</span>
-              <span class="pill"><span class="dot"></span> Suporte humano</span>
+          <div class="card">
+            <div class="card-inner">
+              <div style="font-weight:900; font-size:16px; margin-bottom:8px;">O NOOON começa pelas máquinas</div>
+              <div class="mini">
+                O foco é vender e receber com fluidez. O app entra como apoio: controle do caixa e, se você quiser,
+                acesso a soluções de crédito vinculadas ao uso.
+              </div>
+              <ul class="bullet">
+                <li><span class="dot"></span><span><b>Máquina + suporte humano:</b> você fala com gente, não com um robô.</span></li>
+                <li><span class="dot"></span><span><b>Condições ajustáveis:</b> negociação direta com o representante.</span></li>
+                <li><span class="dot"></span><span><b>Controle simples:</b> entradas e repasses no app (opcional).</span></li>
+              </ul>
             </div>
           </div>
 
-          <aside class="hero-card" aria-label="Resumo rápido">
-            <h3>Comece do jeito certo</h3>
-            <div class="big">Receba + controle</div>
-            <div class="sub">Máquinas de pagamento + conta digital num só lugar.</div>
-            <ul>
-              <li>Cartão, PIX e aproximação</li>
-              <li>Organização do caixa</li>
-              <li>Atendimento comercial e suporte</li>
-            </ul>
-            <div class="mini-cta">
-              <a class="btn btn-primary btn-small" href="#quero-comecar">Quero começar</a>
-              <a class="btn btn-outline btn-small" href="#empresas">Sou empresa</a>
-              <a class="btn btn-outline btn-small" href="#afiliados">Sou afiliado</a>
+          <div class="card">
+            <div class="card-inner">
+              <div style="font-weight:900; font-size:16px; margin-bottom:8px;">Atendimento rápido</div>
+              <div class="mini">
+                Quer uma máquina, quer indicar, ou quer representar? O mesmo canal resolve.
+              </div>
+              <ul class="bullet">
+                <li><span class="dot"></span><span>Escolha um modelo</span></li>
+                <li><span class="dot"></span><span>Chame no WhatsApp</span></li>
+                <li><span class="dot"></span><span>Fechou: sem enrolação</span></li>
+              </ul>
+              <div style="margin-top:14px">
+                <a class="btn primary" href="#" id="ctaHeroMini">Quero falar agora</a>
+              </div>
             </div>
-          </aside>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SOLUÇÕES -->
-    <section id="solucoes">
+    <!-- Máquinas -->
+    <section class="machines" id="maquinas">
       <div class="container">
-        <div class="section-title">
+        <div class="machines-head">
           <div>
-            <div class="kicker">Soluções NOOON</div>
-            <h2>Tudo para receber e gerenciar</h2>
-            <p class="section-desc">Você vende, o NOOON organiza. Recebimento, conta digital e gestão sem complicação.</p>
+            <div class="kicker" style="margin-bottom:10px;">MÁQUINAS</div>
+            <h2 class="machines-title">Máquinas NOOON: vender sem travar</h2>
+            <p class="machines-sub">Aproxime, passe, pix — e siga o jogo. Escolha o modelo e fale agora.</p>
           </div>
-          <a class="btn btn-outline btn-small" href="#quero-comecar">Quero começar</a>
+          <a class="cta" href="#" id="ctaMachinesTop">Quero uma máquina</a>
         </div>
 
         <div class="grid-3">
-          <div class="card">
-            <h3>Recebimento</h3>
-            <p>Cartão, PIX e aproximação. Pronto pra girar no dia a dia.</p>
-          </div>
-          <div class="card">
-            <h3>Conta digital</h3>
-            <p>Mais controle, mais velocidade, mais clareza do seu caixa.</p>
-          </div>
-          <div class="card">
-            <h3>Gestão</h3>
-            <p>Relatórios e acompanhamento pelo app. Sem planilha infinita.</p>
-          </div>
+          <!-- S920 -->
+          <article class="machine">
+            <div class="machine-inner">
+              <div class="machine-img">
+                <!-- Mantendo em /assets (conforme seu repo) -->
+                <img src="assets/s920.png" alt="Máquina S920 NOOON"
+                  onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=&quot;color:rgba(182,200,183,.9);font-weight:800&quot;>Imagem não encontrada em <span class=&quot;hint&quot;>assets/s920.png</span></div>';">
+              </div>
+
+              <div class="machine-name">S920</div>
+              <p class="machine-desc">Compacta, rápida e confiável pro dia a dia.</p>
+
+              <div class="pricing">
+                <div><b>Crédito:</b> R$ 100 em até 6x</div>
+                <div><b>Débito em conta:</b> R$ 150 em até 4x <span class="hint">(conta NOOON)</span></div>
+                <div><b>PIX ou crédito à vista:</b> R$ 550</div>
+                <div><b>Locação:</b> R$ 75 / mês <span class="hint">(conta NOOON)</span></div>
+
+                <div class="machine-actions">
+                  <a class="btn primary" href="#" data-wa="Quero a S920">Quero esta</a>
+                  <a class="btn" href="#" data-wa="Quero começar com a S920">Começar</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- A910 -->
+          <article class="machine">
+            <div class="machine-inner">
+              <div class="machine-img">
+                <img src="assets/a910.png" alt="Máquina A910 NOOON"
+                  onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=&quot;color:rgba(182,200,183,.9);font-weight:800&quot;>Imagem não encontrada em <span class=&quot;hint&quot;>assets/a910.png</span></div>';">
+              </div>
+
+              <div class="machine-name">A910</div>
+              <p class="machine-desc">Tela grande e experiência premium na venda.</p>
+
+              <div class="pricing">
+                <div><b>Crédito:</b> R$ 150 em até 6x</div>
+                <div><b>Débito em conta:</b> R$ 225 em até 4x <span class="hint">(conta NOOON)</span></div>
+                <div><b>PIX ou crédito à vista:</b> R$ 800</div>
+                <div><b>Locação:</b> R$ 100 / mês <span class="hint">(conta NOOON)</span></div>
+
+                <div class="machine-actions">
+                  <a class="btn primary" href="#" data-wa="Quero a A910">Quero esta</a>
+                  <a class="btn" href="#" data-wa="Quero começar com a A910">Começar</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- A960 -->
+          <article class="machine">
+            <div class="machine-inner">
+              <div class="machine-img">
+                <img src="assets/a960.png" alt="Máquina A960 NOOON"
+                  onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=&quot;color:rgba(182,200,183,.9);font-weight:800&quot;>Imagem não encontrada em <span class=&quot;hint&quot;>assets/a960.png</span></div>';">
+              </div>
+
+              <div class="machine-name">A960</div>
+              <p class="machine-desc">Topo de linha, presença forte no balcão.</p>
+
+              <div class="pricing">
+                <div><b>Crédito:</b> R$ 175 em até 6x</div>
+                <div><b>Débito em conta:</b> R$ 260 em até 4x <span class="hint">(conta NOOON)</span></div>
+                <div><b>PIX ou crédito à vista:</b> R$ 900</div>
+                <div><b>Locação:</b> R$ 125 / mês <span class="hint">(conta NOOON)</span></div>
+
+                <div class="machine-actions">
+                  <a class="btn primary" href="#" data-wa="Quero a A960">Quero esta</a>
+                  <a class="btn" href="#" data-wa="Quero começar com a A960">Começar</a>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- MÁQUINAS -->
-    <section id="maquinas">
+    <!-- Diferenciais -->
+    <section id="diferenciais">
       <div class="container">
-        <div class="section-title">
-          <div>
-            <div class="kicker">Máquinas</div>
-            <h2>Máquinas NOOON: vender sem travar</h2>
-            <p class="section-desc">Aproxime, passe, pix — e siga o jogo. Escolha o modelo e fale agora.</p>
-          </div>
-          <a class="btn btn-primary btn-small"
-             href="https://wa.me/5584987885959?text=Ol%C3%A1%2C%20quero%20conhecer%20as%20m%C3%A1quinas%20NOOON%20(S920%2C%20A910%2C%20A960).%20Pode%20me%20mandar%20os%20detalhes%3F"
-             target="_blank" rel="noopener noreferrer">Quero uma máquina</a>
+        <h2 class="section-title">Por que usar NOOON?</h2>
+        <p class="section-lead">
+          O NOOON é feito para quem vende de verdade: negociação humana, soluções rápidas e controle simples.
+          Sem misturar tudo — cada benefício tem seu lugar.
+        </p>
+
+        <div class="benefits">
+          <article class="benefit">
+            <div class="benefit-inner">
+              <h3>🟢 Taxas que você negocia</h3>
+              <p>No NOOON, as taxas não são engessadas. Você negocia direto com o representante de vendas.</p>
+              <ul class="mini-list">
+                <li>Sem tabela confusa</li>
+                <li>Sem surpresa no repasse</li>
+                <li>Sem call center distante</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="benefit">
+            <div class="benefit-inner">
+              <h3>🔵 Crédito que acompanha seu faturamento</h3>
+              <p>
+                Usando as máquinas NOOON, você pode ter acesso a um <b>crédito especial prático e rápido</b>,
+                com base na média real do seu movimento.
+              </p>
+              <ul class="mini-list">
+                <li>A partir da segunda semana de uso</li>
+                <li>Sem papelada</li>
+                <li>Sem burocracia</li>
+              </ul>
+              <p style="margin-top:10px; font-size:12.5px; color:rgba(182,200,183,.85)">
+                O app (conta) é opcional — entra apenas quando fizer sentido para crédito/gestão.
+              </p>
+            </div>
+          </article>
+
+          <article class="benefit">
+            <div class="benefit-inner">
+              <h3>🟣 Controle de caixa pelo aplicativo</h3>
+              <p>
+                Acompanhe vendas, entradas e repasses direto no aplicativo.
+                Use se quiser. Não é obrigatório.
+              </p>
+              <ul class="mini-list">
+                <li>Visão clara do caixa</li>
+                <li>Rotina simples</li>
+                <li>Sem complicação</li>
+              </ul>
+            </div>
+          </article>
         </div>
 
-        <div class="machine-grid">
-          <div class="machine-item">
-            <img src="assets/machine-s920-nooon.png" alt="Máquina NOOON S920" loading="lazy">
-            <h4>S920</h4>
-            <p>Compacta, rápida e confiável pro dia a dia.</p>
-            <div class="machine-pricing">
-              <ul>
-                <li><strong>Crédito:</strong> R$ 100 em até 6x</li>
-                <li><strong>Débito em conta:</strong> R$ 150 em até 4x <span>(conta NOOON)</span></li>
-                <li><strong>PIX ou crédito à vista:</strong> R$ 550</li>
-                <li><strong>Locação:</strong> R$ 75 / mês <span>(conta NOOON)</span></li>
-              </ul>
-            </div>
-            <div class="actions">
-              <a class="btn btn-primary btn-small js-wa-model" href="#" data-model="S920">Quero esta</a>
-              <a class="btn btn-outline btn-small" href="#quero-comecar">Começar</a>
-            </div>
-          </div>
-
-          <div class="machine-item">
-            <img src="assets/machine-a910-paytime-nooon.png" alt="Máquina NOOON A910" loading="lazy">
-            <h4>A910</h4>
-            <p>Tela grande e experiência premium na venda.</p>
-            <div class="machine-pricing">
-              <ul>
-                <li><strong>Crédito:</strong> R$ 150 em até 6x</li>
-                <li><strong>Débito em conta:</strong> R$ 225 em até 4x <span>(conta NOOON)</span></li>
-                <li><strong>PIX ou crédito à vista:</strong> R$ 800</li>
-                <li><strong>Locação:</strong> R$ 100 / mês <span>(conta NOOON)</span></li>
-              </ul>
-            </div>
-            <div class="actions">
-              <a class="btn btn-primary btn-small js-wa-model" href="#" data-model="A910">Quero esta</a>
-              <a class="btn btn-outline btn-small" href="#quero-comecar">Começar</a>
-            </div>
-          </div>
-
-          <div class="machine-item">
-            <img src="assets/machine-a960-nooon.png" alt="Máquina NOOON A960" loading="lazy">
-            <h4>A960</h4>
-            <p>Topo de linha, presença forte no balcão.</p>
-            <div class="machine-pricing">
-              <ul>
-                <li><strong>Crédito:</strong> R$ 175 em até 6x</li>
-                <li><strong>Débito em conta:</strong> R$ 260 em até 4x <span>(conta NOOON)</span></li>
-                <li><strong>PIX ou crédito à vista:</strong> R$ 900</li>
-                <li><strong>Locação:</strong> R$ 125 / mês <span>(conta NOOON)</span></li>
-              </ul>
-            </div>
-            <div class="actions">
-              <a class="btn btn-primary btn-small js-wa-model" href="#" data-model="A960">Quero esta</a>
-              <a class="btn btn-outline btn-small" href="#quero-comecar">Começar</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-3" style="margin-top:14px;">
-          <div class="card">
-            <h3>Cartão + PIX + aproximação</h3>
-            <p>O essencial que precisa funcionar — funcionando.</p>
-          </div>
-          <div class="card">
-            <h3>Gestão pelo app</h3>
-            <p>Você acompanha sem ficar refém de papel ou planilha.</p>
-          </div>
-          <div class="card">
-            <h3>Suporte que resolve</h3>
-            <p>Atendimento comercial + suporte pro dia a dia.</p>
-          </div>
+        <div style="margin-top:18px">
+          <a class="cta" href="#" id="ctaBenefits">Falar no WhatsApp</a>
         </div>
       </div>
     </section>
 
-    <!-- CONTA -->
-    <section id="conta">
+    <!-- Público -->
+    <section id="publico">
       <div class="container">
-        <div class="section-title">
-          <div>
-            <div class="kicker">Conta digital</div>
-            <h2>Conta NOOON: controle e velocidade</h2>
-            <p class="section-desc">Organize as entradas, acompanhe o fluxo e mantenha o negócio saudável.</p>
-          </div>
-          <a class="btn btn-outline btn-small" href="#quero-comecar">Abrir conta</a>
-        </div>
+        <h2 class="section-title">Para quem é o NOOON</h2>
+        <p class="section-lead">O NOOON foi criado para quem vive do próprio negócio e precisa vender com consistência.</p>
 
-        <div class="grid-3">
-          <div class="card">
-            <h3>PIX e transferências</h3>
-            <p>Movimente com agilidade para manter o caixa rodando.</p>
-          </div>
-          <div class="card">
-            <h3>Organização do caixa</h3>
-            <p>Mais clareza do dia a dia pra tomar decisão sem chute.</p>
-          </div>
-          <div class="card">
-            <h3>Acompanhamento</h3>
-            <p>Veja o que entrou e o que falta receber — simples e direto.</p>
-          </div>
+        <div class="pills">
+          <span class="pill">Pequenos comércios</span>
+          <span class="pill">Prestadores de serviço</span>
+          <span class="pill">Autônomos e MEIs</span>
+          <span class="pill">Balcão e rua</span>
         </div>
       </div>
     </section>
 
-    <!-- EMPRESAS & PARCEIROS -->
-    <section id="empresas">
+    <!-- Rede -->
+    <section id="rede">
       <div class="container">
-        <div class="section-title">
-          <div>
-            <div class="kicker">B2B</div>
-            <h2>Condições para empresas e parceiros</h2>
-            <p class="section-desc">Se você tem volume, base de clientes ou operação recorrente, o NOOON te atende com foco em escala.</p>
-          </div>
-          <a class="btn btn-primary btn-small" href="#form-empresas">Quero ser parceiro</a>
-        </div>
+        <h2 class="section-title">Ganhe dinheiro com o NOOON</h2>
+        <p class="section-lead">
+          Além de vender com mais vantagem, você pode construir renda indicando ou representando as máquinas NOOON.
+        </p>
 
-        <div class="grid-2">
-          <div class="card">
-            <h3>Empresas</h3>
-            <p>Operações com volume, conciliação e atendimento dedicado.</p>
-            <ul class="bullets">
-              <li>Modelo alinhado ao seu fluxo</li>
-              <li>Atendimento comercial</li>
-              <li>Implantação objetiva</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Parceiros</h3>
-            <p>Contadores, plataformas, sistemas, comunidades e associações.</p>
-            <ul class="bullets">
-              <li>Condição para parcerias</li>
-              <li>Canal de atendimento</li>
-              <li>Expansão com consistência</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:14px;" id="form-empresas">
-          <h3>Cadastro rápido — Empresas & Parceiros</h3>
-          <p>Escolha como enviar: WhatsApp (rápido) ou e-mail (formal).</p>
-
-          <form class="form" id="leadEmpresas">
-            <div class="row">
-              <div>
-                <label for="emp_nome">Nome</label>
-                <input id="emp_nome" name="nome" placeholder="Seu nome" required />
-              </div>
-              <div>
-                <label for="emp_whats">WhatsApp</label>
-                <input id="emp_whats" name="whats" placeholder="(DDD) 9xxxx-xxxx" required />
+        <div class="two">
+          <article class="benefit">
+            <div class="benefit-inner">
+              <h3>🤝 Seja um Representante NOOON</h3>
+              <p>Monte sua própria rede de vendas de máquinas NOOON e ganhe comissões recorrentes conforme sua rede cresce.</p>
+              <ul class="mini-list">
+                <li>Estrutura em rede</li>
+                <li>Ganhos progressivos</li>
+                <li>Produto real, suporte real</li>
+              </ul>
+              <div style="margin-top:12px">
+                <a class="btn primary" href="#" data-wa="Quero ser Representante NOOON">Quero ser representante</a>
               </div>
             </div>
+          </article>
 
-            <div class="row">
-              <div>
-                <label for="emp_tipo">Sou</label>
-                <select id="emp_tipo" name="tipo" required>
-                  <option value="" disabled selected>Selecione</option>
-                  <option value="Empresa">Empresa</option>
-                  <option value="Parceiro (contador / plataforma / comunidade)">Parceiro (contador / plataforma / comunidade)</option>
-                </select>
-              </div>
-              <div>
-                <label for="emp_cnpj">CNPJ (opcional)</label>
-                <input id="emp_cnpj" name="cnpj" placeholder="00.000.000/0000-00" />
+          <article class="benefit">
+            <div class="benefit-inner">
+              <h3>🔗 Seja um Afiliado NOOON</h3>
+              <p>Divulgue as máquinas NOOON nas redes sociais e receba comissão por link ou cupom exclusivo.</p>
+              <ul class="mini-list">
+                <li>Venda online</li>
+                <li>Link/cupom exclusivo</li>
+                <li>Comissão por indicação</li>
+              </ul>
+              <div style="margin-top:12px">
+                <a class="btn primary" href="#" data-wa="Quero ser Afiliado NOOON">Quero ser afiliado</a>
               </div>
             </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
+    <!-- Contato (e-mails oficiais) -->
+    <section id="contato">
+      <div class="container">
+        <h2 class="section-title">Contato NOOON</h2>
+        <p class="section-lead">
+          Quer comprar máquina, tirar dúvidas, falar de parceria, financeiro ou suporte? Use o WhatsApp ou o e-mail correto abaixo.
+        </p>
+
+        <div class="contact-grid">
+          <div class="contact-item">
+            <b>WhatsApp (principal):</b><br />
+            <a href="#" id="ctaContatoWhats">(84) 98788-5959</a>
+          </div>
+
+          <div class="contact-item">
+            <b>Comercial:</b><br />
+            <a href="mailto:comercial@nooon.com.br">comercial@nooon.com.br</a>
+          </div>
+
+          <div class="contact-item">
+            <b>Contato geral:</b><br />
+            <a href="mailto:contato@nooon.com.br">contato@nooon.com.br</a>
+          </div>
+
+          <div class="contact-item">
+            <b>SAC:</b><br />
+            <a href="mailto:sac@nooon.com.br">sac@nooon.com.br</a>
+          </div>
+
+          <div class="contact-item">
+            <b>Suporte:</b><br />
+            <a href="mailto:suporte@nooon.com.br">suporte@nooon.com.br</a>
+          </div>
+
+          <div class="contact-item">
+            <b>Financeiro:</b><br />
+            <a href="mailto:financeiro@nooon.com.br">financeiro@nooon.com.br</a>
+          </div>
+
+          <div class="contact-item">
+            <b>Fiscal:</b><br />
+            <a href="mailto:fiscal@nooon.com.br">fiscal@nooon.com.br</a>
+          </div>
+
+          <div class="contact-item">
+            <b>Atalho rápido:</b><br />
+            <a href="mailto:contato@nooon.com.br?subject=NOOON%20-%20Contato">Abrir e-mail</a>
+          </div>
+        </div>
+
+        <div style="margin-top:18px">
+          <a class="cta" href="#" id="ctaContatoBottom">Falar no WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA final -->
+    <section class="final">
+      <div class="container">
+        <div class="card">
+          <div class="card-inner">
             <div>
-              <label for="emp_msg">Mensagem</label>
-              <textarea id="emp_msg" name="mensagem" placeholder="Descreva seu volume, segmento e o que você precisa."></textarea>
+              <h2>Quer vender, indicar ou representar o NOOON?</h2>
+              <p>Chama no WhatsApp e vamos direto ao ponto: escolha do modelo, condições e próximos passos.</p>
             </div>
-
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary">Enviar no WhatsApp</button>
-              <button type="button" class="btn btn-outline" id="empEmail">Enviar por e-mail</button>
-              <a class="btn btn-ghost" href="mailto:comercial@nooon.com.br">Falar direto: comercial@nooon.com.br</a>
-            </div>
-
-            <div class="fine">Ao enviar, você será direcionado para o WhatsApp ou seu e-mail com a mensagem pronta.</div>
-            <div class="status" id="empStatus"></div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- AFILIADOS -->
-    <section id="afiliados">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <div class="kicker">Afiliados</div>
-            <h2>Ganhe comissões indicando o NOOON</h2>
-            <p class="section-desc">Indique clientes, acompanhe as ativações e monetize com consistência.</p>
-          </div>
-          <a class="btn btn-primary btn-small" href="#form-afiliados">Quero ser afiliado</a>
-        </div>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>1) Indique</h3>
-            <p>Você capta o contato e manda pro NOOON com mensagem pronta.</p>
-          </div>
-          <div class="card">
-            <h3>2) Ativou</h3>
-            <p>O cliente começa a operar e você acompanha o andamento.</p>
-          </div>
-          <div class="card">
-            <h3>3) Você ganha</h3>
-            <p>Comissão por ativação e modelo para escalar suas indicações.</p>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:14px;" id="form-afiliados">
-          <h3>Cadastro rápido — Afiliados</h3>
-          <p>Escolha como enviar: WhatsApp (rápido) ou e-mail (formal).</p>
-
-          <form class="form" id="leadAfiliados">
-            <div class="row">
-              <div>
-                <label for="afi_nome">Nome</label>
-                <input id="afi_nome" name="nome" placeholder="Seu nome" required />
-              </div>
-              <div>
-                <label for="afi_whats">WhatsApp</label>
-                <input id="afi_whats" name="whats" placeholder="(DDD) 9xxxx-xxxx" required />
-              </div>
-            </div>
-
-            <div class="row">
-              <div>
-                <label for="afi_cidade">Cidade/UF</label>
-                <input id="afi_cidade" name="cidade" placeholder="Ex.: Natal/RN" required />
-              </div>
-              <div>
-                <label for="afi_perfil">Perfil</label>
-                <select id="afi_perfil" name="perfil" required>
-                  <option value="" disabled selected>Selecione</option>
-                  <option value="Representante comercial">Representante comercial</option>
-                  <option value="Influenciador / comunidade">Influenciador / comunidade</option>
-                  <option value="Parceiro (outro)">Parceiro (outro)</option>
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label for="afi_msg">Mensagem</label>
-              <textarea id="afi_msg" name="mensagem" placeholder="Conte como você pretende indicar clientes (segmento, volume, abordagem)."></textarea>
-            </div>
-
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary">Enviar no WhatsApp</button>
-              <button type="button" class="btn btn-outline" id="afiEmail">Enviar por e-mail</button>
-              <a class="btn btn-ghost" href="mailto:comercial@nooon.com.br">Falar direto: comercial@nooon.com.br</a>
-            </div>
-
-            <div class="fine">Dica: se você já tem carteira, mencione o segmento (mercado, food, beleza, etc.).</div>
-            <div class="status" id="afiStatus"></div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- SEGMENTOS -->
-    <section>
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <div class="kicker">Segmentos</div>
-            <h2>Feito para quem vende todo dia</h2>
-            <p class="section-desc">Se tem caixa girando, o NOOON encaixa.</p>
-          </div>
-          <a class="btn btn-outline btn-small" href="#quero-comecar">Quero começar</a>
-        </div>
-
-        <div class="segments" aria-label="Segmentos atendidos">
-          <div class="segment">Mercadinhos</div>
-          <div class="segment">Conveniências</div>
-          <div class="segment">Restaurantes</div>
-          <div class="segment">Varejo</div>
-          <div class="segment">Serviços</div>
-          <div class="segment">Autônomos</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SUPORTE -->
-    <section id="suporte">
-      <div class="container">
-        <div class="section-title">
-          <div>
-            <div class="kicker">Suporte</div>
-            <h2>Suporte que resolve</h2>
-            <p class="section-desc">Atendimento comercial e suporte para você não ficar travado.</p>
-          </div>
-          <a class="btn btn-primary btn-small"
-             href="https://wa.me/5584987885959?text=Ol%C3%A1%2C%20preciso%20de%20ajuda%20com%20NOOON%20(suporte).%20Pode%20me%20atender%3F"
-             target="_blank" rel="noopener noreferrer">Abrir no WhatsApp</a>
-        </div>
-
-        <div class="grid-3">
-          <div class="card">
-            <h3>WhatsApp</h3>
-            <p>(84) 98788-5959</p>
-            <div class="form-actions">
-              <a class="btn btn-outline btn-small"
-                 href="https://wa.me/5584987885959?text=Ol%C3%A1%2C%20quero%20tirar%20uma%20d%C3%BAvida%20sobre%20NOOON."
-                 target="_blank" rel="noopener noreferrer">Chamar agora</a>
-            </div>
-          </div>
-          <div class="card">
-            <h3>Instagram</h3>
-            <p>@nooon.pagamentos</p>
-            <div class="form-actions">
-              <a class="btn btn-outline btn-small"
-                 href="https://instagram.com/nooon.pagamentos"
-                 target="_blank" rel="noopener noreferrer">Abrir Instagram</a>
-            </div>
-          </div>
-          <div class="card">
-            <h3>E-mails</h3>
-            <p>Comercial, suporte e atendimento por setor.</p>
-            <div class="form-actions">
-              <a class="btn btn-outline btn-small" href="mailto:contato@nooon.com.br">Contato</a>
-              <a class="btn btn-outline btn-small" href="mailto:suporte@nooon.com.br">Suporte</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA FINAL -->
-    <section id="quero-comecar">
-      <div class="container">
-        <div class="cta-band">
-          <div>
-            <h3>Pronto pra vender mais e organizar melhor?</h3>
-            <p>Comece com o NOOON: pagamentos + conta digital em um só lugar. Clique e fale agora.</p>
-          </div>
-          <div class="form-actions">
-            <a class="btn btn-primary"
-               href="https://wa.me/5584987885959?text=Ol%C3%A1%2C%20quero%20come%C3%A7ar%20com%20o%20NOOON.%20Pode%20me%20orientar%3F"
-               target="_blank" rel="noopener noreferrer">Quero começar</a>
-            <a class="btn btn-outline" href="#empresas">Sou empresa</a>
-            <a class="btn btn-outline" href="#afiliados">Sou afiliado</a>
+            <a class="cta" href="#" id="ctaFinal">Falar no WhatsApp agora</a>
           </div>
         </div>
       </div>
@@ -1029,182 +829,63 @@
 
   <footer>
     <div class="container">
-      <div class="footer-grid">
-        <div>
-          <img class="footer-icon" src="assets/nooon-icon.png" alt="NOOON" />
-          <div class="small">
-            <strong>NOOON</strong> • nooon.com.br<br/>
-            WhatsApp: <a href="https://wa.me/5584987885959" target="_blank" rel="noopener noreferrer" style="color:rgba(116,204,0,.95)">(84) 98788-5959</a><br/>
-            Instagram: <a href="https://instagram.com/nooon.pagamentos" target="_blank" rel="noopener noreferrer" style="color:rgba(116,204,0,.95)">@nooon.pagamentos</a>
+      <div class="footer-inner">
+        <div class="small">
+          <div style="font-weight:900; letter-spacing:.10em;">NOOON</div>
+          <div style="margin-top:6px;">Máquinas de pagamento • Taxas ajustáveis • Controle simples</div>
+          <div style="margin-top:10px; opacity:.9;">© <span id="year"></span> NOOON. Todos os direitos reservados.</div>
+          <div style="margin-top:10px; opacity:.9;">
+            E-mails: <a href="mailto:contato@nooon.com.br" style="color:rgba(116,204,0,.95);font-weight:900;">contato@nooon.com.br</a>
+            • <a href="mailto:comercial@nooon.com.br" style="color:rgba(116,204,0,.95);font-weight:900;">comercial@nooon.com.br</a>
+            • <a href="mailto:suporte@nooon.com.br" style="color:rgba(116,204,0,.95);font-weight:900;">suporte@nooon.com.br</a>
           </div>
         </div>
 
-        <div class="footer-links">
-          <a href="#solucoes">Soluções</a>
+        <div class="foot-links">
           <a href="#maquinas">Máquinas</a>
-          <a href="#conta">Conta</a>
-          <a href="#empresas">Empresas & Parceiros</a>
-          <a href="#afiliados">Afiliados</a>
-          <a href="#suporte">Suporte</a>
+          <a href="#diferenciais">Diferenciais</a>
+          <a href="#rede">Representantes & Afiliados</a>
+          <a href="#contato">Contato</a>
+          <a href="#" id="ctaFooter">WhatsApp</a>
         </div>
-
-        <div class="footer-links">
-          <a href="mailto:contato@nooon.com.br">contato@nooon.com.br</a>
-          <a href="mailto:comercial@nooon.com.br">comercial@nooon.com.br</a>
-          <a href="mailto:sac@nooon.com.br">sac@nooon.com.br</a>
-          <a href="mailto:financeiro@nooon.com.br">financeiro@nooon.com.br</a>
-          <a href="mailto:fiscal@nooon.com.br">fiscal@nooon.com.br</a>
-          <a href="mailto:suporte@nooon.com.br">suporte@nooon.com.br</a>
-        </div>
-      </div>
-
-      <div class="small" style="margin-top:18px;">
-        © <span id="year"></span> NOOON • nooon.com.br
       </div>
     </div>
   </footer>
 
   <script>
-    // Config
-    const WHATSAPP_E164 = "5584987885959";
-    const EMAIL_COMERCIAL = "comercial@nooon.com.br";
-
-    function encode(text){ return encodeURIComponent(text); }
-    function buildWhatsAppURL(message){ return `https://wa.me/${WHATSAPP_E164}?text=${encode(message)}`; }
-    function buildMailto(to, subject, body){ return `mailto:${to}?subject=${encode(subject)}&body=${encode(body)}`; }
-    function getVal(id){ return (document.getElementById(id)?.value || "").trim(); }
-    function validatePhoneLike(str){ return str.replace(/\D/g,'').length >= 10; }
-    function setStatus(el, type, msg){
-      el.className = "status " + (type === "ok" ? "ok" : "err");
-      el.textContent = msg;
-    }
-
-    // CTA por modelo (WhatsApp)
-    document.querySelectorAll(".js-wa-model").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        const model = btn.getAttribute("data-model") || "máquina";
-        const msg = `Olá! Tenho interesse na máquina NOOON ${model}. Pode me mandar os detalhes (condições e como funciona)?`;
-        window.open(buildWhatsAppURL(msg), "_blank", "noopener,noreferrer");
-      });
-    });
-
-    // Empresas
-    const formEmp = document.getElementById("leadEmpresas");
-    const empStatus = document.getElementById("empStatus");
-    const empEmailBtn = document.getElementById("empEmail");
-
-    function buildEmpMessage(){
-      const nome = getVal("emp_nome");
-      const whats = getVal("emp_whats");
-      const tipo = getVal("emp_tipo");
-      const cnpj = getVal("emp_cnpj");
-      const msg  = getVal("emp_msg");
-      return [
-        "Olá! Quero falar sobre Empresas & Parceiros NOOON.",
-        "",
-        `Nome: ${nome}`,
-        `WhatsApp: ${whats}`,
-        `Perfil: ${tipo}`,
-        cnpj ? `CNPJ: ${cnpj}` : null,
-        msg ? "" : null,
-        msg ? `Mensagem: ${msg}` : null
-      ].filter(Boolean).join("\n");
-    }
-
-    formEmp?.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const nome = getVal("emp_nome");
-      const whats = getVal("emp_whats");
-      const tipo = getVal("emp_tipo");
-
-      if(!nome || !validatePhoneLike(whats) || !tipo){
-        setStatus(empStatus, "err", "Preenche nome, WhatsApp e perfil pra enviar.");
-        return;
-      }
-
-      window.open(buildWhatsAppURL(buildEmpMessage()), "_blank", "noopener,noreferrer");
-      setStatus(empStatus, "ok", "Abrindo WhatsApp com a mensagem pronta.");
-    });
-
-    empEmailBtn?.addEventListener("click", () => {
-      const nome = getVal("emp_nome");
-      const whats = getVal("emp_whats");
-      const tipo = getVal("emp_tipo");
-
-      if(!nome || !validatePhoneLike(whats) || !tipo){
-        setStatus(empStatus, "err", "Preenche nome, WhatsApp e perfil pra enviar por e-mail.");
-        return;
-      }
-
-      window.location.href = buildMailto(
-        EMAIL_COMERCIAL,
-        "NOOON • Empresas & Parceiros (Cadastro)",
-        buildEmpMessage()
-      );
-      setStatus(empStatus, "ok", "Abrindo seu e-mail com a mensagem pronta.");
-    });
-
-    // Afiliados
-    const formAfi = document.getElementById("leadAfiliados");
-    const afiStatus = document.getElementById("afiStatus");
-    const afiEmailBtn = document.getElementById("afiEmail");
-
-    function buildAfiMessage(){
-      const nome = getVal("afi_nome");
-      const whats = getVal("afi_whats");
-      const cidade = getVal("afi_cidade");
-      const perfil = getVal("afi_perfil");
-      const msg  = getVal("afi_msg");
-      return [
-        "Olá! Quero ser Afiliado/Representante NOOON.",
-        "",
-        `Nome: ${nome}`,
-        `WhatsApp: ${whats}`,
-        `Cidade/UF: ${cidade}`,
-        `Perfil: ${perfil}`,
-        msg ? "" : null,
-        msg ? `Mensagem: ${msg}` : null
-      ].filter(Boolean).join("\n");
-    }
-
-    formAfi?.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const nome = getVal("afi_nome");
-      const whats = getVal("afi_whats");
-      const cidade = getVal("afi_cidade");
-      const perfil = getVal("afi_perfil");
-
-      if(!nome || !validatePhoneLike(whats) || !cidade || !perfil){
-        setStatus(afiStatus, "err", "Preenche nome, WhatsApp, cidade e perfil pra enviar.");
-        return;
-      }
-
-      window.open(buildWhatsAppURL(buildAfiMessage()), "_blank", "noopener,noreferrer");
-      setStatus(afiStatus, "ok", "Abrindo WhatsApp com a mensagem pronta.");
-    });
-
-    afiEmailBtn?.addEventListener("click", () => {
-      const nome = getVal("afi_nome");
-      const whats = getVal("afi_whats");
-      const cidade = getVal("afi_cidade");
-      const perfil = getVal("afi_perfil");
-
-      if(!nome || !validatePhoneLike(whats) || !cidade || !perfil){
-        setStatus(afiStatus, "err", "Preenche nome, WhatsApp, cidade e perfil pra enviar por e-mail.");
-        return;
-      }
-
-      window.location.href = buildMailto(
-        EMAIL_COMERCIAL,
-        "NOOON • Afiliados (Cadastro)",
-        buildAfiMessage()
-      );
-      setStatus(afiStatus, "ok", "Abrindo seu e-mail com a mensagem pronta.");
-    });
-
-    // Year
+    // Ano no footer
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // WhatsApp builder
+    function waLink(customText){
+      const txt = encodeURIComponent(customText || "Quero falar sobre as máquinas de pagamento NOOON.");
+      return `https://wa.me/${WA_NUMBER}?text=${txt}`;
+    }
+
+    function bindWA(el, customText){
+      if(!el) return;
+      el.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.href = waLink(customText);
+      });
+    }
+
+    // CTAs principais
+    bindWA(document.getElementById("ctaTop"), "Quero falar sobre as máquinas de pagamento NOOON.");
+    bindWA(document.getElementById("ctaHero"), "Quero falar sobre as máquinas de pagamento NOOON.");
+    bindWA(document.getElementById("ctaHeroMini"), "Quero falar agora sobre as máquinas NOOON.");
+    bindWA(document.getElementById("ctaMachinesTop"), "Quero uma máquina NOOON. Me mostra as opções?");
+    bindWA(document.getElementById("ctaBenefits"), "Quero entender as condições e diferenciais do NOOON.");
+    bindWA(document.getElementById("ctaFinal"), "Quero fechar com a NOOON. Como começamos?");
+    bindWA(document.getElementById("ctaFooter"), "Quero falar com a NOOON.");
+    bindWA(document.getElementById("ctaContatoBottom"), "Quero falar com a NOOON.");
+    bindWA(document.getElementById("ctaContatoWhats"), "Quero falar com a NOOON.");
+
+    // Botões por produto / intenção (data-wa)
+    document.querySelectorAll("[data-wa]").forEach(btn => {
+      const msg = btn.getAttribute("data-wa");
+      bindWA(btn, msg);
+    });
   </script>
 </body>
 </html>
