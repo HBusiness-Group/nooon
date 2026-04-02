@@ -1,0 +1,55 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <linearGradient id="bg" x1="180" y1="40" x2="1040" y2="860" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#1C3218"/>
+    <stop offset="1" stop-color="#0B1A08"/>
+  </linearGradient>
+  <radialGradient id="g1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(860 160) rotate(128) scale(360 360)">
+    <stop stop-color="#74CC00" stop-opacity=".46"/>
+    <stop offset="1" stop-color="#74CC00" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="g2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(230 720) rotate(42) scale(320 320)">
+    <stop stop-color="#2E6417" stop-opacity=".7"/>
+    <stop offset="1" stop-color="#2E6417" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="glass" x1="260" y1="180" x2="940" y2="730" gradientUnits="userSpaceOnUse">
+    <stop stop-color="white" stop-opacity=".14"/>
+    <stop offset="1" stop-color="white" stop-opacity=".04"/>
+  </linearGradient>
+  <filter id="blur" x="-100" y="-100" width="1400" height="1100" filterUnits="userSpaceOnUse">
+    <feGaussianBlur stdDeviation="40"/>
+  </filter>
+</defs>
+<rect width="1200" height="900" rx="46" fill="url(#bg)"/>
+<rect width="1200" height="900" rx="46" fill="url(#g1)"/>
+<rect width="1200" height="900" rx="46" fill="url(#g2)"/>
+<g filter="url(#blur)">
+  <circle cx="875" cy="170" r="105" fill="#74CC00" fill-opacity=".18"/>
+  <circle cx="250" cy="755" r="96" fill="#2E6417" fill-opacity=".28"/>
+</g>
+<rect x="144" y="110" width="912" height="680" rx="38" fill="url(#glass)" stroke="white" stroke-opacity="0.22" stroke-width="2"/>
+<rect x="180" y="150" width="840" height="56" rx="18" fill="white" fill-opacity="0.06" stroke="white" stroke-opacity="0.10"/>
+<circle cx="218" cy="178" r="8" fill="#74CC00"/>
+<circle cx="246" cy="178" r="8" fill="white" fill-opacity="0.35"/>
+<circle cx="274" cy="178" r="8" fill="white" fill-opacity="0.18"/>
+<rect x="210" y="250" width="330" height="290" rx="28" fill="white" fill-opacity="0.05" stroke="white" stroke-opacity="0.10"/>
+<text x="244" y="312" fill="white" fill-opacity="0.56" font-size="24" font-family="Arial, sans-serif" letter-spacing="4">PORTAL NOOON</text>
+<text x="244" y="390" fill="white" font-size="56" font-family="Arial, sans-serif" font-weight="700">R$ 128.450</text>
+<rect x="244" y="426" width="188" height="16" rx="8" fill="#74CC00" fill-opacity=".75"/>
+<rect x="244" y="458" width="246" height="10" rx="5" fill="white" fill-opacity="0.18"/>
+<rect x="244" y="480" width="216" height="10" rx="5" fill="white" fill-opacity="0.10"/>
+<rect x="244" y="516" width="110" height="36" rx="18" fill="#74CC00" fill-opacity=".15" stroke="#74CC00" stroke-opacity=".45"/>
+<text x="268" y="539" fill="#74CC00" font-size="16" font-family="Arial, sans-serif">Online</text>
+<rect x="578" y="250" width="266" height="170" rx="28" fill="white" fill-opacity="0.05" stroke="white" stroke-opacity="0.10"/>
+<text x="612" y="302" fill="white" fill-opacity="0.54" font-size="22" font-family="Arial, sans-serif" letter-spacing="3">TPV HOJE</text>
+<path d="M616 373C652 348 675 344 711 356C748 369 780 354 815 319" stroke="#74CC00" stroke-width="10" stroke-linecap="round"/>
+<circle cx="815" cy="319" r="10" fill="#74CC00"/>
+<rect x="578" y="450" width="376" height="246" rx="30" fill="white" fill-opacity="0.05" stroke="white" stroke-opacity="0.10"/>
+<text x="612" y="504" fill="white" fill-opacity="0.54" font-size="22" font-family="Arial, sans-serif" letter-spacing="3">MAQUININHA / GLASS</text>
+<rect x="760" y="530" width="130" height="98" rx="28" fill="#74CC00" fill-opacity=".18" stroke="#74CC00" stroke-opacity=".32"/>
+<rect x="778" y="548" width="94" height="52" rx="16" fill="white" fill-opacity="0.08"/>
+<rect x="798" y="616" width="54" height="12" rx="6" fill="white" fill-opacity="0.20"/>
+<rect x="618" y="548" width="110" height="16" rx="8" fill="white" fill-opacity="0.16"/>
+<rect x="618" y="578" width="82" height="16" rx="8" fill="#74CC00" fill-opacity=".52"/>
+<rect x="618" y="608" width="126" height="12" rx="6" fill="white" fill-opacity="0.10"/>
+</svg>
