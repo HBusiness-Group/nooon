@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investidores — NOOON</title>
+<link rel="icon" href="./assets/favicon-32.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#0b1a08;--surf:#111f0d;--surf2:#162812;--surf3:#1c3218;--lime:#74cc00;--lf:rgba(116,204,0,.08);--lb:rgba(116,204,0,.18);--w:#fff;--wd:rgba(255,255,255,.65);--wm:rgba(255,255,255,.38);--bdr:rgba(255,255,255,.07);--amber:rgba(255,180,50,.9);}
+html{scroll-behavior:smooth;}body{background:var(--bg);color:var(--w);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.18;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;border-bottom:.5px solid var(--bdr);backdrop-filter:blur(16px);background:rgba(11,26,8,.8);}
+.logo-w{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-svg{width:28px;height:28px;flex-shrink:0;}
+.logo-t{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:.14em;color:var(--lime);}
+.nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none;}
+.nav-links a{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--wm);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--w);}
+.btn-nav{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:var(--lime);padding:8px 18px;border-radius:100px;text-decoration:none;}
+.page-hero{padding:8rem 2rem 4rem;text-align:center;position:relative;z-index:1;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);border:.5px solid rgba(116,204,0,.22);padding:5px 14px;border-radius:100px;margin-bottom:1.75rem;}
+.ed{width:5px;height:5px;border-radius:50%;background:var(--lime);}
+h1.pt{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;line-height:1;letter-spacing:-.025em;margin-bottom:1.2rem;}
+h1.pt em{font-style:normal;color:var(--lime);}
+.page-sub{font-size:1rem;font-weight:300;color:var(--wd);line-height:1.75;max-width:560px;margin:0 auto;}
+.si{max-width:1100px;margin:0 auto;padding:4rem 2rem;position:relative;z-index:1;}
+.stag{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--lime);margin-bottom:1.1rem;display:flex;align-items:center;gap:10px;}
+.stag::before{content:'';display:block;width:20px;height:1px;background:var(--lime);opacity:.4;}
+h2.st{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3.5vw,2.5rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.1rem;}
+h2.st em{font-style:normal;color:var(--lime);}
+.sb{font-size:.95rem;font-weight:300;color:var(--wd);line-height:1.75;max-width:560px;}
+
+/* COTAS PRINCIPAIS */
+.cotas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem;}
+.cota-card{background:var(--surf);border:.5px solid var(--bdr);border-radius:20px;padding:2rem;display:flex;flex-direction:column;gap:1rem;transition:border-color .25s;}
+.cota-card:hover{border-color:rgba(116,204,0,.3);}
+.cota-card.featured{border-color:rgba(116,204,0,.35);background:var(--surf2);}
+.cota-badge{display:inline-block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:100px;width:fit-content;}
+.cb-green{color:var(--lime);background:var(--lf);border:.5px solid var(--lb);}
+.cb-amber{color:var(--amber);background:rgba(255,180,50,.08);border:.5px solid rgba(255,180,50,.2);}
+.cota-valor{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--w);line-height:1;}
+.cota-pct{font-size:.78rem;color:var(--lime);margin-top:.25rem;}
+.cota-divider{height:.5px;background:var(--bdr);}
+.cota-name{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;color:var(--w);}
+.cota-desc{font-size:.83rem;font-weight:300;color:var(--wm);line-height:1.65;flex:1;}
+.cota-items{display:flex;flex-direction:column;gap:.5rem;}
+.ci-item{display:flex;align-items:flex-start;gap:.7rem;font-size:.8rem;color:rgba(255,255,255,.6);}
+.ci-item::before{content:'';display:block;width:5px;height:5px;border-radius:50%;background:var(--lime);flex-shrink:0;margin-top:.4rem;}
+.cota-vagas{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;background:var(--surf3);border-radius:10px;}
+.cv-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--wm);}
+.cv-val{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--lime);}
+
+/* FRANQUIA LIGHT */
+.fl-sec{background:var(--surf);border-top:.5px solid var(--bdr);border-bottom:.5px solid var(--bdr);}
+.fl-header{display:flex;align-items:flex-start;justify-content:space-between;gap:3rem;flex-wrap:wrap;margin-bottom:3rem;}
+.fl-mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2rem;}
+.fl-mini{background:var(--surf2);border:.5px solid var(--bdr);border-radius:16px;padding:1.5rem;text-align:center;transition:border-color .25s;}
+.fl-mini:hover{border-color:rgba(116,204,0,.25);}
+.fl-mini-pct{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--lime);line-height:1;margin-bottom:.35rem;}
+.fl-mini-val{font-size:.82rem;font-weight:500;color:var(--w);margin-bottom:.25rem;}
+.fl-mini-desc{font-size:.72rem;color:var(--wm);}
+.fl-total{background:var(--surf3);border:.5px solid rgba(116,204,0,.2);border-radius:16px;padding:1.5rem;text-align:center;margin-top:1rem;}
+.fl-t-label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--wm);margin-bottom:.4rem;}
+.fl-t-val{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;color:var(--lime);}
+
+/* DISCLAIMER */
+.disc{background:rgba(255,180,50,.06);border:.5px solid rgba(255,180,50,.2);border-radius:14px;padding:1.5rem;margin-top:2rem;}
+.disc-title{font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);margin-bottom:.5rem;}
+.disc-text{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.65;}
+
+/* CONTATO */
+.contact-sec{border-top:.5px solid var(--bdr);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:flex-start;}
+.contact-form{background:var(--surf);border:.5px solid var(--bdr);border-radius:20px;padding:2.5rem;}
+.ff{margin-bottom:1.25rem;}
+.ff label{display:block;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--wm);margin-bottom:.5rem;}
+.ff input,.ff textarea,.ff select{width:100%;padding:.85rem 1rem;background:var(--surf2);border:.5px solid var(--bdr);border-radius:10px;color:var(--w);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;resize:vertical;}
+.ff input:focus,.ff textarea:focus,.ff select:focus{border-color:rgba(116,204,0,.35);}
+.ff input::placeholder,.ff textarea::placeholder{color:var(--wm);}
+.ff select option{background:var(--surf2);}
+.btn-form{width:100%;padding:1rem;background:var(--lime);color:var(--bg);font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:100px;cursor:pointer;transition:opacity .2s;margin-top:.5rem;}
+.btn-form:hover{opacity:.88;}
+
+footer{border-top:.5px solid var(--bdr);background:var(--surf);position:relative;z-index:1;}
+.fi{max-width:1100px;margin:0 auto;padding:2.5rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;}
+.flogo{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:.15em;color:var(--lime);}
+.flinks{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.flinks a{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--wm);text-decoration:none;transition:color .2s;}
+.flinks a:hover{color:var(--w);}
+.fcopy{font-size:.68rem;color:rgba(255,255,255,.18);}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.rv.vis{opacity:1;transform:translateY(0);}
+.rv1{transition-delay:.1s;}.rv2{transition-delay:.2s;}.rv3{transition-delay:.3s;}
+@media(max-width:900px){.cotas-grid{grid-template-columns:1fr;}.fl-mini-grid{grid-template-columns:repeat(2,1fr);}.contact-grid{grid-template-columns:1fr;}}
+@media(max-width:600px){nav .nav-links,nav .btn-nav{display:none;}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<nav>
+  <a href="./index.html" class="logo-w">
+    <svg class="logo-svg" viewBox="0 0 100 100" fill="none"><path d="M50 5 L88 27.5 L88 72.5 L50 95 L12 72.5 L12 27.5 Z" fill="#2e6417"/><path d="M50 18 L78 33.5 L78 66.5 L50 82 L22 66.5 L22 33.5 Z" fill="#0b1a08"/><rect x="30" y="34" width="40" height="32" rx="10" fill="#74cc00"/><rect x="37" y="41" width="26" height="18" rx="6" fill="#0b1a08"/></svg>
+    <span class="logo-t">NOOON</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="./institucional.html">Sobre</a></li>
+    <li><a href="./equipamentos.html">Equipamentos</a></li>
+    <li><a href="./representantes.html">Representantes</a></li>
+    <li><a href="./parceiros.html">Parcerias</a></li>
+    <li><a href="./calculadora.html">Calculadora</a></li>
+    <li><a href="./investidores.html" class="active">Investidores</a></li>
+  </ul>
+  <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav">Acessar conta</a>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow"><div class="ed"></div>Captação de investimento</div>
+  <h1 class="pt">Seja parte do<br><em>ecossistema NOOON</em></h1>
+  <p class="page-sub">Três modalidades de participação — com ou sem envolvimento operacional. Cotas a partir de R$ 15.000 com participação real no crescimento da rede.</p>
+</div>
+
+<!-- COTAS PRINCIPAIS R$50k -->
+<div class="si">
+  <div class="stag rv">Cotas de R$ 50.000 = 10%</div>
+  <h2 class="st rv rv1">Modalidades de<br><em>participação</em></h2>
+  <p class="sb rv rv2">Cada cota de R$ 50.000 corresponde a 10% de participação na carteira NOOON. Você escolhe como quer participar.</p>
+
+  <div class="cotas-grid">
+    <div class="cota-card featured rv">
+      <div class="cota-badge cb-green">Mais procurado</div>
+      <div class="cota-valor">R$ 50.000</div>
+      <div class="cota-pct">10% de participação</div>
+      <div class="cota-divider"></div>
+      <div class="cota-name">Investidor Operador</div>
+      <div class="cota-desc">Entra no quadro societário da NOOON com participação ativa nas decisões estratégicas e operacionais da rede.</div>
+      <div class="cota-items">
+        <div class="ci-item">Participação societária formal (10%)</div>
+        <div class="ci-item">Acesso ao conselho estratégico</div>
+        <div class="ci-item">Participação nos resultados mensais</div>
+        <div class="ci-item">Voto em decisões de expansão</div>
+        <div class="ci-item">Dashboard exclusivo de acompanhamento</div>
+      </div>
+      <div class="cota-vagas"><div class="cv-label">Vagas disponíveis</div><div class="cv-val">1 de 1</div></div>
+    </div>
+
+    <div class="cota-card rv rv1">
+      <div class="cota-badge cb-green">Investidor passivo</div>
+      <div class="cota-valor">R$ 50.000</div>
+      <div class="cota-pct">10% de participação</div>
+      <div class="cota-divider"></div>
+      <div class="cota-name">Investidor Silencioso</div>
+      <div class="cota-desc">Participa do resultado sem envolvimento no quadro societário. Ideal para quem quer retorno financeiro sem responsabilidade operacional.</div>
+      <div class="cota-items">
+        <div class="ci-item">Participação nos resultados (10%)</div>
+        <div class="ci-item">Sem responsabilidade operacional</div>
+        <div class="ci-item">Relatórios mensais de performance</div>
+        <div class="ci-item">Contrato de participação nos lucros</div>
+        <div class="ci-item">Liquidez negociável após 12 meses</div>
+      </div>
+      <div class="cota-vagas"><div class="cv-label">Vagas disponíveis</div><div class="cv-val">1 de 1</div></div>
+    </div>
+
+    <div class="cota-card rv rv2">
+      <div class="cota-badge cb-amber">Franquia Light</div>
+      <div class="cota-valor">R$ 50.000</div>
+      <div class="cota-pct">10% — até 4 participantes</div>
+      <div class="cota-divider"></div>
+      <div class="cota-name">Cota de Franquia Light</div>
+      <div class="cota-desc">A cota de 10% pode ser dividida entre até 4 investidores de R$ 15.000 cada, com participação proporcional de 2,5%.</div>
+      <div class="cota-items">
+        <div class="ci-item">4 × R$ 15.000 = 4 × 2,5%</div>
+        <div class="ci-item">Participação proporcional nos resultados</div>
+        <div class="ci-item">Acesso ao ecossistema como parceiro</div>
+        <div class="ci-item">Menor barreira de entrada</div>
+        <div class="ci-item">Relatórios compartilhados mensalmente</div>
+      </div>
+      <div class="cota-vagas"><div class="cv-label">Vagas disponíveis</div><div class="cv-val">4 de 4</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FRANQUIA LIGHT DETALHADA -->
+<div class="fl-sec">
+  <div class="si">
+    <div class="fl-header">
+      <div>
+        <div class="stag rv">Franquia Light — detalhamento</div>
+        <h2 class="st rv rv1">Quatro cotas,<br><em>uma oportunidade</em></h2>
+        <p class="sb rv rv2">A cota de franquia light de 10% pode ser dividida em até 4 participações iguais de 2,5%. Cada participante entra com R$ 15.000.</p>
+      </div>
+    </div>
+
+    <div class="fl-mini-grid rv rv1">
+      <div class="fl-mini">
+        <div class="fl-mini-pct">2,5%</div>
+        <div class="fl-mini-val">Participante 1</div>
+        <div class="fl-mini-desc">R$ 15.000</div>
+      </div>
+      <div class="fl-mini">
+        <div class="fl-mini-pct">2,5%</div>
+        <div class="fl-mini-val">Participante 2</div>
+        <div class="fl-mini-desc">R$ 15.000</div>
+      </div>
+      <div class="fl-mini">
+        <div class="fl-mini-pct">2,5%</div>
+        <div class="fl-mini-val">Participante 3</div>
+        <div class="fl-mini-desc">R$ 15.000</div>
+      </div>
+      <div class="fl-mini">
+        <div class="fl-mini-pct">2,5%</div>
+        <div class="fl-mini-val">Participante 4</div>
+        <div class="fl-mini-desc">R$ 15.000</div>
+      </div>
+    </div>
+
+    <div class="fl-total rv rv2">
+      <div class="fl-t-label">Total da cota = 10% por R$ 60.000</div>
+      <div class="fl-t-val">4 × 2,5% = 10% de participação</div>
+    </div>
+
+    <div class="disc rv">
+      <div class="disc-title">Aviso importante</div>
+      <div class="disc-text">As informações apresentadas nesta página têm caráter informativo e não constituem oferta pública de valores mobiliários. A participação está sujeita à assinatura de contrato formal e à due diligence das partes. Consulte um advogado antes de tomar qualquer decisão de investimento. A NOOON / HBusiness Group Tecnologia não garante retornos futuros.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTATO INVESTIDOR -->
+<div class="contact-sec" id="contato">
+  <div class="si">
+    <div class="contact-grid">
+      <div>
+        <div class="stag rv">Interesse</div>
+        <h2 class="st rv rv1">Quero investir<br><em>no NOOON</em></h2>
+        <p class="sb rv rv2">Preencha o formulário e nossa equipe entrará em contato para apresentar o material completo e tirar todas as suas dúvidas.</p>
+        <div style="margin-top:2rem;display:flex;flex-direction:column;gap:1rem;">
+          <div style="padding:1.25rem;background:var(--surf);border:.5px solid var(--bdr);border-radius:14px;">
+            <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--wm);margin-bottom:.4rem;">Cotas disponíveis</div>
+            <div style="display:flex;flex-direction:column;gap:.4rem;">
+              <div style="display:flex;justify-content:space-between;font-size:.83rem;"><span style="color:var(--wd);">Investidor Operador (10%)</span><span style="color:var(--lime);">1 vaga</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:.83rem;"><span style="color:var(--wd);">Investidor Silencioso (10%)</span><span style="color:var(--lime);">1 vaga</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:.83rem;"><span style="color:var(--wd);">Franquia Light (2,5% cada)</span><span style="color:var(--lime);">4 vagas</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form rv rv1">
+        <div class="ff">
+          <label>Nome completo</label>
+          <input type="text" placeholder="Seu nome" id="inv-nome">
+        </div>
+        <div class="ff">
+          <label>E-mail</label>
+          <input type="email" placeholder="seu@email.com" id="inv-email">
+        </div>
+        <div class="ff">
+          <label>WhatsApp</label>
+          <input type="tel" placeholder="(92) 99999-9999" id="inv-wpp">
+        </div>
+        <div class="ff">
+          <label>Modalidade de interesse</label>
+          <select id="inv-mod">
+            <option value="">Selecione</option>
+            <option value="operador">Investidor Operador — R$ 50.000 / 10%</option>
+            <option value="silencioso">Investidor Silencioso — R$ 50.000 / 10%</option>
+            <option value="franquia-light">Franquia Light — R$ 15.000 / 2,5%</option>
+            <option value="mais-info">Quero mais informações</option>
+          </select>
+        </div>
+        <div class="ff">
+          <label>Mensagem (opcional)</label>
+          <textarea placeholder="Sua mensagem ou dúvidas..." rows="3" id="inv-msg"></textarea>
+        </div>
+        <button class="btn-form" onclick="enviarInvestidor()">Enviar interesse via WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fi">
+    <div><div class="flogo">NOOON</div><div style="font-size:.68rem;color:rgba(255,255,255,.28);margin-top:3px;">HBusiness Group Tecnologia</div></div>
+    <div class="flinks">
+      <a href="./institucional.html">Sobre</a><a href="./equipamentos.html">Equipamentos</a><a href="./representantes.html">Representantes</a><a href="./parceiros.html">Parcerias</a><a href="./calculadora.html">Calculadora</a><a href="https://portal.nooon.com.br" target="_blank">Portal</a>
+    </div>
+    <div class="fcopy">© 2026 NOOON</div>
+  </div>
+</footer>
+
+<script>
+const rvs=document.querySelectorAll('.rv');
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.1});
+rvs.forEach(el=>obs.observe(el));
+setTimeout(()=>document.querySelectorAll('.page-hero .rv').forEach(el=>el.classList.add('vis')),80);
+
+function enviarInvestidor(){
+  const nome=document.getElementById('inv-nome').value;
+  const email=document.getElementById('inv-email').value;
+  const wpp=document.getElementById('inv-wpp').value;
+  const mod=document.getElementById('inv-mod').value;
+  const msg=document.getElementById('inv-msg').value;
+  if(!nome||!wpp){alert('Por favor, preencha seu nome e WhatsApp.');return;}
+  const texto=`Olá! Tenho interesse em investir no NOOON.\n\n*Nome:* ${nome}\n*E-mail:* ${email}\n*WhatsApp:* ${wpp}\n*Modalidade:* ${mod}\n*Mensagem:* ${msg||'—'}`;
+  window.open(`https://wa.me/5592999999999?text=${encodeURIComponent(texto)}`,'_blank');
+}
+</script>
+</body>
+</html>

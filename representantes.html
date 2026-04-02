@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Representantes — NOOON</title>
+<link rel="icon" href="./assets/favicon-32.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--bg:#0b1a08;--surf:#111f0d;--surf2:#162812;--lime:#74cc00;--lf:rgba(116,204,0,.08);--lb:rgba(116,204,0,.18);--w:#fff;--wd:rgba(255,255,255,.65);--wm:rgba(255,255,255,.38);--bdr:rgba(255,255,255,.07);}
+html{scroll-behavior:smooth;}body{background:var(--bg);color:var(--w);font-family:'DM Sans',sans-serif;overflow-x:hidden;}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.18;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;border-bottom:.5px solid var(--bdr);backdrop-filter:blur(16px);background:rgba(11,26,8,.8);}
+.logo-w{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-svg{width:28px;height:28px;flex-shrink:0;}
+.logo-t{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:.14em;color:var(--lime);}
+.nav-links{display:flex;align-items:center;gap:1.5rem;list-style:none;}
+.nav-links a{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--wm);text-decoration:none;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--w);}
+.btn-nav{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:var(--lime);padding:8px 18px;border-radius:100px;text-decoration:none;}
+.page-hero{padding:8rem 2rem 4rem;text-align:center;position:relative;z-index:1;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--lime);border:.5px solid rgba(116,204,0,.22);padding:5px 14px;border-radius:100px;margin-bottom:1.75rem;}
+.ed{width:5px;height:5px;border-radius:50%;background:var(--lime);}
+h1.pt{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;line-height:1;letter-spacing:-.025em;margin-bottom:1.2rem;}
+h1.pt em{font-style:normal;color:var(--lime);}
+.page-sub{font-size:1rem;font-weight:300;color:var(--wd);line-height:1.75;max-width:520px;margin:0 auto;}
+.si{max-width:1100px;margin:0 auto;padding:4rem 2rem;position:relative;z-index:1;}
+.stag{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--lime);margin-bottom:1.1rem;display:flex;align-items:center;gap:10px;}
+.stag::before{content:'';display:block;width:20px;height:1px;background:var(--lime);opacity:.4;}
+h2.st{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,3.5vw,2.5rem);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.1rem;}
+h2.st em{font-style:normal;color:var(--lime);}
+.sb{font-size:.95rem;font-weight:300;color:var(--wd);line-height:1.75;max-width:560px;}
+
+/* SEARCH */
+.search-wrap{margin:2.5rem 0;position:relative;max-width:440px;}
+.search-wrap input{width:100%;padding:.9rem 1.25rem .9rem 3rem;background:var(--surf);border:.5px solid var(--bdr);border-radius:12px;color:var(--w);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;}
+.search-wrap input:focus{border-color:rgba(116,204,0,.3);}
+.search-wrap input::placeholder{color:var(--wm);}
+.search-icon{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--wm);}
+
+/* REP GRID */
+.rep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem;margin-top:2rem;}
+.rep-card{background:var(--surf);border:.5px solid var(--bdr);border-radius:18px;padding:1.75rem;display:flex;flex-direction:column;gap:1rem;transition:border-color .25s;}
+.rep-card:hover{border-color:rgba(116,204,0,.22);}
+.rep-avatar{width:64px;height:64px;border-radius:50%;background:rgba(116,204,0,.12);border:.5px solid var(--lb);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--lime);}
+.rep-avatar img{width:64px;height:64px;border-radius:50%;object-fit:cover;}
+.rep-name{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--w);}
+.rep-region{font-size:.75rem;color:var(--wm);display:flex;align-items:center;gap:6px;}
+.rep-region::before{content:'';display:block;width:6px;height:6px;border-radius:50%;background:var(--lime);flex-shrink:0;}
+.rep-wpp{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:500;color:var(--lime);text-decoration:none;background:var(--lf);border:.5px solid var(--lb);padding:8px 16px;border-radius:100px;margin-top:.25rem;transition:background .2s;}
+.rep-wpp:hover{background:rgba(116,204,0,.14);}
+.empty-state{text-align:center;padding:4rem 2rem;color:var(--wm);font-size:.9rem;}
+
+/* SEJA REP CTA */
+.seja-sec{background:var(--surf);border-top:.5px solid var(--bdr);border-bottom:.5px solid var(--bdr);}
+.seja-inner{max-width:700px;margin:0 auto;padding:5rem 2rem;text-align:center;}
+.btn-p{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--bg);background:var(--lime);padding:14px 30px;border-radius:100px;text-decoration:none;transition:opacity .2s;}
+.btn-p:hover{opacity:.88;}
+
+footer{border-top:.5px solid var(--bdr);background:var(--surf);position:relative;z-index:1;}
+.fi{max-width:1100px;margin:0 auto;padding:2.5rem 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;}
+.flogo{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;letter-spacing:.15em;color:var(--lime);}
+.flinks{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.flinks a{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--wm);text-decoration:none;transition:color .2s;}
+.flinks a:hover{color:var(--w);}
+.fcopy{font-size:.68rem;color:rgba(255,255,255,.18);}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.rv.vis{opacity:1;transform:translateY(0);}
+.rv1{transition-delay:.1s;}.rv2{transition-delay:.2s;}
+@media(max-width:600px){nav .nav-links,nav .btn-nav{display:none;}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<nav>
+  <a href="./index.html" class="logo-w">
+    <svg class="logo-svg" viewBox="0 0 100 100" fill="none"><path d="M50 5 L88 27.5 L88 72.5 L50 95 L12 72.5 L12 27.5 Z" fill="#2e6417"/><path d="M50 18 L78 33.5 L78 66.5 L50 82 L22 66.5 L22 33.5 Z" fill="#0b1a08"/><rect x="30" y="34" width="40" height="32" rx="10" fill="#74cc00"/><rect x="37" y="41" width="26" height="18" rx="6" fill="#0b1a08"/></svg>
+    <span class="logo-t">NOOON</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="./institucional.html">Sobre</a></li>
+    <li><a href="./equipamentos.html">Equipamentos</a></li>
+    <li><a href="./representantes.html" class="active">Representantes</a></li>
+    <li><a href="./parceiros.html">Parcerias</a></li>
+    <li><a href="./calculadora.html">Calculadora</a></li>
+    <li><a href="./investidores.html">Investidores</a></li>
+  </ul>
+  <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav">Acessar conta</a>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow"><div class="ed"></div>Rede NOOON</div>
+  <h1 class="pt">Nossos <em>Representantes</em></h1>
+  <p class="page-sub">Conheça quem representa o NOOON na sua região. Entre em contato diretamente para ativar sua máquina ou tirar dúvidas.</p>
+</div>
+
+<div class="si">
+  <div class="stag rv">Encontre seu representante</div>
+  <h2 class="st rv rv1">Rede <em>regional</em></h2>
+  <p class="sb rv rv2">Cada representante é responsável por uma região. Eles ativam pontos, treinam estabelecimentos e garantem o funcionamento da sua rede.</p>
+
+  <div class="search-wrap rv rv1">
+    <div class="search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+    <input type="text" id="search-rep" placeholder="Buscar por nome ou região..." oninput="filterReps(this.value)">
+  </div>
+
+  <div class="rep-grid" id="rep-grid">
+    <!-- Representantes cadastrados -->
+    <div class="rep-card" data-name="João Silva" data-region="Manaus/AM">
+      <div class="rep-avatar">JS</div>
+      <div>
+        <div class="rep-name">João Silva</div>
+        <div class="rep-region">Manaus / AM</div>
+      </div>
+      <a href="https://wa.me/5592999999999" target="_blank" class="rep-wpp">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.547 4.07 1.502 5.787L.057 23.998l6.381-1.674A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.9 9.9 0 0 1-5.045-1.378l-.361-.214-3.746.982 1-3.651-.235-.374A9.86 9.86 0 0 1 2.1 12c0-5.461 4.439-9.9 9.9-9.9 5.462 0 9.9 4.439 9.9 9.9 0 5.462-4.438 9.9-9.9 9.9z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+
+    <div class="rep-card" data-name="Maria Oliveira" data-region="Belém/PA">
+      <div class="rep-avatar">MO</div>
+      <div>
+        <div class="rep-name">Maria Oliveira</div>
+        <div class="rep-region">Belém / PA</div>
+      </div>
+      <a href="https://wa.me/5591999999999" target="_blank" class="rep-wpp">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.547 4.07 1.502 5.787L.057 23.998l6.381-1.674A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.9 9.9 0 0 1-5.045-1.378l-.361-.214-3.746.982 1-3.651-.235-.374A9.86 9.86 0 0 1 2.1 12c0-5.461 4.439-9.9 9.9-9.9 5.462 0 9.9 4.439 9.9 9.9 0 5.462-4.438 9.9-9.9 9.9z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+
+    <div class="rep-card" data-name="Carlos Mendes" data-region="Fortaleza/CE">
+      <div class="rep-avatar">CM</div>
+      <div>
+        <div class="rep-name">Carlos Mendes</div>
+        <div class="rep-region">Fortaleza / CE</div>
+      </div>
+      <a href="https://wa.me/5585999999999" target="_blank" class="rep-wpp">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.099.547 4.07 1.502 5.787L.057 23.998l6.381-1.674A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.9a9.9 9.9 0 0 1-5.045-1.378l-.361-.214-3.746.982 1-3.651-.235-.374A9.86 9.86 0 0 1 2.1 12c0-5.461 4.439-9.9 9.9-9.9 5.462 0 9.9 4.439 9.9 9.9 0 5.462-4.438 9.9-9.9 9.9z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+
+    <!-- Vaga em aberto -->
+    <div class="rep-card" style="border-style:dashed;opacity:.6;">
+      <div class="rep-avatar" style="background:rgba(255,255,255,.05);color:rgba(255,255,255,.3);">+</div>
+      <div>
+        <div class="rep-name" style="color:rgba(255,255,255,.4);">Sua região aqui</div>
+        <div class="rep-region" style="color:rgba(255,255,255,.25);">Vaga disponível</div>
+      </div>
+      <a href="./parceiros.html" class="rep-wpp" style="opacity:.7;">Quero ser representante</a>
+    </div>
+  </div>
+</div>
+
+<div class="seja-sec">
+  <div class="seja-inner">
+    <div class="stag rv" style="justify-content:center;">Expansão</div>
+    <h2 class="st rv rv1" style="text-align:center;">Sua região está<br><em>disponível</em></h2>
+    <p class="sb rv rv2" style="text-align:center;margin:0 auto 2.5rem;">Não encontrou um representante na sua cidade? Seja o primeiro a levar o ecossistema NOOON para a sua região.</p>
+    <a href="./parceiros.html" class="btn-p rv rv2">Quero ser representante NOOON</a>
+  </div>
+</div>
+
+<footer>
+  <div class="fi">
+    <div><div class="flogo">NOOON</div><div style="font-size:.68rem;color:rgba(255,255,255,.28);margin-top:3px;">HBusiness Group Tecnologia</div></div>
+    <div class="flinks">
+      <a href="./institucional.html">Sobre</a><a href="./equipamentos.html">Equipamentos</a><a href="./parceiros.html">Parcerias</a><a href="./calculadora.html">Calculadora</a><a href="./investidores.html">Investidores</a><a href="https://portal.nooon.com.br" target="_blank">Portal</a>
+    </div>
+    <div class="fcopy">© 2026 NOOON</div>
+  </div>
+</footer>
+
+<script>
+const rvs=document.querySelectorAll('.rv');
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.1});
+rvs.forEach(el=>obs.observe(el));
+setTimeout(()=>document.querySelectorAll('.page-hero .rv').forEach(el=>el.classList.add('vis')),80);
+
+function filterReps(q){
+  const cards=document.querySelectorAll('#rep-grid .rep-card');
+  q=q.toLowerCase();
+  cards.forEach(c=>{
+    const n=c.dataset.name?.toLowerCase()||'';
+    const r=c.dataset.region?.toLowerCase()||'';
+    c.style.display=(n.includes(q)||r.includes(q)||!q)?'':'none';
+  });
+}
+</script>
+</body>
+</html>

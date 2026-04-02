@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOOON — Ecossistema Financeiro Completo</title>
+<meta name="description" content="NOOON é um ecossistema financeiro completo com banco digital, gestão de negócios e ferramentas inteligentes para você e sua empresa.">
+<meta property="og:title" content="NOOON — Ecossistema Financeiro">
+<meta property="og:image" content="./assets/og-1200x630.png">
+<link rel="icon" href="./assets/favicon-32.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#0b1a08; --bg2:#0d1e0a; --surf:#111f0d; --surf2:#162812; --surf3:#1c3218;
+  --green:#2e6417; --lime:#74cc00; --lm: rgba(116,204,0,.45); --lf:rgba(116,204,0,.08); --lb:rgba(116,204,0,.18);
+  --w:#ffffff; --wd:rgba(255,255,255,.65); --wm:rgba(255,255,255,.38); --wf:rgba(255,255,255,.1);
+  --bdr:rgba(255,255,255,.07); --gbdr:rgba(46,100,23,.4);
+}
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--w); font-family:'DM Sans',sans-serif; overflow-x:hidden; line-height:1.6; }
+
+.grain { position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.2;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"); }
+
+/* ── NAV ── */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:1.2rem 2.5rem; display:flex; align-items:center; justify-content:space-between; gap:2rem; border-bottom:0.5px solid var(--bdr); backdrop-filter:blur(16px); background:rgba(11,26,8,.8); transition:padding .3s; }
+nav.scrolled { padding:.85rem 2.5rem; }
+.logo-w { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.logo-svg { width:30px; height:30px; flex-shrink:0; }
+.logo-t { font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:800; letter-spacing:.14em; color:var(--lime); }
+.nav-links { display:flex; align-items:center; gap:1.5rem; list-style:none; }
+.nav-links a { font-size:.76rem; letter-spacing:.08em; text-transform:uppercase; color:var(--wm); text-decoration:none; transition:color .2s; }
+.nav-links a:hover { color:var(--w); }
+.btn-nav { font-size:.72rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--bg); background:var(--lime); padding:9px 20px; border-radius:100px; text-decoration:none; transition:opacity .2s, transform .15s; white-space:nowrap; }
+.btn-nav:hover { opacity:.88; transform:translateY(-1px); }
+
+/* ── HERO ── */
+.hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:7rem 2rem 5rem; position:relative; overflow:hidden; }
+.hero-orb { position:absolute; width:700px; height:700px; border-radius:50%; background:rgba(46,100,23,.15); filter:blur(100px); top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:0; }
+.hero-orb2 { position:absolute; width:350px; height:350px; border-radius:50%; background:rgba(116,204,0,.05); filter:blur(70px); bottom:5%; right:5%; pointer-events:none; z-index:0; }
+.hero > * { position:relative; z-index:1; }
+.eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:.67rem; letter-spacing:.22em; text-transform:uppercase; color:var(--lime); border:.5px solid rgba(116,204,0,.25); padding:6px 16px; border-radius:100px; margin-bottom:2rem; }
+.ed { width:5px; height:5px; border-radius:50%; background:var(--lime); animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.3;transform:scale(.6);} }
+.hero h1 { font-family:'Syne',sans-serif; font-size:clamp(3rem,8vw,5.5rem); font-weight:800; line-height:.95; letter-spacing:-.03em; margin-bottom:1.75rem; max-width:800px; }
+.hero h1 em { font-style:normal; color:var(--lime); }
+.hero-sub { font-size:clamp(1rem,2vw,1.15rem); font-weight:300; color:var(--wd); line-height:1.75; max-width:520px; margin:0 auto 3rem; }
+.hero-btns { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; justify-content:center; }
+.btn-p { display:inline-flex; align-items:center; gap:8px; font-size:.8rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--bg); background:var(--lime); padding:14px 30px; border-radius:100px; text-decoration:none; transition:opacity .2s, transform .15s; }
+.btn-p:hover { opacity:.88; transform:translateY(-1px); }
+.btn-g { display:inline-flex; align-items:center; gap:8px; font-size:.8rem; font-weight:300; color:var(--wm); text-decoration:none; transition:color .2s; }
+.btn-g:hover { color:var(--w); }
+.scroll-cue { margin-top:4.5rem; display:flex; flex-direction:column; align-items:center; gap:8px; }
+.scroll-line { width:1px; height:48px; background:linear-gradient(to bottom,rgba(116,204,0,.5),transparent); animation:sdrop 1.6s ease-in-out infinite; }
+@keyframes sdrop { 0%{transform:scaleY(0);transform-origin:top;} 50%{transform:scaleY(1);transform-origin:top;} 51%{transform:scaleY(1);transform-origin:bottom;} 100%{transform:scaleY(0);transform-origin:bottom;} }
+.scroll-lbl { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--wm); }
+
+/* ── STATS ── */
+.stats-bar { border-top:.5px solid var(--bdr); border-bottom:.5px solid var(--bdr); background:var(--surf); padding:2rem; display:flex; justify-content:center; position:relative; z-index:1; }
+.stats-inner { display:grid; grid-template-columns:repeat(4,1fr); max-width:900px; width:100%; }
+.stat { text-align:center; padding:1rem 2rem; border-right:.5px solid var(--bdr); }
+.stat:last-child { border-right:none; }
+.stat-n { font-family:'Syne',sans-serif; font-size:2rem; font-weight:800; color:var(--lime); line-height:1; margin-bottom:.4rem; }
+.stat-l { font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--wm); }
+
+/* ── SECTION ── */
+.section-inner { max-width:1100px; margin:0 auto; padding:6rem 2rem; position:relative; z-index:1; }
+.stag { font-size:.63rem; letter-spacing:.25em; text-transform:uppercase; color:var(--lime); margin-bottom:1.2rem; display:flex; align-items:center; gap:10px; }
+.stag::before { content:''; display:block; width:22px; height:1px; background:var(--lime); opacity:.45; }
+h2.stitle { font-family:'Syne',sans-serif; font-size:clamp(1.9rem,4vw,2.9rem); font-weight:800; line-height:1.1; letter-spacing:-.02em; margin-bottom:1.2rem; }
+h2.stitle em { font-style:normal; color:var(--lime); }
+.sbody { font-size:1rem; font-weight:300; color:var(--wd); line-height:1.75; max-width:580px; }
+
+/* ── ABOUT ── */
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+.about-card { background:var(--surf); border:.5px solid var(--bdr); border-radius:20px; padding:2rem; }
+.ac-title { font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; color:var(--lime); margin-bottom:1.5rem; }
+.ai { display:flex; gap:1rem; align-items:flex-start; margin-bottom:1.1rem; }
+.ai:last-child { margin-bottom:0; }
+.ai-icon { width:36px; height:36px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:var(--lf); border:.5px solid var(--lb); }
+.ai-label { font-size:.82rem; font-weight:500; color:var(--w); margin-bottom:3px; }
+.ai-desc { font-size:.74rem; color:var(--wm); }
+
+/* ── PRODUTOS ── */
+.produtos { background:var(--surf); border-top:.5px solid var(--bdr); border-bottom:.5px solid var(--bdr); }
+.pheader { text-align:center; margin-bottom:4rem; }
+.pgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(116,204,0,.05); border:.5px solid rgba(116,204,0,.1); border-radius:22px; overflow:hidden; }
+.pcard { background:var(--surf2); padding:2.5rem 2rem; display:flex; flex-direction:column; gap:.9rem; transition:background .25s; text-decoration:none; color:inherit; }
+.pcard:hover { background:#1c2e17; }
+.pnum { font-family:'Syne',sans-serif; font-size:.7rem; font-weight:800; color:rgba(116,204,0,.28); letter-spacing:.12em; }
+.picon { width:46px; height:46px; border-radius:13px; display:flex; align-items:center; justify-content:center; }
+.pi-l { background:rgba(116,204,0,.1); border:.5px solid rgba(116,204,0,.22); }
+.pi-g { background:rgba(46,100,23,.2); border:.5px solid rgba(46,100,23,.4); }
+.ptag { font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--wm); }
+.pname { font-family:'Syne',sans-serif; font-size:1.3rem; font-weight:800; color:var(--w); }
+.pname span { color:var(--lime); }
+.pdesc { font-size:.83rem; font-weight:300; color:var(--wm); line-height:1.65; flex:1; }
+.pfeat { display:flex; flex-direction:column; gap:6px; }
+.pf { display:flex; align-items:center; gap:8px; font-size:.76rem; color:rgba(255,255,255,.6); }
+.pfd { width:4px; height:4px; border-radius:50%; background:var(--lime); flex-shrink:0; }
+.badge-live { display:inline-flex; align-items:center; gap:5px; font-size:.58rem; letter-spacing:.15em; text-transform:uppercase; color:var(--lime); background:rgba(116,204,0,.08); border:.5px solid rgba(116,204,0,.2); padding:3px 10px; border-radius:100px; width:fit-content; }
+.bld { width:5px; height:5px; border-radius:50%; background:var(--lime); animation:pulse 1.5s ease-in-out infinite; }
+.pcta { display:inline-flex; align-items:center; gap:8px; font-size:.76rem; font-weight:500; color:rgba(116,204,0,.7); margin-top:.5rem; transition:gap .2s, color .2s; }
+.pcard:hover .pcta { gap:14px; color:var(--lime); }
+
+/* ── STEPS ── */
+.steps-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:2rem; margin-top:4rem; }
+.step { position:relative; }
+.step-n { font-family:'Syne',sans-serif; font-size:3rem; font-weight:800; color:rgba(116,204,0,.1); line-height:1; margin-bottom:.75rem; }
+.step-t { font-family:'Syne',sans-serif; font-size:.95rem; font-weight:700; color:var(--w); margin-bottom:.5rem; }
+.step-d { font-size:.82rem; font-weight:300; color:var(--wm); line-height:1.65; }
+.step-con { position:absolute; top:1.5rem; right:-1rem; width:2rem; height:1px; background:rgba(116,204,0,.2); }
+
+/* ── TECH ── */
+.tsec { background:var(--surf); border-top:.5px solid var(--bdr); }
+.tgrid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+.titems { display:flex; flex-direction:column; gap:1.25rem; margin-top:2.5rem; }
+.titem { display:flex; gap:1.25rem; padding:1.4rem; background:var(--surf2); border:.5px solid var(--bdr); border-radius:16px; transition:border-color .25s; }
+.titem:hover { border-color:rgba(116,204,0,.2); }
+.ticon { width:40px; height:40px; border-radius:11px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:var(--lf); border:.5px solid var(--lb); }
+.ttext .tt { font-size:.88rem; font-weight:500; color:var(--w); margin-bottom:4px; }
+.ttext .td { font-size:.79rem; font-weight:300; color:var(--wm); line-height:1.6; }
+.tvisual { position:relative; aspect-ratio:1; display:flex; align-items:center; justify-content:center; }
+.tring { position:absolute; border-radius:50%; border:.5px solid rgba(116,204,0,.15); animation:spin 20s linear infinite; }
+.tring:nth-child(2) { animation-direction:reverse; animation-duration:32s; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.tcenter { width:110px; height:110px; border-radius:50%; background:rgba(116,204,0,.08); border:1px solid rgba(116,204,0,.2); display:flex; align-items:center; justify-content:center; }
+.tctext { font-family:'Syne',sans-serif; font-size:.85rem; font-weight:800; letter-spacing:.12em; color:var(--lime); }
+
+/* ── FRANQUIA ── */
+.franquia-sec { border-top:.5px solid var(--bdr); }
+.fgrid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+.fcards { display:flex; flex-direction:column; gap:1rem; }
+.fcard { padding:1.4rem; background:var(--surf); border:.5px solid var(--bdr); border-radius:16px; display:flex; gap:1rem; align-items:flex-start; transition:border-color .25s; }
+.fcard:hover { border-color:rgba(116,204,0,.2); }
+.fcnum { font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:800; color:rgba(116,204,0,.2); line-height:1; flex-shrink:0; width:2.5rem; }
+.fct .ft { font-size:.88rem; font-weight:500; color:var(--w); margin-bottom:4px; }
+.fct .fd { font-size:.79rem; font-weight:300; color:var(--wm); line-height:1.6; }
+
+/* ── CTA FINAL ── */
+.cta-sec { text-align:center; padding:8rem 2rem; position:relative; overflow:hidden; }
+.cta-orb { position:absolute; width:600px; height:600px; border-radius:50%; background:rgba(46,100,23,.12); filter:blur(80px); top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; }
+.cta-sec .stitle { font-size:clamp(2.5rem,5vw,3.8rem); }
+.cta-acts { display:flex; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap; margin-top:2.5rem; }
+.btn-ol { display:inline-flex; align-items:center; gap:8px; font-size:.8rem; color:var(--wm); text-decoration:none; border:.5px solid rgba(255,255,255,.15); padding:13px 28px; border-radius:100px; transition:border-color .2s, color .2s; }
+.btn-ol:hover { border-color:rgba(116,204,0,.3); color:var(--w); }
+
+/* ── FOOTER ── */
+footer { border-top:.5px solid var(--bdr); background:var(--surf); position:relative; z-index:1; }
+.fi { max-width:1100px; margin:0 auto; padding:3rem 2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:2rem; }
+.flogo { font-family:'Syne',sans-serif; font-size:1.25rem; font-weight:800; letter-spacing:.15em; color:var(--lime); }
+.flinks { display:flex; gap:1.75rem; flex-wrap:wrap; }
+.flinks a { font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--wm); text-decoration:none; transition:color .2s; }
+.flinks a:hover { color:var(--w); }
+.fcopy { font-size:.7rem; color:rgba(255,255,255,.18); letter-spacing:.08em; }
+
+/* ── REVEAL ── */
+.rv { opacity:0; transform:translateY(24px); transition:opacity .65s ease, transform .65s ease; }
+.rv.vis { opacity:1; transform:translateY(0); }
+.rv1{transition-delay:.1s;} .rv2{transition-delay:.2s;} .rv3{transition-delay:.3s;} .rv4{transition-delay:.4s;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px) {
+  .about-grid,.tgrid,.fgrid { grid-template-columns:1fr; gap:3rem; }
+  .about-card-col,.tvisual { display:none; }
+  .stats-inner { grid-template-columns:repeat(2,1fr); }
+  .stat:nth-child(2) { border-right:none; }
+  .pgrid { grid-template-columns:1fr; }
+  .steps-grid { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:600px) {
+  nav .nav-links, nav .btn-nav { display:none; }
+  .steps-grid { grid-template-columns:1fr; }
+  .hero h1 { font-size:2.6rem; }
+  .fi { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="./index.html" class="logo-w">
+    <svg class="logo-svg" viewBox="0 0 100 100" fill="none">
+      <path d="M50 5 L88 27.5 L88 72.5 L50 95 L12 72.5 L12 27.5 Z" fill="#2e6417"/>
+      <path d="M50 18 L78 33.5 L78 66.5 L50 82 L22 66.5 L22 33.5 Z" fill="#0b1a08"/>
+      <rect x="30" y="34" width="40" height="32" rx="10" fill="#74cc00"/>
+      <rect x="37" y="41" width="26" height="18" rx="6" fill="#0b1a08"/>
+    </svg>
+    <span class="logo-t">NOOON</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#produtos">Produtos</a></li>
+    <li><a href="./equipamentos.html">Equipamentos</a></li>
+    <li><a href="./representantes.html">Representantes</a></li>
+    <li><a href="./parceiros.html">Parcerias</a></li>
+    <li><a href="./investidores.html">Investidores</a></li>
+  </ul>
+  <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav">Acessar conta</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="hero-orb2"></div>
+  <div class="eyebrow rv"><div class="ed"></div>Ecossistema Financeiro Completo</div>
+  <h1 class="rv rv1">Mais do que<br>um banco.<br><em>Um ecossistema.</em></h1>
+  <p class="hero-sub rv rv2">NOOON une conta digital, gestão de negócios e ferramentas financeiras inteligentes em uma plataforma construída para o crescimento real dos brasileiros.</p>
+  <div class="hero-btns rv rv3">
+    <a href="https://portal.nooon.com.br" target="_blank" class="btn-p">Abrir minha conta</a>
+    <a href="#produtos" class="btn-g">Ver o ecossistema <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="scroll-cue rv rv4"><div class="scroll-line"></div><span class="scroll-lbl">Rolar</span></div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-n">3×</div><div class="stat-l">Mais que um banco</div></div>
+    <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Digital e acessível</div></div>
+    <div class="stat"><div class="stat-n">60×</div><div class="stat-l">Parcelas no NOOON Caixa</div></div>
+    <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Potencial do ecossistema</div></div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div class="stag rv">Nossa missão</div>
+        <h2 class="stitle rv rv1">Finanças que<br><em>trabalham por você</em></h2>
+        <p class="sbody rv rv2">O NOOON nasceu de uma visão simples: o sistema financeiro brasileiro é complicado demais para quem realmente precisa crescer. Construímos um ecossistema que simplifica, potencializa e escala junto com o seu negócio.</p>
+        <p class="sbody rv rv2" style="margin-top:1rem;">Não somos apenas uma conta digital. Somos a infraestrutura financeira do seu crescimento.</p>
+      </div>
+      <div class="about-card-col rv rv1">
+        <div class="about-card">
+          <div class="ac-title">Pilares do ecossistema</div>
+          <div class="ai">
+            <div class="ai-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="2" stroke="rgba(116,204,0,.75)" stroke-width="1.5"/><path d="M3 10h18" stroke="rgba(116,204,0,.5)" stroke-width="1.5"/></svg></div>
+            <div><div class="ai-label">Banco Digital NOOON</div><div class="ai-desc">Conta, cartão, PIX e muito mais</div></div>
+          </div>
+          <div class="ai">
+            <div class="ai-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" stroke="rgba(116,204,0,.75)" stroke-width="1.5"/></svg></div>
+            <div><div class="ai-label">Portal do Negócio</div><div class="ai-desc">Gestão completa do seu empreendimento</div></div>
+          </div>
+          <div class="ai">
+            <div class="ai-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="rgba(116,204,0,.75)" stroke-width="1.5" stroke-linecap="round"/><path d="M7 16l4-4 4 4 4-6" stroke="rgba(116,204,0,.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><div class="ai-label">NOOON Caixa</div><div class="ai-desc">Projeção inteligente do fluxo financeiro</div></div>
+          </div>
+          <div class="ai">
+            <div class="ai-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="rgba(116,204,0,.75)" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="rgba(116,204,0,.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div><div class="ai-label">Super Sócio</div><div class="ai-desc">Crédito integrado ao ecossistema</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS -->
+<section class="produtos" id="produtos">
+  <div class="section-inner">
+    <div class="pheader">
+      <div class="stag rv" style="justify-content:center;">O ecossistema</div>
+      <h2 class="stitle rv rv1" style="text-align:center;">Três portais,<br><em>um só universo</em></h2>
+      <p class="sbody rv rv2" style="margin:0 auto;text-align:center;">Cada ponto de acesso foi projetado para uma necessidade específica — e todos se conectam no mesmo ecossistema NOOON.</p>
+    </div>
+    <div class="pgrid rv rv1">
+      <div class="pcard">
+        <div class="pnum">01</div>
+        <div class="picon pi-l"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 9l9-6 9 6v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" stroke="rgba(116,204,0,.8)" stroke-width="1.5"/><path d="M9 22V12h6v10" stroke="rgba(116,204,0,.5)" stroke-width="1.5"/></svg></div>
+        <div class="ptag">Ecossistema completo</div>
+        <div class="pname">Site <span>Institucional</span></div>
+        <div class="pdesc">A porta de entrada do universo NOOON. Conheça nossa missão, produtos e como o ecossistema transforma sua relação com o dinheiro.</div>
+        <div class="pfeat">
+          <div class="pf"><div class="pfd"></div>Identidade e missão NOOON</div>
+          <div class="pf"><div class="pfd"></div>Apresentação do ecossistema</div>
+          <div class="pf"><div class="pfd"></div>Portal para representantes</div>
+        </div>
+        <div class="pcta">Você está aqui <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="8" r="2" fill="currentColor"/></svg></div>
+      </div>
+      <div class="pcard">
+        <div class="pnum">02</div>
+        <div class="picon pi-g"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="rgba(116,204,0,.6)"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="rgba(116,204,0,.45)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="ptag">Banco Digital + Negócios</div>
+        <div class="pname">Portal do <span>Cliente</span></div>
+        <div class="pdesc">O coração operacional do NOOON. Sua conta digital completa integrada à gestão do seu negócio em um único lugar.</div>
+        <div class="pfeat">
+          <div class="pf"><div class="pfd"></div>Conta digital e cartão</div>
+          <div class="pf"><div class="pfd"></div>Gestão financeira do negócio</div>
+          <div class="pf"><div class="pfd"></div>PIX, transferências e muito mais</div>
+          <div class="pf"><div class="pfd"></div>Super Sócio — crédito integrado</div>
+        </div>
+        <div class="badge-live"><div class="bld"></div>Online agora</div>
+        <a href="https://portal.nooon.com.br" target="_blank" class="pcta">Acessar portal <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="pcard">
+        <div class="pnum">03</div>
+        <div class="picon pi-l"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" stroke="rgba(116,204,0,.8)" stroke-width="1.5" stroke-linecap="round"/><path d="M7 16l4-4 4 4 4-6" stroke="rgba(116,204,0,.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="ptag">Planejamento financeiro</div>
+        <div class="pname">NOOON <span>Caixa</span></div>
+        <div class="pdesc">Ferramenta exclusiva de projeção de saldo diário baseada em calendário. Visualize o futuro financeiro antes que ele aconteça.</div>
+        <div class="pfeat">
+          <div class="pf"><div class="pfd"></div>Calendário de saldo projetado</div>
+          <div class="pf"><div class="pfd"></div>Parcelamento automático (até 60×)</div>
+          <div class="pf"><div class="pfd"></div>Multi-contas personalizadas</div>
+          <div class="pf"><div class="pfd"></div>Gráficos e relatórios mensais</div>
+        </div>
+        <div class="badge-live"><div class="bld"></div>Online agora</div>
+        <a href="https://caixa.nooon.com.br" target="_blank" class="pcta">Abrir ferramenta <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section>
+  <div class="section-inner">
+    <div class="stag rv">Como funciona</div>
+    <h2 class="stitle rv rv1">Simples de entrar,<br><em>impossível de largar</em></h2>
+    <div class="steps-grid">
+      <div class="step rv"><div class="step-n">01</div><div class="step-t">Abra sua conta</div><div class="step-d">Crie sua conta digital NOOON em minutos. 100% online, sem burocracia.</div><div class="step-con"></div></div>
+      <div class="step rv rv1"><div class="step-n">02</div><div class="step-t">Conecte seu negócio</div><div class="step-d">Use o Portal do Cliente para integrar gestão financeira e banco digital.</div><div class="step-con"></div></div>
+      <div class="step rv rv2"><div class="step-n">03</div><div class="step-t">Projete seu futuro</div><div class="step-d">Com o NOOON Caixa, visualize dia a dia como seu saldo vai se comportar.</div><div class="step-con"></div></div>
+      <div class="step rv rv3"><div class="step-n">04</div><div class="step-t">Cresça com o ecossistema</div><div class="step-d">Acesse crédito, expanda com representantes e domine o ecossistema NOOON.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TECNOLOGIA -->
+<section class="tsec">
+  <div class="section-inner">
+    <div class="tgrid">
+      <div>
+        <div class="stag rv">Infraestrutura</div>
+        <h2 class="stitle rv rv1">Tecnologia que<br><em>você pode confiar</em></h2>
+        <p class="sbody rv rv2">Cada produto do ecossistema NOOON é construído com as melhores práticas de segurança e escalabilidade. Sua confiança é a nossa prioridade.</p>
+        <div class="titems">
+          <div class="titem rv rv1"><div class="ticon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 3l9 4.5V12c0 5-4 8.5-9 10-5-1.5-9-5-9-10V7.5z" stroke="rgba(116,204,0,.75)" stroke-width="1.5"/><path d="M9 12l2 2 4-4" stroke="rgba(116,204,0,.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ttext"><div class="tt">Segurança de ponta a ponta</div><div class="td">Criptografia e proteção de dados em cada transação.</div></div></div>
+          <div class="titem rv rv2"><div class="ticon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="rgba(116,204,0,.75)" stroke-width="1.5"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="rgba(116,204,0,.5)" stroke-width="1.5"/></svg></div><div class="ttext"><div class="tt">100% na nuvem</div><div class="td">Infraestrutura distribuída. Disponível onde você estiver.</div></div></div>
+          <div class="titem rv rv3"><div class="ticon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9z" stroke="rgba(116,204,0,.75)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ttext"><div class="tt">Evolução contínua</div><div class="td">Novos recursos chegam sem interromper o que você já usa.</div></div></div>
+        </div>
+      </div>
+      <div class="tvisual rv">
+        <div class="tring" style="width:280px;height:280px;"></div>
+        <div class="tring" style="width:200px;height:200px;"></div>
+        <div class="tcenter"><div class="tctext">NOOON</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REPRESENTANTES / CIDADE DOMINADA -->
+<section class="franquia-sec">
+  <div class="section-inner">
+    <div class="fgrid">
+      <div>
+        <div class="stag rv">Expansão</div>
+        <h2 class="stitle rv rv1">Seja um<br><em>representante NOOON</em></h2>
+        <p class="sbody rv rv2">O modelo "Cidade Dominada" é o nosso programa de expansão. Representantes NOOON levam o ecossistema financeiro para todo o Brasil — e constroem renda recorrente no processo.</p>
+        <a href="./parceiros.html" class="btn-p rv rv3" style="margin-top:2.5rem;font-size:.78rem;">Quero ser representante <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <div class="fcards">
+        <div class="fcard rv"><div class="fcnum">1</div><div class="fct"><div class="ft">Cadastro simplificado</div><div class="fd">Processo 100% digital para se tornar representante credenciado.</div></div></div>
+        <div class="fcard rv rv1"><div class="fcnum">2</div><div class="fct"><div class="ft">Treinamento e suporte</div><div class="fd">Material completo e equipe dedicada para você dominar sua região.</div></div></div>
+        <div class="fcard rv rv2"><div class="fcnum">3</div><div class="fct"><div class="ft">Renda recorrente</div><div class="fd">Ganhe mensalmente por cada estabelecimento ativo na sua rede.</div></div></div>
+        <div class="fcard rv rv3"><div class="fcnum">4</div><div class="fct"><div class="ft">Domine sua cidade</div><div class="fd">Construa um negócio próprio dentro do ecossistema NOOON.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-sec">
+  <div class="cta-orb"></div>
+  <div style="position:relative;z-index:1;max-width:800px;margin:0 auto;">
+    <div class="eyebrow rv" style="justify-content:center;margin-bottom:2rem;"><div class="ed"></div>Comece agora</div>
+    <h2 class="stitle rv rv1" style="text-align:center;">Pronto para entrar<br>no <em>ecossistema</em>?</h2>
+    <p class="sbody rv rv2" style="text-align:center;margin:0 auto;">Junte-se às pessoas e empresas que já escolheram o NOOON como plataforma financeira de crescimento.</p>
+    <div class="cta-acts rv rv3">
+      <a href="https://portal.nooon.com.br" target="_blank" class="btn-p">Abrir minha conta grátis</a>
+      <a href="https://caixa.nooon.com.br" target="_blank" class="btn-ol">Testar o NOOON Caixa</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fi">
+    <div><div class="flogo">NOOON</div><div style="font-size:.7rem;color:rgba(255,255,255,.28);margin-top:4px;">HBusiness Group Tecnologia</div></div>
+    <div class="flinks">
+      <a href="#sobre">Sobre</a>
+      <a href="./equipamentos.html">Equipamentos</a>
+      <a href="./representantes.html">Representantes</a>
+      <a href="./parceiros.html">Parcerias</a>
+      <a href="./calculadora.html">Calculadora</a>
+      <a href="./investidores.html">Investidores</a>
+      <a href="https://portal.nooon.com.br" target="_blank">Portal</a>
+      <a href="https://caixa.nooon.com.br" target="_blank">NOOON Caixa</a>
+    </div>
+    <div class="fcopy">© 2026 NOOON · Manaus, Brasil</div>
+  </div>
+</footer>
+
+<script>
+const nb = document.getElementById('navbar');
+window.addEventListener('scroll', () => nb.classList.toggle('scrolled', scrollY > 50));
+const rvs = document.querySelectorAll('.rv');
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); }), {threshold:.1});
+rvs.forEach(el => obs.observe(el));
+setTimeout(() => document.querySelectorAll('.hero .rv').forEach(el => el.classList.add('vis')), 80);
+</script>
+</body>
+</html>
