@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seja Representante — NOOON</title>
+<meta name="description" content="Seja um representante NOOON e ganhe comissões recorrentes expandindo o ecossistema financeiro na sua cidade.">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0d1f0a;
+  --dark: #142910;
+  --mid: #1e3d14;
+  --primary: #2e6417;
+  --accent: #74cc00;
+  --accent-light: #9ddd3a;
+  --white: #ffffff;
+  --off-white: #f0f7e8;
+  --border: rgba(116,204,0,0.15);
+  --border-mid: rgba(116,204,0,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--deep); color: var(--white); font-family: 'Open Sans', sans-serif; overflow-x: hidden; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--deep); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; height: 72px; background: rgba(13,31,10,0.94); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-mid); }
+.nav-logo img { height: 38px; width: auto; }
+.nav-menu { display: flex; gap: 4px; list-style: none; }
+.nav-menu a { display: block; padding: 8px 14px; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.82); text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--white); background: rgba(116,204,0,0.1); }
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+.btn-nav { padding: 9px 22px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.25s; }
+.btn-nav:hover { background: var(--accent-light); transform: translateY(-1px); }
+.btn-nav-outline { padding: 9px 22px; background: transparent; color: var(--accent); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 600; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: all 0.25s; }
+.btn-nav-outline:hover { background: rgba(116,204,0,0.08); }
+
+/* COMMONS */
+.section-tag { display: inline-block; padding: 5px 16px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.section-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--accent); }
+.section-heading { font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+.section-heading em { color: var(--accent); font-style: normal; }
+.base-text { font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.82); }
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 30px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(116,204,0,0.3); background: var(--accent-light); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 15px 30px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 600; border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+.btn-ghost:hover { background: rgba(255,255,255,0.09); }
+
+/* HERO */
+#hero { padding: 140px 60px 90px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-mid); }
+.hero-mesh { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 55% 60% at 100% 10%, rgba(46,100,23,0.45) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 0% 90%, rgba(116,204,0,0.06) 0%, transparent 55%); }
+.hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.hero-heading { font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 800; line-height: 1.02; letter-spacing: -0.025em; margin-bottom: 22px; }
+.hero-heading em { color: var(--accent); font-style: normal; }
+.hero-sub { font-size: 1rem; line-height: 1.78; color: rgba(255,255,255,0.82); margin-bottom: 40px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* HERO STATS */
+.hero-numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.hero-num-card { padding: 24px; background: rgba(116,204,0,0.06); border: 1px solid rgba(116,204,0,0.18); border-radius: 14px; }
+.hero-num-value { font-size: 2rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+.hero-num-label { font-size: 0.75rem; color: rgba(255,255,255,0.78); line-height: 1.5; }
+
+/* PERFIS */
+#perfis { padding: 100px 60px; }
+.perfis-inner { max-width: 1100px; margin: 0 auto; }
+.perfis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 52px; }
+.perfil-card { padding: 40px 36px; border-radius: 20px; border: 1px solid var(--border-mid); background: var(--dark); transition: all 0.35s; position: relative; overflow: hidden; }
+.perfil-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--border-mid); transition: background 0.3s; }
+.perfil-card:hover { border-color: var(--border); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.35); }
+.perfil-card:hover::before { background: var(--accent); }
+.perfil-icon { width: 52px; height: 52px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 24px; }
+.perfil-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 10px; }
+.perfil-desc { font-size: 0.86rem; color: rgba(255,255,255,0.78); line-height: 1.7; margin-bottom: 24px; }
+.perfil-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.perfil-tag { padding: 4px 12px; background: rgba(116,204,0,0.08); border: 1px solid var(--border); border-radius: 100px; font-size: 0.68rem; font-weight: 700; color: rgba(255,255,255,0.82); letter-spacing: 0.04em; }
+.perfil-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 700; color: var(--accent); text-decoration: none; transition: gap 0.2s; }
+.perfil-link:hover { gap: 12px; }
+
+/* PLANOS */
+#planos { padding: 100px 60px; background: var(--dark); border-top: 1px solid var(--border-mid); }
+.planos-inner { max-width: 1100px; margin: 0 auto; }
+.planos-header { text-align: center; margin-bottom: 60px; }
+.planos-sub { margin-top: 14px; font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+.planos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.plano-card { padding: 36px 30px; border-radius: 20px; border: 1px solid var(--border-mid); background: rgba(255,255,255,0.02); display: flex; flex-direction: column; transition: all 0.3s; position: relative; }
+.plano-card:hover { border-color: var(--border); transform: translateY(-4px); }
+.plano-card.destaque { border-color: rgba(116,204,0,0.35); background: rgba(116,204,0,0.05); box-shadow: 0 0 0 1px rgba(116,204,0,0.1), 0 16px 48px rgba(0,0,0,0.3); }
+.plano-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); padding: 4px 16px; background: var(--accent); color: var(--deep); font-size: 0.58rem; font-weight: 800; letter-spacing: 0.15em; border-radius: 0 0 8px 8px; white-space: nowrap; }
+.plano-nivel { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 16px; }
+.plano-comissao { font-size: 3.2rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+.plano-comissao-label { font-size: 0.78rem; color: rgba(255,255,255,0.7); margin-bottom: 28px; }
+.plano-divider { height: 1px; background: var(--border-mid); margin-bottom: 24px; }
+.plano-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; flex: 1; }
+.plano-feature { display: flex; align-items: flex-start; gap: 10px; font-size: 0.82rem; color: rgba(255,255,255,0.82); line-height: 1.5; }
+.plano-check { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.plano-limit { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: rgba(116,204,0,0.08); border: 1px solid var(--border); border-radius: 8px; font-size: 0.75rem; font-weight: 700; color: var(--accent); margin-bottom: 20px; }
+
+/* CALCULADORA */
+#calculadora { padding: 100px 60px; border-top: 1px solid var(--border-mid); }
+.calc-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.calc-info {}
+.calc-steps { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+.calc-step { display: flex; gap: 16px; align-items: flex-start; }
+.calc-step-num { width: 32px; height: 32px; background: rgba(116,204,0,0.12); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; color: var(--accent); flex-shrink: 0; }
+.calc-step-text { font-size: 0.84rem; color: rgba(255,255,255,0.82); line-height: 1.6; padding-top: 6px; }
+.calc-step-text strong { color: var(--white); font-weight: 700; display: block; margin-bottom: 2px; }
+
+.calc-widget { background: var(--mid); border: 1px solid var(--border); border-radius: 20px; padding: 36px; }
+.calc-title { font-size: 1rem; font-weight: 700; margin-bottom: 28px; }
+.calc-title span { color: var(--accent); }
+.calc-row { margin-bottom: 22px; }
+.calc-lbl { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.82); margin-bottom: 8px; }
+input[type=range] { width: 100%; appearance: none; height: 5px; background: rgba(255,255,255,0.22); border-radius: 3px; outline: none; cursor: pointer; margin-top: 4px; }
+input[type=range]::-webkit-slider-thumb { appearance: none; width: 20px; height: 20px; background: var(--accent); border-radius: 50%; cursor: pointer; box-shadow: 0 0 0 4px rgba(116,204,0,0.22); }
+.range-row { display: flex; justify-content: space-between; margin-top: 6px; }
+.range-row span { font-size: 0.65rem; color: rgba(255,255,255,0.70); }
+.range-val { font-size: 0.8rem; font-weight: 700; color: var(--accent); }
+.calc-select { width: 100%; padding: 11px 14px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 600; outline: none; cursor: pointer; }
+.calc-select:focus { border-color: var(--accent); }
+.calc-result { padding: 24px; background: rgba(116,204,0,0.08); border: 1px solid rgba(116,204,0,0.22); border-radius: 14px; margin-top: 8px; }
+.calc-result-lbl { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.75); margin-bottom: 6px; }
+.calc-result-val { font-size: 2.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.calc-breakdown { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(116,204,0,0.12); display: flex; flex-direction: column; gap: 7px; }
+.bd-item { display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(255,255,255,0.75); }
+.bd-item span:last-child { font-weight: 700; color: rgba(255,255,255,0.92); }
+.calc-note { font-size: 0.7rem; color: rgba(255,255,255,0.65); margin-top: 10px; line-height: 1.6; }
+
+/* FORMULÁRIO */
+#cadastro { padding: 100px 60px; background: var(--dark); border-top: 1px solid var(--border-mid); }
+.cadastro-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.cadastro-info {}
+.cadastro-benefits { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+.benefit-item { display: flex; gap: 14px; align-items: flex-start; }
+.benefit-icon { width: 40px; height: 40px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.benefit-title { font-size: 0.9rem; font-weight: 700; margin-bottom: 3px; }
+.benefit-desc { font-size: 0.8rem; color: rgba(255,255,255,0.75); line-height: 1.5; }
+
+/* FORM */
+.form-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-mid); border-radius: 20px; padding: 40px; }
+.form-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 6px; }
+.form-subtitle { font-size: 0.82rem; color: rgba(255,255,255,0.72); margin-bottom: 28px; }
+.form-group { margin-bottom: 18px; }
+.form-label { display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.78); margin-bottom: 7px; }
+.form-input { width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.25); border: 1px solid var(--border-mid); border-radius: 9px; color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; }
+.form-input:focus { border-color: var(--accent); }
+.form-input::placeholder { color: rgba(255,255,255,0.35); }
+.form-select { width: 100%; padding: 12px 16px; background: rgba(0,0,0,0.25); border: 1px solid var(--border-mid); border-radius: 9px; color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.88rem; outline: none; cursor: pointer; transition: border-color 0.2s; }
+.form-select:focus { border-color: var(--accent); }
+.form-select option { background: var(--dark); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-submit { width: 100%; padding: 15px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.92rem; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s; margin-top: 8px; }
+.form-submit:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(116,204,0,0.3); }
+.form-divider { display: flex; align-items: center; gap: 14px; margin: 20px 0; }
+.form-divider::before, .form-divider::after { content: ''; flex: 1; height: 1px; background: var(--border-mid); }
+.form-divider span { font-size: 0.7rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.1em; }
+.btn-wpp-full { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; background: rgba(37,211,102,0.12); border: 1px solid rgba(37,211,102,0.3); color: #25d366; font-family: 'Open Sans', sans-serif; font-size: 0.88rem; font-weight: 700; border-radius: 10px; text-decoration: none; transition: all 0.25s; }
+.btn-wpp-full:hover { background: rgba(37,211,102,0.2); }
+
+/* SUCESSO */
+.form-success { display: none; text-align: center; padding: 32px; }
+.form-success-icon { font-size: 2.5rem; margin-bottom: 16px; }
+.form-success-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
+.form-success-text { font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+
+/* CTA FINAL */
+#cta-final { padding: 100px 60px; text-align: center; position: relative; overflow: hidden; }
+.cta-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 500px; height: 300px; background: radial-gradient(ellipse, rgba(116,204,0,0.1) 0%, transparent 70%); pointer-events: none; }
+.cta-heading { font-size: clamp(2rem, 4vw, 3.8rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 18px; position: relative; }
+.cta-heading em { color: var(--accent); font-style: normal; }
+.cta-sub { font-size: 0.95rem; color: rgba(255,255,255,0.78); max-width: 400px; margin: 0 auto 40px; line-height: 1.7; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* FOOTER */
+footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(--border-mid); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; }
+.footer-logo { margin-bottom: 12px; }
+.footer-logo img { height: 26px; width: auto; opacity: 0.9; }
+.footer-desc { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 220px; }
+.footer-contact { margin-top: 12px; font-size: 0.72rem; color: rgba(255,255,255,0.65); line-height: 1.8; }
+.footer-col-title { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 14px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom { grid-column: 1/-1; padding-top: 24px; border-top: 1px solid var(--border-mid); display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+.footer-bottom a { color: rgba(116,204,0,0.7); text-decoration: none; }
+.footer-bottom a:hover { color: var(--accent); }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; }
+  .nav-menu { display: none; }
+  #hero, #perfis, #planos, #calculadora, #cadastro, #cta-final { padding: 80px 24px; }
+  #hero { padding-top: 110px; }
+  .hero-inner, .calc-inner, .cadastro-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-numbers { grid-template-columns: 1fr 1fr; }
+  .perfis-grid { grid-template-columns: 1fr; }
+  .planos-grid { grid-template-columns: 1fr; gap: 16px; }
+  .form-row { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr 1fr; padding: 44px 24px; }
+}
+@media (max-width: 600px) {
+  .hero-numbers { grid-template-columns: 1fr 1fr; }
+  footer { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></a>
+  <ul class="nav-menu">
+    <li><a href="maquinas.html">Maquininhas</a></li>
+    <li><a href="representante.html" class="active">Seja Representante</a></li>
+    <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+    <li><a href="investidores.html">Investidores</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="area-representante.html" class="btn-nav-outline">Área do Representante</a>
+    <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav">Acessar Portal</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-inner">
+    <div>
+      <span class="section-tag">Oportunidade de negócio</span>
+      <h1 class="hero-heading">Expanda o NOOON.<br><em>Ganhe recorrente.</em></h1>
+      <p class="hero-sub">Seja um representante NOOON e receba comissões mensais sobre cada estabelecimento ativo no seu portfólio — enquanto eles usarem a maquininha, você recebe.</p>
+      <div class="hero-actions">
+        <a href="#cadastro" class="btn-primary">Quero ser representante</a>
+        <a href="#planos" class="btn-ghost">Ver planos &darr;</a>
+      </div>
+    </div>
+    <div class="hero-numbers reveal">
+      <div class="hero-num-card">
+        <div class="hero-num-value">30%</div>
+        <div class="hero-num-label">Comissão máxima sobre a receita gerada</div>
+      </div>
+      <div class="hero-num-card">
+        <div class="hero-num-value">Recorrente</div>
+        <div class="hero-num-label">Ganho mensal enquanto o cliente estiver ativo</div>
+      </div>
+      <div class="hero-num-card">
+        <div class="hero-num-value">2</div>
+        <div class="hero-num-label">Perfis de atuação: campo ou digital</div>
+      </div>
+      <div class="hero-num-card">
+        <div class="hero-num-value">3</div>
+        <div class="hero-num-label">Planos com progressão automática</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFIS -->
+<section id="perfis">
+  <div class="perfis-inner">
+    <div class="reveal">
+      <p class="section-label">Perfis de atuação</p>
+      <h2 class="section-heading">Escolha como <em>quer atuar</em></h2>
+    </div>
+    <div class="perfis-grid">
+      <div class="perfil-card reveal reveal-delay-1">
+        <div class="perfil-icon">&#128203;</div>
+        <h3 class="perfil-title">Representante Comercial</h3>
+        <p class="perfil-desc">Atua presencialmente visitando comércios, restaurantes, mercados e negócios locais. Prospecta, apresenta e ativa as maquininhas NOOON no seu território.</p>
+        <div class="perfil-tags">
+          <span class="perfil-tag">Atuação presencial</span>
+          <span class="perfil-tag">Território definido</span>
+          <span class="perfil-tag">Comissão por TPV</span>
+          <span class="perfil-tag">Suporte da NOOON</span>
+        </div>
+        <a href="#cadastro" class="perfil-link">Quero ser comercial &rarr;</a>
+      </div>
+      <div class="perfil-card reveal reveal-delay-2">
+        <div class="perfil-icon">&#128241;</div>
+        <h3 class="perfil-title">Parceiro Digital / Influencer</h3>
+        <p class="perfil-desc">Usa sua audiência online — redes sociais, grupos, comunidades — para indicar o NOOON. Cada indicação ativada gera comissão recorrente sem precisar sair de casa.</p>
+        <div class="perfil-tags">
+          <span class="perfil-tag">100% digital</span>
+          <span class="perfil-tag">Link de indicação</span>
+          <span class="perfil-tag">Qualquer cidade</span>
+          <span class="perfil-tag">Sem limite geográfico</span>
+        </div>
+        <a href="parceiros-digitais.html" class="perfil-link">Conhecer programa digital &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section id="planos">
+  <div class="planos-inner">
+    <div class="planos-header reveal">
+      <span class="section-tag">Comissões</span>
+      <h2 class="section-heading">Planos de <em>comissão</em></h2>
+      <p class="planos-sub">Quanto mais você cresce, maior sua comissão. Progressão automática conforme seu portfólio.</p>
+    </div>
+    <div class="planos-grid">
+
+      <!-- INICIANTE -->
+      <div class="plano-card reveal">
+        <p class="plano-nivel">Plano Iniciante</p>
+        <div class="plano-comissao">20%</div>
+        <p class="plano-comissao-label">de comissão sobre a receita gerada</p>
+        <div class="plano-limit">Até 25 estabelecimentos ativos</div>
+        <div class="plano-divider"></div>
+        <ul class="plano-features">
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Acesso imediato ao credenciamento</li>
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Material de apresentação NOOON</li>
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Suporte do time comercial</li>
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Dashboard de acompanhamento</li>
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Comissão paga mensalmente</li>
+        </ul>
+        <a href="#cadastro" class="btn-ghost" style="width:100%;justify-content:center;">Começar agora</a>
+      </div>
+
+      <!-- CRESCIMENTO -->
+      <div class="plano-card destaque reveal reveal-delay-1">
+        <div class="plano-badge">MAIS COMUM</div>
+        <p class="plano-nivel">Plano Crescimento</p>
+        <div class="plano-comissao">25%</div>
+        <p class="plano-comissao-label">de comissão sobre a receita gerada</p>
+        <div class="plano-limit">De 26 a 50 estabelecimentos ativos</div>
+        <div class="plano-divider"></div>
+        <ul class="plano-features">
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Tudo do plano Iniciante</li>
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Progressão automática ao atingir 26 estab.</li>
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Prioridade no suporte</li>
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Acesso a campanhas exclusivas</li>
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Relatórios detalhados de TPV</li>
+        </ul>
+        <a href="#cadastro" class="btn-primary" style="width:100%;">Quero crescer</a>
+      </div>
+
+      <!-- MASTER -->
+      <div class="plano-card reveal reveal-delay-2">
+        <p class="plano-nivel">Plano Master</p>
+        <div class="plano-comissao">30%</div>
+        <p class="plano-comissao-label">de comissão sobre a receita gerada</p>
+        <div class="plano-limit">Acima de 50 estabelecimentos ativos</div>
+        <div class="plano-divider"></div>
+        <ul class="plano-features">
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Tudo dos planos anteriores</li>
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Progressão automática ao atingir 51 estab.</li>
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Gerente de conta dedicado</li>
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Condições especiais de locação</li>
+          <li class="plano-feature"><span class="plano-check">&#10003;</span>Participação em eventos NOOON</li>
+        </ul>
+        <a href="#cadastro" class="btn-ghost" style="width:100%;justify-content:center;">Quero ser Master</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CALCULADORA -->
+<section id="calculadora">
+  <div class="calc-inner">
+    <div class="calc-info reveal">
+      <p class="section-label">Simulador</p>
+      <h2 class="section-heading">Quanto você pode <em>ganhar?</em></h2>
+      <p class="base-text" style="margin-top:16px;">Simule sua comissão mensal com base no número de estabelecimentos ativos e no volume transacionado por cada um.</p>
+      <div class="calc-steps">
+        <div class="calc-step">
+          <div class="calc-step-num">1</div>
+          <div class="calc-step-text"><strong>Você prospecta estabelecimentos</strong>Comerciantes, restaurantes, salões, mercados — qualquer negócio que aceite cartão.</div>
+        </div>
+        <div class="calc-step">
+          <div class="calc-step-num">2</div>
+          <div class="calc-step-text"><strong>Eles usam a maquininha</strong>Cada transação gera receita para o NOOON.</div>
+        </div>
+        <div class="calc-step">
+          <div class="calc-step-num">3</div>
+          <div class="calc-step-text"><strong>Você recebe mensalmente</strong>Sua comissão é calculada sobre a receita total gerada pelo seu portfólio.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calc-widget reveal reveal-delay-1">
+      <div class="calc-title">Simule seus <span>ganhos mensais</span></div>
+
+      <div class="calc-row">
+        <div class="calc-lbl">Estabelecimentos ativos</div>
+        <input type="range" id="calcEstab" min="1" max="100" value="10" oninput="calcular()">
+        <div class="range-row">
+          <span>1</span>
+          <span class="range-val" id="estabVal">10 estab.</span>
+          <span>100</span>
+        </div>
+      </div>
+
+      <div class="calc-row">
+        <div class="calc-lbl">TPV médio diário por estabelecimento</div>
+        <input type="range" id="calcTPV" min="200" max="3000" step="50" value="750" oninput="calcular()">
+        <div class="range-row">
+          <span>R$200</span>
+          <span class="range-val" id="tpvVal">R$750</span>
+          <span>R$3.000</span>
+        </div>
+      </div>
+
+      <div class="calc-row">
+        <div class="calc-lbl">Plano de comissão</div>
+        <select id="calcPlano" onchange="calcular()" class="calc-select">
+          <option value="0.20">Plano 20% — Iniciante (até 25 estab.)</option>
+          <option value="0.25" selected>Plano 25% — Crescimento (até 50 estab.)</option>
+          <option value="0.30">Plano 30% — Master (acima de 50 estab.)</option>
+        </select>
+      </div>
+
+      <div class="calc-result">
+        <div class="calc-result-lbl">Sua comissão mensal estimada</div>
+        <div class="calc-result-val" id="calcVal">R$ 563</div>
+        <div class="calc-breakdown">
+          <div class="bd-item"><span>TPV total mensal (30 dias)</span><span id="bdTPV">—</span></div>
+          <div class="bd-item"><span>Sua parte conforme plano</span><span id="bdSua">—</span></div>
+        </div>
+        <p class="calc-note">Estimativa baseada em 30 dias de operação. Valores sujeitos a variação conforme TPV real dos estabelecimentos.</p>
+      </div>
+
+      <a href="#cadastro" class="btn-primary" style="display:flex;margin-top:18px;width:100%;">
+        Quero começar agora
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CADASTRO -->
+<section id="cadastro">
+  <div class="cadastro-inner">
+    <div class="cadastro-info reveal">
+      <p class="section-label">Cadastro</p>
+      <h2 class="section-heading">Comece <em>hoje mesmo</em></h2>
+      <p class="base-text" style="margin-top:16px;">Preencha o formulário e nossa equipe entrará em contato em até 24 horas para dar início ao seu onboarding como representante NOOON.</p>
+      <div class="cadastro-benefits">
+        <div class="benefit-item">
+          <div class="benefit-icon">&#9889;</div>
+          <div>
+            <div class="benefit-title">Ativação rápida</div>
+            <div class="benefit-desc">Onboarding completo em até 48h após aprovação do cadastro.</div>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">&#127891;</div>
+          <div>
+            <div class="benefit-title">Treinamento incluso</div>
+            <div class="benefit-desc">Material de vendas, scripts e suporte do time comercial NOOON.</div>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">&#128200;</div>
+          <div>
+            <div class="benefit-title">Dashboard em tempo real</div>
+            <div class="benefit-desc">Acompanhe seu portfólio, TPV e comissões na Área do Representante.</div>
+          </div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">&#128176;</div>
+          <div>
+            <div class="benefit-title">Pagamento mensal garantido</div>
+            <div class="benefit-desc">Comissões calculadas e pagas todo mês, sem burocracia.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-1">
+      <div class="form-card" id="formCard">
+        <h3 class="form-title">Formulário de interesse</h3>
+        <p class="form-subtitle">Preencha e entraremos em contato em até 24h.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome completo</label>
+            <input type="text" class="form-input" id="fNome" placeholder="Seu nome">
+          </div>
+          <div class="form-group">
+            <label class="form-label">WhatsApp</label>
+            <input type="tel" class="form-input" id="fWpp" placeholder="(00) 00000-0000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-input" id="fEmail" placeholder="seu@email.com">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Cidade / Estado</label>
+            <input type="text" class="form-input" id="fCidade" placeholder="Ex: Manaus, AM">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Perfil de atuação</label>
+            <select class="form-select" id="fPerfil">
+              <option value="">Selecione...</option>
+              <option value="comercial">Representante Comercial</option>
+              <option value="digital">Parceiro Digital / Influencer</option>
+              <option value="ambos">Ambos</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Como nos encontrou?</label>
+          <select class="form-select" id="fOrigem">
+            <option value="">Selecione...</option>
+            <option value="instagram">Instagram</option>
+            <option value="indicacao">Indicação de alguém</option>
+            <option value="google">Google</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+
+        <button class="form-submit" onclick="enviarFormulario()">Enviar cadastro</button>
+
+        <div class="form-divider"><span>ou</span></div>
+
+        <a href="https://wa.me/5584987885959?text=Olá!%20Tenho%20interesse%20em%20ser%20representante%20NOOON" target="_blank" class="btn-wpp-full">
+          Falar direto no WhatsApp
+        </a>
+      </div>
+
+      <!-- SUCESSO -->
+      <div class="form-card" id="formSucesso" style="display:none;text-align:center;padding:48px 40px;">
+        <div style="font-size:2.5rem;margin-bottom:20px;">&#10003;</div>
+        <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:10px;color:var(--accent);">Cadastro enviado!</h3>
+        <p style="font-size:0.88rem;color:rgba(255,255,255,0.78);line-height:1.7;margin-bottom:24px;">Nossa equipe vai entrar em contato via WhatsApp em até 24 horas para dar início ao seu onboarding.</p>
+        <a href="https://wa.me/5584987885959?text=Olá!%20Acabei%20de%20preencher%20o%20formulário%20de%20representante%20NOOON" target="_blank" class="btn-primary" style="width:100%;">Acelerar pelo WhatsApp &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="cta-glow"></div>
+  <div class="reveal">
+    <h2 class="cta-heading">Sua cidade está<br><em>esperando.</em></h2>
+    <p class="cta-sub">Cada estabelecimento sem NOOON é uma oportunidade de comissão recorrente esperando por você.</p>
+    <div class="cta-actions">
+      <a href="#cadastro" class="btn-primary">Quero ser representante</a>
+      <a href="maquinas.html" class="btn-ghost">Conhecer as máquinas &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo"><img src="assets/logo1_nooon.png" alt="NOOON"></div>
+    <p class="footer-desc">Ecossistema financeiro completo para pessoas e negócios. Manaus, AM — Brasil.</p>
+    <p class="footer-contact">contato@nooon.com.br<br>(84) 98788-5959</p>
+  </div>
+  <div>
+    <p class="footer-col-title">Produtos</p>
+    <ul class="footer-links">
+      <li><a href="maquinas.html">Maquininhas</a></li>
+      <li><a href="https://portal.nooon.com.br" target="_blank">Banco Digital</a></li>
+      <li><a href="https://caixa.nooon.com.br" target="_blank">NOOON Caixa</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Parceiros</p>
+    <ul class="footer-links">
+      <li><a href="representante.html">Seja Representante</a></li>
+      <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+      <li><a href="investidores.html">Investidores</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Ajuda</p>
+    <ul class="footer-links">
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="area-representante.html">Área do Representante</a></li>
+      <li><a href="https://wa.me/5584987885959" target="_blank">WhatsApp</a></li>
+      <li><a href="mailto:contato@nooon.com.br">E-mail</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 NOOON — Ecossistema Financeiro. Todos os direitos reservados.</span>
+    <span>Desenvolvido por <a href="https://abracadabra.srv.br" target="_blank">AbraCadabra</a> &middot; <a href="https://hbusiness-group.com.br" target="_blank">HBusiness Group</a></span>
+  </div>
+</footer>
+
+<script>
+// CALCULADORA
+function calcular() {
+  const estab = parseInt(document.getElementById('calcEstab').value);
+  const tpv   = parseInt(document.getElementById('calcTPV').value);
+  const plano = parseFloat(document.getElementById('calcPlano').value);
+
+  document.getElementById('estabVal').textContent = estab + ' estab.';
+  document.getElementById('tpvVal').textContent = 'R$' + tpv.toLocaleString('pt-BR');
+
+  const tpvMensal = estab * tpv * 30;
+  const comissaoNooon = tpvMensal * 0.01;
+  const ganho = comissaoNooon * plano;
+
+  const fmt = v => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+  document.getElementById('calcVal').textContent = fmt(ganho);
+  document.getElementById('bdTPV').textContent = fmt(tpvMensal);
+  document.getElementById('bdSua').textContent = (plano * 100).toFixed(0) + '% = ' + fmt(ganho);
+}
+calcular();
+
+// FORMULÁRIO
+function enviarFormulario() {
+  const nome   = document.getElementById('fNome').value.trim();
+  const wpp    = document.getElementById('fWpp').value.trim();
+  const email  = document.getElementById('fEmail').value.trim();
+  const cidade = document.getElementById('fCidade').value.trim();
+  const perfil = document.getElementById('fPerfil').value;
+
+  if (!nome || !wpp || !email || !cidade || !perfil) {
+    alert('Por favor, preencha todos os campos obrigatórios.');
+    return;
+  }
+
+  // Monta mensagem WhatsApp com os dados
+  const msg = encodeURIComponent(
+    `Olá! Acabei de preencher o formulário de representante NOOON.\n\n` +
+    `*Nome:* ${nome}\n*WhatsApp:* ${wpp}\n*E-mail:* ${email}\n*Cidade:* ${cidade}\n*Perfil:* ${perfil}`
+  );
+
+  // Abre WhatsApp com os dados
+  window.open(`https://wa.me/5584987885959?text=${msg}`, '_blank');
+
+  // Mostra tela de sucesso
+  document.getElementById('formCard').style.display = 'none';
+  document.getElementById('formSucesso').style.display = 'block';
+}
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
