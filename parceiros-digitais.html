@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parceiros Digitais — NOOON</title>
+<meta name="description" content="Seja um parceiro digital NOOON. Use sua audiência para indicar e ganhe comissão recorrente.">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0d1f0a;
+  --dark: #142910;
+  --mid: #1e3d14;
+  --primary: #2e6417;
+  --accent: #74cc00;
+  --accent-light: #9ddd3a;
+  --white: #ffffff;
+  --border: rgba(116,204,0,0.15);
+  --border-mid: rgba(116,204,0,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--deep); color: var(--white); font-family: 'Open Sans', sans-serif; overflow-x: hidden; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--deep); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; height: 72px; background: rgba(13,31,10,0.94); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-mid); }
+.nav-logo img { height: 38px; width: auto; }
+.nav-menu { display: flex; gap: 4px; list-style: none; }
+.nav-menu a { display: block; padding: 8px 14px; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.82); text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--white); background: rgba(116,204,0,0.1); }
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+.btn-nav { padding: 9px 22px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.25s; }
+.btn-nav:hover { background: var(--accent-light); transform: translateY(-1px); }
+.btn-nav-outline { padding: 9px 22px; background: transparent; color: var(--accent); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 600; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: all 0.25s; }
+.btn-nav-outline:hover { background: rgba(116,204,0,0.08); }
+
+/* COMMONS */
+.section-tag { display: inline-block; padding: 5px 16px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.section-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--accent); }
+.section-heading { font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+.section-heading em { color: var(--accent); font-style: normal; }
+.base-text { font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.82); }
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 30px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(116,204,0,0.3); background: var(--accent-light); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 15px 30px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 600; border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+.btn-ghost:hover { background: rgba(255,255,255,0.09); }
+
+/* HERO */
+#hero { padding: 140px 60px 90px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-mid); }
+.hero-mesh { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 60% at 100% 10%, rgba(46,100,23,0.45) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 0% 90%, rgba(116,204,0,0.06) 0%, transparent 55%); }
+.hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.hero-heading { font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 800; line-height: 1.02; letter-spacing: -0.025em; margin-bottom: 22px; }
+.hero-heading em { color: var(--accent); font-style: normal; }
+.hero-sub { font-size: 1rem; line-height: 1.78; color: rgba(255,255,255,0.82); margin-bottom: 40px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* CANAIS PREVIEW */
+.canais-cloud { display: flex; flex-wrap: wrap; gap: 12px; }
+.canal-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  background: rgba(116,204,0,0.06); border: 1px solid rgba(116,204,0,0.18);
+  border-radius: 100px; font-size: 0.82rem; font-weight: 600;
+  color: rgba(255,255,255,0.88); transition: all 0.25s;
+}
+.canal-pill:hover { background: rgba(116,204,0,0.12); border-color: var(--border); }
+.canal-pill span { font-size: 1rem; }
+
+/* COMO FUNCIONA */
+#como-funciona { padding: 100px 60px; background: var(--dark); border-top: 1px solid var(--border-mid); }
+.como-inner { max-width: 1100px; margin: 0 auto; }
+.steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 52px; position: relative; }
+.steps-grid::before { content: ''; position: absolute; top: 28px; left: 10%; right: 10%; height: 1px; background: linear-gradient(to right, transparent, var(--border), var(--border), transparent); z-index: 0; }
+.step-card { text-align: center; position: relative; z-index: 1; }
+.step-num { width: 56px; height: 56px; background: var(--mid); border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 800; color: var(--accent); margin: 0 auto 20px; }
+.step-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 8px; }
+.step-desc { font-size: 0.78rem; color: rgba(255,255,255,0.72); line-height: 1.6; }
+
+/* INDICAÇÃO */
+#indicacao { padding: 100px 60px; }
+.indicacao-inner { max-width: 1100px; margin: 0 auto; }
+.indicacao-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 52px; }
+.indicacao-card { padding: 32px 28px; background: var(--dark); border: 1px solid var(--border-mid); border-radius: 18px; transition: all 0.3s; position: relative; overflow: hidden; }
+.indicacao-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--border-mid); transition: background 0.3s; }
+.indicacao-card:hover { border-color: var(--border); transform: translateY(-4px); }
+.indicacao-card:hover::before { background: var(--accent); }
+.indicacao-icon { width: 48px; height: 48px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 20px; }
+.indicacao-title { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+.indicacao-desc { font-size: 0.82rem; color: rgba(255,255,255,0.75); line-height: 1.65; margin-bottom: 16px; }
+.indicacao-example { padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--border-mid); border-radius: 8px; font-size: 0.75rem; color: rgba(255,255,255,0.65); font-family: monospace; word-break: break-all; }
+
+/* PAINEL INFLUENCER */
+#painel { padding: 100px 60px; background: var(--dark); border-top: 1px solid var(--border-mid); }
+.painel-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.painel-info {}
+.painel-beneficios { margin-top: 28px; display: flex; flex-direction: column; gap: 16px; }
+.beneficio { display: flex; gap: 14px; align-items: flex-start; }
+.beneficio-icon { width: 38px; height: 38px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.beneficio-title { font-size: 0.88rem; font-weight: 700; margin-bottom: 3px; }
+.beneficio-desc { font-size: 0.78rem; color: rgba(255,255,255,0.72); line-height: 1.5; }
+
+/* FORMULÁRIO PAINEL */
+.painel-form { background: rgba(255,255,255,0.02); border: 1px solid var(--border-mid); border-radius: 20px; padding: 36px; }
+.painel-form-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 6px; }
+.painel-form-sub { font-size: 0.8rem; color: rgba(255,255,255,0.65); margin-bottom: 28px; }
+.form-group { margin-bottom: 16px; }
+.form-label { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.78); margin-bottom: 7px; }
+.form-input { width: 100%; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--border-mid); border-radius: 9px; color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; }
+.form-input:focus { border-color: var(--accent); }
+.form-input::placeholder { color: rgba(255,255,255,0.3); }
+.form-select { width: 100%; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--border-mid); border-radius: 9px; color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.88rem; outline: none; cursor: pointer; }
+.form-select:focus { border-color: var(--accent); }
+.form-select option { background: var(--dark); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* MÉTRICAS GRID */
+.metricas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.metrica-input-wrap { position: relative; }
+.metrica-suffix { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 0.72rem; color: rgba(255,255,255,0.45); pointer-events: none; }
+
+/* CANAIS CHECK */
+.canais-check { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.canal-check-item { display: none; }
+.canal-check-label { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-mid); border-radius: 100px; font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.72); cursor: pointer; transition: all 0.2s; user-select: none; }
+.canal-check-item:checked + .canal-check-label { background: rgba(116,204,0,0.12); border-color: var(--border); color: var(--accent); }
+
+.form-submit { width: 100%; padding: 14px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s; margin-top: 8px; }
+.form-submit:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 10px 28px rgba(116,204,0,0.28); }
+.form-divider { display: flex; align-items: center; gap: 14px; margin: 16px 0; }
+.form-divider::before, .form-divider::after { content: ''; flex: 1; height: 1px; background: var(--border-mid); }
+.form-divider span { font-size: 0.68rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
+.btn-wpp-full { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 13px; background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.25); color: #4ade80; font-family: 'Open Sans', sans-serif; font-size: 0.88rem; font-weight: 700; border-radius: 10px; text-decoration: none; transition: all 0.25s; }
+.btn-wpp-full:hover { background: rgba(37,211,102,0.18); }
+
+/* SUCESSO */
+.form-success { display: none; text-align: center; padding: 32px 20px; }
+.success-icon { font-size: 2.5rem; margin-bottom: 16px; }
+.success-title { font-size: 1.2rem; font-weight: 800; color: var(--accent); margin-bottom: 10px; }
+.success-text { font-size: 0.84rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 20px; }
+
+/* CALCULADORA */
+#calculadora { padding: 100px 60px; border-top: 1px solid var(--border-mid); }
+.calc-inner { max-width: 900px; margin: 0 auto; }
+.calc-header { text-align: center; margin-bottom: 52px; }
+.calc-widget { background: var(--mid); border: 1px solid var(--border); border-radius: 20px; padding: 40px; }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.calc-lbl { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.82); margin-bottom: 8px; }
+input[type=range] { width: 100%; appearance: none; height: 5px; background: rgba(255,255,255,0.22); border-radius: 3px; outline: none; cursor: pointer; margin-top: 4px; }
+input[type=range]::-webkit-slider-thumb { appearance: none; width: 20px; height: 20px; background: var(--accent); border-radius: 50%; cursor: pointer; box-shadow: 0 0 0 4px rgba(116,204,0,0.22); }
+.range-row { display: flex; justify-content: space-between; margin-top: 6px; }
+.range-row span { font-size: 0.65rem; color: rgba(255,255,255,0.70); }
+.range-val { font-size: 0.8rem; font-weight: 700; color: var(--accent); }
+.calc-select { width: 100%; padding: 11px 14px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.88rem; font-weight: 600; outline: none; cursor: pointer; }
+.calc-result-box { grid-column: 1 / -1; padding: 28px; background: rgba(116,204,0,0.07); border: 1px solid rgba(116,204,0,0.22); border-radius: 14px; }
+.calc-result-lbl { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.75); margin-bottom: 6px; }
+.calc-result-val { font-size: 2.8rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 16px; }
+.calc-bd { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.calc-bd-item { display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(255,255,255,0.75); padding: 8px 12px; background: rgba(0,0,0,0.15); border-radius: 7px; }
+.calc-bd-item span:last-child { font-weight: 700; color: rgba(255,255,255,0.92); }
+.calc-note { font-size: 0.7rem; color: rgba(255,255,255,0.55); margin-top: 12px; }
+
+/* CTA FINAL */
+#cta-final { padding: 100px 60px; text-align: center; position: relative; overflow: hidden; }
+.cta-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 500px; height: 300px; background: radial-gradient(ellipse, rgba(116,204,0,0.1) 0%, transparent 70%); pointer-events: none; }
+.cta-heading { font-size: clamp(2rem, 4vw, 3.8rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 18px; position: relative; }
+.cta-heading em { color: var(--accent); font-style: normal; }
+.cta-sub { font-size: 0.95rem; color: rgba(255,255,255,0.78); max-width: 420px; margin: 0 auto 40px; line-height: 1.7; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* FOOTER */
+footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(--border-mid); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; }
+.footer-logo { margin-bottom: 12px; }
+.footer-logo img { height: 26px; width: auto; opacity: 0.9; }
+.footer-desc { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 220px; }
+.footer-contact { margin-top: 12px; font-size: 0.72rem; color: rgba(255,255,255,0.65); line-height: 1.8; }
+.footer-col-title { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 14px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom { grid-column: 1/-1; padding-top: 24px; border-top: 1px solid var(--border-mid); display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+.footer-bottom a { color: rgba(116,204,0,0.7); text-decoration: none; }
+.footer-bottom a:hover { color: var(--accent); }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; }
+  .nav-menu { display: none; }
+  #hero, #como-funciona, #indicacao, #painel, #calculadora, #cta-final { padding: 80px 24px; }
+  #hero { padding-top: 110px; }
+  .hero-inner, .painel-inner { grid-template-columns: 1fr; gap: 48px; }
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+  .steps-grid::before { display: none; }
+  .indicacao-grid { grid-template-columns: 1fr; }
+  .calc-grid { grid-template-columns: 1fr; }
+  .calc-bd { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr 1fr; padding: 44px 24px; }
+}
+@media (max-width: 600px) {
+  .steps-grid { grid-template-columns: 1fr; }
+  .metricas-grid { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></a>
+  <ul class="nav-menu">
+    <li><a href="maquinas.html">Maquininhas</a></li>
+    <li><a href="representante.html">Seja Representante</a></li>
+    <li><a href="parceiros-digitais.html" class="active">Parceiros Digitais</a></li>
+    <li><a href="investidores.html">Investidores</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="area-representante.html" class="btn-nav-outline">Área do Representante</a>
+    <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav">Acessar Portal</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-inner">
+    <div>
+      <span class="section-tag">Programa de parceiros</span>
+      <h1 class="hero-heading">Sua audiência vale <em>dinheiro recorrente.</em></h1>
+      <p class="hero-sub">Indique o NOOON para sua audiência — seguidores, grupos e comunidades — e ganhe comissão todo mês por cada estabelecimento ativo que você trouxer.</p>
+      <div class="hero-actions">
+        <a href="#painel" class="btn-primary">Quero ser parceiro</a>
+        <a href="#como-funciona" class="btn-ghost">Como funciona &darr;</a>
+      </div>
+    </div>
+    <div class="reveal">
+      <div style="margin-bottom:20px;">
+        <p style="font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:14px;">Canais aceitos</p>
+        <div class="canais-cloud">
+          <div class="canal-pill"><span>&#128247;</span> Instagram</div>
+          <div class="canal-pill"><span>&#127911;</span> TikTok</div>
+          <div class="canal-pill"><span>&#127909;</span> YouTube</div>
+          <div class="canal-pill"><span>&#128172;</span> WhatsApp</div>
+          <div class="canal-pill"><span>&#9992;</span> Telegram</div>
+          <div class="canal-pill"><span>&#128038;</span> Twitter/X</div>
+          <div class="canal-pill"><span>&#127760;</span> Qualquer plataforma</div>
+        </div>
+      </div>
+      <div style="padding:24px;background:rgba(116,204,0,0.06);border:1px solid var(--border);border-radius:14px;">
+        <p style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:12px;">Suas comissões</p>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;">
+          <div><div style="font-size:1.8rem;font-weight:800;color:var(--accent);line-height:1;">20%</div><div style="font-size:0.72rem;color:rgba(255,255,255,0.72);margin-top:3px;">até 25 indicações</div></div>
+          <div><div style="font-size:1.8rem;font-weight:800;color:var(--accent);line-height:1;">25%</div><div style="font-size:0.72rem;color:rgba(255,255,255,0.72);margin-top:3px;">até 50 indicações</div></div>
+          <div><div style="font-size:1.8rem;font-weight:800;color:var(--accent);line-height:1;">30%</div><div style="font-size:0.72rem;color:rgba(255,255,255,0.72);margin-top:3px;">acima de 50</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como-funciona">
+  <div class="como-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:52px;">
+      <span class="section-tag">Simples assim</span>
+      <h2 class="section-heading">Como <em>funciona</em></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <h3 class="step-title">Cadastre-se</h3>
+        <p class="step-desc">Preencha o formulário com seus dados e canais digitais. Nossa equipe analisa em 24h.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <h3 class="step-title">Receba seu link</h3>
+        <p class="step-desc">Você recebe um link de indicação personalizado e/ou código de cupom exclusivo.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <h3 class="step-title">Divulgue</h3>
+        <p class="step-desc">Compartilhe com sua audiência — stories, posts, grupos, vídeos. Do seu jeito.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-3">
+        <div class="step-num">4</div>
+        <h3 class="step-title">Ganhe todo mês</h3>
+        <p class="step-desc">Cada estabelecimento ativo que você indicou gera comissão recorrente pra você.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAS DE INDICAÇÃO -->
+<section id="indicacao">
+  <div class="indicacao-inner">
+    <div class="reveal">
+      <p class="section-label">Ferramentas de indicação</p>
+      <h2 class="section-heading">Indique do <em>seu jeito</em></h2>
+    </div>
+    <div class="indicacao-grid">
+      <div class="indicacao-card reveal reveal-delay-1">
+        <div class="indicacao-icon">&#128279;</div>
+        <h3 class="indicacao-title">Link de indicação personalizado</h3>
+        <p class="indicacao-desc">Receba um link único com seu nome ou @. Compartilhe em bio, stories, descrição de vídeos — qualquer lugar.</p>
+        <div class="indicacao-example">nooon.com.br/?ref=seunome</div>
+      </div>
+      <div class="indicacao-card reveal reveal-delay-2">
+        <div class="indicacao-icon">&#127381;</div>
+        <h3 class="indicacao-title">Código de cupom exclusivo</h3>
+        <p class="indicacao-desc">Use seu código para campanhas e conteúdos. O cliente informa o cupom ao contratar e a indicação é registrada para você.</p>
+        <div class="indicacao-example">Cupom: SEUNOME ou @seuarroba</div>
+      </div>
+      <div class="indicacao-card reveal reveal-delay-3">
+        <div class="indicacao-icon">&#128172;</div>
+        <h3 class="indicacao-title">Indicação direta pelo WhatsApp</h3>
+        <p class="indicacao-desc">Indique diretamente pelo WhatsApp — envie o contato do cliente para nossa equipe com seu nome. Simples e rápido.</p>
+        <div class="indicacao-example">wa.me/5584987885959 → "Indicação de @seunome"</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAINEL / CADASTRO -->
+<section id="painel">
+  <div class="painel-inner">
+    <div class="painel-info reveal">
+      <p class="section-label">Cadastro de parceiro</p>
+      <h2 class="section-heading">Mostre seu <em>potencial digital</em></h2>
+      <p class="base-text" style="margin-top:16px;">Preencha seu perfil com os dados dos seus canais. Nossa equipe avalia o melhor plano de parceria para o seu perfil e entra em contato em até 24h.</p>
+      <div class="painel-beneficios">
+        <div class="beneficio">
+          <div class="beneficio-icon">&#128200;</div>
+          <div>
+            <div class="beneficio-title">Dashboard personalizado</div>
+            <div class="beneficio-desc">Acompanhe suas indicações, ativações e comissões em tempo real.</div>
+          </div>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio-icon">&#127775;</div>
+          <div>
+            <div class="beneficio-title">Plano sob medida</div>
+            <div class="beneficio-desc">Parceiros com grandes audiências podem ter condições especiais negociadas.</div>
+          </div>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio-icon">&#127873;</div>
+          <div>
+            <div class="beneficio-title">Kit de conteúdo pronto</div>
+            <div class="beneficio-desc">Artes, vídeos e textos prontos para postar em cada canal digital.</div>
+          </div>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio-icon">&#128176;</div>
+          <div>
+            <div class="beneficio-title">Comissão recorrente</div>
+            <div class="beneficio-desc">Enquanto o cliente estiver ativo, você recebe todo mês — sem precisar fazer mais nada.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-1">
+      <div class="painel-form" id="painelForm">
+        <h3 class="painel-form-title">Seu perfil digital</h3>
+        <p class="painel-form-sub">Quanto mais completo, mais rápido aprovamos seu cadastro.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome completo</label>
+            <input type="text" class="form-input" id="pNome" placeholder="Seu nome">
+          </div>
+          <div class="form-group">
+            <label class="form-label">WhatsApp</label>
+            <input type="tel" class="form-input" id="pWpp" placeholder="(00) 00000-0000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-input" id="pEmail" placeholder="seu@email.com">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Canais que você utiliza</label>
+          <div class="canais-check">
+            <input type="checkbox" class="canal-check-item" id="ch-ig"><label class="canal-check-label" for="ch-ig">&#128247; Instagram</label>
+            <input type="checkbox" class="canal-check-item" id="ch-tt"><label class="canal-check-label" for="ch-tt">&#127911; TikTok</label>
+            <input type="checkbox" class="canal-check-item" id="ch-yt"><label class="canal-check-label" for="ch-yt">&#127909; YouTube</label>
+            <input type="checkbox" class="canal-check-item" id="ch-wpp"><label class="canal-check-label" for="ch-wpp">&#128172; WhatsApp</label>
+            <input type="checkbox" class="canal-check-item" id="ch-tg"><label class="canal-check-label" for="ch-tg">&#9992; Telegram</label>
+            <input type="checkbox" class="canal-check-item" id="ch-tw"><label class="canal-check-label" for="ch-tw">&#128038; Twitter/X</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Seu @ principal (Instagram, TikTok etc.)</label>
+          <input type="text" class="form-input" id="pArroba" placeholder="@seuarroba">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Métricas dos seus canais</label>
+          <div class="metricas-grid">
+            <div class="form-group metrica-input-wrap">
+              <input type="number" class="form-input" id="pSeguidores" placeholder="Ex: 15000">
+              <span class="metrica-suffix">seguidores</span>
+            </div>
+            <div class="form-group metrica-input-wrap">
+              <input type="number" class="form-input" id="pEngajamento" placeholder="Ex: 5">
+              <span class="metrica-suffix">% engaj.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Nicho / tema do seu conteúdo</label>
+          <select class="form-select" id="pNicho">
+            <option value="">Selecione...</option>
+            <option value="empreendedorismo">Empreendedorismo / Negócios</option>
+            <option value="financas">Finanças pessoais</option>
+            <option value="lifestyle">Lifestyle / Cotidiano</option>
+            <option value="gastronomia">Gastronomia / Restaurantes</option>
+            <option value="local">Conteúdo local / Cidade</option>
+            <option value="tecnologia">Tecnologia</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Cidade onde atua</label>
+          <input type="text" class="form-input" id="pCidade" placeholder="Ex: Manaus, AM">
+        </div>
+
+        <button class="form-submit" onclick="enviarPainel()">Enviar perfil e solicitar parceria</button>
+
+        <div class="form-divider"><span>ou</span></div>
+
+        <a href="https://wa.me/5584987885959?text=Olá!%20Tenho%20interesse%20em%20ser%20parceiro%20digital%20NOOON" target="_blank" class="btn-wpp-full">
+          Falar direto no WhatsApp
+        </a>
+      </div>
+
+      <!-- SUCESSO -->
+      <div class="painel-form form-success" id="painelSucesso" style="display:none;">
+        <div class="success-icon">&#10003;</div>
+        <h3 class="success-title">Perfil enviado com sucesso!</h3>
+        <p class="success-text">Nossa equipe vai analisar seu perfil e entrar em contato via WhatsApp em até 24 horas com sua proposta de parceria.</p>
+        <a href="https://wa.me/5584987885959?text=Olá!%20Acabei%20de%20enviar%20meu%20perfil%20como%20parceiro%20digital%20NOOON" target="_blank" class="btn-primary" style="width:100%;">Acelerar pelo WhatsApp &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULADORA -->
+<section id="calculadora">
+  <div class="calc-inner">
+    <div class="calc-header reveal">
+      <span class="section-tag">Simulador</span>
+      <h2 class="section-heading">Quanto você pode <em>ganhar?</em></h2>
+      <p style="margin-top:14px;font-size:0.9rem;color:rgba(255,255,255,0.75);">Simule sua comissão mensal com base nas suas indicações.</p>
+    </div>
+    <div class="calc-widget reveal">
+      <div class="calc-grid">
+        <div>
+          <div class="calc-lbl">Indicações ativas (estabelecimentos)</div>
+          <input type="range" id="cEstab" min="1" max="100" value="10" oninput="calcular()">
+          <div class="range-row"><span>1</span><span class="range-val" id="cEstabVal">10 indic.</span><span>100</span></div>
+        </div>
+        <div>
+          <div class="calc-lbl">TPV médio diário por estabelecimento</div>
+          <input type="range" id="cTPV" min="200" max="3000" step="50" value="750" oninput="calcular()">
+          <div class="range-row"><span>R$200</span><span class="range-val" id="cTPVVal">R$750</span><span>R$3.000</span></div>
+        </div>
+        <div>
+          <div class="calc-lbl">Seu plano de comissão</div>
+          <select id="cPlano" onchange="calcular()" class="calc-select">
+            <option value="0.20">Plano 20% — até 25 indicações</option>
+            <option value="0.25" selected>Plano 25% — até 50 indicações</option>
+            <option value="0.30">Plano 30% — acima de 50</option>
+          </select>
+        </div>
+        <div></div>
+        <div class="calc-result-box">
+          <div class="calc-result-lbl">Sua comissão mensal estimada</div>
+          <div class="calc-result-val" id="cResultado">R$ 563</div>
+          <div class="calc-bd">
+            <div class="calc-bd-item"><span>TPV total mensal</span><span id="cTPVTotal">—</span></div>
+            <div class="calc-bd-item"><span>Sua comissão</span><span id="cSua">—</span></div>
+          </div>
+          <p class="calc-note">Estimativa com base em 30 dias. Valores variam conforme TPV real de cada estabelecimento indicado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="cta-glow"></div>
+  <div class="reveal">
+    <h2 class="cta-heading">Sua audiência já existe.<br><em>Monetize ela.</em></h2>
+    <p class="cta-sub">Cadastre-se agora e comece a ganhar comissão recorrente com o NOOON.</p>
+    <div class="cta-actions">
+      <a href="#painel" class="btn-primary">Quero ser parceiro digital</a>
+      <a href="representante.html" class="btn-ghost">Ver plano comercial &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo"><img src="assets/logo1_nooon.png" alt="NOOON"></div>
+    <p class="footer-desc">Ecossistema financeiro completo para pessoas e negócios. Manaus, AM — Brasil.</p>
+    <p class="footer-contact">contato@nooon.com.br<br>(84) 98788-5959</p>
+  </div>
+  <div>
+    <p class="footer-col-title">Produtos</p>
+    <ul class="footer-links">
+      <li><a href="maquinas.html">Maquininhas</a></li>
+      <li><a href="https://portal.nooon.com.br" target="_blank">Banco Digital</a></li>
+      <li><a href="https://caixa.nooon.com.br" target="_blank">NOOON Caixa</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Parceiros</p>
+    <ul class="footer-links">
+      <li><a href="representante.html">Seja Representante</a></li>
+      <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+      <li><a href="investidores.html">Investidores</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Ajuda</p>
+    <ul class="footer-links">
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="area-representante.html">Área do Representante</a></li>
+      <li><a href="https://wa.me/5584987885959" target="_blank">WhatsApp</a></li>
+      <li><a href="mailto:contato@nooon.com.br">E-mail</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 NOOON — Ecossistema Financeiro. Todos os direitos reservados.</span>
+    <span>Desenvolvido por <a href="https://abracadabra.srv.br" target="_blank">AbraCadabra</a> &middot; <a href="https://hbusiness-group.com.br" target="_blank">HBusiness Group</a></span>
+  </div>
+</footer>
+
+<script>
+// CALCULADORA
+function calcular() {
+  const estab = parseInt(document.getElementById('cEstab').value);
+  const tpv   = parseInt(document.getElementById('cTPV').value);
+  const plano = parseFloat(document.getElementById('cPlano').value);
+  document.getElementById('cEstabVal').textContent = estab + ' indic.';
+  document.getElementById('cTPVVal').textContent = 'R$' + tpv.toLocaleString('pt-BR');
+  const tpvMensal = estab * tpv * 30;
+  const ganho = tpvMensal * 0.01 * plano;
+  const fmt = v => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+  document.getElementById('cResultado').textContent = fmt(ganho);
+  document.getElementById('cTPVTotal').textContent = fmt(tpvMensal);
+  document.getElementById('cSua').textContent = (plano*100).toFixed(0) + '% = ' + fmt(ganho);
+}
+calcular();
+
+// FORMULÁRIO
+function enviarPainel() {
+  const nome  = document.getElementById('pNome').value.trim();
+  const wpp   = document.getElementById('pWpp').value.trim();
+  const email = document.getElementById('pEmail').value.trim();
+  const arroba = document.getElementById('pArroba').value.trim();
+  const cidade = document.getElementById('pCidade').value.trim();
+  const seg   = document.getElementById('pSeguidores').value.trim();
+  const eng   = document.getElementById('pEngajamento').value.trim();
+  const nicho = document.getElementById('pNicho').value;
+
+  if (!nome || !wpp || !email || !cidade) {
+    alert('Por favor, preencha pelo menos nome, WhatsApp, e-mail e cidade.');
+    return;
+  }
+
+  const canais = [];
+  ['ch-ig','ch-tt','ch-yt','ch-wpp','ch-tg','ch-tw'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.checked) canais.push(el.nextElementSibling.textContent.trim());
+  });
+
+  const msg = encodeURIComponent(
+    `Olá! Quero ser parceiro digital NOOON.\n\n` +
+    `*Nome:* ${nome}\n*WhatsApp:* ${wpp}\n*E-mail:* ${email}\n` +
+    `*Arroba:* ${arroba || '—'}\n*Seguidores:* ${seg || '—'}\n*Engajamento:* ${eng ? eng+'%' : '—'}\n` +
+    `*Nicho:* ${nicho || '—'}\n*Canais:* ${canais.join(', ') || '—'}\n*Cidade:* ${cidade}`
+  );
+
+  window.open(`https://wa.me/5584987885959?text=${msg}`, '_blank');
+
+  document.getElementById('painelForm').style.display = 'none';
+  document.getElementById('painelSucesso').style.display = 'block';
+}
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
