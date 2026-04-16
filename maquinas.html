@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maquininhas — NOOON</title>
+<meta name="description" content="Conheça os modelos S920 e A930. Taxas competitivas, locação flexível e suporte local.">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0d1f0a;
+  --dark: #142910;
+  --mid: #1e3d14;
+  --primary: #2e6417;
+  --accent: #74cc00;
+  --accent-light: #9ddd3a;
+  --white: #ffffff;
+  --off-white: #f0f7e8;
+  --border: rgba(116,204,0,0.15);
+  --border-mid: rgba(116,204,0,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--deep); color: var(--white); font-family: 'Open Sans', sans-serif; overflow-x: hidden; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--deep); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; height: 72px; background: rgba(13,31,10,0.94); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-mid); }
+.nav-logo img { height: 38px; width: auto; }
+.nav-menu { display: flex; gap: 4px; list-style: none; }
+.nav-menu a { display: block; padding: 8px 14px; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.82); text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--white); background: rgba(116,204,0,0.1); }
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+.btn-nav { padding: 9px 22px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.25s; }
+.btn-nav:hover { background: var(--accent-light); transform: translateY(-1px); }
+.btn-nav-outline { padding: 9px 22px; background: transparent; color: var(--accent); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 600; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: all 0.25s; }
+.btn-nav-outline:hover { background: rgba(116,204,0,0.08); }
+
+/* HERO */
+#hero { padding: 140px 60px 80px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-mid); }
+.hero-mesh { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 50% at 100% 0%, rgba(46,100,23,0.4) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 0% 100%, rgba(116,204,0,0.06) 0%, transparent 55%); }
+.hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.section-tag { display: inline-block; padding: 5px 16px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.hero-heading { font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 20px; }
+.hero-heading em { color: var(--accent); font-style: normal; }
+.hero-sub { font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,0.82); margin-bottom: 36px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 15px 30px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(116,204,0,0.3); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 15px 30px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 600; border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+.btn-ghost:hover { background: rgba(255,255,255,0.09); }
+
+/* HERO MACHINES PREVIEW */
+.hero-machines { display: flex; align-items: flex-end; justify-content: center; gap: 24px; }
+.hero-machine { text-align: center; }
+.hero-machine img { display: block; margin: 0 auto; filter: drop-shadow(0 12px 32px rgba(0,0,0,0.7)); }
+.hero-machine-s920 img { height: 240px; width: auto; }
+.hero-machine-a930 img { width: 260px; height: auto; max-height: 200px; object-fit: contain; }
+.hero-machine-label { margin-top: 14px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+
+/* SECTION COMMONS */
+.section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.section-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--accent); }
+.section-heading { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+.section-heading em { color: var(--accent); font-style: normal; }
+.section-center { text-align: center; }
+.section-center .section-label { justify-content: center; }
+.section-center .section-label::before { display: none; }
+
+/* MODELOS */
+#modelos { padding: 100px 60px; }
+.modelos-inner { max-width: 1100px; margin: 0 auto; }
+.modelos-header { margin-bottom: 60px; }
+
+/* TABS */
+.model-tabs { display: flex; gap: 8px; margin-bottom: 48px; }
+.model-tab { padding: 12px 28px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-mid); border-radius: 10px; font-family: 'Open Sans', sans-serif; font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.6); cursor: pointer; transition: all 0.25s; }
+.model-tab.active { background: rgba(116,204,0,0.12); border-color: var(--border); color: var(--accent); }
+.model-tab:hover:not(.active) { border-color: var(--border); color: rgba(255,255,255,0.88); }
+
+/* MODEL PANEL */
+.model-panel { display: none; }
+.model-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+
+.model-visual { position: relative; }
+.model-img-container { background: linear-gradient(145deg, var(--mid) 0%, var(--dark) 100%); border: 1px solid var(--border); border-radius: 24px; padding: 48px 32px; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.model-badge-top { display: inline-block; padding: 5px 16px; background: rgba(116,204,0,0.12); border: 1px solid var(--border); border-radius: 100px; font-size: 0.63rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+.model-img-s920 { height: 280px; width: auto; filter: drop-shadow(0 16px 40px rgba(0,0,0,0.8)); }
+.model-img-a930 { width: 100%; max-width: 320px; height: auto; max-height: 240px; object-fit: contain; filter: drop-shadow(0 16px 40px rgba(0,0,0,0.8)); }
+.model-name-big { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.03em; color: var(--white); }
+
+/* MANUAL DOWNLOAD */
+.manual-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.82); text-decoration: none; transition: all 0.25s; width: 100%; justify-content: center; }
+.manual-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); color: var(--white); }
+.manual-icon { font-size: 1rem; }
+
+/* MODEL INFO */
+.model-info {}
+.model-name { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px; }
+.model-tagline { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 32px; }
+
+/* PRICING */
+.pricing-block { margin-bottom: 32px; }
+.pricing-block-title { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 12px; }
+.pricing-tiers { display: flex; flex-direction: column; gap: 8px; }
+.pricing-tier { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 14px 18px; border-radius: 10px; }
+.pricing-tier:nth-child(1) { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+.pricing-tier:nth-child(2) { background: rgba(116,204,0,0.06); border: 1px solid rgba(116,204,0,0.15); }
+.pricing-tier:nth-child(3) { background: rgba(116,204,0,0.1); border: 1px solid rgba(116,204,0,0.22); }
+.tier-range { font-size: 0.82rem; color: rgba(255,255,255,0.88); font-weight: 500; }
+.tier-right { text-align: right; }
+.tier-price { font-size: 1.1rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.tier-price.free { color: var(--accent-light); }
+.tier-note { font-size: 0.62rem; color: rgba(255,255,255,0.65); margin-top: 2px; }
+
+/* SPECS */
+.specs-block { margin-bottom: 32px; }
+.specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.spec-item { padding: 14px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; }
+.spec-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 4px; }
+.spec-value { font-size: 0.84rem; font-weight: 600; color: var(--white); }
+
+/* FEATURES LIST */
+.features-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+.feature-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.84rem; color: rgba(255,255,255,0.85); line-height: 1.5; }
+.feature-check { color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+/* CTA CARD */
+.cta-card { padding: 24px; background: rgba(116,204,0,0.08); border: 1px solid rgba(116,204,0,0.2); border-radius: 14px; }
+.cta-card-text { font-size: 0.84rem; color: rgba(255,255,255,0.8); line-height: 1.6; margin-bottom: 16px; }
+.btn-wpp { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 700; border-radius: 10px; text-decoration: none; transition: all 0.3s; width: 100%; }
+.btn-wpp:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(116,204,0,0.3); }
+
+/* TAXAS */
+#taxas { padding: 100px 60px; background: var(--dark); border-top: 1px solid var(--border-mid); }
+.taxas-inner { max-width: 1100px; margin: 0 auto; }
+.taxas-header { text-align: center; margin-bottom: 56px; }
+.taxas-sub { margin-top: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+
+/* BANDEIRAS TABS */
+.bandeira-tabs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+.bandeira-tab { padding: 8px 20px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-mid); border-radius: 8px; font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.7); cursor: pointer; transition: all 0.2s; letter-spacing: 0.04em; }
+.bandeira-tab.active { background: rgba(116,204,0,0.12); border-color: var(--border); color: var(--accent); }
+.bandeira-tab:hover:not(.active) { border-color: var(--border); color: var(--white); }
+
+/* TAXA TABLE */
+.taxa-panel { display: none; }
+.taxa-panel.active { display: block; }
+
+.taxa-table-wrap { overflow-x: auto; border-radius: 16px; border: 1px solid var(--border-mid); }
+table { width: 100%; border-collapse: collapse; }
+thead tr { background: rgba(116,204,0,0.08); border-bottom: 1px solid var(--border); }
+thead th { padding: 14px 20px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-align: left; }
+thead th:last-child { text-align: right; color: var(--accent); }
+tbody tr { border-bottom: 1px solid var(--border-mid); transition: background 0.2s; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: rgba(116,204,0,0.04); }
+tbody td { padding: 13px 20px; font-size: 0.84rem; color: rgba(255,255,255,0.85); }
+tbody td:first-child { font-weight: 600; color: var(--white); }
+tbody td:last-child { text-align: right; font-weight: 800; color: var(--accent); font-size: 0.95rem; }
+.row-highlight td { background: rgba(116,204,0,0.06); }
+
+/* PIX special */
+.taxa-pix-card { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.pix-item { padding: 28px; background: rgba(116,204,0,0.06); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+.pix-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+.pix-value { font-size: 2.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.pix-desc { font-size: 0.75rem; color: rgba(255,255,255,0.65); margin-top: 6px; }
+
+/* CALLOUT */
+.taxa-callout { margin-top: 20px; padding: 16px 24px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-mid); border-radius: 10px; font-size: 0.78rem; color: rgba(255,255,255,0.72); line-height: 1.7; text-align: center; }
+
+/* COMPARATIVO */
+#comparativo { padding: 100px 60px; border-top: 1px solid var(--border-mid); }
+.comparativo-inner { max-width: 900px; margin: 0 auto; }
+.comp-table-wrap { margin-top: 48px; border-radius: 16px; border: 1px solid var(--border-mid); overflow: hidden; }
+.comp-table { width: 100%; border-collapse: collapse; }
+.comp-table thead tr { background: rgba(116,204,0,0.08); }
+.comp-table thead th { padding: 16px 24px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8); text-align: center; }
+.comp-table thead th:first-child { text-align: left; }
+.comp-table tbody tr { border-top: 1px solid var(--border-mid); }
+.comp-table tbody tr:hover { background: rgba(116,204,0,0.03); }
+.comp-table tbody td { padding: 14px 24px; font-size: 0.84rem; color: rgba(255,255,255,0.82); text-align: center; }
+.comp-table tbody td:first-child { text-align: left; font-weight: 600; color: rgba(255,255,255,0.7); }
+.check { color: var(--accent); font-weight: 700; font-size: 1rem; }
+.dash { color: rgba(255,255,255,0.3); }
+.col-highlight { background: rgba(116,204,0,0.04); }
+.col-header-highlight { color: var(--accent) !important; }
+
+/* CTA FINAL */
+#cta-final { padding: 100px 60px; text-align: center; border-top: 1px solid var(--border-mid); position: relative; overflow: hidden; }
+.cta-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 500px; height: 300px; background: radial-gradient(ellipse, rgba(116,204,0,0.1) 0%, transparent 70%); pointer-events: none; }
+.cta-heading { font-size: clamp(2rem, 4vw, 3.8rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 18px; position: relative; }
+.cta-heading em { color: var(--accent); font-style: normal; }
+.cta-sub { font-size: 0.95rem; color: rgba(255,255,255,0.78); max-width: 400px; margin: 0 auto 40px; line-height: 1.7; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* FOOTER */
+footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(--border-mid); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; }
+.footer-logo { margin-bottom: 12px; }
+.footer-logo img { height: 26px; width: auto; opacity: 0.9; }
+.footer-desc { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 220px; }
+.footer-contact { margin-top: 12px; font-size: 0.72rem; color: rgba(255,255,255,0.65); line-height: 1.8; }
+.footer-col-title { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 14px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom { grid-column: 1/-1; padding-top: 24px; border-top: 1px solid var(--border-mid); display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+.footer-bottom a { color: rgba(116,204,0,0.7); text-decoration: none; }
+.footer-bottom a:hover { color: var(--accent); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; }
+  .nav-menu { display: none; }
+  #hero { padding: 110px 24px 60px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero-machines { order: -1; }
+  .hero-machine-s920 img { height: 180px; }
+  .hero-machine-a930 img { max-width: 200px; }
+  #modelos, #taxas, #comparativo, #cta-final { padding: 80px 24px; }
+  .model-panel.active { grid-template-columns: 1fr; }
+  .specs-grid { grid-template-columns: 1fr 1fr; }
+  footer { grid-template-columns: 1fr 1fr; padding: 44px 24px; }
+  .taxa-pix-card { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .model-tabs { flex-direction: column; }
+  .bandeira-tabs { gap: 6px; }
+  .specs-grid { grid-template-columns: 1fr; }
+  .taxa-pix-card { grid-template-columns: 1fr; }
+  .hero-machines { flex-direction: column; align-items: center; }
+  footer { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></a>
+  <ul class="nav-menu">
+    <li><a href="maquinas.html" class="active">Maquininhas</a></li>
+    <li><a href="representante.html">Seja Representante</a></li>
+    <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+    <li><a href="investidores.html">Investidores</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="area-representante.html" class="btn-nav-outline">Área do Representante</a>
+    <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav">Acessar Portal</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-inner">
+    <div>
+      <span class="section-tag">Equipamentos</span>
+      <h1 class="hero-heading">As maquininhas <em>que trabalham</em> por você</h1>
+      <p class="hero-sub">Dois modelos para cada perfil de negócio. Locação flexível, taxas competitivas e suporte local — sem burocracia.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/5584987885959?text=Olá!%20Quero%20saber%20mais%20sobre%20as%20maquininhas%20NOOON" target="_blank" class="btn-primary">Falar com representante</a>
+        <a href="#modelos" class="btn-ghost">Ver modelos &darr;</a>
+      </div>
+    </div>
+    <div class="hero-machines">
+      <div class="hero-machine hero-machine-s920">
+        <img src="assets/s920_sf.png" alt="S920">
+        <p class="hero-machine-label">S920</p>
+      </div>
+      <div class="hero-machine hero-machine-a930">
+        <img src="assets/a930_sf.png" alt="A930">
+        <p class="hero-machine-label">A930</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELOS -->
+<section id="modelos">
+  <div class="modelos-inner">
+    <div class="modelos-header reveal">
+      <p class="section-label">Modelos disponíveis</p>
+      <h2 class="section-heading">Escolha o modelo <em>ideal</em></h2>
+    </div>
+
+    <div class="model-tabs reveal">
+      <button class="model-tab active" onclick="switchModel('s920', this)">Modelo S920</button>
+      <button class="model-tab" onclick="switchModel('a930', this)">Modelo A930</button>
+    </div>
+
+    <!-- S920 -->
+    <div class="model-panel active" id="panel-s920">
+      <div class="model-visual reveal">
+        <div class="model-img-container">
+          <span class="model-badge-top">Modelo S920</span>
+          <img src="assets/s920_sf.png" alt="S920" class="model-img-s920">
+          <div class="model-name-big">S920</div>
+          <a href="assets/manual_s920.pdf" download class="manual-btn">
+            <span class="manual-icon">&#8681;</span>
+            Baixar manual de instalação (PDF)
+          </a>
+        </div>
+      </div>
+      <div class="model-info reveal reveal-delay-1">
+        <h3 class="model-name">S920</h3>
+        <p class="model-tagline">Compacta, conectada e ideal para mobilidade</p>
+
+        <div class="pricing-block">
+          <p class="pricing-block-title">Locação mensal</p>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="tier-range">Até R$20.000/mês em transações</span>
+              <div class="tier-right"><div class="tier-price">R$110</div><div class="tier-note">/mês + taxas</div></div>
+            </div>
+            <div class="pricing-tier">
+              <span class="tier-range">Até R$40.000/mês em transações</span>
+              <div class="tier-right"><div class="tier-price">R$10</div><div class="tier-note">/mês + taxas</div></div>
+            </div>
+            <div class="pricing-tier">
+              <span class="tier-range">Acima de R$40.000/mês</span>
+              <div class="tier-right"><div class="tier-price free">Gratuita</div><div class="tier-note">apenas taxas</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="specs-block">
+          <p class="pricing-block-title">Especificações</p>
+          <div class="specs-grid">
+            <div class="spec-item"><div class="spec-label">Conectividade</div><div class="spec-value">4G + Wi-Fi</div></div>
+            <div class="spec-item"><div class="spec-label">Impressora</div><div class="spec-value">Térmica integrada</div></div>
+            <div class="spec-item"><div class="spec-label">Bateria</div><div class="spec-value">Longa duração</div></div>
+            <div class="spec-item"><div class="spec-label">Pagamentos</div><div class="spec-value">NFC + QR + Chip</div></div>
+            <div class="spec-item"><div class="spec-label">Bandeiras</div><div class="spec-value">Todas aceitas</div></div>
+            <div class="spec-item"><div class="spec-label">Forma</div><div class="spec-value">Portátil</div></div>
+          </div>
+        </div>
+
+        <ul class="features-list">
+          <li class="feature-item"><span class="feature-check">&#10003;</span>Ideal para negócios móveis e delivery</li>
+          <li class="feature-item"><span class="feature-check">&#10003;</span>Aceita débito, crédito, PIX e voucher</li>
+          <li class="feature-item"><span class="feature-check">&#10003;</span>Instalação e configuração pelo representante local</li>
+          <li class="feature-item"><span class="feature-check">&#10003;</span>Suporte técnico incluso</li>
+        </ul>
+
+        <div class="cta-card">
+          <p class="cta-card-text">Interessado no S920? Fale com o representante NOOON da sua região e ative sua máquina hoje.</p>
+          <a href="https://wa.me/5584987885959?text=Olá!%20Tenho%20interesse%20na%20maquininha%20S920%20NOOON" target="_blank" class="btn-wpp">
+            Quero o S920 &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- A930 -->
+    <div class="model-panel" id="panel-a930">
+      <div class="model-visual reveal">
+        <div class="model-img-container">
+          <span class="model-badge-top">Modelo A930 — Mais Popular</span>
+          <img src="assets/a930_sf.png" alt="A930" class="model-img-a930">
+          <div class="model-name-big">A930</div>
+          <a href="assets/manual_a930.pdf" download class="manual-btn">
+            <span class="manual-icon">&#8681;</span>
+            Baixar manual de instalação (PDF)
+          </a>
+        </div>
+      </div>
+      <div class="model-info reveal reveal-delay-1">
+        <h3 class="model-name">A930</h3>
+        <p class="model-tagline">Profissional, completa e ideal para alto volume</p>
+
+        <div class="pricing-block">
+          <p class="pricing-block-title">Locação mensal</p>
+          <div class="pricing-tiers">
+            <div class="pricing-tier">
+              <span class="tier-range">Até R$30.000/mês em transações</span>
+              <div class="tier-right"><div class="tier-price">R$160</div><div class="tier-note">/mês + taxas</div></div>
+            </div>
+            <div class="pricing-tier">
+              <span class="tier-range">Até R$60.000/mês em transações</span>
+              <div class="tier-right"><div class="tier-price">R$10</div><div class="tier-note">/mês + taxas</div></div>
+            </div>
+            <div class="pricing-tier">
+              <span class="tier-range">Acima de R$60.000/mês</span>
+              <div class="tier-right"><div class="tier-price free">Gratuita</div><div class="tier-note">apenas taxas</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="specs-block">
+          <p class="pricing-block-title">Especificações</p>
+          <div class="specs-grid">
+            <div class="spec-item"><div class="spec-label">Conectividade</div><div class="spec-value">4G + Wi-Fi + Ethernet</div></div>
+            <div class="spec-item"><div class="spec-label">Impressora</div><div class="spec-value">Alta velocidade</div></div>
+            <div class="spec-item"><div class="spec-label">Tela</div><div class="spec-value">Touch screen ampla</div></div>
+            <div class="spec-item"><div class="spec-label">Pagamentos</div><div class="spec-value">NFC + QR + Chip</div></div>
+            <div class="spec-item"><div class="spec-label">Bandeiras</div><div class="spec-value">Todas aceitas</div></div>
+            <div class="spec-item"><div class="spec-label">Forma</div><div class="spec-value">Mesa / Balcão</div></div>
+          </div>
+        </div>
+
+        <ul class="features-list">
+          <li class="feature-item"><span class="feature-check">&#10003;</span>Ideal para restaurantes, mercados e lojas</li>
+          <li class="feature-item"><span class="feature-check">&#10003;</span>Alto volume de transações diárias</li>
+          <li class="feature-item"><span class="feature-check">&#10003;</span>Instalação e configuração pelo representante local</li>
+          <li class="feature-item"><span class="feature-check">&#10003;</span>Suporte técnico incluso</li>
+        </ul>
+
+        <div class="cta-card">
+          <p class="cta-card-text">Interessado no A930? Fale com o representante NOOON da sua região e ative sua máquina hoje.</p>
+          <a href="https://wa.me/5584987885959?text=Olá!%20Tenho%20interesse%20na%20maquininha%20A930%20NOOON" target="_blank" class="btn-wpp">
+            Quero o A930 &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABELA DE TAXAS -->
+<section id="taxas">
+  <div class="taxas-inner">
+    <div class="taxas-header reveal">
+      <p class="section-tag">Transparência total</p>
+      <h2 class="section-heading">Tabela completa <em>de taxas</em></h2>
+      <p class="taxas-sub">Selecione a bandeira para ver as taxas por modalidade e parcelamento.</p>
+    </div>
+
+    <div class="bandeira-tabs reveal">
+      <button class="bandeira-tab active" onclick="switchBandeira('mastercard', this)">Mastercard</button>
+      <button class="bandeira-tab" onclick="switchBandeira('visa', this)">Visa</button>
+      <button class="bandeira-tab" onclick="switchBandeira('elo', this)">Elo</button>
+      <button class="bandeira-tab" onclick="switchBandeira('amex', this)">American Express</button>
+      <button class="bandeira-tab" onclick="switchBandeira('hiper', this)">Hiper / Hipercard</button>
+      <button class="bandeira-tab" onclick="switchBandeira('outras', this)">Outras</button>
+      <button class="bandeira-tab" onclick="switchBandeira('pix', this)">PIX</button>
+    </div>
+
+    <!-- MASTERCARD -->
+    <div class="taxa-panel active" id="taxa-mastercard">
+      <div class="taxa-table-wrap reveal">
+        <table>
+          <thead><tr><th>Modalidade</th><th>Taxa Final</th></tr></thead>
+          <tbody>
+            <tr class="row-highlight"><td>Débito</td><td>2,00%</td></tr>
+            <tr><td>Crédito 1x</td><td>4,00%</td></tr>
+            <tr><td>Crédito 2x</td><td>5,00%</td></tr>
+            <tr><td>Crédito 3x</td><td>6,00%</td></tr>
+            <tr><td>Crédito 4x</td><td>7,00%</td></tr>
+            <tr><td>Crédito 5x</td><td>7,50%</td></tr>
+            <tr><td>Crédito 6x</td><td>8,50%</td></tr>
+            <tr><td>Crédito 7x</td><td>9,50%</td></tr>
+            <tr><td>Crédito 8x</td><td>10,00%</td></tr>
+            <tr><td>Crédito 9x</td><td>11,00%</td></tr>
+            <tr><td>Crédito 10x</td><td>11,50%</td></tr>
+            <tr><td>Crédito 11x</td><td>12,00%</td></tr>
+            <tr><td>Crédito 12x</td><td>13,00%</td></tr>
+            <tr><td>Crédito 13x</td><td>14,00%</td></tr>
+            <tr><td>Crédito 14x</td><td>14,50%</td></tr>
+            <tr><td>Crédito 15x</td><td>15,50%</td></tr>
+            <tr><td>Crédito 16x</td><td>16,50%</td></tr>
+            <tr><td>Crédito 17x</td><td>17,00%</td></tr>
+            <tr><td>Crédito 18x</td><td>18,00%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- VISA (igual Mastercard) -->
+    <div class="taxa-panel" id="taxa-visa">
+      <div class="taxa-table-wrap reveal">
+        <table>
+          <thead><tr><th>Modalidade</th><th>Taxa Final</th></tr></thead>
+          <tbody>
+            <tr class="row-highlight"><td>Débito</td><td>2,00%</td></tr>
+            <tr><td>Crédito 1x</td><td>4,00%</td></tr>
+            <tr><td>Crédito 2x</td><td>5,00%</td></tr>
+            <tr><td>Crédito 3x</td><td>6,00%</td></tr>
+            <tr><td>Crédito 4x</td><td>7,00%</td></tr>
+            <tr><td>Crédito 5x</td><td>7,50%</td></tr>
+            <tr><td>Crédito 6x</td><td>8,50%</td></tr>
+            <tr><td>Crédito 7x</td><td>9,50%</td></tr>
+            <tr><td>Crédito 8x</td><td>10,00%</td></tr>
+            <tr><td>Crédito 9x</td><td>11,00%</td></tr>
+            <tr><td>Crédito 10x</td><td>11,50%</td></tr>
+            <tr><td>Crédito 11x</td><td>12,00%</td></tr>
+            <tr><td>Crédito 12x</td><td>13,00%</td></tr>
+            <tr><td>Crédito 13x</td><td>14,00%</td></tr>
+            <tr><td>Crédito 14x</td><td>14,50%</td></tr>
+            <tr><td>Crédito 15x</td><td>15,50%</td></tr>
+            <tr><td>Crédito 16x</td><td>16,50%</td></tr>
+            <tr><td>Crédito 17x</td><td>17,00%</td></tr>
+            <tr><td>Crédito 18x</td><td>18,00%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ELO -->
+    <div class="taxa-panel" id="taxa-elo">
+      <div class="taxa-table-wrap reveal">
+        <table>
+          <thead><tr><th>Modalidade</th><th>Taxa Final</th></tr></thead>
+          <tbody>
+            <tr class="row-highlight"><td>Débito</td><td>2,50%</td></tr>
+            <tr><td>Crédito 1x</td><td>5,00%</td></tr>
+            <tr><td>Crédito 2x</td><td>6,00%</td></tr>
+            <tr><td>Crédito 3x</td><td>7,00%</td></tr>
+            <tr><td>Crédito 4x</td><td>7,50%</td></tr>
+            <tr><td>Crédito 5x</td><td>8,00%</td></tr>
+            <tr><td>Crédito 6x</td><td>9,00%</td></tr>
+            <tr><td>Crédito 7x</td><td>10,00%</td></tr>
+            <tr><td>Crédito 8x</td><td>11,00%</td></tr>
+            <tr><td>Crédito 9x</td><td>11,50%</td></tr>
+            <tr><td>Crédito 10x</td><td>12,50%</td></tr>
+            <tr><td>Crédito 11x</td><td>13,00%</td></tr>
+            <tr><td>Crédito 12x</td><td>14,00%</td></tr>
+            <tr><td>Crédito 13x</td><td>15,00%</td></tr>
+            <tr><td>Crédito 14x</td><td>15,50%</td></tr>
+            <tr><td>Crédito 15x</td><td>16,50%</td></tr>
+            <tr><td>Crédito 16x</td><td>17,50%</td></tr>
+            <tr><td>Crédito 17x</td><td>18,00%</td></tr>
+            <tr><td>Crédito 18x</td><td>19,00%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- AMEX -->
+    <div class="taxa-panel" id="taxa-amex">
+      <div class="taxa-table-wrap reveal">
+        <table>
+          <thead><tr><th>Modalidade</th><th>Taxa Final</th></tr></thead>
+          <tbody>
+            <tr class="row-highlight"><td>Débito</td><td>3,00%</td></tr>
+            <tr><td>Crédito 1x</td><td>5,00%</td></tr>
+            <tr><td>Crédito 2x</td><td>6,00%</td></tr>
+            <tr><td>Crédito 3x</td><td>6,50%</td></tr>
+            <tr><td>Crédito 4x</td><td>7,50%</td></tr>
+            <tr><td>Crédito 5x</td><td>8,00%</td></tr>
+            <tr><td>Crédito 6x</td><td>9,00%</td></tr>
+            <tr><td>Crédito 7x</td><td>10,00%</td></tr>
+            <tr><td>Crédito 8x</td><td>11,00%</td></tr>
+            <tr><td>Crédito 9x</td><td>11,50%</td></tr>
+            <tr><td>Crédito 10x</td><td>12,50%</td></tr>
+            <tr><td>Crédito 11x</td><td>13,00%</td></tr>
+            <tr><td>Crédito 12x</td><td>14,00%</td></tr>
+            <tr><td>Crédito 13x</td><td>15,00%</td></tr>
+            <tr><td>Crédito 14x</td><td>15,50%</td></tr>
+            <tr><td>Crédito 15x</td><td>16,50%</td></tr>
+            <tr><td>Crédito 16x</td><td>17,50%</td></tr>
+            <tr><td>Crédito 17x</td><td>18,00%</td></tr>
+            <tr><td>Crédito 18x</td><td>19,00%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- HIPER -->
+    <div class="taxa-panel" id="taxa-hiper">
+      <div class="taxa-table-wrap reveal">
+        <table>
+          <thead><tr><th>Modalidade</th><th>Taxa Final</th></tr></thead>
+          <tbody>
+            <tr class="row-highlight"><td>Débito</td><td>2,50%</td></tr>
+            <tr><td>Crédito 1x</td><td>5,00%</td></tr>
+            <tr><td>Crédito 2x</td><td>6,00%</td></tr>
+            <tr><td>Crédito 3x</td><td>6,50%</td></tr>
+            <tr><td>Crédito 4x</td><td>7,50%</td></tr>
+            <tr><td>Crédito 5x</td><td>8,00%</td></tr>
+            <tr><td>Crédito 6x</td><td>9,00%</td></tr>
+            <tr><td>Crédito 7x</td><td>10,00%</td></tr>
+            <tr><td>Crédito 8x</td><td>11,00%</td></tr>
+            <tr><td>Crédito 9x</td><td>11,50%</td></tr>
+            <tr><td>Crédito 10x</td><td>12,50%</td></tr>
+            <tr><td>Crédito 11x</td><td>13,00%</td></tr>
+            <tr><td>Crédito 12x</td><td>14,00%</td></tr>
+            <tr><td>Crédito 13x</td><td>15,00%</td></tr>
+            <tr><td>Crédito 14x</td><td>15,50%</td></tr>
+            <tr><td>Crédito 15x</td><td>16,50%</td></tr>
+            <tr><td>Crédito 16x</td><td>17,50%</td></tr>
+            <tr><td>Crédito 17x</td><td>18,00%</td></tr>
+            <tr><td>Crédito 18x</td><td>19,00%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- OUTRAS -->
+    <div class="taxa-panel" id="taxa-outras">
+      <div class="taxa-table-wrap reveal">
+        <table>
+          <thead><tr><th>Modalidade</th><th>Taxa Final</th></tr></thead>
+          <tbody>
+            <tr class="row-highlight"><td>Débito</td><td>2,50%</td></tr>
+            <tr><td>Crédito 1x</td><td>5,00%</td></tr>
+            <tr><td>Crédito 2x</td><td>6,00%</td></tr>
+            <tr><td>Crédito 3x</td><td>6,50%</td></tr>
+            <tr><td>Crédito 4x</td><td>7,50%</td></tr>
+            <tr><td>Crédito 5x</td><td>8,00%</td></tr>
+            <tr><td>Crédito 6x</td><td>9,00%</td></tr>
+            <tr><td>Crédito 7x</td><td>10,00%</td></tr>
+            <tr><td>Crédito 8x</td><td>11,00%</td></tr>
+            <tr><td>Crédito 9x</td><td>11,50%</td></tr>
+            <tr><td>Crédito 10x</td><td>12,50%</td></tr>
+            <tr><td>Crédito 11x</td><td>13,00%</td></tr>
+            <tr><td>Crédito 12x</td><td>14,00%</td></tr>
+            <tr><td>Crédito 13x</td><td>15,00%</td></tr>
+            <tr><td>Crédito 14x</td><td>15,50%</td></tr>
+            <tr><td>Crédito 15x</td><td>16,50%</td></tr>
+            <tr><td>Crédito 16x</td><td>17,50%</td></tr>
+            <tr><td>Crédito 17x</td><td>18,00%</td></tr>
+            <tr><td>Crédito 18x</td><td>19,00%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PIX -->
+    <div class="taxa-panel" id="taxa-pix">
+      <div class="taxa-pix-card reveal">
+        <div class="pix-item">
+          <div class="pix-label">PIX — Taxa percentual</div>
+          <div class="pix-value">1,00%</div>
+          <div class="pix-desc">Sobre o valor da transação</div>
+        </div>
+        <div class="pix-item">
+          <div class="pix-label">PIX — Taxa fixa</div>
+          <div class="pix-value">R$0,50</div>
+          <div class="pix-desc">Por transação realizada</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="taxa-callout reveal">
+      Taxas sujeitas a alteração. Consulte seu representante NOOON para condições especiais por volume. &nbsp;|&nbsp; Locação: R$10/dia ou conforme faixa mensal de TPV.
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIVO -->
+<section id="comparativo">
+  <div class="comparativo-inner">
+    <div class="reveal section-center">
+      <p class="section-tag">Compare</p>
+      <h2 class="section-heading">S920 vs <em>A930</em></h2>
+    </div>
+    <div class="comp-table-wrap reveal">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>S920</th>
+            <th class="col-header-highlight">A930</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Conectividade</td><td>4G + Wi-Fi</td><td class="col-highlight">4G + Wi-Fi + Ethernet</td></tr>
+          <tr><td>Impressora</td><td>Térmica</td><td class="col-highlight">Alta velocidade</td></tr>
+          <tr><td>Tela touch</td><td><span class="check">&#10003;</span></td><td class="col-highlight"><span class="check">&#10003;</span> Ampla</td></tr>
+          <tr><td>NFC</td><td><span class="check">&#10003;</span></td><td class="col-highlight"><span class="check">&#10003;</span></td></tr>
+          <tr><td>QR Code</td><td><span class="check">&#10003;</span></td><td class="col-highlight"><span class="check">&#10003;</span></td></tr>
+          <tr><td>Portátil</td><td><span class="check">&#10003;</span></td><td class="col-highlight"><span class="dash">—</span> (balcão)</td></tr>
+          <tr><td>Ideal para</td><td>Mobilidade / Delivery</td><td class="col-highlight">Alto volume / Loja</td></tr>
+          <tr><td>Locação a partir de</td><td>R$110/mês</td><td class="col-highlight">R$160/mês</td></tr>
+          <tr><td>Locação gratuita a partir de</td><td>R$40.000/mês</td><td class="col-highlight">R$60.000/mês</td></tr>
+          <tr><td>Manual PDF</td><td><span class="check">&#10003;</span></td><td class="col-highlight"><span class="check">&#10003;</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="cta-glow"></div>
+  <div class="reveal">
+    <h2 class="cta-heading">Pronto para <em>ativar</em><br>sua maquininha?</h2>
+    <p class="cta-sub">Fale agora com o representante NOOON e comece a receber pagamentos hoje.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/5584987885959?text=Olá!%20Quero%20ativar%20uma%20maquininha%20NOOON" target="_blank" class="btn-primary">Falar no WhatsApp</a>
+      <a href="representante.html" class="btn-ghost">Seja um representante &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo"><img src="assets/logo1_nooon.png" alt="NOOON"></div>
+    <p class="footer-desc">Ecossistema financeiro completo para pessoas e negócios. Manaus, AM — Brasil.</p>
+    <p class="footer-contact">contato@nooon.com.br<br>(84) 98788-5959</p>
+  </div>
+  <div>
+    <p class="footer-col-title">Produtos</p>
+    <ul class="footer-links">
+      <li><a href="maquinas.html">Maquininhas</a></li>
+      <li><a href="https://portal.nooon.com.br" target="_blank">Banco Digital</a></li>
+      <li><a href="https://caixa.nooon.com.br" target="_blank">NOOON Caixa</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Parceiros</p>
+    <ul class="footer-links">
+      <li><a href="representante.html">Seja Representante</a></li>
+      <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+      <li><a href="investidores.html">Investidores</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Ajuda</p>
+    <ul class="footer-links">
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="area-representante.html">Área do Representante</a></li>
+      <li><a href="https://wa.me/5584987885959" target="_blank">WhatsApp</a></li>
+      <li><a href="mailto:contato@nooon.com.br">E-mail</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 NOOON — Ecossistema Financeiro. Todos os direitos reservados.</span>
+    <span>Desenvolvido por <a href="https://abracadabra.srv.br" target="_blank">AbraCadabra</a> &middot; <a href="https://hbusiness-group.com.br" target="_blank">HBusiness Group</a></span>
+  </div>
+</footer>
+
+<script>
+// MODEL TABS
+function switchModel(model, btn) {
+  document.querySelectorAll('.model-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.model-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + model).classList.add('active');
+}
+
+// BANDEIRA TABS
+function switchBandeira(bandeira, btn) {
+  document.querySelectorAll('.bandeira-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.taxa-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('taxa-' + bandeira).classList.add('active');
+}
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
