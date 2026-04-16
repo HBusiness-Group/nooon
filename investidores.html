@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investidores — NOOON</title>
+<meta name="description" content="Invista no ecossistema NOOON. Três modelos de investimento com retornos atrativos e receita recorrente.">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0d1f0a;
+  --dark: #142910;
+  --mid: #1e3d14;
+  --primary: #2e6417;
+  --accent: #74cc00;
+  --accent-light: #9ddd3a;
+  --white: #ffffff;
+  --border: rgba(116,204,0,0.15);
+  --border-mid: rgba(116,204,0,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--deep); color: var(--white); font-family: 'Open Sans', sans-serif; overflow-x: hidden; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--deep); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; height: 72px; background: rgba(13,31,10,0.94); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-mid); }
+.nav-logo img { height: 38px; width: auto; }
+.nav-menu { display: flex; gap: 4px; list-style: none; }
+.nav-menu a { display: block; padding: 8px 14px; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.82); text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--white); background: rgba(116,204,0,0.1); }
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+.btn-nav { padding: 9px 22px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.25s; }
+.btn-nav:hover { background: var(--accent-light); transform: translateY(-1px); }
+.btn-nav-outline { padding: 9px 22px; background: transparent; color: var(--accent); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 600; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: all 0.25s; }
+.btn-nav-outline:hover { background: rgba(116,204,0,0.08); }
+
+/* COMMONS */
+.section-tag { display: inline-block; padding: 5px 16px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.section-label::before { content: ''; display: block; width: 20px; height: 2px; background: var(--accent); }
+.section-heading { font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+.section-heading em { color: var(--accent); font-style: normal; }
+.base-text { font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.82); }
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 30px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(116,204,0,0.3); background: var(--accent-light); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 15px 30px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 600; border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+.btn-ghost:hover { background: rgba(255,255,255,0.09); }
+
+/* HERO */
+#hero { padding: 140px 60px 90px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-mid); }
+.hero-mesh { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 60% at 100% 10%, rgba(46,100,23,0.45) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 0% 90%, rgba(116,204,0,0.06) 0%, transparent 55%); }
+.hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; }
+.hero-heading { font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 800; line-height: 1.02; letter-spacing: -0.025em; margin-bottom: 22px; max-width: 700px; }
+.hero-heading em { color: var(--accent); font-style: normal; }
+.hero-sub { font-size: 1rem; line-height: 1.78; color: rgba(255,255,255,0.82); margin-bottom: 40px; max-width: 580px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 64px; }
+.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 700px; }
+.hero-stat { padding: 22px 24px; background: rgba(116,204,0,0.05); border: 1px solid rgba(116,204,0,0.15); border-radius: 14px; }
+.hero-stat-val { font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 5px; }
+.hero-stat-lbl { font-size: 0.75rem; color: rgba(255,255,255,0.75); line-height: 1.4; }
+
+/* CONFIDENCIALIDADE */
+.nda-bar { background: rgba(255,200,0,0.06); border: 1px solid rgba(255,200,0,0.2); border-radius: 12px; padding: 16px 24px; max-width: 1100px; margin: 0 auto 60px; display: flex; align-items: flex-start; gap: 14px; }
+.nda-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.nda-text { font-size: 0.82rem; color: rgba(255,220,100,0.9); line-height: 1.7; }
+.nda-text strong { color: rgba(255,220,100,1); font-weight: 700; display: block; margin-bottom: 3px; }
+
+/* MODELOS */
+#modelos { padding: 100px 60px; }
+.modelos-inner { max-width: 1100px; margin: 0 auto; }
+.modelos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
+
+.modelo-card { border-radius: 22px; border: 1px solid var(--border-mid); background: var(--dark); display: flex; flex-direction: column; overflow: hidden; transition: all 0.35s; position: relative; }
+.modelo-card:hover { border-color: var(--border); transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.4); }
+.modelo-card.destaque { border-color: rgba(116,204,0,0.35); box-shadow: 0 0 0 1px rgba(116,204,0,0.1); }
+.modelo-card-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); padding: 4px 18px; background: var(--accent); color: var(--deep); font-size: 0.58rem; font-weight: 800; letter-spacing: 0.15em; border-radius: 0 0 8px 8px; white-space: nowrap; }
+
+.modelo-header { padding: 32px 28px 24px; border-bottom: 1px solid var(--border-mid); }
+.modelo-tipo { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 10px; }
+.modelo-nome { font-size: 1.3rem; font-weight: 800; margin-bottom: 8px; line-height: 1.2; }
+.modelo-desc { font-size: 0.8rem; color: rgba(255,255,255,0.72); line-height: 1.6; }
+
+.modelo-numeros { padding: 24px 28px; border-bottom: 1px solid var(--border-mid); display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.modelo-num { text-align: center; }
+.modelo-num-val { font-size: 1.2rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+.modelo-num-lbl { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); line-height: 1.3; }
+
+.modelo-body { padding: 24px 28px; flex: 1; display: flex; flex-direction: column; }
+.modelo-features { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 28px; flex: 1; }
+.modelo-feature { display: flex; align-items: flex-start; gap: 10px; font-size: 0.82rem; color: rgba(255,255,255,0.82); line-height: 1.5; }
+.feature-check { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+.btn-modelo { width: 100%; padding: 13px; background: rgba(116,204,0,0.08); border: 1px solid var(--border); color: var(--accent); font-family: 'Open Sans', sans-serif; font-size: 0.82rem; font-weight: 700; border-radius: 9px; cursor: pointer; text-decoration: none; display: block; text-align: center; transition: all 0.25s; }
+.btn-modelo:hover { background: var(--accent); color: var(--deep); }
+.modelo-card.destaque .btn-modelo { background: var(--accent); color: var(--deep); }
+.modelo-card.destaque .btn-modelo:hover { background: var(--accent-light); }
+
+/* COMPARATIVO */
+#comparativo { padding: 100px 60px; background: var(--dark); border-top: 1px solid var(--border-mid); }
+.comp-inner { max-width: 1000px; margin: 0 auto; }
+.comp-table-wrap { margin-top: 48px; border-radius: 16px; border: 1px solid var(--border-mid); overflow: hidden; }
+.comp-table { width: 100%; border-collapse: collapse; }
+.comp-table thead tr { background: rgba(116,204,0,0.08); }
+.comp-table thead th { padding: 16px 20px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.82); text-align: center; }
+.comp-table thead th:first-child { text-align: left; }
+.comp-table tbody tr { border-top: 1px solid var(--border-mid); }
+.comp-table tbody tr:hover { background: rgba(116,204,0,0.03); }
+.comp-table tbody td { padding: 14px 20px; font-size: 0.82rem; color: rgba(255,255,255,0.82); text-align: center; }
+.comp-table tbody td:first-child { text-align: left; font-weight: 600; color: rgba(255,255,255,0.70); }
+.col-hl { background: rgba(116,204,0,0.04); }
+.col-hd { color: var(--accent) !important; }
+.check { color: var(--accent); font-weight: 700; }
+.dash { color: rgba(255,255,255,0.28); }
+
+/* PROCESSO */
+#processo { padding: 100px 60px; border-top: 1px solid var(--border-mid); }
+.processo-inner { max-width: 1100px; margin: 0 auto; }
+.processo-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 52px; position: relative; }
+.processo-steps::before { content: ''; position: absolute; top: 27px; left: 10%; right: 10%; height: 1px; background: linear-gradient(to right, transparent, var(--border), var(--border), transparent); }
+.pstep { text-align: center; position: relative; z-index: 1; }
+.pstep-num { width: 54px; height: 54px; background: var(--mid); border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 800; color: var(--accent); margin: 0 auto 18px; }
+.pstep-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; }
+.pstep-desc { font-size: 0.72rem; color: rgba(255,255,255,0.70); line-height: 1.6; }
+
+/* FORMULÁRIO */
+#contato { padding: 100px 60px; background: var(--dark); border-top: 1px solid var(--border-mid); }
+.contato-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.contato-info {}
+.contato-diferenciais { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+.dif-item { display: flex; gap: 14px; align-items: flex-start; }
+.dif-icon { width: 40px; height: 40px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+.dif-title { font-size: 0.88rem; font-weight: 700; margin-bottom: 3px; }
+.dif-desc { font-size: 0.78rem; color: rgba(255,255,255,0.72); line-height: 1.5; }
+
+.form-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-mid); border-radius: 20px; padding: 40px; }
+.form-card-title { font-size: 1.05rem; font-weight: 800; margin-bottom: 6px; }
+.form-card-sub { font-size: 0.8rem; color: rgba(255,255,255,0.65); margin-bottom: 28px; }
+.form-group { margin-bottom: 16px; }
+.form-label { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.78); margin-bottom: 7px; }
+.form-input { width: 100%; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--border-mid); border-radius: 9px; color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.2s; }
+.form-input:focus { border-color: var(--accent); }
+.form-input::placeholder { color: rgba(255,255,255,0.3); }
+.form-select { width: 100%; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--border-mid); border-radius: 9px; color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.88rem; outline: none; cursor: pointer; transition: border-color 0.2s; }
+.form-select:focus { border-color: var(--accent); }
+.form-select option { background: var(--dark); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-textarea { width: 100%; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--border-mid); border-radius: 9px; color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.88rem; outline: none; resize: vertical; min-height: 90px; transition: border-color 0.2s; }
+.form-textarea:focus { border-color: var(--accent); }
+.form-textarea::placeholder { color: rgba(255,255,255,0.3); }
+.form-submit { width: 100%; padding: 14px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: all 0.3s; margin-top: 6px; }
+.form-submit:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 10px 28px rgba(116,204,0,0.28); }
+.form-divider { display: flex; align-items: center; gap: 14px; margin: 16px 0; }
+.form-divider::before, .form-divider::after { content: ''; flex: 1; height: 1px; background: var(--border-mid); }
+.form-divider span { font-size: 0.68rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
+.btn-wpp-full { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 13px; background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.25); color: #4ade80; font-family: 'Open Sans', sans-serif; font-size: 0.88rem; font-weight: 700; border-radius: 10px; text-decoration: none; transition: all 0.25s; }
+.btn-wpp-full:hover { background: rgba(37,211,102,0.18); }
+.nda-mini { padding: 12px 16px; background: rgba(255,200,0,0.05); border: 1px solid rgba(255,200,0,0.15); border-radius: 8px; font-size: 0.73rem; color: rgba(255,220,100,0.85); line-height: 1.6; margin-bottom: 16px; }
+
+/* SUCESSO */
+.form-sucesso { display: none; text-align: center; padding: 32px 20px; }
+
+/* CTA FINAL */
+#cta-final { padding: 100px 60px; text-align: center; position: relative; overflow: hidden; }
+.cta-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 500px; height: 300px; background: radial-gradient(ellipse, rgba(116,204,0,0.1) 0%, transparent 70%); pointer-events: none; }
+.cta-heading { font-size: clamp(2rem, 4vw, 3.8rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 18px; position: relative; }
+.cta-heading em { color: var(--accent); font-style: normal; }
+.cta-sub { font-size: 0.95rem; color: rgba(255,255,255,0.78); max-width: 420px; margin: 0 auto 40px; line-height: 1.7; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+
+/* FOOTER */
+footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(--border-mid); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; }
+.footer-logo { margin-bottom: 12px; }
+.footer-logo img { height: 26px; width: auto; opacity: 0.9; }
+.footer-desc { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 220px; }
+.footer-contact { margin-top: 12px; font-size: 0.72rem; color: rgba(255,255,255,0.65); line-height: 1.8; }
+.footer-col-title { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 14px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom { grid-column: 1/-1; padding-top: 24px; border-top: 1px solid var(--border-mid); display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+.footer-bottom a { color: rgba(116,204,0,0.7); text-decoration: none; }
+.footer-bottom a:hover { color: var(--accent); }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; }
+  .nav-menu { display: none; }
+  #hero, #modelos, #comparativo, #processo, #contato, #cta-final { padding: 80px 24px; }
+  #hero { padding-top: 110px; }
+  .modelos-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr 1fr 1fr; }
+  .processo-steps { grid-template-columns: 1fr 1fr; }
+  .processo-steps::before { display: none; }
+  .contato-inner { grid-template-columns: 1fr; gap: 48px; }
+  .form-row { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr 1fr; padding: 44px 24px; }
+}
+@media (max-width: 600px) {
+  .hero-stats { grid-template-columns: 1fr; }
+  .modelo-numeros { grid-template-columns: 1fr 1fr 1fr; }
+  footer { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></a>
+  <ul class="nav-menu">
+    <li><a href="maquinas.html">Maquininhas</a></li>
+    <li><a href="representante.html">Seja Representante</a></li>
+    <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+    <li><a href="investidores.html" class="active">Investidores</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="area-representante.html" class="btn-nav-outline">Área do Representante</a>
+    <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav">Acessar Portal</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-inner">
+    <span class="section-tag">Oportunidade de investimento</span>
+    <h1 class="hero-heading">Invista no ecossistema financeiro que <em>cresce com o Brasil.</em></h1>
+    <p class="hero-sub">O NOOON oferece três modelos de investimento com retornos atrativos, receita recorrente e participação em um ecossistema fintech em expansão territorial.</p>
+    <div class="hero-actions">
+      <a href="#contato" class="btn-primary">Quero investir</a>
+      <a href="#modelos" class="btn-ghost">Conhecer os modelos &darr;</a>
+    </div>
+    <div class="hero-stats reveal">
+      <div class="hero-stat">
+        <div class="hero-stat-val">3</div>
+        <div class="hero-stat-lbl">Modelos de investimento disponíveis</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">12m</div>
+        <div class="hero-stat-lbl">Prazo mínimo de retorno estimado</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">100%</div>
+        <div class="hero-stat-lbl">Retorno a.a. no modelo Franquia Light</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVISO DE CONFIDENCIALIDADE -->
+<div style="padding: 0 60px; max-width:1220px; margin: 0 auto;">
+  <div class="nda-bar reveal">
+    <span class="nda-icon">&#128274;</span>
+    <div class="nda-text">
+      <strong>Informações confidenciais — NDA aplicável</strong>
+      Os detalhes completos desta oportunidade de investimento, incluindo a estrutura societária, identidade do franqueador e projeções financeiras detalhadas, são compartilhados exclusivamente após assinatura de Acordo de Confidencialidade (NDA). As informações desta página são de caráter introdutório.
+    </div>
+  </div>
+</div>
+
+<!-- MODELOS -->
+<section id="modelos">
+  <div class="modelos-inner">
+    <div class="reveal">
+      <p class="section-label">Modalidades</p>
+      <h2 class="section-heading">Três formas de <em>investir</em></h2>
+    </div>
+
+    <div class="modelos-grid">
+
+      <!-- INVESTIDOR INTERNO -->
+      <div class="modelo-card reveal">
+        <div class="modelo-header">
+          <p class="modelo-tipo">Modelo 01</p>
+          <h3 class="modelo-nome">Investidor Interno</h3>
+          <p class="modelo-desc">Entra na estrutura societária do NOOON. Participa ativamente das decisões e recebe 10% do lucro líquido recorrente.</p>
+        </div>
+        <div class="modelo-numeros">
+          <div class="modelo-num">
+            <div class="modelo-num-val">R$50k</div>
+            <div class="modelo-num-lbl">Investimento mínimo</div>
+          </div>
+          <div class="modelo-num">
+            <div class="modelo-num-val">50%</div>
+            <div class="modelo-num-lbl">Retorno estimado a.a.</div>
+          </div>
+          <div class="modelo-num">
+            <div class="modelo-num-val">24m</div>
+            <div class="modelo-num-lbl">Prazo de retorno</div>
+          </div>
+        </div>
+        <div class="modelo-body">
+          <ul class="modelo-features">
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Participação de 10% do lucro líquido</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Receita recorrente contínua</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Participação nas decisões estratégicas</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Acesso completo aos relatórios financeiros</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Socio do ecossistema NOOON</li>
+          </ul>
+          <a href="#contato" class="btn-modelo">Tenho interesse</a>
+        </div>
+      </div>
+
+      <!-- INVESTIDOR EXTERNO -->
+      <div class="modelo-card destaque reveal reveal-delay-1">
+        <div class="modelo-card-badge">MAIS PROCURADO</div>
+        <div class="modelo-header">
+          <p class="modelo-tipo">Modelo 02</p>
+          <h3 class="modelo-nome">Investidor Externo</h3>
+          <p class="modelo-desc">Não entra na sociedade. Investe capital e recebe retorno via payback progressivo — 10% do lucro líquido + reajuste de 2,5% a.m. sobre o saldo.</p>
+        </div>
+        <div class="modelo-numeros">
+          <div class="modelo-num">
+            <div class="modelo-num-val">R$50k</div>
+            <div class="modelo-num-lbl">Investimento mínimo</div>
+          </div>
+          <div class="modelo-num">
+            <div class="modelo-num-val">75%</div>
+            <div class="modelo-num-lbl">Retorno estimado a.a.</div>
+          </div>
+          <div class="modelo-num">
+            <div class="modelo-num-val">18m</div>
+            <div class="modelo-num-lbl">Prazo de retorno</div>
+          </div>
+        </div>
+        <div class="modelo-body">
+          <ul class="modelo-features">
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>10% do lucro líquido como rendimento</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Reajuste de 2,5% ao mês sobre saldo investido</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Modelo payback progressivo</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Excedente reduz o capital investido</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Capital quitado → investidor sai com lucro</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Focado em retorno, não em sociedade</li>
+          </ul>
+          <a href="#contato" class="btn-modelo">Tenho interesse</a>
+        </div>
+      </div>
+
+      <!-- FRANQUIA LIGHT -->
+      <div class="modelo-card reveal reveal-delay-2">
+        <div class="modelo-header">
+          <p class="modelo-tipo">Modelo 03</p>
+          <h3 class="modelo-nome">Franquia Light</h3>
+          <p class="modelo-desc">Não entra na empresa. Compra máquinas e recebe retorno sobre os ativos — locação + comissão sobre TPV de 20% a 30%.</p>
+        </div>
+        <div class="modelo-numeros">
+          <div class="modelo-num">
+            <div class="modelo-num-val">R$20k</div>
+            <div class="modelo-num-lbl">Investimento mínimo</div>
+          </div>
+          <div class="modelo-num">
+            <div class="modelo-num-val">100%</div>
+            <div class="modelo-num-lbl">Retorno estimado a.a.</div>
+          </div>
+          <div class="modelo-num">
+            <div class="modelo-num-val">12m</div>
+            <div class="modelo-num-lbl">Prazo de retorno</div>
+          </div>
+        </div>
+        <div class="modelo-body">
+          <ul class="modelo-features">
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Compra de maquininhas como ativo</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Retorno via locação dos equipamentos</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Comissão de 20% a 30% sobre TPV</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Participantes ilimitados por operação</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Função: escalar rápido sem diluir sociedade</li>
+            <li class="modelo-feature"><span class="feature-check">&#10003;</span>Menor aporte mínimo do ecossistema</li>
+          </ul>
+          <a href="#contato" class="btn-modelo">Tenho interesse</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATIVO -->
+<section id="comparativo">
+  <div class="comp-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:48px;">
+      <span class="section-tag">Compare</span>
+      <h2 class="section-heading">Qual modelo é <em>ideal para você?</em></h2>
+    </div>
+    <div class="comp-table-wrap reveal">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Critério</th>
+            <th>Interno</th>
+            <th class="col-hd">Externo</th>
+            <th>Franquia Light</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Investimento mínimo</td><td>R$50.000</td><td class="col-hl">R$50.000</td><td>R$20.000</td></tr>
+          <tr><td>Retorno estimado a.a.</td><td>50%</td><td class="col-hl">75%</td><td>100%</td></tr>
+          <tr><td>Prazo de retorno</td><td>24 meses</td><td class="col-hl">18 meses</td><td>12 meses</td></tr>
+          <tr><td>Entra na sociedade</td><td><span class="check">&#10003;</span></td><td class="col-hl"><span class="dash">—</span></td><td><span class="dash">—</span></td></tr>
+          <tr><td>Participa das decisões</td><td><span class="check">&#10003;</span></td><td class="col-hl"><span class="dash">—</span></td><td><span class="dash">—</span></td></tr>
+          <tr><td>Receita recorrente</td><td><span class="check">&#10003;</span></td><td class="col-hl"><span class="check">&#10003;</span></td><td><span class="check">&#10003;</span></td></tr>
+          <tr><td>Modelo de saída</td><td>Permanente</td><td class="col-hl">Capital quitado</td><td>Venda dos ativos</td></tr>
+          <tr><td>Participantes</td><td>Limitado</td><td class="col-hl">Limitado</td><td>Ilimitado</td></tr>
+          <tr><td>Perfil ideal</td><td>Sócio estratégico</td><td class="col-hl">Foco em retorno</td><td>Escalar rápido</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo">
+  <div class="processo-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:52px;">
+      <span class="section-tag">Como funciona</span>
+      <h2 class="section-heading">Do interesse ao <em>primeiro retorno</em></h2>
+    </div>
+    <div class="processo-steps">
+      <div class="pstep reveal">
+        <div class="pstep-num">1</div>
+        <h3 class="pstep-title">Contato inicial</h3>
+        <p class="pstep-desc">Você preenche o formulário ou aciona via WhatsApp com o modelo de interesse.</p>
+      </div>
+      <div class="pstep reveal reveal-delay-1">
+        <div class="pstep-num">2</div>
+        <h3 class="pstep-title">Reunião e NDA</h3>
+        <p class="pstep-desc">Realizamos uma conversa para apresentar o projeto e assinamos o acordo de confidencialidade.</p>
+      </div>
+      <div class="pstep reveal reveal-delay-2">
+        <div class="pstep-num">3</div>
+        <h3 class="pstep-title">Due diligence</h3>
+        <p class="pstep-desc">Você recebe os documentos financeiros completos para análise.</p>
+      </div>
+      <div class="pstep reveal reveal-delay-3">
+        <div class="pstep-num">4</div>
+        <h3 class="pstep-title">Contrato</h3>
+        <p class="pstep-desc">Formalização do investimento com contrato detalhado e aporte realizado.</p>
+      </div>
+      <div class="pstep reveal" style="transition-delay:0.4s">
+        <div class="pstep-num">5</div>
+        <h3 class="pstep-title">Retorno</h3>
+        <p class="pstep-desc">Acompanhamento via dashboard e recebimento dos retornos conforme cronograma.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="contato-inner">
+    <div class="contato-info reveal">
+      <p class="section-label">Interesse</p>
+      <h2 class="section-heading">Vamos <em>conversar</em></h2>
+      <p class="base-text" style="margin-top:16px;">Preencha o formulário com seu perfil e o modelo de interesse. Nossa equipe entrará em contato em até 24 horas para dar início à conversa.</p>
+      <div class="contato-diferenciais">
+        <div class="dif-item">
+          <div class="dif-icon">&#128274;</div>
+          <div>
+            <div class="dif-title">Confidencialidade garantida</div>
+            <div class="dif-desc">NDA assinado antes de qualquer compartilhamento de dados sensíveis do projeto.</div>
+          </div>
+        </div>
+        <div class="dif-item">
+          <div class="dif-icon">&#128200;</div>
+          <div>
+            <div class="dif-title">Projeções financeiras detalhadas</div>
+            <div class="dif-desc">Acesso ao modelo financeiro completo após qualificação do investidor.</div>
+          </div>
+        </div>
+        <div class="dif-item">
+          <div class="dif-icon">&#9889;</div>
+          <div>
+            <div class="dif-title">Processo ágil</div>
+            <div class="dif-desc">Da conversa inicial ao contrato assinado em até 15 dias úteis.</div>
+          </div>
+        </div>
+        <div class="dif-item">
+          <div class="dif-icon">&#127942;</div>
+          <div>
+            <div class="dif-title">Ecossistema comprovado</div>
+            <div class="dif-desc">Modelo de negócio validado com operação ativa e crescimento territorial.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-1">
+      <div class="form-card" id="formCard">
+        <h3 class="form-card-title">Formulário de interesse</h3>
+        <p class="form-card-sub">Suas informações são tratadas com total sigilo.</p>
+
+        <div class="nda-mini">
+          &#128274; Ao enviar este formulário, você concorda que as informações serão usadas exclusivamente para contato sobre esta oportunidade de investimento.
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome completo</label>
+            <input type="text" class="form-input" id="iNome" placeholder="Seu nome">
+          </div>
+          <div class="form-group">
+            <label class="form-label">WhatsApp</label>
+            <input type="tel" class="form-input" id="iWpp" placeholder="(00) 00000-0000">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-input" id="iEmail" placeholder="seu@email.com">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Modelo de interesse</label>
+            <select class="form-select" id="iModelo">
+              <option value="">Selecione...</option>
+              <option value="interno">Investidor Interno</option>
+              <option value="externo">Investidor Externo</option>
+              <option value="light">Franquia Light</option>
+              <option value="indefinido">Ainda não sei — quero conversar</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Capacidade de aporte</label>
+            <select class="form-select" id="iAporte">
+              <option value="">Selecione...</option>
+              <option value="20-50k">R$20.000 – R$50.000</option>
+              <option value="50-100k">R$50.000 – R$100.000</option>
+              <option value="100-250k">R$100.000 – R$250.000</option>
+              <option value="250k+">Acima de R$250.000</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Mensagem (opcional)</label>
+          <textarea class="form-textarea" id="iMsg" placeholder="Conte um pouco sobre seu perfil de investidor ou dúvidas iniciais..."></textarea>
+        </div>
+
+        <button class="form-submit" onclick="enviarInvestidor()">Enviar e solicitar reunião</button>
+
+        <div class="form-divider"><span>ou</span></div>
+
+        <a href="https://wa.me/5584987885959?text=Olá!%20Tenho%20interesse%20em%20investir%20no%20NOOON.%20Gostaria%20de%20saber%20mais%20sobre%20os%20modelos%20de%20investimento." target="_blank" class="btn-wpp-full">
+          Falar direto no WhatsApp
+        </a>
+      </div>
+
+      <!-- SUCESSO -->
+      <div class="form-card form-sucesso" id="formSucesso" style="display:none;text-align:center;padding:48px 40px;">
+        <div style="font-size:2.5rem;margin-bottom:20px;">&#10003;</div>
+        <h3 style="font-size:1.3rem;font-weight:800;color:var(--accent);margin-bottom:10px;">Interesse registrado!</h3>
+        <p style="font-size:0.88rem;color:rgba(255,255,255,0.78);line-height:1.7;margin-bottom:24px;">Nossa equipe de investimentos entrará em contato via WhatsApp em até 24 horas para agendar uma conversa inicial e dar início ao processo.</p>
+        <a href="https://wa.me/5584987885959?text=Olá!%20Acabei%20de%20preencher%20o%20formulário%20de%20interesse%20em%20investir%20no%20NOOON." target="_blank" class="btn-primary" style="width:100%;">Acelerar pelo WhatsApp &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="cta-glow"></div>
+  <div class="reveal">
+    <h2 class="cta-heading">O ecossistema está<br><em>em expansão.</em></h2>
+    <p class="cta-sub">Vagas limitadas para cada modalidade. Entre em contato e garanta sua posição.</p>
+    <div class="cta-actions">
+      <a href="#contato" class="btn-primary">Quero investir</a>
+      <a href="representante.html" class="btn-ghost">Ser representante &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo"><img src="assets/logo1_nooon.png" alt="NOOON"></div>
+    <p class="footer-desc">Ecossistema financeiro completo para pessoas e negócios. Manaus, AM — Brasil.</p>
+    <p class="footer-contact">contato@nooon.com.br<br>(84) 98788-5959</p>
+  </div>
+  <div>
+    <p class="footer-col-title">Produtos</p>
+    <ul class="footer-links">
+      <li><a href="maquinas.html">Maquininhas</a></li>
+      <li><a href="https://portal.nooon.com.br" target="_blank">Banco Digital</a></li>
+      <li><a href="https://caixa.nooon.com.br" target="_blank">NOOON Caixa</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Parceiros</p>
+    <ul class="footer-links">
+      <li><a href="representante.html">Seja Representante</a></li>
+      <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+      <li><a href="investidores.html">Investidores</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Ajuda</p>
+    <ul class="footer-links">
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="area-representante.html">Área do Representante</a></li>
+      <li><a href="https://wa.me/5584987885959" target="_blank">WhatsApp</a></li>
+      <li><a href="mailto:contato@nooon.com.br">E-mail</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 NOOON — Ecossistema Financeiro. Todos os direitos reservados.</span>
+    <span>Desenvolvido por <a href="https://abracadabra.srv.br" target="_blank">AbraCadabra</a> &middot; <a href="https://hbusiness-group.com.br" target="_blank">HBusiness Group</a></span>
+  </div>
+</footer>
+
+<script>
+function enviarInvestidor() {
+  const nome   = document.getElementById('iNome').value.trim();
+  const wpp    = document.getElementById('iWpp').value.trim();
+  const email  = document.getElementById('iEmail').value.trim();
+  const modelo = document.getElementById('iModelo').value;
+  const aporte = document.getElementById('iAporte').value;
+  const msg    = document.getElementById('iMsg').value.trim();
+
+  if (!nome || !wpp || !email || !modelo) {
+    alert('Por favor, preencha nome, WhatsApp, e-mail e modelo de interesse.');
+    return;
+  }
+
+  const texto = encodeURIComponent(
+    `Olá! Tenho interesse em investir no NOOON.\n\n` +
+    `*Nome:* ${nome}\n*WhatsApp:* ${wpp}\n*E-mail:* ${email}\n` +
+    `*Modelo:* ${modelo}\n*Capacidade de aporte:* ${aporte || '—'}\n` +
+    `*Mensagem:* ${msg || '—'}`
+  );
+
+  window.open(`https://wa.me/5584987885959?text=${texto}`, '_blank');
+  document.getElementById('formCard').style.display = 'none';
+  document.getElementById('formSucesso').style.display = 'block';
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
