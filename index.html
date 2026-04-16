@@ -496,15 +496,15 @@ footer { padding: 48px 60px; background: var(--deep); border-top: 1px solid var(
       <div class="calc-row">
         <div class="calc-label">TPV médio diário por estabelecimento</div>
         <input type="range" id="calcTPV" min="200" max="3000" step="50" value="750" oninput="calcComissao()">
-        <div class="range-labels"><span>R$ 200</span><span class="range-val" id="tpvVal">R$ 1.600</span><span>R$ 0.000</span></div>
+        <div class="range-labels"><span>R$ 200</span><span class="range-val" id="tpvVal">R$ 1.600</span><span>R$ 3.000</span></div>
       </div>
 
       <div class="calc-row">
         <div class="calc-label">Plano de comissão</div>
         <select id="calcPlano" onchange="calcComissao()" class="calc-input">
-          <option value="0.20">Plano 20% — Iniciante (até 30 estabelecimentos)</option>
-          <option value="0.25" selected>Plano 25% — Crescimento (até 50 estabelecimentos)</option>
-          <option value="0.30">Plano 30% — Master (acima de 50 estabelecimentos)</option>
+          <option value="0.20">Plano 20% : Iniciante (até 30 estabelecimentos)</option>
+          <option value="0.25" selected>Plano 25% : Crescimento (até 50 estabelecimentos)</option>
+          <option value="0.30">Plano 30% : Master (acima de 50 estabelecimentos)</option>
         </select>
       </div>
 
