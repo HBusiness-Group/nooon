@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Área do Representante — NOOON</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0d1f0a;
+  --dark: #142910;
+  --mid: #1e3d14;
+  --primary: #2e6417;
+  --accent: #74cc00;
+  --accent-light: #9ddd3a;
+  --white: #ffffff;
+  --border: rgba(116,204,0,0.15);
+  --border-mid: rgba(116,204,0,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--deep); color: var(--white); font-family: 'Open Sans', sans-serif; overflow-x: hidden; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--deep); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
+/* ===== TELA DE ACESSO ===== */
+#tela-acesso {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 24px; position: relative; overflow: hidden;
+}
+.acesso-mesh {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 60% at 70% 30%, rgba(46,100,23,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(116,204,0,0.08) 0%, transparent 55%);
+}
+.acesso-card {
+  position: relative; z-index: 1;
+  background: var(--dark); border: 1px solid var(--border);
+  border-radius: 24px; padding: 52px 44px;
+  width: 100%; max-width: 460px; text-align: center;
+}
+.acesso-logo { margin-bottom: 32px; }
+.acesso-logo img { height: 44px; width: auto; }
+.acesso-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 10px; }
+.acesso-sub { font-size: 0.88rem; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 36px; }
+
+.acesso-divider { display: flex; align-items: center; gap: 14px; margin: 24px 0; }
+.acesso-divider::before, .acesso-divider::after { content: ''; flex: 1; height: 1px; background: var(--border-mid); }
+.acesso-divider span { font-size: 0.68rem; color: rgba(255,255,255,0.45); text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* Input de token */
+.token-group { margin-bottom: 16px; }
+.token-label { display: block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.78); margin-bottom: 8px; text-align: left; }
+.token-input {
+  width: 100%; padding: 13px 16px;
+  background: rgba(0,0,0,0.3); border: 1px solid var(--border-mid);
+  border-radius: 10px; color: var(--white);
+  font-family: 'Open Sans', sans-serif; font-size: 1rem; font-weight: 600;
+  letter-spacing: 0.15em; text-align: center;
+  outline: none; transition: border-color 0.2s;
+}
+.token-input:focus { border-color: var(--accent); }
+.token-input::placeholder { letter-spacing: 0.05em; color: rgba(255,255,255,0.3); font-weight: 400; }
+.token-error { font-size: 0.75rem; color: #ff6b6b; margin-top: 8px; display: none; }
+
+.btn-entrar {
+  width: 100%; padding: 14px;
+  background: var(--accent); color: var(--deep);
+  font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 700;
+  border: none; border-radius: 10px; cursor: pointer; transition: all 0.25s;
+  margin-top: 4px;
+}
+.btn-entrar:hover { background: var(--accent-light); transform: translateY(-1px); }
+
+/* Link mágico WhatsApp */
+.btn-wpp-magic {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 14px;
+  background: rgba(37,211,102,0.1); border: 1px solid rgba(37,211,102,0.25);
+  color: #4ade80; font-family: 'Open Sans', sans-serif;
+  font-size: 0.88rem; font-weight: 700;
+  border-radius: 10px; text-decoration: none; transition: all 0.25s; cursor: pointer;
+}
+.btn-wpp-magic:hover { background: rgba(37,211,102,0.18); }
+.wpp-dot { width: 8px; height: 8px; border-radius: 50%; background: #25d366; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.4); } 50% { box-shadow: 0 0 0 6px rgba(37,211,102,0); } }
+
+.acesso-note { font-size: 0.72rem; color: rgba(255,255,255,0.45); margin-top: 20px; line-height: 1.6; }
+
+/* ===== ÁREA INTERNA ===== */
+#area-interna { display: none; }
+
+/* TOPBAR */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 68px;
+  background: rgba(13,31,10,0.95); backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border-mid);
+}
+.topbar-logo img { height: 34px; width: auto; }
+.topbar-user { display: flex; align-items: center; gap: 14px; }
+.topbar-badge {
+  padding: 5px 14px; background: rgba(116,204,0,0.12);
+  border: 1px solid var(--border); border-radius: 100px;
+  font-size: 0.68rem; font-weight: 700; color: var(--accent);
+  letter-spacing: 0.08em;
+}
+.btn-sair {
+  padding: 8px 18px; background: transparent;
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 8px;
+  color: rgba(255,255,255,0.65); font-family: 'Open Sans', sans-serif;
+  font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.btn-sair:hover { border-color: rgba(255,255,255,0.3); color: var(--white); }
+
+/* MAIN */
+.area-main { padding: 100px 48px 60px; max-width: 1100px; margin: 0 auto; }
+
+/* WELCOME */
+.welcome-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 28px; background: rgba(116,204,0,0.06);
+  border: 1px solid var(--border); border-radius: 14px; margin-bottom: 48px;
+  flex-wrap: wrap; gap: 16px;
+}
+.welcome-text h2 { font-size: 1.1rem; font-weight: 800; margin-bottom: 3px; }
+.welcome-text p { font-size: 0.82rem; color: rgba(255,255,255,0.72); }
+.welcome-actions { display: flex; gap: 10px; }
+.btn-sm {
+  padding: 9px 20px; background: var(--accent); color: var(--deep);
+  font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 700;
+  border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.2s;
+}
+.btn-sm:hover { background: var(--accent-light); }
+.btn-sm-ghost {
+  padding: 9px 20px; background: transparent;
+  border: 1px solid var(--border); border-radius: 8px;
+  color: rgba(255,255,255,0.82); font-family: 'Open Sans', sans-serif;
+  font-size: 0.78rem; font-weight: 600; text-decoration: none; transition: all 0.2s;
+}
+.btn-sm-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* SECTION TITLE */
+.area-section-title {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(255,255,255,0.6);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+}
+.area-section-title::before { content: ''; display: block; width: 16px; height: 2px; background: var(--accent); }
+
+/* LINKS ÚTEIS */
+.links-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 48px; }
+.link-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 20px; background: var(--dark);
+  border: 1px solid var(--border-mid); border-radius: 12px;
+  text-decoration: none; color: inherit; transition: all 0.25s;
+}
+.link-card:hover { border-color: var(--border); background: rgba(116,204,0,0.05); transform: translateY(-2px); }
+.link-icon { width: 40px; height: 40px; background: rgba(116,204,0,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.link-info {}
+.link-name { font-size: 0.85rem; font-weight: 700; margin-bottom: 2px; }
+.link-desc { font-size: 0.72rem; color: rgba(255,255,255,0.65); }
+.link-arrow { margin-left: auto; color: var(--accent); font-size: 0.85rem; flex-shrink: 0; }
+
+/* MATERIAIS */
+.materiais-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 48px; }
+.material-card {
+  padding: 24px; background: var(--dark);
+  border: 1px solid var(--border-mid); border-radius: 14px;
+  transition: all 0.25s;
+}
+.material-card:hover { border-color: var(--border); }
+.material-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+.material-icon { width: 44px; height: 44px; background: rgba(116,204,0,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+.material-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 3px; }
+.material-desc { font-size: 0.75rem; color: rgba(255,255,255,0.65); line-height: 1.5; }
+.material-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn-download {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; background: rgba(116,204,0,0.1);
+  border: 1px solid var(--border); border-radius: 7px;
+  font-size: 0.72rem; font-weight: 700; color: var(--accent);
+  text-decoration: none; transition: all 0.2s;
+}
+.btn-download:hover { background: rgba(116,204,0,0.18); }
+.btn-view {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; background: transparent;
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 7px;
+  font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.75);
+  text-decoration: none; cursor: pointer; transition: all 0.2s;
+}
+.btn-view:hover { border-color: rgba(255,255,255,0.25); color: var(--white); }
+
+/* SCRIPTS */
+.scripts-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
+.script-item {
+  background: var(--dark); border: 1px solid var(--border-mid);
+  border-radius: 12px; overflow: hidden;
+}
+.script-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; cursor: pointer; transition: background 0.2s;
+}
+.script-header:hover { background: rgba(116,204,0,0.04); }
+.script-header-left { display: flex; align-items: center; gap: 12px; }
+.script-tag { padding: 3px 10px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 0.6rem; font-weight: 700; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; }
+.script-name { font-size: 0.88rem; font-weight: 700; }
+.script-toggle { color: var(--accent); font-size: 1rem; transition: transform 0.3s; }
+.script-item.open .script-toggle { transform: rotate(45deg); }
+.script-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+.script-item.open .script-body { max-height: 600px; }
+.script-content { padding: 0 20px 20px; }
+.script-text {
+  background: rgba(0,0,0,0.25); border: 1px solid var(--border-mid);
+  border-radius: 10px; padding: 16px 18px;
+  font-size: 0.82rem; line-height: 1.8; color: rgba(255,255,255,0.85);
+  white-space: pre-wrap; font-family: 'Open Sans', sans-serif;
+  margin-bottom: 10px;
+}
+.script-copy {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; background: rgba(116,204,0,0.1);
+  border: 1px solid var(--border); border-radius: 7px;
+  font-size: 0.72rem; font-weight: 700; color: var(--accent);
+  cursor: pointer; transition: all 0.2s; border-left: none; border-right: none;
+  border: 1px solid var(--border);
+}
+.script-copy:hover { background: rgba(116,204,0,0.18); }
+
+/* TAXAS TABLE RESUMO */
+.taxas-resumo { margin-bottom: 48px; }
+.taxas-resumo-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 12px; }
+.taxa-mini { padding: 16px 12px; text-align: center; background: rgba(116,204,0,0.04); border: 1px solid var(--border-mid); border-radius: 10px; }
+.taxa-mini-name { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.72); margin-bottom: 6px; }
+.taxa-mini-val { font-size: 1.3rem; font-weight: 800; color: var(--accent); }
+.taxa-mini-desc { font-size: 0.62rem; color: rgba(255,255,255,0.60); margin-top: 3px; }
+.taxas-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; color: var(--accent); text-decoration: none; }
+.taxas-link:hover { text-decoration: underline; }
+
+/* PLANOS RESUMO */
+.planos-resumo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 48px; }
+.plano-mini { padding: 20px; background: var(--dark); border: 1px solid var(--border-mid); border-radius: 12px; text-align: center; }
+.plano-mini-pct { font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.plano-mini-nome { font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.80); margin: 6px 0 4px; }
+.plano-mini-limite { font-size: 0.68rem; color: rgba(255,255,255,0.60); }
+
+/* FOOTER INTERNO */
+.area-footer { padding: 28px 48px; border-top: 1px solid var(--border-mid); display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+.area-footer a { color: rgba(116,204,0,0.65); text-decoration: none; }
+.area-footer a:hover { color: var(--accent); }
+
+/* TOAST */
+.toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--accent); color: var(--deep); padding: 12px 24px; border-radius: 100px; font-size: 0.82rem; font-weight: 700; z-index: 999; transition: transform 0.3s; pointer-events: none; }
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .topbar { padding: 0 24px; }
+  .area-main { padding: 90px 24px 48px; }
+  .links-grid { grid-template-columns: 1fr 1fr; }
+  .materiais-grid { grid-template-columns: 1fr; }
+  .taxas-resumo-grid { grid-template-columns: repeat(3, 1fr); }
+  .planos-resumo { grid-template-columns: 1fr; }
+  .welcome-bar { flex-direction: column; }
+  .area-footer { flex-direction: column; gap: 8px; text-align: center; }
+}
+@media (max-width: 600px) {
+  .links-grid { grid-template-columns: 1fr; }
+  .taxas-resumo-grid { grid-template-columns: repeat(2, 1fr); }
+  .acesso-card { padding: 36px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ===== TELA DE ACESSO ===== -->
+<div id="tela-acesso">
+  <div class="acesso-mesh"></div>
+  <div class="acesso-card">
+    <div class="acesso-logo">
+      <img src="assets/logo4_nooon.png" alt="NOOON">
+    </div>
+    <h1 class="acesso-title">Área do Representante</h1>
+    <p class="acesso-sub">Acesse com o link enviado via WhatsApp ou insira o código de acesso fornecido pela equipe NOOON.</p>
+
+    <!-- LINK MÁGICO VIA WHATSAPP -->
+    <button class="btn-wpp-magic" onclick="solicitarLink()">
+      <span class="wpp-dot"></span>
+      Solicitar link de acesso via WhatsApp
+    </button>
+
+    <div class="acesso-divider"><span>ou insira o código</span></div>
+
+    <!-- CÓDIGO MANUAL -->
+    <div class="token-group">
+      <label class="token-label">Código de acesso</label>
+      <input type="text" class="token-input" id="tokenInput" placeholder="Digite o código" maxlength="12"
+        onkeydown="if(event.key==='Enter') verificarToken()">
+      <div class="token-error" id="tokenError">Código inválido. Solicite um novo via WhatsApp.</div>
+    </div>
+    <button class="btn-entrar" onclick="verificarToken()">Entrar</button>
+
+    <p class="acesso-note">
+      Ainda não é representante? <a href="representante.html" style="color:var(--accent);text-decoration:none;">Cadastre-se aqui</a>.<br>
+      O link de acesso é pessoal e intransferível.
+    </p>
+  </div>
+</div>
+
+<!-- ===== ÁREA INTERNA ===== -->
+<div id="area-interna">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></div>
+    <div class="topbar-user">
+      <span class="topbar-badge">Área do Representante</span>
+      <button class="btn-sair" onclick="sair()">Sair</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="area-main">
+
+    <!-- BOAS-VINDAS -->
+    <div class="welcome-bar">
+      <div class="welcome-text">
+        <h2>Bem-vindo, Representante NOOON!</h2>
+        <p>Aqui você encontra todos os materiais e ferramentas para expandir seu portfólio.</p>
+      </div>
+      <div class="welcome-actions">
+        <a href="https://wa.me/5584987885959" target="_blank" class="btn-sm">Suporte WhatsApp</a>
+        <a href="https://portal.nooon.com.br" target="_blank" class="btn-sm-ghost">Acessar Portal</a>
+      </div>
+    </div>
+
+    <!-- LINKS ÚTEIS -->
+    <p class="area-section-title">Links úteis</p>
+    <div class="links-grid">
+      <a href="https://portal.nooon.com.br" target="_blank" class="link-card">
+        <div class="link-icon">&#127968;</div>
+        <div class="link-info">
+          <div class="link-name">Portal NOOON</div>
+          <div class="link-desc">Banco digital e conta</div>
+        </div>
+        <span class="link-arrow">&#8599;</span>
+      </a>
+      <a href="https://caixa.nooon.com.br" target="_blank" class="link-card">
+        <div class="link-icon">&#128200;</div>
+        <div class="link-info">
+          <div class="link-name">NOOON Caixa</div>
+          <div class="link-desc">Gestão financeira</div>
+        </div>
+        <span class="link-arrow">&#8599;</span>
+      </a>
+      <a href="https://wa.me/5584987885959" target="_blank" class="link-card">
+        <div class="link-icon">&#128172;</div>
+        <div class="link-info">
+          <div class="link-name">Suporte Técnico</div>
+          <div class="link-desc">WhatsApp direto</div>
+        </div>
+        <span class="link-arrow">&#8599;</span>
+      </a>
+      <a href="maquinas.html" class="link-card">
+        <div class="link-icon">&#128179;</div>
+        <div class="link-info">
+          <div class="link-name">Página Maquininhas</div>
+          <div class="link-desc">Compartilhe com clientes</div>
+        </div>
+        <span class="link-arrow">&#8599;</span>
+      </a>
+      <a href="representante.html" class="link-card">
+        <div class="link-icon">&#128101;</div>
+        <div class="link-info">
+          <div class="link-name">Indicar Representante</div>
+          <div class="link-desc">Expanda a rede NOOON</div>
+        </div>
+        <span class="link-arrow">&#8599;</span>
+      </a>
+      <a href="mailto:contato@nooon.com.br" class="link-card">
+        <div class="link-icon">&#9993;</div>
+        <div class="link-info">
+          <div class="link-name">E-mail NOOON</div>
+          <div class="link-desc">contato@nooon.com.br</div>
+        </div>
+        <span class="link-arrow">&#8599;</span>
+      </a>
+    </div>
+
+    <!-- MANUAIS E MATERIAIS -->
+    <p class="area-section-title">Manuais e materiais</p>
+    <div class="materiais-grid">
+      <div class="material-card">
+        <div class="material-header">
+          <div class="material-icon">&#128196;</div>
+          <div>
+            <div class="material-title">Manual de Instalação — S920</div>
+            <div class="material-desc">Guia completo de configuração, ativação e primeiros passos com a maquininha S920.</div>
+          </div>
+        </div>
+        <div class="material-actions">
+          <a href="assets/manual_s920.pdf" download class="btn-download">&#8681; Baixar PDF</a>
+          <a href="assets/manual_s920.pdf" target="_blank" class="btn-view">&#128065; Visualizar</a>
+        </div>
+      </div>
+
+      <div class="material-card">
+        <div class="material-header">
+          <div class="material-icon">&#128196;</div>
+          <div>
+            <div class="material-title">Manual de Instalação — A930</div>
+            <div class="material-desc">Guia completo de configuração, ativação e primeiros passos com a maquininha A930.</div>
+          </div>
+        </div>
+        <div class="material-actions">
+          <a href="assets/manual_a930.pdf" download class="btn-download">&#8681; Baixar PDF</a>
+          <a href="assets/manual_a930.pdf" target="_blank" class="btn-view">&#128065; Visualizar</a>
+        </div>
+      </div>
+
+      <div class="material-card">
+        <div class="material-header">
+          <div class="material-icon">&#127912;</div>
+          <div>
+            <div class="material-title">Kit de Materiais Gráficos</div>
+            <div class="material-desc">Logos, banners para WhatsApp, stories e posts prontos para divulgação.</div>
+          </div>
+        </div>
+        <div class="material-actions">
+          <a href="assets/kit_grafico_nooon.zip" download class="btn-download">&#8681; Baixar Kit</a>
+        </div>
+      </div>
+
+      <div class="material-card">
+        <div class="material-header">
+          <div class="material-icon">&#128101;</div>
+          <div>
+            <div class="material-title">Apresentação Comercial</div>
+            <div class="material-desc">Deck de slides para apresentar o NOOON para lojistas e estabelecimentos.</div>
+          </div>
+        </div>
+        <div class="material-actions">
+          <a href="assets/apresentacao_nooon.pdf" download class="btn-download">&#8681; Baixar PDF</a>
+          <a href="assets/apresentacao_nooon.pdf" target="_blank" class="btn-view">&#128065; Visualizar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPTS DE VENDA -->
+    <p class="area-section-title">Scripts e argumentos de venda</p>
+    <div class="scripts-list">
+
+      <div class="script-item">
+        <div class="script-header" onclick="toggleScript(this)">
+          <div class="script-header-left">
+            <span class="script-tag">Abordagem</span>
+            <span class="script-name">Primeiro contato presencial</span>
+          </div>
+          <span class="script-toggle">+</span>
+        </div>
+        <div class="script-body">
+          <div class="script-content">
+            <div class="script-text">Olá, bom dia! Meu nome é [seu nome] e sou representante do NOOON aqui em [cidade].
+
+O NOOON é um ecossistema financeiro — oferecemos maquininha de pagamento com as menores taxas da região, suporte local e, para quem transaciona bastante, a locação pode ser até gratuita.
+
+Posso te mostrar nossa tabela de taxas? São só 5 minutos e você vai ver a diferença comparando com o que você paga hoje.</div>
+            <button class="script-copy" onclick="copiarTexto(this)">&#128203; Copiar script</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="script-header" onclick="toggleScript(this)">
+          <div class="script-header-left">
+            <span class="script-tag">WhatsApp</span>
+            <span class="script-name">Mensagem de prospecção digital</span>
+          </div>
+          <span class="script-toggle">+</span>
+        </div>
+        <div class="script-body">
+          <div class="script-content">
+            <div class="script-text">Olá [nome]! Tudo bem?
+
+Sou representante do NOOON — um ecossistema financeiro com maquininha de pagamento que está chegando forte em [cidade].
+
+Nosso diferencial: taxas a partir de 1% no PIX e 2% no débito. E dependendo do seu volume mensal, a locação pode ser gratuita.
+
+Posso te enviar nossa tabela completa de taxas? Leva menos de 1 minuto pra comparar com o que você paga hoje. &#128515;</div>
+            <button class="script-copy" onclick="copiarTexto(this)">&#128203; Copiar script</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="script-header" onclick="toggleScript(this)">
+          <div class="script-header-left">
+            <span class="script-tag">Objeção</span>
+            <span class="script-name">"Já tenho maquininha"</span>
+          </div>
+          <span class="script-toggle">+</span>
+        </div>
+        <div class="script-body">
+          <div class="script-content">
+            <div class="script-text">Entendo! A maioria dos nossos clientes também tinha antes de conhecer o NOOON.
+
+A pergunta que eu faço é: você sabe exatamente quanto paga de taxa no crédito parcelado hoje?
+
+Com o NOOON, você pode comparar e, em muitos casos, economizar centenas de reais por mês — especialmente se vende bastante no crédito.
+
+Posso te mostrar um comparativo rápido? Sem compromisso nenhum.</div>
+            <button class="script-copy" onclick="copiarTexto(this)">&#128203; Copiar script</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="script-header" onclick="toggleScript(this)">
+          <div class="script-header-left">
+            <span class="script-tag">Objeção</span>
+            <span class="script-name">"Não preciso, pago pouco"</span>
+          </div>
+          <span class="script-toggle">+</span>
+        </div>
+        <div class="script-body">
+          <div class="script-content">
+            <div class="script-text">Que ótimo! Mas deixa eu te perguntar uma coisa: você recebe tudo no próximo dia ou espera semanas?
+
+Com o NOOON, além das taxas competitivas, o recebimento no débito é D+1 — você vende hoje e recebe amanhã.
+
+E tem mais: quem transaciona bastante tem a locação da máquina gratuita. Ou seja, você usa e não paga aluguel. Vale pelo menos dar uma olhada, não é?</div>
+            <button class="script-copy" onclick="copiarTexto(this)">&#128203; Copiar script</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-item">
+        <div class="script-header" onclick="toggleScript(this)">
+          <div class="script-header-left">
+            <span class="script-tag">Fechamento</span>
+            <span class="script-name">Ativação na hora</span>
+          </div>
+          <span class="script-toggle">+</span>
+        </div>
+        <div class="script-body">
+          <div class="script-content">
+            <div class="script-text">Perfeito! Para ativar é simples:
+
+1. Você me passa seus dados (nome, CPF/CNPJ, telefone)
+2. A gente faz o cadastro agora mesmo
+3. Eu instalo e configuro a máquina aqui com você
+
+O processo todo leva cerca de 20 minutos e você já sai vendendo hoje.
+
+Vamos ativar?</div>
+            <button class="script-copy" onclick="copiarTexto(this)">&#128203; Copiar script</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TAXAS RESUMO -->
+    <p class="area-section-title">Tabela de taxas — referência rápida</p>
+    <div class="taxas-resumo">
+      <div class="taxas-resumo-grid">
+        <div class="taxa-mini"><div class="taxa-mini-name">PIX</div><div class="taxa-mini-val">1%</div><div class="taxa-mini-desc">Instantâneo</div></div>
+        <div class="taxa-mini"><div class="taxa-mini-name">Débito</div><div class="taxa-mini-val">2%</div><div class="taxa-mini-desc">D+1</div></div>
+        <div class="taxa-mini"><div class="taxa-mini-name">Créd. 1x</div><div class="taxa-mini-val">4%</div><div class="taxa-mini-desc">À vista</div></div>
+        <div class="taxa-mini"><div class="taxa-mini-name">Créd. 2x</div><div class="taxa-mini-val">5%</div><div class="taxa-mini-desc">Parcelado</div></div>
+        <div class="taxa-mini"><div class="taxa-mini-name">Créd. 3x</div><div class="taxa-mini-val">6%</div><div class="taxa-mini-desc">Parcelado</div></div>
+      </div>
+      <a href="maquinas.html#taxas" class="taxas-link">Ver tabela completa por bandeira &rarr;</a>
+    </div>
+
+    <!-- PLANOS RESUMO -->
+    <p class="area-section-title">Seus planos de comissão</p>
+    <div class="planos-resumo">
+      <div class="plano-mini">
+        <div class="plano-mini-pct">20%</div>
+        <div class="plano-mini-nome">Iniciante</div>
+        <div class="plano-mini-limite">Até 25 estabelecimentos</div>
+      </div>
+      <div class="plano-mini" style="border-color:var(--border);background:rgba(116,204,0,0.05);">
+        <div class="plano-mini-pct">25%</div>
+        <div class="plano-mini-nome">Crescimento</div>
+        <div class="plano-mini-limite">Até 50 estabelecimentos</div>
+      </div>
+      <div class="plano-mini">
+        <div class="plano-mini-pct">30%</div>
+        <div class="plano-mini-nome">Master</div>
+        <div class="plano-mini-limite">Acima de 50 estabelecimentos</div>
+      </div>
+    </div>
+
+  </div><!-- /area-main -->
+
+  <div class="area-footer">
+    <span>© 2025 NOOON — Área Restrita a Representantes</span>
+    <span>Dúvidas? <a href="https://wa.me/5584987885959" target="_blank">WhatsApp (84) 98788-5959</a> &middot; <a href="mailto:contato@nooon.com.br">contato@nooon.com.br</a></span>
+  </div>
+
+</div><!-- /area-interna -->
+
+<script>
+// ===== CONFIGURAÇÃO =====
+// Token fixo — troque por um código seguro de sua escolha
+const TOKEN_VALIDO = 'NOOON2025';
+// Chave de sessão no localStorage
+const SESSION_KEY = 'nooon_rep_auth';
+// Número WhatsApp para solicitar link
+const WPP_NUMERO = '5584987885959';
+
+// ===== VERIFICAR SE JÁ TEM SESSÃO =====
+window.addEventListener('DOMContentLoaded', () => {
+  // Verificar token na URL (link mágico: area-representante.html?token=NOOON2025)
+  const params = new URLSearchParams(window.location.search);
+  const tokenURL = params.get('token');
+  if (tokenURL && tokenURL.toUpperCase() === TOKEN_VALIDO) {
+    sessionStorage.setItem(SESSION_KEY, '1');
+    // Limpar token da URL sem recarregar
+    window.history.replaceState({}, '', window.location.pathname);
+    entrar();
+    return;
+  }
+
+  // Verificar sessão existente
+  if (sessionStorage.getItem(SESSION_KEY) === '1') {
+    entrar();
+  }
+});
+
+// ===== SOLICITAR LINK VIA WHATSAPP =====
+function solicitarLink() {
+  const msg = encodeURIComponent(
+    'Olá! Sou representante NOOON e preciso do link de acesso à Área do Representante.'
+  );
+  window.open(`https://wa.me/${WPP_NUMERO}?text=${msg}`, '_blank');
+}
+
+// ===== VERIFICAR TOKEN MANUAL =====
+function verificarToken() {
+  const input = document.getElementById('tokenInput').value.trim().toUpperCase();
+  const erro = document.getElementById('tokenError');
+
+  if (input === TOKEN_VALIDO) {
+    erro.style.display = 'none';
+    sessionStorage.setItem(SESSION_KEY, '1');
+    entrar();
+  } else {
+    erro.style.display = 'block';
+    document.getElementById('tokenInput').style.borderColor = '#ff6b6b';
+    setTimeout(() => {
+      document.getElementById('tokenInput').style.borderColor = '';
+    }, 2000);
+  }
+}
+
+// ===== ENTRAR =====
+function entrar() {
+  document.getElementById('tela-acesso').style.display = 'none';
+  document.getElementById('area-interna').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+
+// ===== SAIR =====
+function sair() {
+  sessionStorage.removeItem(SESSION_KEY);
+  document.getElementById('area-interna').style.display = 'none';
+  document.getElementById('tela-acesso').style.display = 'flex';
+  document.getElementById('tokenInput').value = '';
+}
+
+// ===== SCRIPTS ACCORDION =====
+function toggleScript(header) {
+  const item = header.closest('.script-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.script-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ===== COPIAR SCRIPT =====
+function copiarTexto(btn) {
+  const texto = btn.previousElementSibling.textContent;
+  navigator.clipboard.writeText(texto).then(() => {
+    mostrarToast('Script copiado!');
+    btn.textContent = '✓ Copiado!';
+    setTimeout(() => { btn.innerHTML = '&#128203; Copiar script'; }, 2000);
+  });
+}
+
+// ===== TOAST =====
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+</script>
+</body>
+</html>
