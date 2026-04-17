@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — NOOON</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0d1f0a;
+  --dark: #142910;
+  --mid: #1e3d14;
+  --accent: #74cc00;
+  --accent-light: #9ddd3a;
+  --white: #ffffff;
+  --gray: #8aab70;
+  --border: rgba(116,204,0,0.15);
+  --border-mid: rgba(116,204,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--deep);color:var(--white);font-family:'Open Sans',sans-serif;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--deep);}::-webkit-scrollbar-thumb{background:#2e6417;border-radius:2px;}
+
+/* ── TELA DE LOGIN ── */
+#tela-login{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:24px;position:relative;overflow:hidden;
+}
+.login-mesh{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 60% at 70% 30%,rgba(46,100,23,0.4) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 80%,rgba(116,204,0,0.07) 0%,transparent 55%);
+}
+.login-card{
+  position:relative;z-index:1;
+  background:var(--dark);border:1px solid var(--border);
+  border-radius:24px;padding:52px 44px;
+  width:100%;max-width:420px;text-align:center;
+}
+.login-logo{margin-bottom:28px;}
+.login-logo img{height:38px;width:auto;}
+.login-badge{
+  display:inline-block;padding:4px 14px;margin-bottom:20px;
+  background:rgba(116,204,0,0.1);border:1px solid var(--border);
+  border-radius:100px;font-size:0.62rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);
+}
+.login-title{font-size:1.3rem;font-weight:800;margin-bottom:8px;}
+.login-sub{font-size:0.82rem;color:rgba(255,255,255,0.55);margin-bottom:32px;line-height:1.6;}
+.input-label{display:block;font-size:0.67rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-bottom:8px;text-align:left;}
+.pwd-input{
+  width:100%;padding:13px 16px;margin-bottom:6px;
+  background:rgba(0,0,0,0.3);border:1px solid var(--border-mid);
+  border-radius:10px;color:var(--white);
+  font-family:'Open Sans',sans-serif;font-size:0.95rem;font-weight:600;
+  letter-spacing:0.12em;text-align:center;outline:none;transition:border-color 0.2s;
+}
+.pwd-input:focus{border-color:var(--accent);}
+.pwd-input::placeholder{letter-spacing:0.04em;color:rgba(255,255,255,0.28);font-weight:400;}
+.login-error{font-size:0.74rem;color:#ff6b6b;margin-bottom:14px;display:none;min-height:18px;}
+.btn-login{
+  width:100%;padding:14px;
+  background:var(--accent);color:var(--deep);
+  font-family:'Open Sans',sans-serif;font-size:0.9rem;font-weight:700;
+  border:none;border-radius:10px;cursor:pointer;transition:all 0.25s;
+}
+.btn-login:hover{background:var(--accent-light);transform:translateY(-1px);}
+.btn-voltar{
+  display:block;width:100%;margin-top:12px;padding:11px;
+  background:transparent;border:1px solid var(--border-mid);
+  border-radius:10px;color:rgba(255,255,255,0.55);
+  font-family:'Open Sans',sans-serif;font-size:0.82rem;font-weight:600;
+  text-decoration:none;text-align:center;transition:all 0.2s;
+}
+.btn-voltar:hover{border-color:var(--border);color:var(--white);}
+
+/* ── ÁREA ADMIN ── */
+#area-admin{display:none;}
+
+/* TOPBAR */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:68px;
+  background:rgba(13,31,10,0.95);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border-mid);
+}
+.topbar-logo img{height:34px;width:auto;}
+.topbar-right{display:flex;align-items:center;gap:12px;}
+.topbar-badge{
+  padding:5px 14px;background:rgba(116,204,0,0.1);
+  border:1px solid var(--border);border-radius:100px;
+  font-size:0.65rem;font-weight:700;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;
+}
+.btn-topbar{
+  padding:8px 16px;background:transparent;
+  border:1px solid var(--border-mid);border-radius:8px;
+  color:rgba(255,255,255,0.6);font-family:'Open Sans',sans-serif;
+  font-size:0.75rem;font-weight:600;text-decoration:none;cursor:pointer;transition:all 0.2s;
+}
+.btn-topbar:hover{border-color:var(--border);color:var(--white);}
+.btn-sair{
+  padding:8px 16px;background:transparent;
+  border:1px solid rgba(255,100,100,0.2);border-radius:8px;
+  color:rgba(255,120,120,0.7);font-family:'Open Sans',sans-serif;
+  font-size:0.75rem;font-weight:600;cursor:pointer;transition:all 0.2s;
+}
+.btn-sair:hover{border-color:rgba(255,100,100,0.5);color:#ff8080;}
+
+/* MAIN */
+.admin-main{
+  max-width:1100px;margin:0 auto;
+  padding:100px 48px 80px;
+}
+
+/* HEADER */
+.admin-header{margin-bottom:52px;}
+.admin-header-tag{font-size:0.62rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.admin-header-tag::before{content:'';display:block;width:20px;height:2px;background:var(--accent);}
+.admin-header h1{font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;letter-spacing:-0.02em;margin-bottom:10px;}
+.admin-header h1 em{color:var(--accent);font-style:normal;}
+.admin-header p{font-size:0.88rem;color:rgba(255,255,255,0.6);line-height:1.7;}
+
+/* SEÇÃO */
+.admin-section{margin-bottom:48px;}
+.admin-section-title{
+  font-size:0.68rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(255,255,255,0.55);margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.admin-section-title::before{content:'';display:block;width:14px;height:2px;background:rgba(116,204,0,0.4);}
+
+/* GRID DE PÁGINAS */
+.pages-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;}
+.page-card{
+  display:flex;flex-direction:column;
+  padding:20px 22px;border-radius:12px;
+  border:1px solid var(--border-mid);background:rgba(255,255,255,0.02);
+  text-decoration:none;color:inherit;transition:all 0.25s;
+}
+.page-card:hover{border-color:var(--border);background:rgba(116,204,0,0.04);transform:translateY(-2px);}
+.page-card.primary{border-color:rgba(116,204,0,0.22);background:rgba(116,204,0,0.04);}
+.page-card.restricted{border-color:rgba(255,180,0,0.18);background:rgba(255,180,0,0.03);}
+.page-card.external{border-color:rgba(100,160,255,0.18);background:rgba(100,160,255,0.02);}
+.page-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px;}
+.page-icon{font-size:1.2rem;}
+.page-status{font-size:0.58rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:3px 8px;border-radius:100px;}
+.status-live{color:#74cc00;background:rgba(116,204,0,0.1);border:1px solid rgba(116,204,0,0.2);}
+.status-ext{color:#64a0ff;background:rgba(100,160,255,0.1);border:1px solid rgba(100,160,255,0.2);}
+.status-private{color:#ffb400;background:rgba(255,180,0,0.1);border:1px solid rgba(255,180,0,0.2);}
+.page-filename{font-size:0.7rem;font-weight:700;letter-spacing:0.06em;color:var(--accent);font-family:monospace;margin-bottom:4px;}
+.page-title{font-size:0.9rem;font-weight:700;margin-bottom:4px;}
+.page-desc{font-size:0.73rem;color:rgba(255,255,255,0.55);line-height:1.5;}
+
+/* CONTATOS */
+.contatos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.contato-card{
+  display:flex;align-items:center;gap:16px;
+  padding:20px 22px;border-radius:12px;
+  border:1px solid var(--border-mid);background:rgba(255,255,255,0.02);
+  text-decoration:none;color:inherit;transition:all 0.25s;
+}
+.contato-card:hover{border-color:var(--border);transform:translateY(-2px);}
+.contato-card.wpp{border-color:rgba(37,211,102,0.2);background:rgba(37,211,102,0.03);}
+.contato-card.wpp:hover{background:rgba(37,211,102,0.07);}
+.contato-card.ig{border-color:rgba(225,100,180,0.2);background:rgba(225,100,180,0.03);}
+.contato-card.ig:hover{background:rgba(225,100,180,0.07);}
+.contato-icon{font-size:1.6rem;flex-shrink:0;}
+.contato-label{font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:4px;}
+.contato-value{font-size:0.95rem;font-weight:700;}
+.contato-desc{font-size:0.72rem;color:rgba(255,255,255,0.5);margin-top:2px;}
+
+/* INFO BAR */
+.info-bar{
+  padding:16px 22px;border-radius:10px;
+  border:1px solid var(--border-mid);background:rgba(255,255,255,0.015);
+  display:flex;align-items:center;gap:14px;margin-bottom:48px;
+}
+.info-bar-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(116,204,0,0.4);}50%{box-shadow:0 0 0 6px rgba(116,204,0,0);}}
+.info-bar-text{font-size:0.78rem;color:rgba(255,255,255,0.6);line-height:1.6;}
+.info-bar-text strong{color:var(--white);}
+
+/* FOOTER */
+.admin-footer{
+  padding:28px 48px;border-top:1px solid var(--border-mid);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:0.7rem;color:rgba(255,255,255,0.4);
+}
+
+@media(max-width:768px){
+  .topbar{padding:0 20px;}
+  .admin-main{padding:88px 20px 60px;}
+  .pages-grid{grid-template-columns:1fr;}
+  .contatos-grid{grid-template-columns:1fr;}
+  .admin-footer{flex-direction:column;gap:8px;text-align:center;padding:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- TELA DE LOGIN -->
+<div id="tela-login">
+  <div class="login-mesh"></div>
+  <div class="login-card">
+    <div class="login-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></div>
+    <div class="login-badge">Acesso Restrito</div>
+    <div class="login-title">Painel Admin</div>
+    <p class="login-sub">Área exclusiva. Insira a senha de administrador para continuar.</p>
+    <label class="input-label">Senha de acesso</label>
+    <input type="password" class="pwd-input" id="pwdInput" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+      onkeydown="if(event.key==='Enter') verificarSenha()">
+    <div class="login-error" id="loginError">Senha incorreta. Tente novamente.</div>
+    <button class="btn-login" onclick="verificarSenha()">Entrar</button>
+    <a href="index.html" class="btn-voltar">&#8592; Voltar ao site</a>
+  </div>
+</div>
+
+<!-- ÁREA ADMIN -->
+<div id="area-admin">
+
+  <div class="topbar">
+    <div class="topbar-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></div>
+    <div class="topbar-right">
+      <span class="topbar-badge">&#9632; Admin</span>
+      <a href="index.html" class="btn-topbar">&#8962; Site</a>
+      <button class="btn-sair" onclick="sair()">Sair</button>
+    </div>
+  </div>
+
+  <div class="admin-main">
+
+    <!-- HEADER -->
+    <div class="admin-header">
+      <div class="admin-header-tag">Painel de Administração</div>
+      <h1>Mapa do <em>Ecossistema NOOON</em></h1>
+      <p>Visão geral de todas as páginas, subdomínios e canais de contato do site.</p>
+    </div>
+
+    <!-- INFO BAR -->
+    <div class="info-bar">
+      <div class="info-bar-dot"></div>
+      <div class="info-bar-text">
+        <strong>Deploy ativo</strong> via GitHub + Cloudflare Pages &nbsp;&middot;&nbsp;
+        Subdomínios ativos: <strong>portal.nooon.com.br</strong> e <strong>caixa.nooon.com.br</strong> — não modificar, apenas linkar.
+      </div>
+    </div>
+
+    <!-- PÁGINAS PRINCIPAIS -->
+    <div class="admin-section">
+      <div class="admin-section-title">Páginas principais</div>
+      <div class="pages-grid">
+
+        <a href="index.html" class="page-card primary">
+          <div class="page-card-top">
+            <span class="page-icon">&#127968;</span>
+            <span class="page-status status-live">Live</span>
+          </div>
+          <div class="page-filename">index.html</div>
+          <div class="page-title">Home — Hub de decisão</div>
+          <div class="page-desc">Ponto de entrada com as 3 trilhas: lojista, ganhar e investir.</div>
+        </a>
+
+        <a href="maquinas.html" class="page-card">
+          <div class="page-card-top">
+            <span class="page-icon">&#128179;</span>
+            <span class="page-status status-live">Live</span>
+          </div>
+          <div class="page-filename">maquinas.html</div>
+          <div class="page-title">Maquininhas</div>
+          <div class="page-desc">Modelos S920 e A930, tabela de taxas e preços de locação.</div>
+        </a>
+
+        <a href="representante.html" class="page-card">
+          <div class="page-card-top">
+            <span class="page-icon">&#129309;</span>
+            <span class="page-status status-live">Live</span>
+          </div>
+          <div class="page-filename">representante.html</div>
+          <div class="page-title">Representante Comercial</div>
+          <div class="page-desc">Planos, calculadora de ganhos e formulário de cadastro.</div>
+        </a>
+
+        <a href="parceiros-digitais.html" class="page-card">
+          <div class="page-card-top">
+            <span class="page-icon">&#128241;</span>
+            <span class="page-status status-live">Live</span>
+          </div>
+          <div class="page-filename">parceiros-digitais.html</div>
+          <div class="page-title">Parceiros Digitais</div>
+          <div class="page-desc">Painel para influencers, afiliados e criadores de conteúdo.</div>
+        </a>
+
+        <a href="cidade-dominada.html" class="page-card">
+          <div class="page-card-top">
+            <span class="page-icon">&#128506;</span>
+            <span class="page-status status-live">Live</span>
+          </div>
+          <div class="page-filename">cidade-dominada.html</div>
+          <div class="page-title">Cidade Dominada</div>
+          <div class="page-desc">Mapa de expansão territorial e escassez regional.</div>
+        </a>
+
+        <a href="investidores.html" class="page-card">
+          <div class="page-card-top">
+            <span class="page-icon">&#128200;</span>
+            <span class="page-status status-live">Live</span>
+          </div>
+          <div class="page-filename">investidores.html</div>
+          <div class="page-title">Investidores</div>
+          <div class="page-desc">Modelos de participação regional, operacional e equity.</div>
+        </a>
+
+        <a href="faq.html" class="page-card">
+          <div class="page-card-top">
+            <span class="page-icon">&#10067;</span>
+            <span class="page-status status-live">Live</span>
+          </div>
+          <div class="page-filename">faq.html</div>
+          <div class="page-title">FAQ</div>
+          <div class="page-desc">Perguntas frequentes para quebra de objeções nas 3 trilhas.</div>
+        </a>
+
+        <a href="blog.html" class="page-card">
+          <div class="page-card-top">
+            <span class="page-icon">&#128221;</span>
+            <span class="page-status status-live">Live</span>
+          </div>
+          <div class="page-filename">blog.html</div>
+          <div class="page-title">Blog</div>
+          <div class="page-desc">Conteúdo institucional e de suporte à conversão.</div>
+        </a>
+
+        <a href="obrigado.html" class="page-card">
+          <div class="page-card-top">
+            <span class="page-icon">&#9989;</span>
+            <span class="page-status status-live">Live</span>
+          </div>
+          <div class="page-filename">obrigado.html</div>
+          <div class="page-title">Obrigado</div>
+          <div class="page-desc">Página de confirmação pós-formulário.</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- PÁGINAS RESTRITAS -->
+    <div class="admin-section">
+      <div class="admin-section-title">Páginas restritas</div>
+      <div class="pages-grid">
+
+        <a href="area-representante.html" class="page-card restricted">
+          <div class="page-card-top">
+            <span class="page-icon">&#128274;</span>
+            <span class="page-status status-private">Privado</span>
+          </div>
+          <div class="page-filename">area-representante.html</div>
+          <div class="page-title">Área do Representante</div>
+          <div class="page-desc">Acesso via token. Scripts de venda, manuais, materiais gráficos e links úteis.</div>
+        </a>
+
+        <a href="admin.html" class="page-card restricted">
+          <div class="page-card-top">
+            <span class="page-icon">&#9632;</span>
+            <span class="page-status status-private">Admin</span>
+          </div>
+          <div class="page-filename">admin.html</div>
+          <div class="page-title">Painel Admin</div>
+          <div class="page-desc">Esta página. Mapa do site, contatos e visão geral do ecossistema.</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- SUBDOMÍNIOS EXTERNOS -->
+    <div class="admin-section">
+      <div class="admin-section-title">Subdomínios ativos (não modificar)</div>
+      <div class="pages-grid">
+
+        <a href="https://portal.nooon.com.br" target="_blank" class="page-card external">
+          <div class="page-card-top">
+            <span class="page-icon">&#127968;</span>
+            <span class="page-status status-ext">Externo</span>
+          </div>
+          <div class="page-filename">portal.nooon.com.br</div>
+          <div class="page-title">Portal NOOON</div>
+          <div class="page-desc">Banco digital, conta e gestão financeira. Operacional, não alterar.</div>
+        </a>
+
+        <a href="https://caixa.nooon.com.br" target="_blank" class="page-card external">
+          <div class="page-card-top">
+            <span class="page-icon">&#128200;</span>
+            <span class="page-status status-ext">Externo</span>
+          </div>
+          <div class="page-filename">caixa.nooon.com.br</div>
+          <div class="page-title">NOOON Caixa</div>
+          <div class="page-desc">Sistema de caixa e gestão de transações. Operacional, não alterar.</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- CANAIS DE CONTATO -->
+    <div class="admin-section">
+      <div class="admin-section-title">Canais de contato</div>
+      <div class="contatos-grid">
+
+        <a href="https://wa.me/5583987885959" target="_blank" class="contato-card wpp">
+          <div class="contato-icon">&#128241;</div>
+          <div>
+            <div class="contato-label">WhatsApp</div>
+            <div class="contato-value">(83) 98788-5959</div>
+            <div class="contato-desc">Suporte, representantes e contato comercial</div>
+          </div>
+        </a>
+
+        <a href="https://instagram.com/nooon.fintech" target="_blank" class="contato-card ig">
+          <div class="contato-icon">&#128247;</div>
+          <div>
+            <div class="contato-label">Instagram</div>
+            <div class="contato-value">@nooon.fintech</div>
+            <div class="contato-desc">Perfil oficial — divulgação e relacionamento</div>
+          </div>
+        </a>
+
+        <a href="mailto:contato@nooon.com.br" class="contato-card">
+          <div class="contato-icon">&#9993;</div>
+          <div>
+            <div class="contato-label">E-mail</div>
+            <div class="contato-value">contato@nooon.com.br</div>
+            <div class="contato-desc">Contato institucional e suporte</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </div><!-- /admin-main -->
+
+  <div class="admin-footer">
+    <span>&copy; 2025 NOOON &mdash; Painel de Administração</span>
+    <span>Acesso restrito &middot; <a href="index.html" style="color:rgba(116,204,0,0.5);text-decoration:none;">Voltar ao site</a></span>
+  </div>
+
+</div><!-- /area-admin -->
+
+<script>
+const SENHA = 'nooon@2026';
+const SESSION_KEY = 'nooon_admin_auth';
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (sessionStorage.getItem(SESSION_KEY) === '1') entrar();
+});
+
+function verificarSenha() {
+  const val = document.getElementById('pwdInput').value;
+  const err = document.getElementById('loginError');
+  if (val === SENHA) {
+    sessionStorage.setItem(SESSION_KEY, '1');
+    err.style.display = 'none';
+    entrar();
+  } else {
+    err.style.display = 'block';
+    document.getElementById('pwdInput').value = '';
+    document.getElementById('pwdInput').focus();
+  }
+}
+
+function entrar() {
+  document.getElementById('tela-login').style.display = 'none';
+  document.getElementById('area-admin').style.display = 'block';
+}
+
+function sair() {
+  sessionStorage.removeItem(SESSION_KEY);
+  document.getElementById('tela-login').style.display = 'flex';
+  document.getElementById('area-admin').style.display = 'none';
+  document.getElementById('pwdInput').value = '';
+}
+
+document.getElementById('pwdInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') verificarSenha();
+});
+</script>
+</body>
+</html>
