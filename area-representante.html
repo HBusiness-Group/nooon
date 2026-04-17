@@ -75,6 +75,17 @@ body { background: var(--deep); color: var(--white); font-family: 'Open Sans', s
 }
 .btn-entrar:hover { background: var(--accent-light); transform: translateY(-1px); }
 
+/* Botão voltar ao site — tela de login */
+.btn-voltar-site {
+  display: block; width: 100%; margin-top: 12px; padding: 12px;
+  background: transparent; border: 1px solid var(--border-mid);
+  border-radius: 10px; color: rgba(255,255,255,0.65);
+  font-family: 'Open Sans', sans-serif; font-size: 0.82rem; font-weight: 600;
+  text-decoration: none; text-align: center;
+  transition: all 0.2s;
+}
+.btn-voltar-site:hover { border-color: var(--border); color: var(--white); background: rgba(255,255,255,0.04); }
+
 /* Link mágico WhatsApp */
 .btn-wpp-magic {
   display: flex; align-items: center; justify-content: center; gap: 10px;
@@ -116,6 +127,15 @@ body { background: var(--deep); color: var(--white); font-family: 'Open Sans', s
   font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
 }
 .btn-sair:hover { border-color: rgba(255,255,255,0.3); color: var(--white); }
+
+/* Botão página inicial — topbar da área interna */
+.btn-inicio-topbar {
+  padding: 8px 16px; background: transparent;
+  border: 1px solid var(--border-mid); border-radius: 8px;
+  color: rgba(255,255,255,0.6); font-family: 'Open Sans', sans-serif;
+  font-size: 0.75rem; font-weight: 600; text-decoration: none; transition: all 0.2s;
+}
+.btn-inicio-topbar:hover { border-color: var(--border); color: var(--accent); }
 
 /* MAIN */
 .area-main { padding: 100px 48px 60px; max-width: 1100px; margin: 0 auto; }
@@ -319,6 +339,8 @@ body { background: var(--deep); color: var(--white); font-family: 'Open Sans', s
     </div>
     <button class="btn-entrar" onclick="verificarToken()">Entrar</button>
 
+    <a href="index.html" class="btn-voltar-site">&#8592; Voltar ao site</a>
+
     <p class="acesso-note">
       Ainda não é representante? <a href="representante.html" style="color:var(--accent);text-decoration:none;">Cadastre-se aqui</a>.<br>
       O link de acesso é pessoal e intransferível.
@@ -334,6 +356,7 @@ body { background: var(--deep); color: var(--white); font-family: 'Open Sans', s
     <div class="topbar-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></div>
     <div class="topbar-user">
       <span class="topbar-badge">Área do Representante</span>
+      <a href="index.html" class="btn-inicio-topbar">&#8962; Página inicial</a>
       <button class="btn-sair" onclick="sair()">Sair</button>
     </div>
   </div>
