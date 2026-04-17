@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Perguntas Frequentes — NOOON</title>
+<meta name="description" content="Tire suas dúvidas sobre maquininhas, taxas, representantes, banco digital e investimentos no NOOON.">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0d1f0a;
+  --dark: #142910;
+  --mid: #1e3d14;
+  --primary: #2e6417;
+  --accent: #74cc00;
+  --accent-light: #9ddd3a;
+  --white: #ffffff;
+  --border: rgba(116,204,0,0.15);
+  --border-mid: rgba(116,204,0,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--deep); color: var(--white); font-family: 'Open Sans', sans-serif; overflow-x: hidden; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--deep); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; height: 72px; background: rgba(13,31,10,0.94); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-mid); }
+.nav-logo img { height: 38px; width: auto; }
+.nav-menu { display: flex; gap: 4px; list-style: none; }
+.nav-menu a { display: block; padding: 8px 14px; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.82); text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--white); background: rgba(116,204,0,0.1); }
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+.btn-nav { padding: 9px 22px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.25s; }
+.btn-nav:hover { background: var(--accent-light); }
+.btn-nav-outline { padding: 9px 22px; background: transparent; color: var(--accent); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 600; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: all 0.25s; }
+.btn-nav-outline:hover { background: rgba(116,204,0,0.08); }
+
+/* HERO */
+#hero { padding: 140px 60px 80px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-mid); text-align: center; }
+.hero-mesh { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 50% 60% at 50% 0%, rgba(46,100,23,0.35) 0%, transparent 65%); }
+.hero-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+.section-tag { display: inline-block; padding: 5px 16px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.hero-heading { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 18px; }
+.hero-heading em { color: var(--accent); font-style: normal; }
+.hero-sub { font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,0.78); margin-bottom: 36px; }
+
+/* BUSCA */
+.search-wrap { position: relative; max-width: 480px; margin: 0 auto; }
+.search-input { width: 100%; padding: 14px 48px 14px 20px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-mid); border-radius: 12px; color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+.search-input:focus { border-color: var(--accent); background: rgba(255,255,255,0.07); }
+.search-input::placeholder { color: rgba(255,255,255,0.38); }
+.search-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.4); font-size: 1rem; pointer-events: none; }
+
+/* MAIN LAYOUT */
+#faq-main { padding: 80px 60px; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 220px 1fr; gap: 60px; align-items: start; }
+
+/* CATEGORIAS SIDEBAR */
+.categorias { position: sticky; top: 92px; }
+.cat-title { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+.cat-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.cat-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.65); cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
+.cat-item:hover { color: var(--white); background: rgba(255,255,255,0.04); }
+.cat-item.active { color: var(--accent); background: rgba(116,204,0,0.08); border-color: var(--border); }
+.cat-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+.cat-count { margin-left: auto; font-size: 0.65rem; color: rgba(255,255,255,0.35); font-weight: 400; }
+.cat-item.active .cat-count { color: rgba(116,204,0,0.6); }
+
+/* FAQ CONTENT */
+.faq-content {}
+.faq-no-results { display: none; text-align: center; padding: 48px 0; color: rgba(255,255,255,0.45); font-size: 0.9rem; }
+
+/* CATEGORIA GRUPO */
+.faq-group { margin-bottom: 56px; }
+.faq-group-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 12px; }
+.faq-group-title::after { content: ''; flex: 1; height: 1px; background: var(--border-mid); }
+.faq-group-desc { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-bottom: 20px; }
+
+/* ACCORDION */
+.faq-list { display: flex; flex-direction: column; gap: 6px; }
+.faq-item { border: 1px solid var(--border-mid); border-radius: 12px; overflow: hidden; transition: border-color 0.25s; }
+.faq-item.open { border-color: rgba(116,204,0,0.25); }
+.faq-item.hidden { display: none; }
+.faq-question { width: 100%; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px; background: transparent; border: none; cursor: pointer; font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--white); text-align: left; transition: background 0.2s; }
+.faq-question:hover { background: rgba(116,204,0,0.03); }
+.faq-icon { width: 24px; height: 24px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1rem; flex-shrink: 0; transition: transform 0.3s, background 0.2s; }
+.faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(116,204,0,0.1); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; padding: 0 22px; font-size: 0.86rem; line-height: 1.85; color: rgba(255,255,255,0.80); }
+.faq-item.open .faq-answer { max-height: 400px; padding: 0 22px 20px; }
+.faq-answer a { color: var(--accent); text-decoration: none; }
+.faq-answer a:hover { text-decoration: underline; }
+.faq-answer strong { color: var(--white); font-weight: 700; }
+
+/* TAG DE CATEGORIA NO ITEM */
+.faq-question-inner { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.faq-cat-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); opacity: 0.7; }
+
+/* CTA BOTTOM */
+#cta-bottom { padding: 80px 60px; border-top: 1px solid var(--border-mid); }
+.cta-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cta-card { padding: 32px 28px; background: var(--dark); border: 1px solid var(--border-mid); border-radius: 16px; transition: all 0.3s; text-decoration: none; color: inherit; display: block; }
+.cta-card:hover { border-color: var(--border); transform: translateY(-4px); }
+.cta-card-icon { font-size: 1.4rem; margin-bottom: 14px; }
+.cta-card-title { font-size: 0.95rem; font-weight: 800; margin-bottom: 6px; }
+.cta-card-desc { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 16px; }
+.cta-card-link { font-size: 0.78rem; font-weight: 700; color: var(--accent); }
+
+/* CONTATO BLOCK */
+.contato-block { max-width: 1100px; margin: 0 auto; padding: 0 0 80px; text-align: center; }
+.contato-block p { font-size: 0.9rem; color: rgba(255,255,255,0.65); margin-bottom: 20px; }
+.contato-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 26px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.86rem; font-weight: 700; border: none; border-radius: 9px; cursor: pointer; text-decoration: none; transition: all 0.25s; }
+.btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.86rem; font-weight: 600; border-radius: 9px; text-decoration: none; transition: all 0.25s; }
+.btn-ghost:hover { background: rgba(255,255,255,0.09); }
+
+/* FOOTER */
+footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(--border-mid); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; }
+.footer-logo { margin-bottom: 12px; }
+.footer-logo img { height: 26px; width: auto; opacity: 0.9; }
+.footer-desc { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 220px; }
+.footer-contact { margin-top: 12px; font-size: 0.72rem; color: rgba(255,255,255,0.65); line-height: 1.8; }
+.footer-col-title { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 14px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom { grid-column: 1/-1; padding-top: 24px; border-top: 1px solid var(--border-mid); display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+.footer-bottom a { color: rgba(116,204,0,0.7); text-decoration: none; }
+.footer-bottom a:hover { color: var(--accent); }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; }
+  .nav-menu { display: none; }
+  #hero { padding: 110px 24px 60px; }
+  #faq-main { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
+  .categorias { position: static; }
+  .cat-list { flex-direction: row; flex-wrap: wrap; }
+  #cta-bottom { padding: 60px 24px; }
+  .cta-inner { grid-template-columns: 1fr; }
+  .contato-block { padding: 0 24px 60px; }
+  footer { grid-template-columns: 1fr 1fr; padding: 44px 24px; }
+}
+@media (max-width: 600px) {
+  footer { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></a>
+  <ul class="nav-menu">
+    <li><a href="maquinas.html">Maquininhas</a></li>
+    <li><a href="representante.html">Seja Representante</a></li>
+    <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+    <li><a href="investidores.html">Investidores</a></li>
+    <li><a href="faq.html" class="active">FAQ</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="area-representante.html" class="btn-nav-outline">Área do Representante</a>
+    <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav">Acessar Portal</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-inner">
+    <span class="section-tag">Central de ajuda</span>
+    <h1 class="hero-heading">Perguntas <em>frequentes</em></h1>
+    <p class="hero-sub">Encontre respostas rápidas sobre maquininhas, taxas, representantes, banco digital e investimentos.</p>
+    <div class="search-wrap">
+      <input type="text" class="search-input" id="searchInput" placeholder="Buscar pergunta..." oninput="buscar(this.value)">
+      <span class="search-icon">&#128269;</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ MAIN -->
+<div id="faq-main">
+
+  <!-- SIDEBAR -->
+  <div class="categorias reveal">
+    <p class="cat-title">Categorias</p>
+    <ul class="cat-list">
+      <li class="cat-item active" onclick="filtrarCat('todas', this)"><span class="cat-dot"></span>Todas <span class="cat-count" id="cnt-todas">28</span></li>
+      <li class="cat-item" onclick="filtrarCat('maquininha', this)"><span class="cat-dot"></span>Maquininhas <span class="cat-count">8</span></li>
+      <li class="cat-item" onclick="filtrarCat('taxas', this)"><span class="cat-dot"></span>Taxas <span class="cat-count">5</span></li>
+      <li class="cat-item" onclick="filtrarCat('representante', this)"><span class="cat-dot"></span>Representantes <span class="cat-count">6</span></li>
+      <li class="cat-item" onclick="filtrarCat('banco', this)"><span class="cat-dot"></span>Banco Digital <span class="cat-count">5</span></li>
+      <li class="cat-item" onclick="filtrarCat('investidor', this)"><span class="cat-dot"></span>Investidores <span class="cat-count">4</span></li>
+    </ul>
+  </div>
+
+  <!-- CONTEÚDO FAQ -->
+  <div class="faq-content">
+    <div class="faq-no-results" id="noResults">Nenhuma pergunta encontrada. Tente outros termos ou <a href="https://wa.me/5584987885959" style="color:var(--accent)">fale conosco</a>.</div>
+
+    <!-- MAQUININHAS -->
+    <div class="faq-group" data-cat="maquininha">
+      <h2 class="faq-group-title">Maquininhas</h2>
+      <p class="faq-group-desc">Tudo sobre os modelos S920 e A930, locação e funcionamento.</p>
+      <div class="faq-list">
+        <div class="faq-item" data-cat="maquininha" data-q="como funciona locação maquininha modelo s920 a930">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Como funciona a locação da maquininha?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">A locação é mensal e varia conforme o volume transacionado. Para o <strong>S920</strong>: R$110/mês até R$20.000 em transações, R$10/mês até R$40.000, e <strong>gratuita</strong> acima de R$40.000. Para o <strong>A930</strong>: R$160/mês até R$30.000, R$10/mês até R$60.000, e gratuita acima de R$60.000. Sobre todas as transações incide a taxa por modalidade de pagamento.</div>
+        </div>
+        <div class="faq-item" data-cat="maquininha" data-q="qual diferença s920 a930 modelos">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Qual a diferença entre o S920 e o A930?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">O <strong>S920</strong> é compacto e portátil — ideal para negócios móveis, delivery e autônomos. Conecta via 4G e Wi-Fi com bateria de longa duração. O <strong>A930</strong> é profissional e voltado para alto volume — tela touch screen ampla, impressora de alta velocidade e conectividade adicional via Ethernet. Indicado para restaurantes, mercados e lojas com fluxo intenso.</div>
+        </div>
+        <div class="faq-item" data-cat="maquininha" data-q="bandeiras aceitas pagamento cartão">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Quais bandeiras são aceitas?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">As maquininhas NOOON aceitam <strong>Mastercard, Visa, Elo, American Express, Hiper/Hipercard</strong> e outras bandeiras. Também aceitam <strong>PIX</strong> via QR Code. Consulte a <a href="maquinas.html#taxas">tabela completa de taxas por bandeira</a>.</div>
+        </div>
+        <div class="faq-item" data-cat="maquininha" data-q="precisa cnpj mei pessoa física contratar">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Preciso ter CNPJ para contratar?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">Não obrigatoriamente. Atendemos <strong>MEI, ME, empresas de outros portes e em alguns casos pessoa física</strong>. Entre em contato com o representante NOOON da sua região para verificar as condições para seu perfil específico.</div>
+        </div>
+        <div class="faq-item" data-cat="maquininha" data-q="instalação configuração maquininha quem instala">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Quem faz a instalação e configuração?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">O <strong>representante NOOON da sua cidade</strong> realiza a instalação, configuração e treinamento inicial de uso. O processo leva em média 20 a 30 minutos e você já sai vendendo no mesmo dia. Manuais de instalação também estão disponíveis para download na <a href="maquinas.html">página de maquininhas</a>.</div>
+        </div>
+        <div class="faq-item" data-cat="maquininha" data-q="suporte técnico problema maquininha quebrou">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>E se a maquininha apresentar problema?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">Entre em contato com o suporte via <a href="https://wa.me/5584987885959">WhatsApp (84) 98788-5959</a> ou pelo <a href="mailto:contato@nooon.com.br">e-mail contato@nooon.com.br</a>. O representante local também pode ser acionado para suporte presencial.</div>
+        </div>
+        <div class="faq-item" data-cat="maquininha" data-q="contrato fidelidade prazo cancelar">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Há contrato de fidelidade?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">As condições de contrato são definidas no momento da adesão. Consulte o representante local para detalhes sobre prazos mínimos e condições de cancelamento aplicáveis ao seu perfil.</div>
+        </div>
+        <div class="faq-item" data-cat="maquininha" data-q="manual instalação pdf download">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Onde encontro o manual de instalação?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">Os manuais de instalação do S920 e A930 estão disponíveis para download em PDF na <a href="maquinas.html">página de maquininhas</a>. Representantes também têm acesso aos manuais na <a href="area-representante.html">Área do Representante</a>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAXAS -->
+    <div class="faq-group" data-cat="taxas">
+      <h2 class="faq-group-title">Taxas e recebimentos</h2>
+      <p class="faq-group-desc">Tudo sobre taxas por modalidade, prazo de recebimento e antecipação.</p>
+      <div class="faq-list">
+        <div class="faq-item" data-cat="taxas" data-q="taxa pix débito crédito modalidade">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Quais são as taxas por modalidade de pagamento?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">Para <strong>Mastercard e Visa</strong>: PIX 1% | Débito 2% | Crédito 1x 4% | 2x 5% | 3x 6%. Outras bandeiras como Elo, Amex e Hipercard possuem tabelas específicas. Veja a <a href="maquinas.html#taxas">tabela completa de taxas</a>.</div>
+        </div>
+        <div class="faq-item" data-cat="taxas" data-q="prazo recebimento quanto tempo recebo d+1">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Em quanto tempo recebo minhas vendas?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer"><strong>PIX e débito:</strong> D+1 (dia seguinte à venda). <strong>Crédito à vista:</strong> D+30. <strong>Crédito parcelado:</strong> conforme o parcelamento. Consulte seu representante para condições de antecipação de recebíveis.</div>
+        </div>
+        <div class="faq-item" data-cat="taxas" data-q="antecipação recebíveis adiantamento">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Posso antecipar recebíveis?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">Condições de antecipação de recebíveis são disponibilizadas mediante solicitação. Entre em contato com o representante NOOON da sua região ou pelo <a href="https://wa.me/5584987885959">WhatsApp</a> para verificar disponibilidade e condições.</div>
+        </div>
+        <div class="faq-item" data-cat="taxas" data-q="locação gratuita grátis volume transação">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Como funciona a locação gratuita?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">Quando o volume mensal transacionado na maquininha ultrapassa determinado limite, a mensalidade de locação cai para <strong>zero</strong> — você usa sem pagar aluguel. Apenas as taxas de transação são cobradas. <strong>S920:</strong> gratuita acima de R$40.000/mês. <strong>A930:</strong> gratuita acima de R$60.000/mês.</div>
+        </div>
+        <div class="faq-item" data-cat="taxas" data-q="parcelamento acima 3x 4x 5x 18x">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Quais as taxas para parcelamento acima de 3x?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">As taxas para parcelamentos de 4x a 18x variam por bandeira e são detalhadas na <a href="maquinas.html#taxas">tabela completa de taxas</a>. Para Mastercard, por exemplo: 4x 7% | 5x 7,5% | 6x 8,5% chegando a 18% no 18x. Consulte a tabela para todas as bandeiras.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPRESENTANTES -->
+    <div class="faq-group" data-cat="representante">
+      <h2 class="faq-group-title">Representantes</h2>
+      <p class="faq-group-desc">Como se tornar representante, planos e comissões.</p>
+      <div class="faq-list">
+        <div class="faq-item" data-cat="representante" data-q="como tornar representante cadastro">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Como me torno um representante NOOON?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">Acesse a <a href="representante.html">página Seja Representante</a>, escolha seu perfil (comercial ou digital), preencha o formulário e nossa equipe entrará em contato em até 24 horas para iniciar seu onboarding.</div>
+        </div>
+        <div class="faq-item" data-cat="representante" data-q="comissão percentual plano quanto ganha representante">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Qual é a comissão do representante?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">A comissão é calculada sobre a receita gerada pelo seu portfólio de estabelecimentos. <strong>Plano Iniciante (até 25 estab.):</strong> 20% | <strong>Crescimento (até 50 estab.):</strong> 25% | <strong>Master (acima de 50 estab.):</strong> 30%. A progressão entre planos é automática conforme o portfólio cresce.</div>
+        </div>
+        <div class="faq-item" data-cat="representante" data-q="como comissão calculada fórmula tpv">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Como a comissão é calculada na prática?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">O cálculo considera o TPV (Total de Pagamentos no período) gerado pelos seus estabelecimentos. A NOOON retém sua margem operacional e o representante recebe seu percentual sobre essa margem. Use o <a href="representante.html#calculadora">simulador de ganhos</a> para estimar seus rendimentos mensais.</div>
+        </div>
+        <div class="faq-item" data-cat="representante" data-q="representante digital influencer online">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Posso ser representante sem sair de casa?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">Sim! O programa de <a href="parceiros-digitais.html">Parceiros Digitais</a> é voltado para quem atua online — influencers, criadores de conteúdo e quem tem audiência digital. Você indica via link personalizado, código de cupom ou WhatsApp e recebe comissão recorrente por cada estabelecimento ativado.</div>
+        </div>
+        <div class="faq-item" data-cat="representante" data-q="treinamento material suporte representante">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Recebo treinamento e material de vendas?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">Sim. Após aprovação do cadastro, você recebe acesso à <a href="area-representante.html">Área do Representante</a> com manuais de instalação, scripts de venda, kit gráfico, apresentação comercial e links úteis. O onboarding inclui treinamento do time NOOON.</div>
+        </div>
+        <div class="faq-item" data-cat="representante" data-q="área representante acesso como entrar">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Como acesso a Área do Representante?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">O acesso é feito via <strong>link mágico enviado pelo WhatsApp</strong> ou com código fornecido pela equipe NOOON. Acesse em <a href="area-representante.html">area-representante</a>. Em caso de dúvidas, acione o suporte via <a href="https://wa.me/5584987885959">WhatsApp</a>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BANCO DIGITAL -->
+    <div class="faq-group" data-cat="banco">
+      <h2 class="faq-group-title">Banco Digital</h2>
+      <p class="faq-group-desc">Conta digital, portal e sistema de gestão financeira.</p>
+      <div class="faq-list">
+        <div class="faq-item" data-cat="banco" data-q="banco digital separado maquininha conta">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>O banco digital é separado da maquininha?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">São produtos <strong>complementares</strong>. A maquininha é o produto principal do NOOON. O banco digital é oferecido como benefício adicional para clientes ativos, acessível via <a href="https://portal.nooon.com.br" target="_blank">portal.nooon.com.br</a>.</div>
+        </div>
+        <div class="faq-item" data-cat="banco" data-q="conta digital grátis mensalidade pf pj">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>A conta digital tem mensalidade?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">A conta digital NOOON é disponibilizada <strong>sem mensalidade</strong> para clientes ativos. Atende tanto pessoa física (PF) quanto pessoa jurídica (PJ). O acesso é feito pelo portal em <a href="https://portal.nooon.com.br" target="_blank">portal.nooon.com.br</a>.</div>
+        </div>
+        <div class="faq-item" data-cat="banco" data-q="nooon caixa gestão financeira sistema">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>O que é o NOOON Caixa?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">O <strong>NOOON Caixa</strong> é o sistema de gestão financeira do ecossistema, acessível em <a href="https://caixa.nooon.com.br" target="_blank">caixa.nooon.com.br</a>. Permite acompanhamento de transações, relatórios financeiros e controle de caixa em tempo real.</div>
+        </div>
+        <div class="faq-item" data-cat="banco" data-q="pix transferência gratuito sem custo">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Como funciona o Pix na conta digital?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">A conta digital NOOON permite transferências via Pix disponíveis 24 horas por dia. Consulte condições de uso e eventuais limites diretamente no portal após abertura da conta.</div>
+        </div>
+        <div class="faq-item" data-cat="banco" data-q="cartão nooon débito virtual físico">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Há cartão NOOON disponível?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">Sim. O ecossistema NOOON prevê cartão de débito virtual e físico integrado à conta digital. Disponibilidade sujeita a confirmação no momento da abertura da conta. Consulte no <a href="https://portal.nooon.com.br" target="_blank">portal</a>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INVESTIDORES -->
+    <div class="faq-group" data-cat="investidor">
+      <h2 class="faq-group-title">Investidores</h2>
+      <p class="faq-group-desc">Modelos de investimento, retorno e processo.</p>
+      <div class="faq-list">
+        <div class="faq-item" data-cat="investidor" data-q="modelos investimento interno externo light">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Quais são os modelos de investimento disponíveis?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">O NOOON oferece <strong>3 modelos</strong>: <strong>Investidor Interno</strong> (sócio, 10% do lucro líquido, a partir de R$50.000) | <strong>Investidor Externo</strong> (payback progressivo, sem sociedade, a partir de R$50.000) | <strong>Franquia Light</strong> (compra de maquininhas como ativos, a partir de R$20.000). Saiba mais em <a href="investidores.html">investidores</a>.</div>
+        </div>
+        <div class="faq-item" data-cat="investidor" data-q="retorno investimento percentual prazo">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Qual o retorno estimado de cada modelo?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer"><strong>Investidor Interno:</strong> ~50% a.a. com prazo de 24 meses. <strong>Investidor Externo:</strong> ~75% a.a. com prazo de 18 meses. <strong>Franquia Light:</strong> ~100% a.a. com prazo de 12 meses. Valores são estimativas baseadas nas projeções do ecossistema. Detalhes completos após assinatura de NDA.</div>
+        </div>
+        <div class="faq-item" data-cat="investidor" data-q="nda confidencialidade sigilo informações">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Por que é necessário assinar um NDA?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">As projeções financeiras detalhadas, estrutura societária e identidade do franqueador são informações confidenciais do ecossistema. O <strong>Acordo de Confidencialidade (NDA)</strong> protege tanto o investidor quanto o NOOON durante a fase de due diligence. É um passo padrão em qualquer negociação de investimento.</div>
+        </div>
+        <div class="faq-item" data-cat="investidor" data-q="como investir começar processo primeiro passo">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <div class="faq-question-inner"><span>Como começar o processo de investimento?</span></div>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-answer">Preencha o <a href="investidores.html#contato">formulário de interesse</a> ou entre em contato via <a href="https://wa.me/5584987885959">WhatsApp</a>. Nossa equipe agenda uma conversa inicial, apresenta o projeto e conduz o processo de NDA e due diligence. O prazo da conversa inicial ao contrato é de até 15 dias úteis.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /faq-content -->
+</div><!-- /faq-main -->
+
+<!-- CTA BOTTOM -->
+<section id="cta-bottom">
+  <div class="cta-inner">
+    <a href="maquinas.html" class="cta-card reveal">
+      <div class="cta-card-icon">&#128179;</div>
+      <h3 class="cta-card-title">Quero uma maquininha</h3>
+      <p class="cta-card-desc">Veja os modelos S920 e A930, tabela de taxas completa e condições de locação.</p>
+      <span class="cta-card-link">Ver maquininhas &rarr;</span>
+    </a>
+    <a href="representante.html" class="cta-card reveal">
+      <div class="cta-card-icon">&#128203;</div>
+      <h3 class="cta-card-title">Quero ser representante</h3>
+      <p class="cta-card-desc">Ganhe comissão recorrente expandindo o NOOON na sua cidade ou online.</p>
+      <span class="cta-card-link">Seja representante &rarr;</span>
+    </a>
+    <a href="investidores.html" class="cta-card reveal">
+      <div class="cta-card-icon">&#128200;</div>
+      <h3 class="cta-card-title">Quero investir</h3>
+      <p class="cta-card-desc">Conheça os 3 modelos de investimento com retorno de até 100% a.a.</p>
+      <span class="cta-card-link">Ver modelos &rarr;</span>
+    </a>
+  </div>
+
+  <div class="contato-block">
+    <p>Não encontrou o que procurava? Nossa equipe responde em minutos.</p>
+    <div class="contato-actions">
+      <a href="https://wa.me/5584987885959?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20o%20NOOON" target="_blank" class="btn-primary">Falar no WhatsApp</a>
+      <a href="mailto:contato@nooon.com.br" class="btn-ghost">Enviar e-mail</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo"><img src="assets/logo1_nooon.png" alt="NOOON"></div>
+    <p class="footer-desc">Ecossistema financeiro completo para pessoas e negócios. Manaus, AM — Brasil.</p>
+    <p class="footer-contact">contato@nooon.com.br<br>(84) 98788-5959</p>
+  </div>
+  <div>
+    <p class="footer-col-title">Produtos</p>
+    <ul class="footer-links">
+      <li><a href="maquinas.html">Maquininhas</a></li>
+      <li><a href="https://portal.nooon.com.br" target="_blank">Banco Digital</a></li>
+      <li><a href="https://caixa.nooon.com.br" target="_blank">NOOON Caixa</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Parceiros</p>
+    <ul class="footer-links">
+      <li><a href="representante.html">Seja Representante</a></li>
+      <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+      <li><a href="investidores.html">Investidores</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Ajuda</p>
+    <ul class="footer-links">
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="area-representante.html">Área do Representante</a></li>
+      <li><a href="https://wa.me/5584987885959" target="_blank">WhatsApp</a></li>
+      <li><a href="mailto:contato@nooon.com.br">E-mail</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 NOOON — Ecossistema Financeiro. Todos os direitos reservados.</span>
+    <span>Desenvolvido por <a href="https://abracadabra.srv.br" target="_blank">AbraCadabra</a> &middot; <a href="https://hbusiness-group.com.br" target="_blank">HBusiness Group</a></span>
+  </div>
+</footer>
+
+<script>
+// ACCORDION
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// FILTRO CATEGORIA
+function filtrarCat(cat, el) {
+  document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.classList.toggle('hidden', cat !== 'todas' && item.dataset.cat !== cat);
+  });
+  document.querySelectorAll('.faq-group').forEach(group => {
+    const temVisivel = [...group.querySelectorAll('.faq-item')].some(i => !i.classList.contains('hidden'));
+    group.style.display = temVisivel ? '' : 'none';
+  });
+  document.getElementById('noResults').style.display = 'none';
+}
+
+// BUSCA
+function buscar(termo) {
+  const t = termo.toLowerCase().trim();
+  let algumVisivel = false;
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.dataset.q || '';
+    const texto = item.querySelector('.faq-question').textContent.toLowerCase();
+    const resposta = item.querySelector('.faq-answer').textContent.toLowerCase();
+    const visivel = !t || q.includes(t) || texto.includes(t) || resposta.includes(t);
+    item.classList.toggle('hidden', !visivel);
+    if (visivel) algumVisivel = true;
+  });
+  document.querySelectorAll('.faq-group').forEach(group => {
+    const temVisivel = [...group.querySelectorAll('.faq-item')].some(i => !i.classList.contains('hidden'));
+    group.style.display = temVisivel ? '' : 'none';
+  });
+  document.getElementById('noResults').style.display = algumVisivel ? 'none' : 'block';
+  // Reset categoria
+  document.querySelectorAll('.cat-item').forEach(i => i.classList.remove('active'));
+  document.querySelector('.cat-item').classList.add('active');
+}
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
