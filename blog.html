@@ -153,6 +153,16 @@ footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(
   .artigos-grid { grid-template-columns: 1fr; }
   footer { grid-template-columns: 1fr; }
 }
+
+/* NAV DROPDOWN */
+.nav-dropdown{position:relative;}
+.nav-dropdown>a{display:flex;align-items:center;gap:5px;}
+.nav-dropdown>a::after{content:"▾";font-size:0.65rem;color:var(--accent);}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;min-width:230px;background:var(--dark);border:1px solid var(--border);border-radius:12px;padding:8px;z-index:200;box-shadow:0 16px 40px rgba(0,0,0,0.5);}
+.nav-dropdown:hover .nav-dropdown-menu{display:flex;flex-direction:column;gap:2px;}
+.nav-dropdown-menu a{padding:10px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.85);text-decoration:none;transition:all 0.2s;display:flex;flex-direction:column;}
+.nav-dropdown-menu a span{font-size:0.66rem;font-weight:400;color:rgba(255,255,255,0.48);margin-top:2px;}
+.nav-dropdown-menu a:hover{background:rgba(116,204,0,0.1);color:var(--white);}
 </style>
 </head>
 <body>
