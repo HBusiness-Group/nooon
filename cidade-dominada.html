@@ -182,6 +182,16 @@ footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(
   #map { height: 380px; }
   footer { grid-template-columns: 1fr; }
 }
+
+/* NAV DROPDOWN */
+.nav-dropdown{position:relative;}
+.nav-dropdown>a{display:flex;align-items:center;gap:5px;}
+.nav-dropdown>a::after{content:"▾";font-size:0.65rem;color:var(--accent);}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;min-width:230px;background:var(--dark);border:1px solid var(--border);border-radius:12px;padding:8px;z-index:200;box-shadow:0 16px 40px rgba(0,0,0,0.5);}
+.nav-dropdown:hover .nav-dropdown-menu{display:flex;flex-direction:column;gap:2px;}
+.nav-dropdown-menu a{padding:10px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.85);text-decoration:none;transition:all 0.2s;display:flex;flex-direction:column;}
+.nav-dropdown-menu a span{font-size:0.66rem;font-weight:400;color:rgba(255,255,255,0.48);margin-top:2px;}
+.nav-dropdown-menu a:hover{background:rgba(116,204,0,0.1);color:var(--white);}
 </style>
 </head>
 <body>
@@ -191,8 +201,14 @@ footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(
   <a href="index.html" class="nav-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></a>
   <ul class="nav-menu">
     <li><a href="maquinas.html">Maquininhas</a></li>
-    <li><a href="representante.html">Seja Representante</a></li>
-    <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+    <li class="nav-dropdown">
+      <a href="representante.html" class="active">Ganhe com o NOOON</a>
+      <div class="nav-dropdown-menu">
+        <a href="representante.html">Representante Comercial <span>Atue no campo, domine territórios</span></a>
+        <a href="parceiros-digitais.html">Parceiro Digital <span>Use sua audiência, ganhe recorrente</span></a>
+        <a href="cidade-dominada.html">Cidade Dominada <span>Expansão regional exclusiva</span></a>
+      </div>
+    </li>
     <li><a href="investidores.html">Investidores</a></li>
     <li><a href="faq.html">FAQ</a></li>
   </ul>
