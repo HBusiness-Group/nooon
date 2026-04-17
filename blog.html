@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Educação Financeira — NOOON</title>
+<meta name="description" content="Dicas de educação financeira, empreendedorismo e novidades do ecossistema NOOON para pequenos negócios.">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0d1f0a;
+  --dark: #142910;
+  --mid: #1e3d14;
+  --primary: #2e6417;
+  --accent: #74cc00;
+  --accent-light: #9ddd3a;
+  --white: #ffffff;
+  --border: rgba(116,204,0,0.15);
+  --border-mid: rgba(116,204,0,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--deep); color: var(--white); font-family: 'Open Sans', sans-serif; overflow-x: hidden; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--deep); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; height: 72px; background: rgba(13,31,10,0.94); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-mid); }
+.nav-logo img { height: 38px; width: auto; }
+.nav-menu { display: flex; gap: 4px; list-style: none; }
+.nav-menu a { display: block; padding: 8px 14px; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.82); text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+.nav-menu a:hover { color: var(--white); background: rgba(116,204,0,0.1); }
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+.btn-nav { padding: 9px 22px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.25s; }
+.btn-nav:hover { background: var(--accent-light); }
+.btn-nav-outline { padding: 9px 22px; background: transparent; color: var(--accent); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 600; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: all 0.25s; }
+.btn-nav-outline:hover { background: rgba(116,204,0,0.08); }
+
+/* HERO */
+#hero { padding: 140px 60px 80px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-mid); }
+.hero-mesh { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 50% 60% at 80% 0%, rgba(46,100,23,0.35) 0%, transparent 65%); }
+.hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.section-tag { display: inline-block; padding: 5px 16px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.hero-heading { font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: 18px; }
+.hero-heading em { color: var(--accent); font-style: normal; }
+.hero-sub { font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,0.80); }
+
+/* NEWSLETTER */
+.newsletter-card { background: rgba(116,204,0,0.06); border: 1px solid rgba(116,204,0,0.18); border-radius: 18px; padding: 32px; }
+.newsletter-title { font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+.newsletter-sub { font-size: 0.82rem; color: rgba(255,255,255,0.72); line-height: 1.6; margin-bottom: 20px; }
+.newsletter-form { display: flex; gap: 10px; }
+.newsletter-input { flex: 1; padding: 12px 14px; background: rgba(0,0,0,0.25); border: 1px solid var(--border-mid); border-radius: 9px; color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.85rem; outline: none; transition: border-color 0.2s; }
+.newsletter-input:focus { border-color: var(--accent); }
+.newsletter-input::placeholder { color: rgba(255,255,255,0.32); }
+.newsletter-btn { padding: 12px 20px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.82rem; font-weight: 700; border: none; border-radius: 9px; cursor: pointer; white-space: nowrap; transition: all 0.25s; }
+.newsletter-btn:hover { background: var(--accent-light); }
+.newsletter-note { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-top: 10px; }
+
+/* FILTROS */
+#filtros { padding: 40px 60px 0; max-width: 1220px; margin: 0 auto; }
+.filtros-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.cats-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.cat-btn { padding: 8px 18px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-mid); border-radius: 100px; font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.72); cursor: pointer; transition: all 0.2s; }
+.cat-btn.active, .cat-btn:hover { background: rgba(116,204,0,0.1); border-color: var(--border); color: var(--accent); }
+.busca-wrap { position: relative; }
+.busca-input { padding: 9px 36px 9px 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-mid); border-radius: 9px; color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.8rem; outline: none; width: 220px; transition: border-color 0.2s; }
+.busca-input:focus { border-color: var(--accent); }
+.busca-input::placeholder { color: rgba(255,255,255,0.35); }
+.busca-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.38); font-size: 0.85rem; pointer-events: none; }
+
+/* ARTIGOS */
+#artigos { padding: 48px 60px 100px; max-width: 1220px; margin: 0 auto; }
+
+/* DESTAQUE */
+.artigo-destaque { display: grid; grid-template-columns: 1.4fr 1fr; gap: 0; background: var(--dark); border: 1px solid var(--border-mid); border-radius: 20px; overflow: hidden; margin-bottom: 40px; transition: all 0.35s; text-decoration: none; color: inherit; }
+.artigo-destaque:hover { border-color: var(--border); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+.destaque-visual { background: linear-gradient(145deg, var(--mid) 0%, var(--primary) 100%); display: flex; align-items: center; justify-content: center; min-height: 280px; position: relative; overflow: hidden; }
+.destaque-visual-icon { font-size: 5rem; opacity: 0.3; }
+.destaque-visual-tag { position: absolute; top: 20px; left: 20px; padding: 5px 14px; background: var(--accent); color: var(--deep); font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; border-radius: 100px; }
+.destaque-content { padding: 44px; display: flex; flex-direction: column; justify-content: center; }
+.artigo-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.artigo-cat { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.artigo-date { font-size: 0.65rem; color: rgba(255,255,255,0.45); }
+.artigo-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+.destaque-title { font-size: 1.5rem; font-weight: 800; line-height: 1.25; margin-bottom: 14px; letter-spacing: -0.02em; }
+.destaque-desc { font-size: 0.88rem; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 24px; }
+.artigo-leitura { font-size: 0.72rem; color: rgba(255,255,255,0.45); margin-bottom: 20px; }
+.btn-artigo { display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 700; color: var(--accent); transition: gap 0.2s; }
+.btn-artigo:hover { gap: 12px; }
+
+/* GRID ARTIGOS */
+.artigos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.artigo-card { background: var(--dark); border: 1px solid var(--border-mid); border-radius: 16px; overflow: hidden; transition: all 0.3s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+.artigo-card:hover { border-color: var(--border); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
+.artigo-card.hidden { display: none; }
+.card-visual { height: 140px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.card-visual-icon { font-size: 3rem; opacity: 0.25; }
+.card-cat-tag { position: absolute; top: 14px; left: 14px; padding: 4px 12px; background: rgba(116,204,0,0.15); border: 1px solid var(--border); border-radius: 100px; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; color: var(--accent); }
+.card-body { padding: 22px 22px 24px; flex: 1; display: flex; flex-direction: column; }
+.card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.card-title { font-size: 0.95rem; font-weight: 800; line-height: 1.3; margin-bottom: 10px; letter-spacing: -0.01em; }
+.card-desc { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.65; flex: 1; margin-bottom: 16px; }
+.card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-mid); padding-top: 14px; }
+.card-leitura { font-size: 0.68rem; color: rgba(255,255,255,0.40); }
+.card-link { font-size: 0.72rem; font-weight: 700; color: var(--accent); }
+
+.no-results { display: none; text-align: center; padding: 60px 0; color: rgba(255,255,255,0.45); grid-column: 1/-1; }
+
+/* CTA NEWSLETTER BOTTOM */
+#newsletter-bottom { padding: 80px 60px; background: var(--dark); border-top: 1px solid var(--border-mid); text-align: center; }
+.newsletter-bottom-inner { max-width: 520px; margin: 0 auto; }
+.newsletter-bottom-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 12px; }
+.newsletter-bottom-title em { color: var(--accent); font-style: normal; }
+.newsletter-bottom-sub { font-size: 0.9rem; color: rgba(255,255,255,0.72); margin-bottom: 28px; line-height: 1.7; }
+.newsletter-bottom-form { display: flex; gap: 10px; }
+
+/* FOOTER */
+footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(--border-mid); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; }
+.footer-logo { margin-bottom: 12px; }
+.footer-logo img { height: 26px; width: auto; opacity: 0.9; }
+.footer-desc { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 220px; }
+.footer-contact { margin-top: 12px; font-size: 0.72rem; color: rgba(255,255,255,0.65); line-height: 1.8; }
+.footer-col-title { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 14px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom { grid-column: 1/-1; padding-top: 24px; border-top: 1px solid var(--border-mid); display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+.footer-bottom a { color: rgba(116,204,0,0.7); text-decoration: none; }
+.footer-bottom a:hover { color: var(--accent); }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; }
+  .nav-menu { display: none; }
+  #hero { padding: 110px 24px 60px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  #filtros { padding: 32px 24px 0; }
+  #artigos { padding: 36px 24px 80px; }
+  .artigo-destaque { grid-template-columns: 1fr; }
+  .destaque-visual { min-height: 180px; }
+  .destaque-content { padding: 28px; }
+  .artigos-grid { grid-template-columns: 1fr 1fr; }
+  #newsletter-bottom { padding: 60px 24px; }
+  .newsletter-bottom-form { flex-direction: column; }
+  footer { grid-template-columns: 1fr 1fr; padding: 44px 24px; }
+}
+@media (max-width: 600px) {
+  .newsletter-form { flex-direction: column; }
+  .artigos-grid { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></a>
+  <ul class="nav-menu">
+    <li><a href="maquinas.html">Maquininhas</a></li>
+    <li><a href="representante.html">Seja Representante</a></li>
+    <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+    <li><a href="investidores.html">Investidores</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="area-representante.html" class="btn-nav-outline">Área do Representante</a>
+    <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav">Acessar Portal</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-inner">
+    <div>
+      <span class="section-tag">Educação financeira</span>
+      <h1 class="hero-heading">Conhecimento que <em>gera resultado.</em></h1>
+      <p class="hero-sub">Dicas práticas de finanças, empreendedorismo e gestão para pequenos negócios — direto do ecossistema NOOON.</p>
+    </div>
+    <div class="newsletter-card reveal">
+      <h3 class="newsletter-title">Receba os melhores conteúdos</h3>
+      <p class="newsletter-sub">Assine e receba dicas de finanças e novidades do NOOON toda semana no seu WhatsApp.</p>
+      <div class="newsletter-form">
+        <input type="tel" class="newsletter-input" id="nlWpp" placeholder="Seu WhatsApp">
+        <button class="newsletter-btn" onclick="assinarNewsletter()">Assinar</button>
+      </div>
+      <p class="newsletter-note">Sem spam. Cancele quando quiser.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FILTROS -->
+<div id="filtros">
+  <div class="filtros-inner">
+    <div class="cats-row">
+      <button class="cat-btn active" onclick="filtrar('todos', this)">Todos</button>
+      <button class="cat-btn" onclick="filtrar('financas', this)">Finanças</button>
+      <button class="cat-btn" onclick="filtrar('empreendedorismo', this)">Empreendedorismo</button>
+      <button class="cat-btn" onclick="filtrar('maquininha', this)">Maquininhas</button>
+      <button class="cat-btn" onclick="filtrar('nooon', this)">NOOON</button>
+    </div>
+    <div class="busca-wrap">
+      <input type="text" class="busca-input" placeholder="Buscar artigo..." oninput="buscarArtigo(this.value)">
+      <span class="busca-icon">&#128269;</span>
+    </div>
+  </div>
+</div>
+
+<!-- ARTIGOS -->
+<div id="artigos">
+
+  <!-- DESTAQUE -->
+  <a href="#" class="artigo-destaque reveal" data-cat="financas">
+    <div class="destaque-visual" style="background:linear-gradient(145deg,#1e3d14,#2e6417);">
+      <div class="destaque-visual-icon">&#128200;</div>
+      <span class="destaque-visual-tag">Em destaque</span>
+    </div>
+    <div class="destaque-content">
+      <div class="artigo-meta">
+        <span class="artigo-cat">Finanças</span>
+        <span class="artigo-dot"></span>
+        <span class="artigo-date">Abr 2025</span>
+      </div>
+      <h2 class="destaque-title">Como calcular a taxa efetiva que você paga na maquininha — e por que isso importa</h2>
+      <p class="destaque-desc">Muitos lojistas não sabem exatamente o quanto pagam de taxa por transação. Entender essa conta pode significar centenas de reais economizados por mês.</p>
+      <p class="artigo-leitura">5 min de leitura</p>
+      <span class="btn-artigo">Ler artigo &rarr;</span>
+    </div>
+  </a>
+
+  <!-- GRID -->
+  <div class="artigos-grid" id="artigos-grid">
+
+    <a href="#" class="artigo-card reveal" data-cat="financas" data-q="fluxo caixa gestão controle finanças">
+      <div class="card-visual" style="background:linear-gradient(135deg,#142910,#1e3d14);">
+        <div class="card-visual-icon">&#128176;</div>
+        <span class="card-cat-tag">Finanças</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta"><span class="artigo-cat">Finanças</span><span class="artigo-dot"></span><span class="artigo-date">Mar 2025</span></div>
+        <h3 class="card-title">Fluxo de caixa para pequenos negócios: como começar do zero</h3>
+        <p class="card-desc">Controlar entradas e saídas é o primeiro passo para um negócio saudável. Veja como montar seu fluxo de caixa de forma simples.</p>
+        <div class="card-footer"><span class="card-leitura">4 min</span><span class="card-link">Ler &rarr;</span></div>
+      </div>
+    </a>
+
+    <a href="#" class="artigo-card reveal" data-cat="maquininha" data-q="maquininha taxa comparação escolher">
+      <div class="card-visual" style="background:linear-gradient(135deg,#0d2b14,#1a3d1a);">
+        <div class="card-visual-icon">&#128179;</div>
+        <span class="card-cat-tag">Maquininhas</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta"><span class="artigo-cat">Maquininhas</span><span class="artigo-dot"></span><span class="artigo-date">Mar 2025</span></div>
+        <h3 class="card-title">S920 ou A930? Como escolher a maquininha certa para o seu negócio</h3>
+        <p class="card-desc">Conheça as diferenças entre os dois modelos NOOON e descubra qual se encaixa melhor no perfil do seu negócio.</p>
+        <div class="card-footer"><span class="card-leitura">3 min</span><span class="card-link">Ler &rarr;</span></div>
+      </div>
+    </a>
+
+    <a href="#" class="artigo-card reveal" data-cat="empreendedorismo" data-q="representante renda extra comissão">
+      <div class="card-visual" style="background:linear-gradient(135deg,#12280f,#1c3d14);">
+        <div class="card-visual-icon">&#128203;</div>
+        <span class="card-cat-tag">Empreendedorismo</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta"><span class="artigo-cat">Empreendedorismo</span><span class="artigo-dot"></span><span class="artigo-date">Fev 2025</span></div>
+        <h3 class="card-title">Renda recorrente: como representantes NOOON constroem patrimônio digital</h3>
+        <p class="card-desc">Entenda o modelo de comissão recorrente e por que ele é diferente de qualquer modelo de vendas tradicional.</p>
+        <div class="card-footer"><span class="card-leitura">5 min</span><span class="card-link">Ler &rarr;</span></div>
+      </div>
+    </a>
+
+    <a href="#" class="artigo-card reveal" data-cat="financas" data-q="pix débito crédito quando usar pagamento">
+      <div class="card-visual" style="background:linear-gradient(135deg,#0f2410,#1e3d14);">
+        <div class="card-visual-icon">&#9889;</div>
+        <span class="card-cat-tag">Finanças</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta"><span class="artigo-cat">Finanças</span><span class="artigo-dot"></span><span class="artigo-date">Fev 2025</span></div>
+        <h3 class="card-title">PIX, débito ou crédito: qual modalidade é mais vantajosa para o lojista?</h3>
+        <p class="card-desc">Cada modalidade tem um impacto diferente no fluxo de caixa. Saiba qual priorizar conforme o seu perfil de vendas.</p>
+        <div class="card-footer"><span class="card-leitura">4 min</span><span class="card-link">Ler &rarr;</span></div>
+      </div>
+    </a>
+
+    <a href="#" class="artigo-card reveal" data-cat="nooon" data-q="ecossistema nooon banco digital conta">
+      <div class="card-visual" style="background:linear-gradient(135deg,#142910,#2e6417);">
+        <div class="card-visual-icon">&#127968;</div>
+        <span class="card-cat-tag">NOOON</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta"><span class="artigo-cat">NOOON</span><span class="artigo-dot"></span><span class="artigo-date">Jan 2025</span></div>
+        <h3 class="card-title">O que é o ecossistema NOOON e como ele vai além de uma simples maquininha</h3>
+        <p class="card-desc">Conheça todos os produtos e serviços que compõem o ecossistema financeiro NOOON — da maquininha ao banco digital.</p>
+        <div class="card-footer"><span class="card-leitura">6 min</span><span class="card-link">Ler &rarr;</span></div>
+      </div>
+    </a>
+
+    <a href="#" class="artigo-card reveal" data-cat="empreendedorismo" data-q="crescer negócio expansão estratégia">
+      <div class="card-visual" style="background:linear-gradient(135deg,#0d1f0a,#1a3518);">
+        <div class="card-visual-icon">&#127919;</div>
+        <span class="card-cat-tag">Empreendedorismo</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta"><span class="artigo-cat">Empreendedorismo</span><span class="artigo-dot"></span><span class="artigo-date">Jan 2025</span></div>
+        <h3 class="card-title">5 estratégias para aumentar o faturamento do seu comércio local em 2025</h3>
+        <p class="card-desc">Pequenas mudanças na operação podem gerar grandes resultados. Descubra estratégias práticas para crescer sem aumentar custos.</p>
+        <div class="card-footer"><span class="card-leitura">5 min</span><span class="card-link">Ler &rarr;</span></div>
+      </div>
+    </a>
+
+    <a href="#" class="artigo-card reveal" data-cat="financas" data-q="antecipação recebíveis capital giro fluxo">
+      <div class="card-visual" style="background:linear-gradient(135deg,#101e0e,#1c3414);">
+        <div class="card-visual-icon">&#9201;</div>
+        <span class="card-cat-tag">Finanças</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta"><span class="artigo-cat">Finanças</span><span class="artigo-dot"></span><span class="artigo-date">Dez 2024</span></div>
+        <h3 class="card-title">Antecipação de recebíveis: quando vale a pena e quando evitar</h3>
+        <p class="card-desc">Antecipar pode parecer solução rápida, mas tem custo. Entenda os cenários em que essa operação faz sentido para o seu caixa.</p>
+        <div class="card-footer"><span class="card-leitura">4 min</span><span class="card-link">Ler &rarr;</span></div>
+      </div>
+    </a>
+
+    <a href="#" class="artigo-card reveal" data-cat="nooon" data-q="investidor franquia light retorno">
+      <div class="card-visual" style="background:linear-gradient(135deg,#0e2010,#1e3a15);">
+        <div class="card-visual-icon">&#128200;</div>
+        <span class="card-cat-tag">NOOON</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta"><span class="artigo-cat">NOOON</span><span class="artigo-dot"></span><span class="artigo-date">Dez 2024</span></div>
+        <h3 class="card-title">Franquia Light NOOON: como investir em maquininhas como ativo e receber mensalmente</h3>
+        <p class="card-desc">Entenda como funciona o modelo de Franquia Light — a forma mais acessível de investir no ecossistema NOOON com retorno recorrente.</p>
+        <div class="card-footer"><span class="card-leitura">6 min</span><span class="card-link">Ler &rarr;</span></div>
+      </div>
+    </a>
+
+    <a href="#" class="artigo-card reveal" data-cat="empreendedorismo" data-q="mei microempreendedor formalização">
+      <div class="card-visual" style="background:linear-gradient(135deg,#0d1e0b,#1a3312);">
+        <div class="card-visual-icon">&#128221;</div>
+        <span class="card-cat-tag">Empreendedorismo</span>
+      </div>
+      <div class="card-body">
+        <div class="card-meta"><span class="artigo-cat">Empreendedorismo</span><span class="artigo-dot"></span><span class="artigo-date">Nov 2024</span></div>
+        <h3 class="card-title">MEI e maquininha: tudo que o microempreendedor precisa saber sobre pagamentos digitais</h3>
+        <p class="card-desc">Quais maquininhas aceitam MEI? Quais taxas são cobradas? Como declarar receitas? Tire todas as dúvidas neste guia completo.</p>
+        <div class="card-footer"><span class="card-leitura">7 min</span><span class="card-link">Ler &rarr;</span></div>
+      </div>
+    </a>
+
+    <div class="no-results" id="noResults">Nenhum artigo encontrado. <a href="https://wa.me/5584987885959" style="color:var(--accent)">Sugira um tema</a>.</div>
+
+  </div>
+</div>
+
+<!-- NEWSLETTER BOTTOM -->
+<section id="newsletter-bottom">
+  <div class="newsletter-bottom-inner">
+    <h2 class="newsletter-bottom-title">Não perca nenhum <em>conteúdo</em></h2>
+    <p class="newsletter-bottom-sub">Receba dicas de finanças e novidades do NOOON diretamente no seu WhatsApp. Simples assim.</p>
+    <div class="newsletter-bottom-form">
+      <input type="tel" class="newsletter-input" id="nlWpp2" placeholder="Seu WhatsApp" style="flex:1;">
+      <button class="newsletter-btn" onclick="assinarNewsletter2()">Quero receber</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo"><img src="assets/logo1_nooon.png" alt="NOOON"></div>
+    <p class="footer-desc">Ecossistema financeiro completo para pessoas e negócios. Manaus, AM — Brasil.</p>
+    <p class="footer-contact">contato@nooon.com.br<br>(84) 98788-5959</p>
+  </div>
+  <div>
+    <p class="footer-col-title">Produtos</p>
+    <ul class="footer-links">
+      <li><a href="maquinas.html">Maquininhas</a></li>
+      <li><a href="https://portal.nooon.com.br" target="_blank">Banco Digital</a></li>
+      <li><a href="https://caixa.nooon.com.br" target="_blank">NOOON Caixa</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Parceiros</p>
+    <ul class="footer-links">
+      <li><a href="representante.html">Seja Representante</a></li>
+      <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+      <li><a href="investidores.html">Investidores</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Ajuda</p>
+    <ul class="footer-links">
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="area-representante.html">Área do Representante</a></li>
+      <li><a href="https://wa.me/5584987885959" target="_blank">WhatsApp</a></li>
+      <li><a href="mailto:contato@nooon.com.br">E-mail</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 NOOON — Ecossistema Financeiro. Todos os direitos reservados.</span>
+    <span>Desenvolvido por <a href="https://abracadabra.srv.br" target="_blank">AbraCadabra</a> &middot; <a href="https://hbusiness-group.com.br" target="_blank">HBusiness Group</a></span>
+  </div>
+</footer>
+
+<script>
+function filtrar(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.artigo-card').forEach(card => {
+    card.classList.toggle('hidden', cat !== 'todos' && card.dataset.cat !== cat);
+  });
+  document.getElementById('noResults').style.display =
+    [...document.querySelectorAll('.artigo-card')].every(c => c.classList.contains('hidden')) ? 'block' : 'none';
+}
+
+function buscarArtigo(termo) {
+  const t = termo.toLowerCase().trim();
+  let algum = false;
+  document.querySelectorAll('.artigo-card').forEach(card => {
+    const q = (card.dataset.q || '') + ' ' + card.textContent.toLowerCase();
+    const v = !t || q.includes(t);
+    card.classList.toggle('hidden', !v);
+    if (v) algum = true;
+  });
+  document.getElementById('noResults').style.display = algum ? 'none' : 'block';
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.cat-btn').classList.add('active');
+}
+
+function assinarNewsletter() {
+  const wpp = document.getElementById('nlWpp').value.trim();
+  if (!wpp) return;
+  const msg = encodeURIComponent(`Olá! Quero assinar a newsletter NOOON e receber conteúdos de educação financeira. Meu WhatsApp: ${wpp}`);
+  window.open(`https://wa.me/5584987885959?text=${msg}`, '_blank');
+}
+function assinarNewsletter2() {
+  const wpp = document.getElementById('nlWpp2').value.trim();
+  if (!wpp) return;
+  const msg = encodeURIComponent(`Olá! Quero assinar a newsletter NOOON e receber conteúdos de educação financeira. Meu WhatsApp: ${wpp}`);
+  window.open(`https://wa.me/5584987885959?text=${msg}`, '_blank');
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

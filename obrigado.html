@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obrigado! — NOOON</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0d1f0a;
+  --dark: #142910;
+  --mid: #1e3d14;
+  --primary: #2e6417;
+  --accent: #74cc00;
+  --accent-light: #9ddd3a;
+  --white: #ffffff;
+  --border: rgba(116,204,0,0.15);
+  --border-mid: rgba(116,204,0,0.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--deep); color: var(--white); font-family: 'Open Sans', sans-serif; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; height: 72px; background: rgba(13,31,10,0.94); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-mid); }
+.nav-logo img { height: 38px; width: auto; }
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+.btn-nav { padding: 9px 22px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.25s; }
+.btn-nav:hover { background: var(--accent-light); }
+
+/* MAIN */
+main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 120px 24px 80px; position: relative; overflow: hidden; }
+.mesh { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 60% at 50% 40%, rgba(46,100,23,0.3) 0%, transparent 65%); }
+
+.success-card { position: relative; z-index: 1; max-width: 560px; width: 100%; text-align: center; }
+
+/* ÍCONE ANIMADO */
+.success-icon-wrap { position: relative; width: 96px; height: 96px; margin: 0 auto 32px; }
+.success-ring { position: absolute; inset: 0; border: 2px solid rgba(116,204,0,0.2); border-radius: 50%; animation: ringPulse 2s ease-out infinite; }
+.success-ring-2 { position: absolute; inset: -12px; border: 1px solid rgba(116,204,0,0.1); border-radius: 50%; animation: ringPulse 2s ease-out 0.4s infinite; }
+@keyframes ringPulse { 0% { transform: scale(0.9); opacity: 0; } 50% { opacity: 1; } 100% { transform: scale(1.4); opacity: 0; } }
+.success-icon-bg { width: 96px; height: 96px; background: rgba(116,204,0,0.12); border: 2px solid rgba(116,204,0,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; animation: iconIn 0.6s cubic-bezier(0.23,1,0.32,1) forwards; opacity: 0; }
+@keyframes iconIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+.success-check { font-size: 2.2rem; color: var(--accent); }
+
+/* CONTEÚDO */
+.success-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; letter-spacing: -0.025em; margin-bottom: 14px; opacity: 0; animation: fadeUp 0.7s 0.3s forwards; }
+.success-title em { color: var(--accent); font-style: normal; }
+.success-sub { font-size: 1rem; color: rgba(255,255,255,0.78); line-height: 1.75; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.7s 0.45s forwards; }
+
+/* PRÓXIMOS PASSOS */
+.steps-card { background: rgba(116,204,0,0.05); border: 1px solid rgba(116,204,0,0.15); border-radius: 16px; padding: 28px 32px; margin-bottom: 36px; text-align: left; opacity: 0; animation: fadeUp 0.7s 0.6s forwards; }
+.steps-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 18px; }
+.steps-list { display: flex; flex-direction: column; gap: 14px; }
+.step { display: flex; align-items: flex-start; gap: 14px; }
+.step-num { width: 28px; height: 28px; background: rgba(116,204,0,0.15); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 800; color: var(--accent); flex-shrink: 0; }
+.step-text { font-size: 0.85rem; color: rgba(255,255,255,0.82); line-height: 1.55; padding-top: 4px; }
+.step-text strong { color: var(--white); font-weight: 700; display: block; margin-bottom: 2px; }
+
+/* AÇÕES */
+.success-actions { display: flex; flex-direction: column; gap: 12px; opacity: 0; animation: fadeUp 0.7s 0.75s forwards; }
+.btn-primary { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 15px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.3s; width: 100%; }
+.btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(116,204,0,0.3); }
+.btn-ghost { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.82); font-family: 'Open Sans', sans-serif; font-size: 0.88rem; font-weight: 600; border-radius: 10px; text-decoration: none; transition: all 0.3s; }
+.btn-ghost:hover { background: rgba(255,255,255,0.08); }
+
+/* LINKS EXTRAS */
+.extra-links { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border-mid); opacity: 0; animation: fadeUp 0.7s 0.9s forwards; }
+.extra-links-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+.extra-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.extra-link { display: flex; align-items: center; gap: 10px; padding: 13px 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-mid); border-radius: 10px; text-decoration: none; color: inherit; transition: all 0.2s; }
+.extra-link:hover { border-color: var(--border); background: rgba(116,204,0,0.05); }
+.extra-link-icon { font-size: 1rem; }
+.extra-link-label { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.78); }
+
+/* CONTEXTO — muda conteúdo conforme parâmetro na URL */
+.ctx-representante, .ctx-investidor, .ctx-maquininha, .ctx-padrao { display: none; }
+.ctx-representante.active, .ctx-investidor.active, .ctx-maquininha.active, .ctx-padrao.active { display: block; }
+
+/* FOOTER */
+footer { padding: 32px 60px; border-top: 1px solid var(--border-mid); display: flex; align-items: center; justify-content: space-between; font-size: 0.7rem; color: rgba(255,255,255,0.4); flex-wrap: wrap; gap: 12px; }
+footer a { color: rgba(116,204,0,0.6); text-decoration: none; }
+footer a:hover { color: var(--accent); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 600px) {
+  nav { padding: 0 24px; }
+  .extra-links-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; text-align: center; padding: 28px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></a>
+  <div class="nav-cta">
+    <a href="index.html" class="btn-nav">Voltar ao site</a>
+  </div>
+</nav>
+
+<main>
+  <div class="mesh"></div>
+  <div class="success-card">
+
+    <!-- ÍCONE -->
+    <div class="success-icon-wrap">
+      <div class="success-ring"></div>
+      <div class="success-ring-2"></div>
+      <div class="success-icon-bg">
+        <span class="success-check">&#10003;</span>
+      </div>
+    </div>
+
+    <!-- TÍTULO — dinâmico por contexto -->
+    <div class="ctx-representante">
+      <h1 class="success-title">Cadastro <em>enviado!</em></h1>
+      <p class="success-sub">Recebemos seu interesse em ser representante NOOON. Nossa equipe entrará em contato via WhatsApp em até <strong>24 horas</strong> para dar início ao seu onboarding.</p>
+    </div>
+    <div class="ctx-investidor">
+      <h1 class="success-title">Interesse <em>registrado!</em></h1>
+      <p class="success-sub">Recebemos seu interesse de investimento. Nossa equipe de negócios entrará em contato via WhatsApp em até <strong>24 horas</strong> para agendar uma conversa inicial.</p>
+    </div>
+    <div class="ctx-maquininha">
+      <h1 class="success-title">Solicitação <em>recebida!</em></h1>
+      <p class="success-sub">Recebemos sua solicitação de maquininha. O representante NOOON da sua região entrará em contato em até <strong>24 horas</strong> para finalizar a ativação.</p>
+    </div>
+    <div class="ctx-padrao">
+      <h1 class="success-title"><em>Obrigado!</em></h1>
+      <p class="success-sub">Recebemos sua mensagem. Nossa equipe entrará em contato via WhatsApp em até <strong>24 horas</strong>.</p>
+    </div>
+
+    <!-- PRÓXIMOS PASSOS -->
+    <div class="steps-card">
+      <p class="steps-title">O que acontece agora</p>
+      <div class="steps-list">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Análise do seu cadastro</strong>Nossa equipe revisa suas informações e prepara o melhor atendimento para o seu perfil.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Contato via WhatsApp</strong>Em até 24 horas você recebe uma mensagem do nosso time para dar o próximo passo.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Ativação ou onboarding</strong>Dependendo do seu interesse, iniciamos a ativação da maquininha ou seu processo de representante.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AÇÕES -->
+    <div class="success-actions">
+      <a href="https://wa.me/5584987885959?text=Olá!%20Acabei%20de%20preencher%20um%20formulário%20no%20site%20NOOON%20e%20gostaria%20de%20agilizar%20o%20atendimento." target="_blank" class="btn-primary">
+        Acelerar pelo WhatsApp
+      </a>
+      <a href="index.html" class="btn-ghost">
+        Voltar ao site &rarr;
+      </a>
+    </div>
+
+    <!-- LINKS EXTRAS -->
+    <div class="extra-links">
+      <p class="extra-links-title">Explore enquanto aguarda</p>
+      <div class="extra-links-grid">
+        <a href="maquinas.html" class="extra-link">
+          <span class="extra-link-icon">&#128179;</span>
+          <span class="extra-link-label">Ver maquininhas</span>
+        </a>
+        <a href="representante.html" class="extra-link">
+          <span class="extra-link-icon">&#128203;</span>
+          <span class="extra-link-label">Ser representante</span>
+        </a>
+        <a href="faq.html" class="extra-link">
+          <span class="extra-link-icon">&#10067;</span>
+          <span class="extra-link-label">Perguntas frequentes</span>
+        </a>
+        <a href="blog.html" class="extra-link">
+          <span class="extra-link-icon">&#128214;</span>
+          <span class="extra-link-label">Blog financeiro</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <span>© 2025 NOOON — Ecossistema Financeiro</span>
+  <span><a href="mailto:contato@nooon.com.br">contato@nooon.com.br</a> &middot; <a href="https://wa.me/5584987885959">(84) 98788-5959</a></span>
+</footer>
+
+<script>
+// Detecta contexto pelo parâmetro ?origem= na URL
+// Ex: obrigado.html?origem=representante
+const params = new URLSearchParams(window.location.search);
+const origem = params.get('origem') || 'padrao';
+const ctxMap = {
+  representante: '.ctx-representante',
+  investidor: '.ctx-investidor',
+  maquininha: '.ctx-maquininha',
+  padrao: '.ctx-padrao',
+};
+const seletor = ctxMap[origem] || '.ctx-padrao';
+document.querySelector(seletor)?.classList.add('active');
+
+// Redireciona para home após 5 minutos de inatividade
+let timer = setTimeout(() => { window.location.href = 'index.html'; }, 300000);
+document.addEventListener('mousemove', () => { clearTimeout(timer); timer = setTimeout(() => { window.location.href = 'index.html'; }, 300000); });
+</script>
+</body>
+</html>
