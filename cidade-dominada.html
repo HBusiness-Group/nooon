@@ -372,18 +372,19 @@ footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(
 // ===== DADOS DAS CIDADES =====
 const cidades = [
   // AMAZONAS — Ativos
-  { nome: 'Manaus', estado: 'AM', status: 'ativo', lat: -3.1019, lng: -60.0250, info: 'Sede do NOOON. Operação completa com múltiplos representantes.' },
+  { nome: 'Manaus', estado: 'AM', status: 'ativo', lat: -3.1019, lng: -60.0250, info: 'Sede NORTE do NOOON. Operação completa com múltiplos representantes.' },
   //{ nome: 'Parintins', estado: 'AM', status: 'ativo', lat: -2.6296, lng: -56.7358, info: 'Representante ativo. Maquininhas instaladas e operando.' },
   //{ nome: 'Itacoatiara', estado: 'AM', status: 'ativo', lat: -3.1431, lng: -58.4444, info: 'Representante ativo com portfólio em crescimento.' },
 
   // RIO GRANDE DO NORTE — Ativos
-  { nome: 'Natal', estado: 'RN', status: 'ativo', lat: -5.7945, lng: -35.2110, info: 'Hub do NOOON no RN. Operação ativa com representantes.' },
+  { nome: 'Natal', estado: 'RN', status: 'ativo', lat: -5.7945, lng: -35.2110, info: 'Hub NORDESTE do NOOON no RN. Operação ativa com representantes.' },
   //{ nome: 'Mossoró', estado: 'RN', status: 'ativo', lat: -5.1875, lng: -37.3444, info: 'Representante ativo. Segunda maior cidade do estado.' },
 
   // AMAZONAS — Em expansão
-  { nome: 'Tefé', estado: 'AM', status: 'expansao', lat: -3.3643, lng: -64.7069, info: 'Processo de implantação iniciado. Representante em treinamento.' },
-  { nome: 'Coari', estado: 'AM', status: 'expansao', lat: -4.0853, lng: -63.1403, info: 'Em processo de expansão. Oportunidade aberta para parceiros.' },
-  { nome: 'Tabatinga', estado: 'AM', status: 'expansao', lat: -4.2519, lng: -69.9381, info: 'Expansão planejada para fronteira tríplice.' },
+  //{ nome: 'Tefé', estado: 'AM', status: 'expansao', lat: -3.3643, lng: -64.7069, info: 'Processo de implantação iniciado. Representante em treinamento.' },
+  //{ nome: 'Coari', estado: 'AM', status: 'expansao', lat: -4.0853, lng: -63.1403, info: 'Em processo de expansão. Oportunidade aberta para parceiros.' },
+  //{ nome: 'Tabatinga', estado: 'AM', status: 'expansao', lat: -4.2519, lng: -69.9381, info: 'Expansão planejada para fronteira tríplice.' },
+  { nome: 'Iranduba', estado: 'AM', status: 'expansao', lat: -3.2847, lng: -.60.1903, info: 'Polo de residencial e comercial em processo de implantação.' },
   { nome: 'Presidente Figueiredo', estado: 'AM', status: 'expansao', lat: -2.0308, lng: -60.0253, info: 'Polo de ecoturismo em processo de implantação.' },
 
   // RIO GRANDE DO NORTE — Em expansão
@@ -393,6 +394,9 @@ const cidades = [
   { nome: 'Macaíba', estado: 'RN', status: 'expansao', lat: -5.8583, lng: -35.3544, info: 'Município em crescimento. Implantação em andamento.' },
 
   // AMAZONAS — Disponíveis
+  { nome: 'Tefé', estado: 'AM', status: 'disponivel', lat: -3.3643, lng: -64.7069, info: 'Disponível para representante comercial.' },
+  { nome: 'Coari', estado: 'AM', status: 'disponivel', lat: -4.0853, lng: -63.1403, info: 'EDisponível para representante comercial.' },
+  { nome: 'Tabatinga', estado: 'AM', status: 'expansao', lat: -4.2519, lng: -69.9381, info: 'Expansão planejada para fronteira tríplice.' },
   { nome: 'Parintins', estado: 'AM', status: 'disponivel', lat: -2.6296, lng: -56.7358, info: 'Disponível para representante local.' },
   { nome: 'Itacoatiara', estado: 'AM', status: 'disponivel', lat: -3.1431, lng: -58.4444, info: 'Disponível para representante local.' },
   { nome: 'Benjamin Constant', estado: 'AM', status: 'disponivel', lat: -4.3731, lng: -70.0325, info: 'Cidade disponível. Seja o primeiro representante!' },
