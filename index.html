@@ -1,187 +1,202 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>NOOON | Ecossistema Financeiro</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOOON | Ecossistema Financeiro</title>
 
-  <meta name="description" content="NOOON é um ecossistema financeiro completo: maquininhas, renda e investimento." />
+<style>
+:root {
+  --verde-neon: #74cc00;
+  --verde-escuro: #2e6417;
+  --bg-dark: #020402;
+}
 
-  <meta property="og:image" content="assets/logo4_nooon.png" />
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
-  <link rel="icon" href="assets/logo3_nooon.png" />
+body {
+  background: radial-gradient(circle at top, #0c1f0c, #000);
+  color: #fff;
+}
 
-  <style>
-    :root {
-      --verde: #74cc00;
-      --verde-escuro: #2e6417;
-      --bg: #050505;
-      --glass: rgba(255,255,255,0.05);
-    }
+/* HEADER GLASS */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  backdrop-filter: blur(20px);
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  z-index: 1000;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+header img {
+  height: 30px;
+}
 
-    body {
-      background: radial-gradient(circle at top, #0b0b0b, #000);
-      color: #fff;
-    }
+nav a {
+  margin: 0 10px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  opacity: 0.8;
+}
 
-    header {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      backdrop-filter: blur(20px);
-      background: rgba(0,0,0,0.4);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 20px;
-      z-index: 1000;
-    }
+nav a:hover {
+  opacity: 1;
+}
 
-    header img {
-      height: 28px;
-    }
+/* HERO */
+.hero {
+  padding-top: 160px;
+  text-align: center;
+}
 
-    nav a {
-      margin: 0 10px;
-      color: #fff;
-      text-decoration: none;
-      font-size: 13px;
-      opacity: 0.8;
-    }
+.hero img {
+  width: 140px;
+  margin-bottom: 20px;
+}
 
-    nav a:hover {
-      opacity: 1;
-    }
+.hero h1 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
 
-    section {
-      padding: 100px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
+.hero p {
+  opacity: 0.7;
+  max-width: 500px;
+  margin: auto;
+}
 
-    .hero {
-      text-align: center;
-      padding-top: 140px;
-    }
+/* BUTTONS */
+.btn-group {
+  margin-top: 35px;
+}
 
-    .hero img {
-      width: 120px;
-      margin-bottom: 20px;
-    }
+.btn {
+  display: inline-block;
+  margin: 10px;
+  padding: 14px 24px;
+  border-radius: 40px;
+  background: linear-gradient(135deg, var(--verde-neon), #a6ff00);
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(116,204,0,0.4);
+}
 
-    h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
+/* SECTIONS */
+section {
+  padding: 100px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
 
-    p {
-      opacity: 0.7;
-    }
+.section-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-    .btn-group {
-      margin-top: 30px;
-    }
+.section-title h2 {
+  font-size: 26px;
+}
 
-    .btn {
-      display: inline-block;
-      margin: 10px;
-      padding: 14px 22px;
-      border-radius: 30px;
-      background: linear-gradient(135deg, var(--verde), #a6ff00);
-      color: #000;
-      font-weight: bold;
-      text-decoration: none;
-    }
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
+/* CARDS */
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: 0.3s;
+}
 
-    .card {
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      padding: 25px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(116,204,0,0.2);
+}
 
-    .card img {
-      width: 100%;
-      margin-top: 15px;
-    }
+/* FOOTER */
+footer {
+  margin-top: 60px;
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.7;
+}
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    footer {
-      margin-top: 60px;
-      padding: 40px 20px;
-      text-align: center;
-      font-size: 12px;
-      opacity: 0.6;
-    }
-
-    .footer-brands {
-      margin-top: 10px;
-      font-size: 11px;
-    }
-  </style>
+/* MOBILE */
+@media (max-width: 768px) {
+  nav {
+    display: none;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <img src="assets/logo4_nooon.png" />
+  <img src="assets/logo4_nooon.png">
   <nav>
     <a href="#">Início</a>
     <a href="maquinas.html">Maquininhas</a>
     <a href="#ganhe">Ganhe</a>
     <a href="investidores.html">Investidores</a>
     <a href="faq.html">FAQ</a>
-    <a href="https://portal.nooon.com.br" target="_blank">Portal</a>
   </nav>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <img src="assets/logo3_nooon.png" />
-  <h1>Não é só pagamento. É estratégia.</h1>
-  <p>Venda mais, gere renda e participe de um ecossistema financeiro em expansão.</p>
+  <img src="assets/logo3_nooon.png">
+  <h1>Não é só pagamento.<br>É estratégia.</h1>
+  <p>Um ecossistema financeiro que conecta vendas, renda e crescimento.</p>
 
   <div class="btn-group">
-    <a href="maquinas.html" class="btn">Vender mais</a>
-    <a href="#ganhe" class="btn">Ganhar dinheiro</a>
-    <a href="investidores.html" class="btn">Investir</a>
+    <a href="maquinas.html" class="btn">Quero vender mais</a>
+    <a href="#ganhe" class="btn">Quero ganhar dinheiro</a>
+    <a href="investidores.html" class="btn">Quero investir</a>
   </div>
 </section>
 
-<!-- MAQUINAS -->
+<!-- ECOSSISTEMA -->
 <section>
   <div class="section-title">
-    <h2>Maquininhas NOOON</h2>
+    <h2>O Ecossistema NOOON</h2>
   </div>
 
   <div class="grid">
     <div class="card">
-      <h3>S920</h3>
-      <img src="assets/pos_s920.png">
+      <h3>Para quem vende</h3>
+      <p>Receba pagamentos e aumente seu faturamento com controle total.</p>
     </div>
 
     <div class="card">
-      <h3>A930</h3>
-      <img src="assets/pos_a930.png">
+      <h3>Para quem quer renda</h3>
+      <p>Ganhe comissões e construa receita recorrente.</p>
+    </div>
+
+    <div class="card">
+      <h3>Para quem quer escalar</h3>
+      <p>Participe da expansão e crescimento do ecossistema.</p>
     </div>
   </div>
 </section>
@@ -195,36 +210,25 @@
   <div class="grid">
     <div class="card">
       <h3>Representante</h3>
-      <p>Venda máquinas e construa sua rede</p>
+      <p>Venda máquinas e crie sua rede.</p>
       <a href="representante.html" class="btn">Entrar</a>
     </div>
 
     <div class="card">
       <h3>Parceiro Digital</h3>
-      <p>Monetize sua audiência</p>
+      <p>Monetize sua audiência.</p>
       <a href="parceiros-digitais.html" class="btn">Entrar</a>
     </div>
 
     <div class="card">
       <h3>Cidade Dominada</h3>
-      <p>Expansão por território</p>
+      <p>Assuma regiões estratégicas.</p>
       <a href="cidade-dominada.html" class="btn">Explorar</a>
     </div>
   </div>
 </section>
 
-<!-- TAXAS -->
-<section>
-  <div class="section-title">
-    <h2>Taxas</h2>
-  </div>
-
-  <div class="card">
-    <img src="assets/taxas_nooon.png">
-  </div>
-</section>
-
-<!-- CTA -->
+<!-- CTA FINAL -->
 <section class="hero">
   <h2>Escolha como entrar</h2>
 
@@ -237,10 +241,8 @@
 
 <footer>
   Desenvolvido por AbraCadabra · HBusiness Group Tecnologia
-
-  <div class="footer-brands">
-    NOOON Ecossistema Financeiro
-  </div>
+  <br><br>
+  NOOON Ecossistema Financeiro
 </footer>
 
 </body>
