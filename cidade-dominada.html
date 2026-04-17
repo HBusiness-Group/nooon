@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cidade Dominada — NOOON</title>
+<meta name="description" content="Veja onde o NOOON já está presente e conquiste sua cidade.">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root {
+  --deep: #0d1f0a;
+  --dark: #142910;
+  --mid: #1e3d14;
+  --primary: #2e6417;
+  --accent: #74cc00;
+  --accent-light: #9ddd3a;
+  --white: #ffffff;
+  --border: rgba(116,204,0,0.15);
+  --border-mid: rgba(116,204,0,0.08);
+  --status-ativo: #74cc00;
+  --status-expansao: #f59e0b;
+  --status-disponivel: rgba(255,255,255,0.25);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--deep); color: var(--white); font-family: 'Open Sans', sans-serif; overflow-x: hidden; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--deep); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 500; display: flex; align-items: center; justify-content: space-between; padding: 0 60px; height: 72px; background: rgba(13,31,10,0.96); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border-mid); }
+.nav-logo img { height: 38px; width: auto; }
+.nav-menu { display: flex; gap: 4px; list-style: none; }
+.nav-menu a { display: block; padding: 8px 14px; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.82); text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+.nav-menu a:hover, .nav-menu a.active { color: var(--white); background: rgba(116,204,0,0.1); }
+.nav-cta { display: flex; align-items: center; gap: 12px; }
+.btn-nav { padding: 9px 22px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.25s; }
+.btn-nav:hover { background: var(--accent-light); }
+.btn-nav-outline { padding: 9px 22px; background: transparent; color: var(--accent); font-family: 'Open Sans', sans-serif; font-size: 0.78rem; font-weight: 600; border: 1px solid var(--border); border-radius: 8px; text-decoration: none; transition: all 0.25s; }
+.btn-nav-outline:hover { background: rgba(116,204,0,0.08); }
+
+/* COMMONS */
+.section-tag { display: inline-block; padding: 5px 16px; background: rgba(116,204,0,0.1); border: 1px solid var(--border); border-radius: 100px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.section-heading { font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+.section-heading em { color: var(--accent); font-style: normal; }
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 30px; background: var(--accent); color: var(--deep); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(116,204,0,0.3); background: var(--accent-light); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 15px 30px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--white); font-family: 'Open Sans', sans-serif; font-size: 0.9rem; font-weight: 600; border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+.btn-ghost:hover { background: rgba(255,255,255,0.09); }
+
+/* HERO */
+#hero { padding: 120px 60px 60px; position: relative; overflow: hidden; border-bottom: 1px solid var(--border-mid); }
+.hero-mesh { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 60% 50% at 100% 0%, rgba(46,100,23,0.4) 0%, transparent 60%); }
+.hero-inner { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.hero-heading { font-size: clamp(2.2rem, 4.5vw, 4rem); font-weight: 800; line-height: 1.02; letter-spacing: -0.025em; margin-bottom: 20px; }
+.hero-heading em { color: var(--accent); font-style: normal; }
+.hero-sub { font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,0.82); margin-bottom: 36px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* CONTADORES */
+.hero-counters { display: flex; flex-direction: column; gap: 16px; }
+.counter-card { padding: 22px 26px; background: rgba(116,204,0,0.06); border: 1px solid rgba(116,204,0,0.18); border-radius: 14px; display: flex; align-items: center; gap: 20px; }
+.counter-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.counter-dot.ativo { background: var(--status-ativo); box-shadow: 0 0 8px rgba(116,204,0,0.6); }
+.counter-dot.expansao { background: var(--status-expansao); box-shadow: 0 0 8px rgba(245,158,11,0.6); }
+.counter-dot.disponivel { background: var(--status-disponivel); }
+.counter-num { font-size: 1.6rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.counter-num.amber { color: var(--status-expansao); }
+.counter-num.muted { color: rgba(255,255,255,0.55); }
+.counter-info {}
+.counter-label { font-size: 0.82rem; font-weight: 700; margin-bottom: 2px; }
+.counter-desc { font-size: 0.72rem; color: rgba(255,255,255,0.65); }
+
+/* MAPA */
+#mapa-section { padding: 0 60px 80px; }
+.mapa-inner { max-width: 1100px; margin: 0 auto; }
+
+.mapa-controles { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+.mapa-filtros { display: flex; gap: 8px; flex-wrap: wrap; }
+.filtro-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-mid); border-radius: 100px; font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.72); cursor: pointer; transition: all 0.2s; }
+.filtro-btn.active, .filtro-btn:hover { border-color: var(--border); color: var(--white); background: rgba(116,204,0,0.08); }
+.filtro-dot { width: 8px; height: 8px; border-radius: 50%; }
+.mapa-legend { display: flex; gap: 20px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 7px; font-size: 0.72rem; color: rgba(255,255,255,0.72); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+.mapa-wrap { border-radius: 18px; overflow: hidden; border: 1px solid var(--border-mid); position: relative; }
+#map { height: 520px; width: 100%; background: var(--dark); }
+
+/* Leaflet dark override */
+.leaflet-container { background: #0d1f0a !important; font-family: 'Open Sans', sans-serif; }
+.leaflet-tile { filter: brightness(0.4) saturate(0.3) hue-rotate(80deg); }
+.leaflet-control-zoom a { background: var(--dark) !important; color: var(--accent) !important; border-color: var(--border) !important; }
+.leaflet-control-zoom a:hover { background: var(--mid) !important; }
+.leaflet-control-attribution { background: rgba(13,31,10,0.8) !important; color: rgba(255,255,255,0.3) !important; font-size: 0.6rem !important; }
+.leaflet-control-attribution a { color: rgba(116,204,0,0.6) !important; }
+
+/* POPUP CUSTOMIZADO */
+.leaflet-popup-content-wrapper { background: var(--dark) !important; border: 1px solid var(--border) !important; border-radius: 12px !important; box-shadow: 0 16px 40px rgba(0,0,0,0.6) !important; }
+.leaflet-popup-tip { background: var(--dark) !important; }
+.leaflet-popup-content { margin: 0 !important; padding: 0 !important; }
+.popup-card { padding: 18px 20px; min-width: 200px; }
+.popup-status { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.popup-status-dot { width: 6px; height: 6px; border-radius: 50%; }
+.popup-cidade { font-size: 1rem; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+.popup-estado { font-size: 0.72rem; color: rgba(255,255,255,0.55); margin-bottom: 12px; }
+.popup-info { font-size: 0.75rem; color: rgba(255,255,255,0.75); line-height: 1.6; margin-bottom: 12px; }
+.popup-cta { display: block; padding: 8px 14px; background: var(--accent); color: var(--deep); font-size: 0.72rem; font-weight: 700; border-radius: 7px; text-align: center; text-decoration: none; transition: all 0.2s; }
+.popup-cta:hover { background: var(--accent-light); }
+.popup-cta.ghost { background: rgba(116,204,0,0.1); color: var(--accent); border: 1px solid var(--border); }
+.popup-cta.ghost:hover { background: rgba(116,204,0,0.2); }
+
+/* LISTA DE CIDADES */
+#lista-section { padding: 80px 60px; background: var(--dark); border-top: 1px solid var(--border-mid); }
+.lista-inner { max-width: 1100px; margin: 0 auto; }
+.lista-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 36px; }
+.lista-estados { display: flex; gap: 8px; }
+.estado-tab { padding: 8px 18px; background: rgba(255,255,255,0.04); border: 1px solid var(--border-mid); border-radius: 8px; font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.72); cursor: pointer; transition: all 0.2s; }
+.estado-tab.active { background: rgba(116,204,0,0.1); border-color: var(--border); color: var(--accent); }
+
+.cidades-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.cidade-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-mid); border-radius: 10px; transition: all 0.2s; cursor: pointer; }
+.cidade-card:hover { border-color: var(--border); background: rgba(116,204,0,0.04); }
+.cidade-card-left { display: flex; align-items: center; gap: 10px; }
+.cidade-status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.cidade-nome { font-size: 0.85rem; font-weight: 700; }
+.cidade-estado-label { font-size: 0.65rem; color: rgba(255,255,255,0.55); }
+.cidade-badge { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; }
+.badge-ativo { background: rgba(116,204,0,0.15); color: var(--accent); }
+.badge-expansao { background: rgba(245,158,11,0.15); color: #f59e0b; }
+.badge-disponivel { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.5); }
+
+/* CTA DUPLO */
+#cta-section { padding: 100px 60px; border-top: 1px solid var(--border-mid); }
+.cta-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.cta-card { padding: 44px 40px; border-radius: 20px; border: 1px solid var(--border-mid); position: relative; overflow: hidden; transition: all 0.3s; }
+.cta-card:hover { border-color: var(--border); transform: translateY(-4px); }
+.cta-card.primary-card { background: linear-gradient(145deg, rgba(116,204,0,0.12) 0%, rgba(116,204,0,0.04) 100%); border-color: rgba(116,204,0,0.25); }
+.cta-card.secondary-card { background: var(--dark); }
+.cta-card-tag { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.cta-card-tag::before { content: ''; display: block; width: 16px; height: 2px; background: var(--accent); }
+.cta-card-heading { font-size: 1.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+.cta-card-heading em { color: var(--accent); font-style: normal; }
+.cta-card-desc { font-size: 0.84rem; color: rgba(255,255,255,0.75); line-height: 1.7; margin-bottom: 28px; }
+.cta-card-action { display: inline-flex; align-items: center; gap: 8px; }
+
+/* FOOTER */
+footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(--border-mid); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px; }
+.footer-logo { margin-bottom: 12px; }
+.footer-logo img { height: 26px; width: auto; opacity: 0.9; }
+.footer-desc { font-size: 0.78rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 220px; }
+.footer-contact { margin-top: 12px; font-size: 0.72rem; color: rgba(255,255,255,0.65); line-height: 1.8; }
+.footer-col-title { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 14px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+.footer-bottom { grid-column: 1/-1; padding-top: 24px; border-top: 1px solid var(--border-mid); display: flex; justify-content: space-between; align-items: center; font-size: 0.7rem; color: rgba(255,255,255,0.5); }
+.footer-bottom a { color: rgba(116,204,0,0.7); text-decoration: none; }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  nav { padding: 0 24px; }
+  .nav-menu { display: none; }
+  #hero { padding: 110px 24px 60px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  #mapa-section { padding: 0 24px 60px; }
+  #lista-section, #cta-section { padding: 60px 24px; }
+  .cidades-grid { grid-template-columns: 1fr 1fr; }
+  .cta-inner { grid-template-columns: 1fr; }
+  footer { grid-template-columns: 1fr 1fr; padding: 44px 24px; }
+}
+@media (max-width: 600px) {
+  .cidades-grid { grid-template-columns: 1fr; }
+  #map { height: 380px; }
+  footer { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></a>
+  <ul class="nav-menu">
+    <li><a href="maquinas.html">Maquininhas</a></li>
+    <li><a href="representante.html">Seja Representante</a></li>
+    <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+    <li><a href="investidores.html">Investidores</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="area-representante.html" class="btn-nav-outline">Área do Representante</a>
+    <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav">Acessar Portal</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-inner">
+    <div>
+      <span class="section-tag">Expansão territorial</span>
+      <h1 class="hero-heading">Cada cidade é um <em>território a dominar.</em></h1>
+      <p class="hero-sub">Acompanhe a expansão do NOOON pelo Amazonas e Rio Grande do Norte. Veja onde já estamos, onde estamos chegando — e onde você pode liderar.</p>
+      <div class="hero-actions">
+        <a href="representante.html" class="btn-primary">Quero minha cidade</a>
+        <a href="#mapa-section" class="btn-ghost">Ver mapa &darr;</a>
+      </div>
+    </div>
+    <div class="hero-counters reveal">
+      <div class="counter-card">
+        <div class="counter-dot ativo"></div>
+        <div class="counter-num" id="cnt-ativo">5</div>
+        <div class="counter-info">
+          <div class="counter-label">Cidades ativas</div>
+          <div class="counter-desc">Com representante e operação em andamento</div>
+        </div>
+      </div>
+      <div class="counter-card">
+        <div class="counter-dot expansao"></div>
+        <div class="counter-num amber" id="cnt-expansao">8</div>
+        <div class="counter-info">
+          <div class="counter-label">Em expansão</div>
+          <div class="counter-desc">Processo de implantação iniciado</div>
+        </div>
+      </div>
+      <div class="counter-card">
+        <div class="counter-dot disponivel"></div>
+        <div class="counter-num muted" id="cnt-disponivel">40+</div>
+        <div class="counter-info">
+          <div class="counter-label">Disponíveis</div>
+          <div class="counter-desc">Aguardando representante local</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section id="mapa-section">
+  <div class="mapa-inner">
+    <div class="mapa-controles reveal">
+      <div class="mapa-filtros">
+        <button class="filtro-btn active" onclick="filtrarMapa('todos', this)">
+          <span class="filtro-dot" style="background:var(--accent)"></span> Todos
+        </button>
+        <button class="filtro-btn" onclick="filtrarMapa('ativo', this)">
+          <span class="filtro-dot" style="background:var(--status-ativo)"></span> Ativos
+        </button>
+        <button class="filtro-btn" onclick="filtrarMapa('expansao', this)">
+          <span class="filtro-dot" style="background:var(--status-expansao)"></span> Em expansão
+        </button>
+        <button class="filtro-btn" onclick="filtrarMapa('disponivel', this)">
+          <span class="filtro-dot" style="background:var(--status-disponivel)"></span> Disponíveis
+        </button>
+      </div>
+      <div class="mapa-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#74cc00;box-shadow:0 0 6px rgba(116,204,0,0.6)"></div>Ativo</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;box-shadow:0 0 6px rgba(245,158,11,0.5)"></div>Em expansão</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,255,0.3)"></div>Disponível</div>
+      </div>
+    </div>
+    <div class="mapa-wrap reveal">
+      <div id="map"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTA -->
+<section id="lista-section">
+  <div class="lista-inner">
+    <div class="lista-header reveal">
+      <h2 class="section-heading" style="font-size:1.6rem;">Cidades do <em>ecossistema</em></h2>
+      <div class="lista-estados">
+        <button class="estado-tab active" onclick="filtrarEstado('todos', this)">Todos</button>
+        <button class="estado-tab" onclick="filtrarEstado('AM', this)">Amazonas</button>
+        <button class="estado-tab" onclick="filtrarEstado('RN', this)">Rio Grande do Norte</button>
+      </div>
+    </div>
+    <div class="cidades-grid reveal" id="cidades-grid">
+      <!-- Preenchido via JS -->
+    </div>
+  </div>
+</section>
+
+<!-- CTA DUPLO -->
+<section id="cta-section">
+  <div class="cta-inner">
+    <div class="cta-card primary-card reveal">
+      <p class="cta-card-tag">Para empreendedores</p>
+      <h2 class="cta-card-heading">Seja o líder <em>na sua cidade</em></h2>
+      <p class="cta-card-desc">Torne-se o representante NOOON da sua região e conquiste território antes da concorrência chegar. Comissão recorrente, suporte completo e exclusividade de área.</p>
+      <div class="cta-card-action">
+        <a href="representante.html" class="btn-primary">Quero minha cidade &rarr;</a>
+      </div>
+    </div>
+    <div class="cta-card secondary-card reveal reveal-delay-1">
+      <p class="cta-card-tag">Para investidores</p>
+      <h2 class="cta-card-heading">Invista na <em>expansão</em></h2>
+      <p class="cta-card-desc">Financie a entrada do NOOON em novas cidades e receba retorno sobre os ativos e operações implantadas. Modelo Franquia Light a partir de R$20.000.</p>
+      <div class="cta-card-action">
+        <a href="investidores.html" class="btn-ghost">Ver modelos de investimento &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo"><img src="assets/logo1_nooon.png" alt="NOOON"></div>
+    <p class="footer-desc">Ecossistema financeiro completo para pessoas e negócios. Manaus, AM — Brasil.</p>
+    <p class="footer-contact">contato@nooon.com.br<br>(84) 98788-5959</p>
+  </div>
+  <div>
+    <p class="footer-col-title">Produtos</p>
+    <ul class="footer-links">
+      <li><a href="maquinas.html">Maquininhas</a></li>
+      <li><a href="https://portal.nooon.com.br" target="_blank">Banco Digital</a></li>
+      <li><a href="https://caixa.nooon.com.br" target="_blank">NOOON Caixa</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Parceiros</p>
+    <ul class="footer-links">
+      <li><a href="representante.html">Seja Representante</a></li>
+      <li><a href="parceiros-digitais.html">Parceiros Digitais</a></li>
+      <li><a href="investidores.html">Investidores</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Ajuda</p>
+    <ul class="footer-links">
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="area-representante.html">Área do Representante</a></li>
+      <li><a href="https://wa.me/5584987885959" target="_blank">WhatsApp</a></li>
+      <li><a href="mailto:contato@nooon.com.br">E-mail</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 NOOON — Ecossistema Financeiro. Todos os direitos reservados.</span>
+    <span>Desenvolvido por <a href="https://abracadabra.srv.br" target="_blank">AbraCadabra</a> &middot; <a href="https://hbusiness-group.com.br" target="_blank">HBusiness Group</a></span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+// ===== DADOS DAS CIDADES =====
+const cidades = [
+  // AMAZONAS — Ativos
+  { nome: 'Manaus', estado: 'AM', status: 'ativo', lat: -3.1019, lng: -60.0250, info: 'Sede do NOOON. Operação completa com múltiplos representantes.' },
+  { nome: 'Parintins', estado: 'AM', status: 'ativo', lat: -2.6296, lng: -56.7358, info: 'Representante ativo. Maquininhas instaladas e operando.' },
+  { nome: 'Itacoatiara', estado: 'AM', status: 'ativo', lat: -3.1431, lng: -58.4444, info: 'Representante ativo com portfólio em crescimento.' },
+
+  // RIO GRANDE DO NORTE — Ativos
+  { nome: 'Natal', estado: 'RN', status: 'ativo', lat: -5.7945, lng: -35.2110, info: 'Hub do NOOON no RN. Operação ativa com representantes.' },
+  { nome: 'Mossoró', estado: 'RN', status: 'ativo', lat: -5.1875, lng: -37.3444, info: 'Representante ativo. Segunda maior cidade do estado.' },
+
+  // AMAZONAS — Em expansão
+  { nome: 'Tefé', estado: 'AM', status: 'expansao', lat: -3.3643, lng: -64.7069, info: 'Processo de implantação iniciado. Representante em treinamento.' },
+  { nome: 'Coari', estado: 'AM', status: 'expansao', lat: -4.0853, lng: -63.1403, info: 'Em processo de expansão. Oportunidade aberta para parceiros.' },
+  { nome: 'Tabatinga', estado: 'AM', status: 'expansao', lat: -4.2519, lng: -69.9381, info: 'Expansão planejada para fronteira tríplice.' },
+  { nome: 'Presidente Figueiredo', estado: 'AM', status: 'expansao', lat: -2.0308, lng: -60.0253, info: 'Polo de ecoturismo em processo de implantação.' },
+
+  // RIO GRANDE DO NORTE — Em expansão
+  { nome: 'Parnamirim', estado: 'RN', status: 'expansao', lat: -5.9155, lng: -35.2632, info: 'Expansão em andamento na Grande Natal.' },
+  { nome: 'Caicó', estado: 'RN', status: 'expansao', lat: -6.4586, lng: -37.0980, info: 'Polo do Seridó em processo de implantação.' },
+  { nome: 'São Gonçalo do Amarante', estado: 'RN', status: 'expansao', lat: -5.7944, lng: -35.3280, info: 'Região do aeroporto internacional. Em expansão.' },
+  { nome: 'Macaíba', estado: 'RN', status: 'expansao', lat: -5.8583, lng: -35.3544, info: 'Município em crescimento. Implantação em andamento.' },
+
+  // AMAZONAS — Disponíveis
+  { nome: 'Benjamin Constant', estado: 'AM', status: 'disponivel', lat: -4.3731, lng: -70.0325, info: 'Cidade disponível. Seja o primeiro representante!' },
+  { nome: 'Humaitá', estado: 'AM', status: 'disponivel', lat: -7.5056, lng: -63.0133, info: 'Disponível para representante comercial.' },
+  { nome: 'Lábrea', estado: 'AM', status: 'disponivel', lat: -7.2592, lng: -64.7994, info: 'Cidade disponível. Oportunidade de primeiro mover.' },
+  { nome: 'Borba', estado: 'AM', status: 'disponivel', lat: -4.3906, lng: -59.5939, info: 'Disponível. Potencial de mercado inexplorado.' },
+  { nome: 'Manicoré', estado: 'AM', status: 'disponivel', lat: -5.8094, lng: -61.3006, info: 'Disponível para representante.' },
+  { nome: 'Novo Airão', estado: 'AM', status: 'disponivel', lat: -2.6244, lng: -60.9408, info: 'Cidade turística disponível.' },
+
+  // RIO GRANDE DO NORTE — Disponíveis
+  { nome: 'Ceará-Mirim', estado: 'RN', status: 'disponivel', lat: -5.6375, lng: -35.4247, info: 'Disponível para representante local.' },
+  { nome: 'Currais Novos', estado: 'RN', status: 'disponivel', lat: -6.2601, lng: -36.5139, info: 'Polo de mineração disponível.' },
+  { nome: 'Açu', estado: 'RN', status: 'disponivel', lat: -5.5764, lng: -36.9083, info: 'Polo agrícola disponível.' },
+  { nome: 'Apodi', estado: 'RN', status: 'disponivel', lat: -5.6589, lng: -37.7928, info: 'Disponível no oeste potiguar.' },
+  { nome: 'João Câmara', estado: 'RN', status: 'disponivel', lat: -5.5394, lng: -35.8183, info: 'Disponível. Polo eólico em crescimento.' },
+];
+
+// ===== MAPA =====
+const map = L.map('map', {
+  center: [-4.5, -52],
+  zoom: 5,
+  zoomControl: true,
+  scrollWheelZoom: true,
+});
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap',
+  maxZoom: 18,
+}).addTo(map);
+
+// Cores por status
+const cores = {
+  ativo: '#74cc00',
+  expansao: '#f59e0b',
+  disponivel: 'rgba(255,255,255,0.35)',
+};
+
+const labels = {
+  ativo: { texto: 'Ativo', badge: 'badge-ativo' },
+  expansao: { texto: 'Em expansão', badge: 'badge-expansao' },
+  disponivel: { texto: 'Disponível', badge: 'badge-disponivel' },
+};
+
+function criarIcone(status) {
+  const cor = cores[status];
+  const tamanho = status === 'ativo' ? 14 : status === 'expansao' ? 12 : 9;
+  const glow = status === 'ativo'
+    ? `box-shadow:0 0 0 4px rgba(116,204,0,0.25),0 0 12px rgba(116,204,0,0.4);`
+    : status === 'expansao'
+    ? `box-shadow:0 0 0 3px rgba(245,158,11,0.2),0 0 8px rgba(245,158,11,0.3);`
+    : '';
+  return L.divIcon({
+    className: '',
+    html: `<div style="width:${tamanho}px;height:${tamanho}px;border-radius:50%;background:${cor};${glow}border:2px solid rgba(255,255,255,0.3);transition:transform 0.2s;"></div>`,
+    iconSize: [tamanho, tamanho],
+    iconAnchor: [tamanho/2, tamanho/2],
+  });
+}
+
+let marcadores = [];
+
+cidades.forEach(c => {
+  const m = L.marker([c.lat, c.lng], { icon: criarIcone(c.status) });
+  const ctaUrl = c.status === 'disponivel'
+    ? `representante.html`
+    : c.status === 'expansao'
+    ? `representante.html`
+    : `https://portal.nooon.com.br`;
+  const ctaTexto = c.status === 'disponivel'
+    ? 'Quero ser representante aqui'
+    : c.status === 'expansao'
+    ? 'Conhecer a operação'
+    : 'Ver operação';
+  const corStatus = { ativo: '#74cc00', expansao: '#f59e0b', disponivel: 'rgba(255,255,255,0.4)' }[c.status];
+  const labelStatus = { ativo: 'Ativo', expansao: 'Em expansão', disponivel: 'Disponível' }[c.status];
+
+  m.bindPopup(`
+    <div class="popup-card">
+      <div class="popup-status" style="color:${corStatus}">
+        <div class="popup-status-dot" style="background:${corStatus}"></div>
+        ${labelStatus}
+      </div>
+      <div class="popup-cidade">${c.nome}</div>
+      <div class="popup-estado">${c.estado === 'AM' ? 'Amazonas' : 'Rio Grande do Norte'}</div>
+      <div class="popup-info">${c.info}</div>
+      <a href="${ctaUrl}" class="popup-cta ${c.status !== 'ativo' ? 'ghost' : ''}">${ctaTexto}</a>
+    </div>
+  `, { maxWidth: 260 });
+
+  m._statusData = c.status;
+  m._estadoData = c.estado;
+  m.addTo(map);
+  marcadores.push(m);
+});
+
+// Ajustar bounds para AM e RN
+const bounds = L.latLngBounds(cidades.map(c => [c.lat, c.lng]));
+map.fitBounds(bounds, { padding: [40, 40] });
+
+// FILTRO MAPA
+function filtrarMapa(status, btn) {
+  document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  marcadores.forEach(m => {
+    if (status === 'todos' || m._statusData === status) {
+      m.addTo(map);
+    } else {
+      map.removeLayer(m);
+    }
+  });
+}
+
+// ===== LISTA =====
+function renderLista(filtroEstado = 'todos') {
+  const grid = document.getElementById('cidades-grid');
+  grid.innerHTML = '';
+  const filtradas = cidades.filter(c => filtroEstado === 'todos' || c.estado === filtroEstado);
+  // Ordenar: ativo → expansao → disponivel
+  const ordem = { ativo: 0, expansao: 1, disponivel: 2 };
+  filtradas.sort((a, b) => ordem[a.status] - ordem[b.status]);
+  filtradas.forEach(c => {
+    const { texto, badge } = labels[c.status];
+    const div = document.createElement('div');
+    div.className = 'cidade-card';
+    div.innerHTML = `
+      <div class="cidade-card-left">
+        <div class="cidade-status-dot" style="background:${cores[c.status]}"></div>
+        <div>
+          <div class="cidade-nome">${c.nome}</div>
+          <div class="cidade-estado-label">${c.estado === 'AM' ? 'Amazonas' : 'RN'}</div>
+        </div>
+      </div>
+      <span class="cidade-badge ${badge}">${texto}</span>
+    `;
+    div.addEventListener('click', () => {
+      const m = marcadores.find(m => m._statusData === c.status && Math.abs(m.getLatLng().lat - c.lat) < 0.01);
+      if (m) {
+        map.setView([c.lat, c.lng], 9);
+        m.openPopup();
+        document.getElementById('mapa-section').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    grid.appendChild(div);
+  });
+}
+
+function filtrarEstado(estado, btn) {
+  document.querySelectorAll('.estado-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderLista(estado);
+}
+
+renderLista();
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
