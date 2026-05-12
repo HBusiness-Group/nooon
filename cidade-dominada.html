@@ -374,48 +374,47 @@ footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(
 <script>
 // ===== DADOS DAS CIDADES =====
 const cidades = [
-  // AMAZONAS — Ativos
-  { nome: 'Manaus', estado: 'AM', status: 'ativo', lat: -3.1019, lng: -60.0250, info: 'Sede NORTE do NOOON. Operação completa com múltiplos representantes.' },
-  //{ nome: 'Parintins', estado: 'AM', status: 'ativo', lat: -2.6296, lng: -56.7358, info: 'Representante ativo. Maquininhas instaladas e operando.' },
-  //{ nome: 'Itacoatiara', estado: 'AM', status: 'ativo', lat: -3.1431, lng: -58.4444, info: 'Representante ativo com portfólio em crescimento.' },
+  // AMAZONAS
+  // Ativos
+  { nome: 'Manaus', estado: 'AM', status: 'ativo', lat: -3.1019, lng: -60.0250, info: 'Sede NORTE do NOOON. Capital do Amazonas, polo econômico e tecnológico da região Norte do Brasil.' },
 
-  // RIO GRANDE DO NORTE — Ativos
-  { nome: 'Natal', estado: 'RN', status: 'ativo', lat: -5.7945, lng: -35.2110, info: 'Hub NORDESTE do NOOON no RN. Operação ativa com representantes.' },
-  //{ nome: 'Mossoró', estado: 'RN', status: 'ativo', lat: -5.1875, lng: -37.3444, info: 'Representante ativo. Segunda maior cidade do estado.' },
+  // Em expansão
+  { nome: 'Itacoatiara', estado: 'AM', status: 'expansao', lat: -3.1431, lng: -58.4444, info: 'Importante município, destaque no comércio, agronegócio e logística regional.' },
+  { nome: 'Rio Preto da Eva', estado: 'AM', status: 'expansao', lat: -2.69872, lng: -59.7007, info: 'Município com destaque para agricultura, turismo e comércio regional.' },
+  { nome: 'Vila de Lindóia', estado: 'AM', status: 'expansao', lat: -2.9372, lng: -59.0494, info: 'Município conhecido pela tranquilidade, comércio local e conexão regional.' },
 
-  // AMAZONAS — Em expansão
-  //{ nome: 'Tefé', estado: 'AM', status: 'expansao', lat: -3.3643, lng: -64.7069, info: 'Processo de implantação iniciado. Representante em treinamento.' },
-  //{ nome: 'Coari', estado: 'AM', status: 'expansao', lat: -4.0853, lng: -63.1403, info: 'Em processo de expansão. Oportunidade aberta para parceiros.' },
-  //{ nome: 'Tabatinga', estado: 'AM', status: 'expansao', lat: -4.2519, lng: -69.9381, info: 'Expansão planejada para fronteira tríplice.' },
-  { nome: 'Iranduba', estado: 'AM', status: 'expansao', lat: -3.2847, lng: -60.1903, info: 'Polo de residencial e comercial em processo de implantação.' },
-  { nome: 'Presidente Figueiredo', estado: 'AM', status: 'expansao', lat: -2.0308, lng: -60.0253, info: 'Polo de ecoturismo em processo de implantação.' },
-
-  // RIO GRANDE DO NORTE — Em expansão
-  { nome: 'Parnamirim', estado: 'RN', status: 'expansao', lat: -5.9155, lng: -35.2632, info: 'Expansão em andamento na Grande Natal.' },
-  { nome: 'Caicó', estado: 'RN', status: 'expansao', lat: -6.4586, lng: -37.0980, info: 'Polo do Seridó em processo de implantação.' },
-  { nome: 'São Gonçalo do Amarante', estado: 'RN', status: 'expansao', lat: -5.7944, lng: -35.3280, info: 'Região do aeroporto internacional. Em expansão.' },
-  { nome: 'Macaíba', estado: 'RN', status: 'expansao', lat: -5.8583, lng: -35.3544, info: 'Município em crescimento. Implantação em andamento.' },
-
-  // AMAZONAS — Disponíveis
-  { nome: 'Tefé', estado: 'AM', status: 'disponivel', lat: -3.3643, lng: -64.7069, info: 'Disponível para representante comercial.' },
-  { nome: 'Coari', estado: 'AM', status: 'disponivel', lat: -4.0853, lng: -63.1403, info: 'EDisponível para representante comercial.' },
-  { nome: 'Tabatinga', estado: 'AM', status: 'expansao', lat: -4.2519, lng: -69.9381, info: 'Expansão planejada para fronteira tríplice.' },
-  { nome: 'Parintins', estado: 'AM', status: 'disponivel', lat: -2.6296, lng: -56.7358, info: 'Disponível para representante local.' },
-  { nome: 'Itacoatiara', estado: 'AM', status: 'disponivel', lat: -3.1431, lng: -58.4444, info: 'Disponível para representante local.' },
-  { nome: 'Benjamin Constant', estado: 'AM', status: 'disponivel', lat: -4.3731, lng: -70.0325, info: 'Cidade disponível. Seja o primeiro representante!' },
-  { nome: 'Humaitá', estado: 'AM', status: 'disponivel', lat: -7.5056, lng: -63.0133, info: 'Disponível para representante comercial.' },
-  { nome: 'Lábrea', estado: 'AM', status: 'disponivel', lat: -7.2592, lng: -64.7994, info: 'Cidade disponível. Oportunidade de primeiro mover.' },
-  { nome: 'Borba', estado: 'AM', status: 'disponivel', lat: -4.3906, lng: -59.5939, info: 'Disponível. Potencial de mercado inexplorado.' },
+  // Disponíveis
+  { nome: 'Borba', estado: 'AM', status: 'disponivel', lat: -4.3906, lng: -59.5939, info: 'Disponível para representante.' },
+  { nome: 'Benjamin Constant', estado: 'AM', status: 'disponivel', lat: -4.3731, lng: -70.0325, info: 'Disponível para representante.' },
+  { nome: 'Coari', estado: 'AM', status: 'disponivel', lat: -4.0853, lng: -63.1403, info: 'Disponível para representante.' },
+  { nome: 'Humaitá', estado: 'AM', status: 'disponivel', lat: -7.5056, lng: -63.0133, info: 'Disponível para representante.' },
+  { nome: 'Iranduba', estado: 'AM', status: 'disponivel', lat: -3.2847, lng: -60.1903, info: 'Disponível para representante.' },
+  { nome: 'Lábrea', estado: 'AM', status: 'disponivel', lat: -7.2592, lng: -64.7994, info: 'Disponível para representante.' },
+  { nome: 'Manacapuru', estado: 'AM', status: 'disponivel', lat: -3.29418, lng: -60.63440, info: 'Disponível para representante.' },
   { nome: 'Manicoré', estado: 'AM', status: 'disponivel', lat: -5.8094, lng: -61.3006, info: 'Disponível para representante.' },
-  { nome: 'Novo Airão', estado: 'AM', status: 'disponivel', lat: -2.6244, lng: -60.9408, info: 'Cidade turística disponível.' },
+  { nome: 'Novo Airão', estado: 'AM', status: 'disponivel', lat: -2.6244, lng: -60.9408, info: 'Disponível para representante.' },
+  { nome: 'Parintins', estado: 'AM', status: 'disponivel', lat: -2.6296, lng: -56.7358, info: 'Disponível para representante.' },
+  { nome: 'Presidente Figueiredo', estado: 'AM', status: 'disponivel', lat: -2.0308, lng: -60.0253, info: 'Disponível para representante.' },
+  { nome: 'Tabatinga', estado: 'AM', status: 'disponivel', lat: -4.2519, lng: -69.9381, info: 'Disponível para representante.' },
+  { nome: 'Tefé', estado: 'AM', status: 'disponivel', lat: -3.3643, lng: -64.7069, info: 'Disponível para representante.' },
 
-  // RIO GRANDE DO NORTE — Disponíveis
-  { nome: 'Mossoró', estado: 'RN', status: 'disponivel', lat: -5.1875, lng: -37.3444, info: 'Disponível para representante local.' },
-  { nome: 'Ceará-Mirim', estado: 'RN', status: 'disponivel', lat: -5.6375, lng: -35.4247, info: 'Disponível para representante local.' },
-  { nome: 'Currais Novos', estado: 'RN', status: 'disponivel', lat: -6.2601, lng: -36.5139, info: 'Polo de mineração disponível.' },
-  { nome: 'Açu', estado: 'RN', status: 'disponivel', lat: -5.5764, lng: -36.9083, info: 'Polo agrícola disponível.' },
-  { nome: 'Apodi', estado: 'RN', status: 'disponivel', lat: -5.6589, lng: -37.7928, info: 'Disponível no oeste potiguar.' },
-  { nome: 'João Câmara', estado: 'RN', status: 'disponivel', lat: -5.5394, lng: -35.8183, info: 'Disponível. Polo eólico em crescimento.' },
+  // RIO GRANDE DO NORTE
+  // Ativos
+  { nome: 'Natal', estado: 'RN', status: 'ativo', lat: -5.7945, lng: -35.2110, info: 'Hub NORDESTE do NOOON no RN. Capital do Rio Grande do Norte, referência em turismo, comércio e desenvolvimento regional.' },
+
+  // Em expansão
+  { nome: 'Caicó', estado: 'RN', status: 'expansao', lat: -6.4586, lng: -37.0980, info: 'Importante cidade do Seridó potiguar, referência regional em comércio, cultura e empreendedorismo.' },
+  { nome: 'Macaíba', estado: 'RN', status: 'expansao', lat: -5.8583, lng: -35.3544, info: 'Município da Grande Natal com forte crescimento comercial, logístico e empresarial.' },
+  { nome: 'Parnamirim', estado: 'RN', status: 'expansao', lat: -5.9155, lng: -35.2632, info: 'Importante município da Grande Natal, destaque em comércio, serviços e expansão urbana.' },
+  { nome: 'São Gonçalo do Amarante', estado: 'RN', status: 'expansao', lat: -5.7944, lng: -35.3280, info: 'Município estratégico da Grande Natal, destaque em logística, comércio e desenvolvimento regional.' },
+
+  // Disponíveis
+  { nome: 'Açu', estado: 'RN', status: 'disponivel', lat: -5.5764, lng: -36.9083, info: 'Disponível para representante.' },
+  { nome: 'Apodi', estado: 'RN', status: 'disponivel', lat: -5.6589, lng: -37.7928, info: 'Disponível para representante.' },
+  { nome: 'Ceará-Mirim', estado: 'RN', status: 'disponivel', lat: -5.6375, lng: -35.4247, info: 'Disponível para representante.' },
+  { nome: 'Currais Novos', estado: 'RN', status: 'disponivel', lat: -6.2601, lng: -36.5139, info: 'Disponível para representante.' },
+  { nome: 'João Câmara', estado: 'RN', status: 'disponivel', lat: -5.5394, lng: -35.8183, info: 'Disponível para representante.' },
+  { nome: 'Mossoró', estado: 'RN', status: 'disponivel', lat: -5.1875, lng: -37.3444, info: 'Disponível para representante.' },
 ];
 
 // ===== MAPA =====
