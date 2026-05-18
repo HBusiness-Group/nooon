@@ -96,19 +96,32 @@
     button.danger{background:#2a1111;color:#fff;border:1px solid rgba(255,77,77,.3)}
 
     .top{
+      position:sticky;
+      top:0;
+      z-index:40;
       display:flex;
       justify-content:space-between;
       gap:22px;
       align-items:stretch;
       margin-bottom:24px;
+      padding-top:10px;
+      padding-bottom:10px;
+      background:linear-gradient(180deg, rgba(5,8,5,.96), rgba(5,8,5,.82));
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
     }
 
     .hero{
       flex:1;
-      background:linear-gradient(135deg,rgba(116,204,0,.13),rgba(255,255,255,.025));
+      background:rgba(8,14,8,.88);
       border:1px solid var(--border);
       border-radius:30px;
       padding:28px;
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:
+        0 10px 40px rgba(0,0,0,.35),
+        inset 0 0 80px rgba(116,204,0,.05);
     }
 
     .hero small{
@@ -128,10 +141,15 @@
 
     .risk-panel{
       width:330px;
-      background:linear-gradient(180deg,#101910,#071007);
+      background:rgba(10,18,10,.92);
       border:1px solid var(--border);
       border-radius:30px;
       padding:24px;
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:
+        0 10px 40px rgba(0,0,0,.35),
+        inset 0 0 80px rgba(116,204,0,.06);
     }
 
     .risk-panel span{
