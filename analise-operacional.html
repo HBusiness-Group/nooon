@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOOON | Análise Operacional</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    :root{
+      --green:#74cc00;
+      --dark-green:#2e6417;
+      --bg:#050805;
+      --card:#0d130d;
+      --card2:#111a11;
+      --text:#ffffff;
+      --muted:#9da89d;
+      --border:rgba(116,204,0,.18);
+      --danger:#ff4d4d;
+      --warn:#f7c948;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(116,204,0,.14), transparent 34%),
+        linear-gradient(180deg,#020402,#081008 55%,#030603);
+      color:var(--text);
+      min-height:100vh;
+      padding:28px;
+    }
+
+    .wrap{max-width:1380px;margin:0 auto}
+
+    .access{
+      position:fixed;
+      inset:0;
+      background:#020402;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:50;
+      padding:24px;
+    }
+
+    .access-box{
+      width:100%;
+      max-width:430px;
+      background:linear-gradient(180deg,#101910,#070b07);
+      border:1px solid var(--border);
+      border-radius:28px;
+      padding:34px;
+      box-shadow:0 30px 100px rgba(0,0,0,.5);
+    }
+
+    .logo{
+      font-size:34px;
+      letter-spacing:4px;
+      font-weight:900;
+      color:var(--green);
+      margin-bottom:8px;
+    }
+
+    .access-box p{color:var(--muted);line-height:1.5;margin-bottom:24px}
+
+    input,select,textarea{
+      width:100%;
+      border:1px solid rgba(255,255,255,.1);
+      background:#050805;
+      color:#fff;
+      border-radius:14px;
+      padding:14px 15px;
+      outline:none;
+      font-size:15px;
+    }
+
+    textarea{min-height:110px;resize:vertical}
+
+    input:focus,select:focus,textarea:focus{border-color:var(--green)}
+
+    button{
+      border:0;
+      border-radius:14px;
+      padding:14px 18px;
+      font-weight:800;
+      cursor:pointer;
+      background:var(--green);
+      color:#061006;
+      font-size:15px;
+    }
+
+    button.secondary{background:#172117;color:#fff;border:1px solid var(--border)}
+    button.danger{background:#2a1111;color:#fff;border:1px solid rgba(255,77,77,.3)}
+
+    .top{
+      display:flex;
+      justify-content:space-between;
+      gap:22px;
+      align-items:stretch;
+      margin-bottom:24px;
+    }
+
+    .hero{
+      flex:1;
+      background:linear-gradient(135deg,rgba(116,204,0,.13),rgba(255,255,255,.025));
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:28px;
+    }
+
+    .hero small{
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:1.5px;
+      font-weight:700;
+    }
+
+    .hero h1{
+      font-size:36px;
+      margin:10px 0;
+      line-height:1.08;
+    }
+
+    .hero p{color:var(--muted);max-width:760px;line-height:1.55}
+
+    .risk-panel{
+      width:330px;
+      background:linear-gradient(180deg,#101910,#071007);
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:24px;
+    }
+
+    .risk-panel span{
+      color:var(--muted);
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-weight:800;
+    }
+
+    .score{
+      font-size:74px;
+      font-weight:900;
+      line-height:1;
+      margin:14px 0;
+    }
+
+    .level{
+      padding:13px;
+      border-radius:14px;
+      text-align:center;
+      font-weight:900;
+      letter-spacing:.5px;
+    }
+
+    .low{background:rgba(116,204,0,.12);color:var(--green);border:1px solid rgba(116,204,0,.25)}
+    .medium{background:rgba(247,201,72,.12);color:var(--warn);border:1px solid rgba(247,201,72,.25)}
+    .high{background:rgba(255,77,77,.12);color:var(--danger);border:1px solid rgba(255,77,77,.25)}
+    .critical{background:#3b0b0b;color:#ffb0b0;border:1px solid rgba(255,77,77,.45)}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .card{
+      background:rgba(13,19,13,.9);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      padding:22px;
+    }
+
+    .full{grid-column:1/-1}
+
+    .card h2{
+      color:var(--green);
+      font-size:18px;
+      margin-bottom:18px;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+
+    .field{margin-bottom:14px}
+
+    label{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:7px;
+      font-weight:650;
+    }
+
+    .checks{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+
+    .check{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:13px;
+      background:#070c07;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:16px;
+      color:#dce5dc;
+      font-size:14px;
+      line-height:1.35;
+    }
+
+    .check input{width:auto;margin-top:2px}
+
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:22px;
+    }
+
+    .note{
+      margin-top:18px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:13px;
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-top:16px;
+    }
+
+    .print-id{
+      color:var(--muted);
+      font-size:13px;
+      margin-top:12px;
+    }
+
+    @media(max-width:980px){
+      body{padding:18px}
+      .top{flex-direction:column}
+      .risk-panel{width:100%}
+      .grid,.row{grid-template-columns:1fr}
+      .checks{grid-template-columns:1fr}
+      .hero h1{font-size:28px}
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="access" id="access">
+    <div class="access-box">
+      <div class="logo">NOOON</div>
+      <p>Acesso restrito à análise operacional, classificação de negócio e registro interno de reunião.</p>
+
+      <label>Senha de acesso</label>
+      <input type="password" id="password" placeholder="Digite a senha" />
+
+      <div class="actions">
+        <button onclick="login()">Entrar</button>
+      </div>
+
+      <p style="font-size:12px;margin-top:18px;margin-bottom:0;">
+        Senha padrão temporária: <strong>nooon2026</strong>
+      </p>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="top">
+      <div class="hero">
+        <small>NOOON • Controle Interno</small>
+        <h1>Análise Operacional e Classificação de Negócio</h1>
+        <p>
+          Formulário interno para registrar reuniões sensíveis, mapear origem de recursos,
+          avaliar risco operacional, documentar observações e gerar ata em PDF.
+        </p>
+        <div class="print-id" id="analysisId"></div>
+      </div>
+
+      <aside class="risk-panel">
+        <span>Classificação atual</span>
+        <div class="score" id="riskScore">0</div>
+        <div class="level low" id="riskLevel">BAIXO RISCO</div>
+      </aside>
+    </section>
+
+    <section class="grid">
+
+      <div class="card">
+        <h2>1. Dados da reunião</h2>
+
+        <div class="row">
+          <div class="field">
+            <label>Data</label>
+            <input type="date" id="dataReuniao">
+          </div>
+
+          <div class="field">
+            <label>Hora</label>
+            <input type="time" id="horaReuniao">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Local da reunião</label>
+          <input id="local" placeholder="Ex.: Escritório, cliente, online">
+        </div>
+
+        <div class="field">
+          <label>Responsável NOOON</label>
+          <input id="responsavel" placeholder="Ex.: Harley Freitas">
+        </div>
+
+        <div class="field">
+          <label>Participantes</label>
+          <textarea id="participantes" placeholder="Nome, função e empresa de cada participante"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>2. Identificação do proponente</h2>
+
+        <div class="field">
+          <label>Nome / Razão social</label>
+          <input id="cliente">
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>CPF / CNPJ</label>
+            <input id="documento">
+          </div>
+
+          <div class="field">
+            <label>Telefone / WhatsApp</label>
+            <input id="telefone">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Banco atual / conta de recebimento</label>
+          <input id="banco">
+        </div>
+
+        <div class="field">
+          <label>Valor informado</label>
+          <input id="valor" placeholder="Ex.: R$ 500.000.000,00">
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>3. Origem e natureza do recurso</h2>
+
+        <div class="field">
+          <label>Origem declarada</label>
+          <select id="origem" class="riskSelect">
+            <option value="0">Selecionar</option>
+            <option value="5">Governo Federal / programa público documentado</option>
+            <option value="12">Fundo privado / investidor</option>
+            <option value="18">Origem internacional</option>
+            <option value="35">Origem ainda não comprovada</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Natureza do recurso</label>
+          <select id="natureza" class="riskSelect">
+            <option value="0">Selecionar</option>
+            <option value="5">Fomento / subvenção / fundo perdido</option>
+            <option value="8">Crédito / financiamento</option>
+            <option value="15">Aporte / investimento</option>
+            <option value="25">Indefinida ou divergente</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Status informado</label>
+          <select id="status" class="riskSelect">
+            <option value="0">Selecionar</option>
+            <option value="5">Aprovado documentalmente</option>
+            <option value="12">Pré-aprovado / em análise</option>
+            <option value="22">Expectativa verbal</option>
+            <option value="35">Sem comprovação objetiva</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Órgão, programa, fundo ou banco operador</label>
+          <textarea id="orgao"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>4. Fluxo financeiro pretendido</h2>
+
+        <div class="field">
+          <label>Como o recurso será liberado?</label>
+          <textarea id="liberacao" placeholder="Descrever origem, banco, conta, etapas, prazos e exigências"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Em qual ponto o NOOON entraria?</label>
+          <textarea id="papelNooon" placeholder="Ex.: apenas análise, indicação, conta operacional, conciliação etc."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Haverá compra de BTC?</label>
+          <select id="btc" class="riskSelect">
+            <option value="0">Selecionar</option>
+            <option value="0">Não</option>
+            <option value="10">Sim, decisão patrimonial posterior</option>
+            <option value="25">Sim, parte central da operação</option>
+            <option value="35">Sim, mas sem exchange/custodiante definido</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Exchange / OTC / custodiante pretendido</label>
+          <input id="custodiante">
+        </div>
+      </div>
+
+      <div class="card full">
+        <h2>5. Checklist de risco e compliance</h2>
+
+        <div class="checks">
+          <label class="check"><input type="checkbox" class="riskCheck" value="35">Sem documento oficial apresentado</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="30">Urgência excessiva para movimentar valores</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="60">Pedido de transação simulada ou “teste” sem lastro</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="45">Pedido para “aquecer conta”, “abrir sinal” ou “destravar limite” sem explicação formal</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="35">Comissão muito alta sem racional técnico</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="25">Origem do recurso parcialmente indefinida</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="20">Pessoa física movimentando valor incompatível com perfil comum</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="25">Operação envolvendo criptoativo</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="20">Terceiros não identificados participam da operação</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="30">Resistência em apresentar documentos</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="-20">Documentação robusta apresentada</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="-15">Advogado/contador/compliance presentes</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="-15">Banco operador identificado</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="-10">Cronograma formal apresentado</label>
+          <label class="check"><input type="checkbox" class="riskCheck" value="-10">NOOON não tocará diretamente no recurso</label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>6. Classificação comercial</h2>
+
+        <div class="field">
+          <label>Tipo de oportunidade</label>
+          <select id="tipoNegocio">
+            <option>Selecionar</option>
+            <option>Intermediação comercial</option>
+            <option>Consultoria / estruturação</option>
+            <option>Infraestrutura de pagamentos</option>
+            <option>Conciliação / controle financeiro</option>
+            <option>Indicação de parceiro institucional</option>
+            <option>Operação não recomendada</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Modelo de remuneração discutido</label>
+          <input id="remuneracao" placeholder="Ex.: percentual, fixo, success fee, indefinido">
+        </div>
+
+        <div class="field">
+          <label>Próxima etapa sugerida</label>
+          <select id="proximaEtapa">
+            <option>Solicitar documentos</option>
+            <option>Encaminhar ao jurídico/compliance</option>
+            <option>Reunião técnica com banco/parceiro</option>
+            <option>Declinar operação</option>
+            <option>Aguardar informações</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>7. Parecer preliminar</h2>
+
+        <div class="field">
+          <label>Decisão preliminar</label>
+          <select id="decisao">
+            <option>Em análise</option>
+            <option>Prosseguir com cautela</option>
+            <option>Prosseguir somente com documentação completa</option>
+            <option>Encaminhar para análise jurídica/compliance</option>
+            <option>Não recomendado</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Resumo executivo</label>
+          <textarea id="resumo" placeholder="Resumo objetivo do que foi entendido na reunião"></textarea>
+        </div>
+      </div>
+
+      <div class="card full">
+        <h2>8. Observações estratégicas</h2>
+        <textarea id="observacoes" placeholder="Contradições percebidas, comportamento, riscos, detalhes relevantes, próximos passos..."></textarea>
+      </div>
+
+    </section>
+
+    <div class="actions">
+      <button onclick="generatePDF()">Gerar PDF / Ata da Reunião</button>
+      <button class="secondary" onclick="saveLocal()">Salvar no navegador</button>
+      <button class="secondary" onclick="loadLocal()">Carregar salvo</button>
+      <button class="danger" onclick="clearForm()">Nova análise</button>
+    </div>
+
+    <div class="note">
+      ☐ Nenhuma promessa operacional foi realizada nesta reunião.<br>
+      ☐ Operação sujeita à validação documental, jurídica, contábil e compliance.<br>
+      ☐ O NOOON não assume custódia, intermediação de criptoativos, liquidação ou trânsito financeiro sem estrutura formal aprovada.<br>
+      ☐ Este documento é registro interno preliminar e não representa aprovação operacional definitiva.
+    </div>
+  </main>
+
+<script>
+  const PASSWORD = "nooon2026";
+
+  const id = "NOOON-DD-" + new Date().toISOString().slice(0,10).replaceAll("-","") + "-" + Math.floor(Math.random() * 9000 + 1000);
+  document.getElementById("analysisId").innerText = "ID da análise: " + id;
+
+  const now = new Date();
+  document.getElementById("dataReuniao").value = now.toISOString().slice(0,10);
+  document.getElementById("horaReuniao").value = now.toTimeString().slice(0,5);
+
+  function login(){
+    const pass = document.getElementById("password").value;
+    if(pass === PASSWORD){
+      document.getElementById("access").style.display = "none";
+    }else{
+      alert("Senha incorreta.");
+    }
+  }
+
+  document.getElementById("password").addEventListener("keydown", function(e){
+    if(e.key === "Enter") login();
+  });
+
+  function calculateRisk(){
+    let score = 0;
+
+    document.querySelectorAll(".riskCheck").forEach(item => {
+      if(item.checked) score += Number(item.value);
+    });
+
+    document.querySelectorAll(".riskSelect").forEach(item => {
+      score += Number(item.value || 0);
+    });
+
+    if(score < 0) score = 0;
+
+    const scoreEl = document.getElementById("riskScore");
+    const levelEl = document.getElementById("riskLevel");
+
+    scoreEl.innerText = score;
+    levelEl.className = "level";
+
+    if(score <= 25){
+      levelEl.innerText = "BAIXO RISCO";
+      levelEl.classList.add("low");
+    }else if(score <= 60){
+      levelEl.innerText = "RISCO MODERADO";
+      levelEl.classList.add("medium");
+    }else if(score <= 100){
+      levelEl.innerText = "ALTO RISCO";
+      levelEl.classList.add("high");
+    }else{
+      levelEl.innerText = "RISCO CRÍTICO";
+      levelEl.classList.add("critical");
+    }
+  }
+
+  document.querySelectorAll(".riskCheck,.riskSelect").forEach(el => {
+    el.addEventListener("change", calculateRisk);
+  });
+
+  function getValue(id){
+    return document.getElementById(id)?.value || "";
+  }
+
+  function getChecklist(){
+    const checks = [];
+    document.querySelectorAll(".riskCheck").forEach(check => {
+      if(check.checked){
+        checks.push(check.parentElement.innerText.trim());
+      }
+    });
+    return checks;
+  }
+
+  function collectData(){
+    return {
+      id,
+      dataReuniao:getValue("dataReuniao"),
+      horaReuniao:getValue("horaReuniao"),
+      local:getValue("local"),
+      responsavel:getValue("responsavel"),
+      participantes:getValue("participantes"),
+      cliente:getValue("cliente"),
+      documento:getValue("documento"),
+      telefone:getValue("telefone"),
+      banco:getValue("banco"),
+      valor:getValue("valor"),
+      origem:document.getElementById("origem").selectedOptions[0].text,
+      natureza:document.getElementById("natureza").selectedOptions[0].text,
+      status:document.getElementById("status").selectedOptions[0].text,
+      orgao:getValue("orgao"),
+      liberacao:getValue("liberacao"),
+      papelNooon:getValue("papelNooon"),
+      btc:document.getElementById("btc").selectedOptions[0].text,
+      custodiante:getValue("custodiante"),
+      tipoNegocio:getValue("tipoNegocio"),
+      remuneracao:getValue("remuneracao"),
+      proximaEtapa:getValue("proximaEtapa"),
+      decisao:getValue("decisao"),
+      resumo:getValue("resumo"),
+      observacoes:getValue("observacoes"),
+      riskScore:document.getElementById("riskScore").innerText,
+      riskLevel:document.getElementById("riskLevel").innerText,
+      checklist:getChecklist()
+    };
+  }
+
+  function saveLocal(){
+    localStorage.setItem("nooonAnaliseOperacional", JSON.stringify(collectData()));
+    alert("Análise salva neste navegador.");
+  }
+
+  function loadLocal(){
+    const raw = localStorage.getItem("nooonAnaliseOperacional");
+    if(!raw){
+      alert("Nenhuma análise salva encontrada.");
+      return;
+    }
+
+    const data = JSON.parse(raw);
+
+    Object.keys(data).forEach(key => {
+      const el = document.getElementById(key);
+      if(el && typeof data[key] === "string") el.value = data[key];
+    });
+
+    calculateRisk();
+    alert("Dados carregados.");
+  }
+
+  function clearForm(){
+    if(confirm("Deseja limpar esta análise?")){
+      document.querySelectorAll("input,textarea").forEach(el => {
+        if(el.type !== "date" && el.type !== "time" && el.type !== "password") el.value = "";
+      });
+      document.querySelectorAll("select").forEach(el => el.selectedIndex = 0);
+      document.querySelectorAll(".riskCheck").forEach(el => el.checked = false);
+      calculateRisk();
+    }
+  }
+
+  function addText(doc, label, text, x, y, maxWidth){
+    doc.setFont("helvetica","bold");
+    doc.text(label, x, y);
+    doc.setFont("helvetica","normal");
+
+    const lines = doc.splitTextToSize(text || "-", maxWidth);
+    doc.text(lines, x, y + 7);
+
+    return y + 9 + (lines.length * 6);
+  }
+
+  function checkPage(doc, y){
+    if(y > 270){
+      doc.addPage();
+      return 20;
+    }
+    return y;
+  }
+
+  function generatePDF(){
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF("p","mm","a4");
+    const d = collectData();
+
+    let y = 18;
+
+    doc.setFillColor(5,8,5);
+    doc.rect(0,0,210,32,"F");
+
+    doc.setTextColor(116,204,0);
+    doc.setFont("helvetica","bold");
+    doc.setFontSize(24);
+    doc.text("NOOON", 16, 20);
+
+    doc.setTextColor(255,255,255);
+    doc.setFontSize(11);
+    doc.text("Ata Interna de Análise Operacional e Classificação de Negócio", 55, 14);
+    doc.text(d.id, 55, 22);
+
+    doc.setTextColor(0,0,0);
+    y = 44;
+
+    doc.setFontSize(14);
+    doc.setFont("helvetica","bold");
+    doc.text("Resumo da Classificação", 16, y);
+
+    y += 10;
+    doc.setFontSize(11);
+    doc.setFont("helvetica","normal");
+    doc.text(`Classificação: ${d.riskLevel}`, 16, y);
+    doc.text(`Score de risco: ${d.riskScore}`, 120, y);
+
+    y += 12;
+    doc.text(`Data/Hora: ${d.dataReuniao} ${d.horaReuniao}`, 16, y);
+    doc.text(`Local: ${d.local || "-"}`, 120, y);
+
+    y += 14;
+    y = addText(doc, "Responsável NOOON:", d.responsavel, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Participantes:", d.participantes, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Cliente / Proponente:", `${d.cliente} | ${d.documento} | ${d.telefone}`, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Banco / Conta informada:", d.banco, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Valor informado:", d.valor, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Origem / Natureza / Status:", `${d.origem} | ${d.natureza} | ${d.status}`, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Órgão, programa, fundo ou banco operador:", d.orgao, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Fluxo de liberação:", d.liberacao, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Papel pretendido do NOOON:", d.papelNooon, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "BTC / Criptoativos:", `${d.btc} | Custodiante/Exchange/OTC: ${d.custodiante || "-"}`, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Tipo de oportunidade:", d.tipoNegocio, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Modelo de remuneração discutido:", d.remuneracao, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Próxima etapa:", d.proximaEtapa, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Decisão preliminar:", d.decisao, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Resumo executivo:", d.resumo, 16, y, 178);
+    y = checkPage(doc, y);
+
+    y = addText(doc, "Observações estratégicas:", d.observacoes, 16, y, 178);
+    y = checkPage(doc, y);
+
+    doc.setFont("helvetica","bold");
+    doc.text("Checklist marcado:", 16, y);
+    y += 8;
+
+    doc.setFont("helvetica","normal");
+    const checklistText = d.checklist.length ? d.checklist.map(i => `• ${i}`).join("\n") : "-";
+    const checklistLines = doc.splitTextToSize(checklistText, 178);
+    doc.text(checklistLines, 16, y);
+    y += checklistLines.length * 6 + 10;
+    y = checkPage(doc, y);
+
+    doc.setFont("helvetica","bold");
+    doc.text("Declarações internas:", 16, y);
+    y += 8;
+
+    doc.setFont("helvetica","normal");
+    const disclaimer = [
+      "Nenhuma promessa operacional foi realizada nesta reunião.",
+      "Operação sujeita à validação documental, jurídica, contábil e compliance.",
+      "O NOOON não assume custódia, intermediação de criptoativos, liquidação ou trânsito financeiro sem estrutura formal aprovada.",
+      "Este documento é registro interno preliminar e não representa aprovação operacional definitiva."
+    ].map(i => `• ${i}`).join("\n");
+
+    doc.text(doc.splitTextToSize(disclaimer, 178), 16, y);
+
+    doc.save(`${d.id}.pdf`);
+  }
+
+  calculateRisk();
+</script>
+
+</body>
+</html>
