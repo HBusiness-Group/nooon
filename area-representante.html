@@ -650,7 +650,7 @@ Vamos ativar?</div>
 <script>
 // ===== CONFIGURAÇÃO =====
 // Token fixo — troque por um código seguro de sua escolha
-const TOKEN_VALIDO = 'NOOON2025';
+const TOKEN_VALIDO = 'nooon2026';
 // Chave de sessão no localStorage
 const SESSION_KEY = 'nooon_rep_auth';
 // Número WhatsApp para solicitar link
@@ -658,7 +658,7 @@ const WPP_NUMERO = '5584987885959';
 
 // ===== VERIFICAR SE JÁ TEM SESSÃO =====
 window.addEventListener('DOMContentLoaded', () => {
-  // Verificar token na URL (link mágico: area-representante.html?token=NOOON2025)
+  // Verificar token na URL (link mágico: area-representante.html?token=nooon2026)
   const params = new URLSearchParams(window.location.search);
   const tokenURL = params.get('token');
   if (tokenURL && tokenURL.toUpperCase() === TOKEN_VALIDO) {
