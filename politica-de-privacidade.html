@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon_180.png">
+<link rel="icon" type="image/png" sizes="256x256" href="assets/favicon_256.png">
+<link rel="icon" type="image/png" href="assets/favicon_256.png">
+<title>NOOON — Política de Privacidade</title>
+<meta name="description" content="Política de Privacidade e proteção de dados da NOOON, em conformidade com a LGPD (Lei nº 13.709/2018).">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep: #0d1f0a;
+  --dark: #142910;
+  --mid: #1e3d14;
+  --primary: #2e6417;
+  --accent: #74cc00;
+  --accent-light: #9ddd3a;
+  --white: #ffffff;
+  --off-white: #f0f7e8;
+  --gray: #8aab70;
+  --border: rgba(116,204,0,0.15);
+  --border-mid: rgba(116,204,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--deep);color:var(--white);font-family:'Open Sans',sans-serif;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--deep);}::-webkit-scrollbar-thumb{background:var(--primary);border-radius:2px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 60px;height:72px;background:rgba(13,31,10,0.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--border-mid);}
+.nav-logo img{height:40px;width:auto;}
+.nav-menu{display:flex;gap:4px;list-style:none;align-items:center;}
+.nav-menu a{display:block;padding:8px 14px;font-size:0.8rem;font-weight:600;color:rgba(255,255,255,0.88);text-decoration:none;border-radius:6px;transition:all 0.2s;}
+.nav-menu a:hover,.nav-menu a.active{color:var(--white);background:rgba(116,204,0,0.1);}
+.nav-dropdown{position:relative;}
+.nav-dropdown>a{display:flex;align-items:center;gap:5px;}
+.nav-dropdown>a::after{content:'▾';font-size:0.65rem;color:var(--accent);}
+.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;min-width:230px;background:var(--dark);border:1px solid var(--border);border-radius:12px;padding:8px;z-index:200;box-shadow:0 16px 40px rgba(0,0,0,0.5);}
+.nav-dropdown:hover .nav-dropdown-menu{display:flex;flex-direction:column;gap:2px;}
+.nav-dropdown-menu a{padding:10px 14px;border-radius:8px;font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.85);text-decoration:none;transition:all 0.2s;display:flex;flex-direction:column;}
+.nav-dropdown-menu a span{font-size:0.66rem;font-weight:400;color:rgba(255,255,255,0.48);margin-top:2px;}
+.nav-dropdown-menu a:hover{background:rgba(116,204,0,0.1);color:var(--white);}
+.nav-cta{display:flex;align-items:center;gap:12px;}
+.btn-nav{padding:9px 22px;background:var(--accent);color:var(--deep);font-family:'Open Sans',sans-serif;font-size:0.78rem;font-weight:700;border:none;border-radius:8px;cursor:pointer;text-decoration:none;transition:all 0.25s;}
+.btn-nav:hover{background:var(--accent-light);transform:translateY(-1px);}
+.btn-nav-outline{padding:9px 22px;background:transparent;color:var(--accent);font-family:'Open Sans',sans-serif;font-size:0.78rem;font-weight:600;border:1px solid var(--border);border-radius:8px;text-decoration:none;transition:all 0.25s;}
+.btn-nav-outline:hover{background:rgba(116,204,0,0.08);}
+
+/* CONTEÚDO */
+#doc{min-height:100vh;padding:120px 24px 80px;position:relative;overflow:hidden;}
+.doc-mesh{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 55% at 85% 0%,rgba(46,100,23,0.4) 0%,transparent 60%),radial-gradient(ellipse 40% 50% at -5% 40%,rgba(116,204,0,0.06) 0%,transparent 55%);}
+.doc-hex{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.doc-hex svg{position:absolute;width:100%;height:100%;opacity:0.035;}
+.doc-wrap{position:relative;z-index:2;max-width:820px;margin:0 auto;}
+.doc-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px 6px 8px;background:rgba(116,204,0,0.1);border:1px solid rgba(116,204,0,0.22);border-radius:100px;margin-bottom:22px;font-size:0.7rem;font-weight:700;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;}
+.doc-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);}
+.doc-title{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;line-height:1.05;letter-spacing:-0.025em;margin-bottom:14px;}
+.doc-title em{color:var(--accent);font-style:normal;}
+.doc-meta{font-size:0.8rem;color:rgba(255,255,255,0.55);margin-bottom:8px;}
+.doc-intro{font-size:0.95rem;color:rgba(255,255,255,0.78);line-height:1.8;margin:20px 0 10px;}
+
+.toc{margin:34px 0 10px;padding:22px 26px;background:rgba(255,255,255,0.02);border:1px solid var(--border-mid);border-radius:16px;}
+.toc-title{font-size:0.65rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.toc ol{list-style:none;counter-reset:toc;display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;}
+.toc li{counter-increment:toc;}
+.toc a{font-size:0.82rem;color:rgba(255,255,255,0.75);text-decoration:none;display:flex;gap:10px;transition:color 0.2s;}
+.toc a::before{content:counter(toc,decimal-leading-zero);color:var(--accent);font-weight:700;font-size:0.72rem;}
+.toc a:hover{color:var(--accent);}
+
+.doc-section{margin-top:44px;scroll-margin-top:90px;}
+.doc-section h2{font-size:1.25rem;font-weight:800;letter-spacing:-0.01em;margin-bottom:16px;display:flex;align-items:baseline;gap:12px;}
+.doc-section h2 .num{font-size:0.85rem;font-weight:800;color:var(--accent);}
+.doc-section h3{font-size:0.95rem;font-weight:700;color:var(--white);margin:22px 0 8px;}
+.doc-section p{font-size:0.9rem;color:rgba(255,255,255,0.8);line-height:1.85;margin-bottom:14px;}
+.doc-section a{color:var(--accent);text-decoration:none;}
+.doc-section a:hover{text-decoration:underline;}
+.doc-section ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:6px 0 16px;}
+.doc-section ul li{font-size:0.9rem;color:rgba(255,255,255,0.8);line-height:1.7;display:flex;align-items:flex-start;gap:10px;}
+.doc-section ul li::before{content:'';flex-shrink:0;width:7px;height:7px;margin-top:8px;border-radius:2px;background:var(--accent);transform:rotate(45deg);}
+.doc-section ul li b{color:var(--white);font-weight:700;}
+.callout{padding:18px 22px;background:rgba(116,204,0,0.05);border:1px solid var(--border);border-radius:12px;margin:8px 0 18px;}
+.callout p{margin:0;font-size:0.85rem;color:rgba(255,255,255,0.82);}
+.rights-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 18px;}
+.right-card{padding:16px 18px;border-radius:12px;border:1px solid var(--border-mid);background:rgba(255,255,255,0.02);}
+.right-card b{display:block;font-size:0.85rem;color:var(--white);margin-bottom:4px;}
+.right-card span{font-size:0.78rem;color:rgba(255,255,255,0.62);line-height:1.55;}
+.contact-box{margin-top:14px;padding:22px 26px;border-radius:14px;border:1px solid var(--border);background:linear-gradient(145deg,var(--mid) 0%,var(--dark) 100%);}
+.contact-box p{margin-bottom:6px;font-size:0.88rem;}
+.doc-back{display:inline-flex;align-items:center;gap:8px;margin-top:40px;padding:13px 26px;background:var(--accent);color:var(--deep);font-size:0.88rem;font-weight:700;border-radius:10px;text-decoration:none;transition:all 0.3s;}
+.doc-back:hover{background:var(--accent-light);transform:translateY(-2px);box-shadow:0 12px 30px rgba(116,204,0,0.25);}
+.placeholder{color:var(--accent-light);font-weight:700;}
+
+/* FOOTER */
+footer{padding:48px 60px;background:var(--deep);border-top:1px solid var(--border-mid);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;}
+.footer-logo{margin-bottom:14px;}
+.footer-logo img{height:34px;}
+.footer-desc{font-size:0.78rem;color:rgba(255,255,255,0.7);line-height:1.7;max-width:220px;}
+.footer-contact{margin-top:14px;font-size:0.72rem;color:rgba(255,255,255,0.65);line-height:1.8;}
+.footer-col-title{font-size:0.72rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--white);margin-bottom:14px;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.footer-links a{font-size:0.78rem;color:rgba(255,255,255,0.72);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--accent);}
+.footer-bottom{grid-column:1/-1;padding-top:28px;border-top:1px solid var(--border-mid);display:flex;justify-content:space-between;align-items:center;font-size:0.7rem;color:rgba(255,255,255,0.62);}
+.footer-bottom a{color:rgba(116,204,0,0.55);text-decoration:none;}
+.footer-bottom a:hover{color:var(--accent);}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  nav{padding:0 24px;}.nav-menu{display:none;}
+  footer{grid-template-columns:1fr 1fr;padding:44px 24px;}
+}
+@media(max-width:600px){
+  #doc{padding:100px 16px 60px;}
+  .toc ol,.rights-grid{grid-template-columns:1fr;}
+  .nav-cta{gap:8px;}
+  .btn-nav,.btn-nav-outline{padding:8px 13px;font-size:0.72rem;}
+  .nav-rep{display:none;}
+  footer{grid-template-columns:1fr;}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo"><img src="assets/logo3_nooon.png" alt="NOOON"></a>
+  <ul class="nav-menu">
+    <li><a href="maquinas.html">Maquininhas</a></li>
+    <li class="nav-dropdown">
+      <a href="representante.html">Ganhe com o NOOON</a>
+      <div class="nav-dropdown-menu">
+        <a href="representante.html">Representante Comercial <span>Atue no campo, domine territórios</span></a>
+        <a href="parceiros-digitais.html">Parceiro Digital <span>Use sua audiência, ganhe recorrente</span></a>
+        <a href="cidade-dominada.html">Cidade Dominada <span>Expansão regional exclusiva</span></a>
+      </div>
+    </li>
+    <li><a href="investidores.html">Investidores</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="area-representante.html" class="btn-nav-outline nav-rep">Área do Representante</a>
+    <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav-outline">Acessar Portal</a>
+    <a href="cadastro-clientes.html" class="btn-nav">Abrir conta</a>
+  </div>
+</nav>
+
+<section id="doc">
+  <div class="doc-hex">
+    <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
+      <defs><pattern id="hexPattern" x="0" y="0" width="80" height="69.3" patternUnits="userSpaceOnUse"><polygon points="40,0 80,20 80,60 40,80 0,60 0,20" fill="none" stroke="rgba(116,204,0,1)" stroke-width="0.8"/></pattern></defs>
+      <rect width="100%" height="100%" fill="url(#hexPattern)"/>
+    </svg>
+  </div>
+  <div class="doc-mesh"></div>
+
+  <div class="doc-wrap">
+    <div class="doc-badge"><span class="doc-badge-dot"></span>Proteção de dados</div>
+    <h1 class="doc-title">Política de <em>Privacidade</em></h1>
+    <p class="doc-meta">Última atualização: 15 de setembro de 2026 &middot; Em conformidade com a LGPD (Lei nº 13.709/2018)</p>
+    <p class="doc-intro">A sua privacidade é prioridade para a NOOON. Esta Política explica, de forma transparente, quais dados pessoais coletamos, por que os utilizamos, com quem eventualmente os compartilhamos e quais são os seus direitos como titular. Ao utilizar nosso site e serviços, ou ao realizar seu cadastro, você declara estar ciente das práticas aqui descritas.</p>
+
+    <div class="toc">
+      <div class="toc-title">Índice</div>
+      <ol>
+        <li><a href="#quem-somos">Quem somos (Controlador)</a></li>
+        <li><a href="#dados">Dados que coletamos</a></li>
+        <li><a href="#finalidades">Como e por que usamos</a></li>
+        <li><a href="#bases">Bases legais</a></li>
+        <li><a href="#compartilhamento">Compartilhamento</a></li>
+        <li><a href="#operadores">Serviços de terceiros</a></li>
+        <li><a href="#cookies">Cookies e navegação</a></li>
+        <li><a href="#retencao">Retenção dos dados</a></li>
+        <li><a href="#seguranca">Segurança</a></li>
+        <li><a href="#direitos">Seus direitos</a></li>
+        <li><a href="#encarregado">Encarregado (DPO) e contato</a></li>
+        <li><a href="#alteracoes">Alterações desta Política</a></li>
+      </ol>
+    </div>
+
+    <div class="doc-section" id="quem-somos">
+      <h2><span class="num">01</span> Quem somos (Controlador)</h2>
+      <p>A NOOON é um ecossistema financeiro operado por <b>NOOON EXPERTISE TECNOLÓGICA LTDA - ME</b>, inscrita no CNPJ sob o nº <b>53.484.213/0001-00</b>, com sede em Manaus/AM — Brasil. Para os fins da LGPD, a NOOON atua como <b>Controladora</b> dos dados pessoais tratados por meio deste site e de seus serviços.</p>
+      <p>Contato geral: <a href="mailto:contato@nooon.com.br">contato@nooon.com.br</a> &middot; (84) 98788-5959.</p>
+    </div>
+
+    <div class="doc-section" id="dados">
+      <h2><span class="num">02</span> Dados que coletamos</h2>
+      <p>Coletamos apenas os dados necessários para viabilizar seu cadastro, a análise do seu perfil e a prestação dos nossos serviços. No formulário de cadastro de cliente, coletamos:</p>
+      <ul>
+        <li><b>Dados de identificação:</b> nome completo, CPF e data de nascimento.</li>
+        <li><b>Dados de contato:</b> celular/WhatsApp e e-mail.</li>
+        <li><b>Endereço:</b> CEP, logradouro, número, complemento, bairro, cidade, UF e ponto de referência.</li>
+        <li><b>Perfil profissional:</b> segmento de atuação e área profissional.</li>
+        <li><b>Dados financeiros:</b> renda mensal base, utilizada para análise de perfil.</li>
+        <li><b>Filiação:</b> nome da mãe, utilizado para verificação de identidade e prevenção à fraude.</li>
+        <li><b>Dados de navegação:</b> informações técnicas geradas automaticamente ao acessar o site (por exemplo, endereço IP e páginas visitadas), quando aplicável.</li>
+      </ul>
+      <div class="callout"><p>Não coletamos intencionalmente dados de crianças e adolescentes, nem categorias de dados pessoais sensíveis além das estritamente necessárias às finalidades aqui descritas.</p></div>
+    </div>
+
+    <div class="doc-section" id="finalidades">
+      <h2><span class="num">03</span> Como e por que usamos</h2>
+      <p>Os dados pessoais coletados são utilizados para as seguintes finalidades:</p>
+      <ul>
+        <li>Realizar e analisar o seu cadastro no ecossistema NOOON;</li>
+        <li>Verificar sua identidade e prevenir fraudes;</li>
+        <li>Entrar em contato sobre seu cadastro, propostas e serviços contratados;</li>
+        <li>Viabilizar a entrega e a habilitação de equipamentos e serviços (por exemplo, maquininhas);</li>
+        <li>Cumprir obrigações legais, regulatórias e de prevenção à lavagem de dinheiro;</li>
+        <li>Aprimorar nossos produtos, comunicações e a experiência de uso do site.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section" id="bases">
+      <h2><span class="num">04</span> Bases legais</h2>
+      <p>Tratamos seus dados com fundamento nas hipóteses do art. 7º da LGPD, especialmente:</p>
+      <ul>
+        <li><b>Consentimento</b> do titular, coletado no momento do cadastro;</li>
+        <li><b>Execução de contrato</b> ou de procedimentos preliminares a seu pedido;</li>
+        <li><b>Cumprimento de obrigação legal ou regulatória</b> pela Controladora;</li>
+        <li><b>Legítimo interesse</b>, para prevenção à fraude e segurança, sempre respeitando seus direitos e liberdades.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section" id="compartilhamento">
+      <h2><span class="num">05</span> Compartilhamento</h2>
+      <p>A NOOON <b>não vende</b> seus dados pessoais. O compartilhamento ocorre apenas quando necessário e limitado à finalidade, com:</p>
+      <ul>
+        <li>Parceiros e instituições financeiras/de adquirência para viabilizar os serviços contratados;</li>
+        <li>Prestadores de serviço que atuam como operadores em nosso nome (tecnologia, hospedagem, comunicação);</li>
+        <li>Autoridades públicas, quando exigido por lei, regulação ou ordem judicial.</li>
+      </ul>
+    </div>
+
+    <div class="doc-section" id="operadores">
+      <h2><span class="num">06</span> Serviços de terceiros</h2>
+      <p>Para o funcionamento do cadastro, o site utiliza serviços de terceiros que atuam como operadores:</p>
+      <ul>
+        <li><b>ViaCEP:</b> consulta pública de endereço a partir do CEP informado, para preenchimento automático;</li>
+        <li><b>FormSubmit:</b> encaminhamento seguro dos dados do formulário por e-mail à equipe NOOON.</li>
+      </ul>
+      <p>Alguns desses serviços podem processar dados em servidores localizados fora do Brasil. Nesses casos, adotamos as salvaguardas previstas na LGPD para transferência internacional de dados.</p>
+    </div>
+
+    <div class="doc-section" id="cookies">
+      <h2><span class="num">07</span> Cookies e navegação</h2>
+      <p>Este site utiliza um número mínimo de cookies e tecnologias semelhantes, essenciais ao seu funcionamento e, quando aplicável, à medição de audiência. Você pode gerenciar ou bloquear cookies nas configurações do seu navegador; a desativação de alguns deles pode afetar a experiência de uso.</p>
+    </div>
+
+    <div class="doc-section" id="retencao">
+      <h2><span class="num">08</span> Retenção dos dados</h2>
+      <p>Mantemos seus dados pessoais apenas pelo tempo necessário ao cumprimento das finalidades desta Política e das obrigações legais e regulatórias aplicáveis. Encerrado esse período, os dados são eliminados de forma segura ou anonimizados, salvo quando sua conservação for autorizada ou exigida por lei.</p>
+    </div>
+
+    <div class="doc-section" id="seguranca">
+      <h2><span class="num">09</span> Segurança</h2>
+      <p>Adotamos medidas técnicas e administrativas adequadas para proteger seus dados contra acessos não autorizados e situações de destruição, perda, alteração ou difusão indevidas, incluindo transmissão por conexão criptografada (HTTPS) e controles de acesso. Nenhum sistema é totalmente imune a riscos, mas trabalhamos continuamente para mitigá-los.</p>
+    </div>
+
+    <div class="doc-section" id="direitos">
+      <h2><span class="num">10</span> Seus direitos</h2>
+      <p>Nos termos do art. 18 da LGPD, você, como titular, pode a qualquer momento exercer os seguintes direitos:</p>
+      <div class="rights-grid">
+        <div class="right-card"><b>Confirmação e acesso</b><span>Saber se tratamos seus dados e acessá-los.</span></div>
+        <div class="right-card"><b>Correção</b><span>Corrigir dados incompletos, inexatos ou desatualizados.</span></div>
+        <div class="right-card"><b>Anonimização ou eliminação</b><span>De dados desnecessários ou tratados em desconformidade.</span></div>
+        <div class="right-card"><b>Portabilidade</b><span>Solicitar a portabilidade a outro fornecedor.</span></div>
+        <div class="right-card"><b>Revogação do consentimento</b><span>Revogar o consentimento a qualquer momento.</span></div>
+        <div class="right-card"><b>Oposição e informação</b><span>Opor-se a tratamentos e conhecer com quem compartilhamos.</span></div>
+      </div>
+      <p>Para exercer seus direitos, basta entrar em contato pelos canais indicados abaixo. Poderemos solicitar informações adicionais para confirmar sua identidade antes de atender ao pedido.</p>
+    </div>
+
+    <div class="doc-section" id="encarregado">
+      <h2><span class="num">11</span> Encarregado (DPO) e contato</h2>
+      <p>Em caso de dúvidas, solicitações ou para exercer seus direitos relativos à proteção de dados, fale com nosso Encarregado pelo Tratamento de Dados Pessoais (DPO):</p>
+      <div class="contact-box">
+        <p><b>Encarregado (DPO):</b> Harley Tavares de Freitas</p>
+        <p><b>E-mail:</b> <a href="mailto:harley.tavares@nooon.com.br">harley.tavares@nooon.com.br</a></p>
+        <p><b>Comercial:</b> <a href="mailto:comercial@nooon.com.br">comercial@nooon.com.br</a> &middot; WhatsApp (84) 98788-5959</p>
+      </div>
+    </div>
+
+    <div class="doc-section" id="alteracoes">
+      <h2><span class="num">12</span> Alterações desta Política</h2>
+      <p>Esta Política pode ser atualizada periodicamente para refletir mudanças em nossos serviços ou na legislação. A versão vigente estará sempre disponível nesta página, com a data da última atualização indicada no topo. Recomendamos a revisão periódica deste documento.</p>
+    </div>
+
+    <a href="cadastro-clientes.html" class="doc-back">Voltar ao cadastro &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="footer-logo"><img src="assets/logo1_nooon.png" alt="NOOON" style="height:26px;width:auto;opacity:0.9;"></div>
+    <p class="footer-desc">Ecossistema financeiro completo para pessoas e negócios. Manaus, AM — Brasil.</p>
+    <p class="footer-contact">contato@nooon.com.br<br>(84) 98788-5959</p>
+  </div>
+  <div>
+    <p class="footer-col-title">Produtos</p>
+    <ul class="footer-links">
+      <li><a href="maquinas.html">Maquininhas</a></li>
+      <li><a href="https://portal.nooon.com.br" target="_blank">Banco Digital</a></li>
+      <li><a href="https://caixa.nooon.com.br" target="_blank">NOOON Caixa</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Ganhe com o NOOON</p>
+    <ul class="footer-links">
+      <li><a href="representante.html">Representante Comercial</a></li>
+      <li><a href="parceiros-digitais.html">Parceiro Digital</a></li>
+      <li><a href="cidade-dominada.html">Cidade Dominada</a></li>
+      <li><a href="investidores.html">Investidores</a></li>
+    </ul>
+  </div>
+  <div>
+    <p class="footer-col-title">Ajuda</p>
+    <ul class="footer-links">
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="area-representante.html">Área do Representante</a></li>
+      <li><a href="https://wa.me/5584987885959" target="_blank">WhatsApp</a></li>
+      <li><a href="mailto:contato@nooon.com.br">E-mail</a></li>
+      <li><a href="politica-de-privacidade.html">Política de Privacidade</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 NOOON — Ecossistema Financeiro. Todos os direitos reservados.</span>
+    <span>Desenvolvido por <a href="https://abracadabra.srv.br" target="_blank">AbraCadabra</a> &middot; <a href="https://hbusiness-group.com.br" target="_blank">HBusiness Group</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

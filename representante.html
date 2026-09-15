@@ -238,6 +238,11 @@ footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(
 .crosslink-block-cta{flex-shrink:0;padding:12px 22px;background:var(--accent);color:var(--deep);font-family:'Open Sans',sans-serif;font-size:0.78rem;font-weight:700;border-radius:9px;white-space:nowrap;transition:all 0.2s;}
 .crosslink-block:hover .crosslink-block-cta{background:var(--accent-light);}
 @media(max-width:1024px){.crosslink-block{margin:0 24px;flex-direction:column;}.crosslink-block-cta{width:100%;text-align:center;}}
+@media(max-width:600px){
+  .nav-cta{gap:8px;}
+  .btn-nav,.btn-nav-outline{padding:8px 13px;font-size:0.72rem;}
+  .nav-rep{display:none;}
+}
 </style>
 </head>
 <body>
@@ -259,8 +264,9 @@ footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(
     <li><a href="faq.html">FAQ</a></li>
   </ul>
   <div class="nav-cta">
-    <a href="area-representante.html" class="btn-nav-outline">Área do Representante</a>
-    <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav">Acessar Portal</a>
+    <a href="area-representante.html" class="btn-nav-outline nav-rep">Área do Representante</a>
+    <a href="https://portal.nooon.com.br" target="_blank" class="btn-nav-outline">Acessar Portal</a>
+    <a href="cadastro-clientes.html" class="btn-nav">Abrir conta</a>
   </div>
 </nav>
 
@@ -635,6 +641,7 @@ footer { padding: 44px 60px; background: var(--deep); border-top: 1px solid var(
       <li><a href="area-representante.html">Área do Representante</a></li>
       <li><a href="https://wa.me/5584987885959" target="_blank">WhatsApp</a></li>
       <li><a href="mailto:contato@nooon.com.br">E-mail</a></li>
+      <li><a href="politica-de-privacidade.html">Política de Privacidade</a></li>
     </ul>
   </div>
   <div class="footer-bottom">
